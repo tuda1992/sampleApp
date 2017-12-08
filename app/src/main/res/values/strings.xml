@@ -1,0 +1,87 @@
+<resources>
+    <string name="app_name">FindLocation</string>
+    <string name="title_activity_maps">Map</string>
+
+    <string name="facebook_app_id">252993385233789</string>
+    <string name="fb_login_protocol_scheme">fb252993385233789</string>
+
+    <string name="action_settings">Settings</string>
+    <string name="action_search">Search</string>
+    <string name="drawer_open">Open</string>
+    <string name="drawer_close">Close</string>
+
+    <string name="nav_item_login">Đăng nhập</string>
+    <string name="nav_item_find_location">Phòng trọ</string>
+    <string name="nav_item_find_job">Việc làm</string>
+    <string name="nav_item_user_info">Thông tin cá nhân</string>
+    <string name="nav_item_logout">Đăng xuất</string>
+
+    <!-- navigation drawer item labels  -->
+    <string-array name="nav_drawer_labels">
+        <!--<item>@string/nav_item_login</item>-->
+        <item>@string/nav_item_find_location</item>
+        <item>@string/nav_item_find_job</item>
+        <item>@string/nav_item_user_info</item>
+        <item>@string/nav_item_logout</item>
+    </string-array>
+
+    <string name="title_signin">Đăng nhập</string>
+    <string name="title_signup">Đăng ký</string>
+    <string name="title_forget_password">Lấy lại mật khẩu</string>
+    <string name="title_find_location">Tìm phòng trọ</string>
+    <string name="title_find_job">Tìm việc làm</string>
+    <string name="title_user_info">Thông tin cá nhân</string>
+
+
+    <string name="text_radio_user">Người dùng</string>
+    <string name="text_radio_master">Chủ nhà trọ</string>
+    <string name="text_user_name">Tên đăng nhập</string>
+    <string name="text_user_password">Mật khẩu</string>
+    <string name="text_save_info">Lưu lại thông tin đăng nhập lần sau</string>
+    <string name="text_save_info_fb">Cho phép truy cập facebook</string>
+    <string name="text_signin">Đăng nhập</string>
+    <string name="text_signup">Đăng ký</string>
+    <string name="text_forgot_password">Quên mật khẩu</string>
+
+
+    <string name="text_signup_fullname">Họ tên</string>
+    <string name="text_signup_dob">Ngày sinh</string>
+    <string name="text_signup_sex">Giới tính</string>
+    <string name="text_signup_school">Trường học</string>
+    <string name="text_signup_class">Chuyên ngành</string>
+    <string name="text_signup_grade">Khoá</string>
+    <string name="text_signup_address">Địa chỉ</string>
+    <string name="text_signup_email">Email</string>
+    <string name="text_signup_telephone">Số điện thoại</string>
+    <string name="text_signup_password">Mật khẩu</string>
+    <string name="text_signup_code">Nhập mã code</string>
+    <string name="text_forget_password_email">Nhập email</string>
+    <string name="text_signup_notify">Để đăng ký sử dụng, bạn cần thực hiện 3 bước:\n- Chụp ảnh thẻ sinh viên\n- Điền thông tin vào mẫu\n- Xác thực số điện thoại</string>
+    <string name="text_signup_info_notify">Bạn cần điền thông tin vào mẫu sau:</string>
+    <string name="text_signup_approve_notify">Hệ thống gửi mã đăng ký qua điện thoại, bạn vui lòng kiểm tra và nhập thông tin để hoàn tất thủ tục đăng ký</string>
+    <string name="text_signup_complete_notify">Chúc mừng bạn đã đăng ký sử dụng thành công. Cảm ơn bạn đã đăng ký sử dụng dịch vụ của chúng tôi.</string>
+    <string name="text_forget_password_email_notify">Bạn quên mật khẩu? Bạn vui lòng gửi email của mình cho chúng tôi, hệ thống sẽ gửi lại mã code xác nhận qua điện thoại.</string>
+    <string name="text_forget_password_code_notify">Hệ thống đã gửi lại code xác nhận qua điện thoại, bạn vui lòng kiểm tra và nhập code để tiếp tục.</string>
+    <string name="text_button_take_picture">Chụp ảnh</string>
+    <string name="text_button_next">Tiếp tục</string>
+    <string name="text_button_send">Gửi</string>
+    <string name="text_button_send_mail">Gửi Email</string>
+
+    <string name="text_forget_password_input_notify">Bạn vui lòng nhập mật khẩu mới.</string>
+    <string name="text_forget_password_new_pass">Mật khẩu</string>
+    <string name="text_forget_password_new_pass_reinput">Nhập lại mật khẩu</string>
+    <string name="text_forget_password_input_notify_2">Lưu ý : Mật khẩu mới không được trùng với mật khẩu cũ, đảm bảo trong mật khẩu có cả chữ và số.</string>
+    <string name="text_forget_password_complete_notify">Chúc mừng bạn đã lấy lại mật khẩu thành công.</string>
+
+    <string name="text_button_ok">Đồng ý</string>
+    <string name="text_button_no">Không đồng ý</string>
+
+    <string name="text_button_date_picker_ok">OK</string>
+    <string name="text_button_date_picker_no">CANCEL</string>
+
+    <string name="text_sex_men">Nam</string>
+    <string name="text_sex_women">Nữ</string>
+
+    <string name="text_permission_camera">Vui lòng cho phép truy cập vào bộ phận chính của ứng dụng</string>
+
+</resources>
