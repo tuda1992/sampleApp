@@ -1,5 +1,10 @@
 package findlocation.bateam.com;
 
+import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.os.Build;
+import android.support.annotation.NonNull;
+import android.support.v4.app.Fragment;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -16,6 +21,8 @@ import findlocation.bateam.com.login.FragmentSignIn;
 import findlocation.bateam.com.login.LoginActivity;
 import findlocation.bateam.com.navigation.FragmentDrawer;
 import findlocation.bateam.com.userinfo.FragmentUserInfo;
+import findlocation.bateam.com.util.ImagePicker;
+import findlocation.bateam.com.util.PermissionUtils;
 
 public class MainActivity extends BaseActivity implements FragmentDrawer.FragmentDrawerListener {
 
@@ -108,5 +115,13 @@ public class MainActivity extends BaseActivity implements FragmentDrawer.Fragmen
     public void onBackPressed() {
         super.onBackPressed();
         finish();
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        for (Fragment fragment : getSupportFragmentManager().getFragments()) {
+            fragment.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        }
     }
 }

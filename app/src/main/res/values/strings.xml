@@ -35,7 +35,7 @@
 
     <string name="text_radio_user">Người dùng</string>
     <string name="text_radio_master">Chủ nhà trọ</string>
-    <string name="text_user_name">Tên đăng nhập</string>
+    <string name="text_email">Email đăng nhập</string>
     <string name="text_user_password">Mật khẩu</string>
     <string name="text_save_info">Lưu lại thông tin đăng nhập lần sau</string>
     <string name="text_save_info_fb">Cho phép truy cập facebook</string>
@@ -50,10 +50,14 @@
     <string name="text_signup_school">Trường học</string>
     <string name="text_signup_class">Chuyên ngành</string>
     <string name="text_signup_grade">Khoá</string>
-    <string name="text_signup_address">Địa chỉ</string>
+    <string name="text_signup_address">Số nhà</string>
+    <string name="text_signup_address_town">Phường/Xã</string>
+    <string name="text_signup_address_district">Quận/Huyện</string>
+    <string name="text_signup_address_city">Tỉnh thành phố</string>
     <string name="text_signup_email">Email</string>
-    <string name="text_signup_telephone">Số điện thoại</string>
+    <string name="text_signup_telephone">Số điện thoại di động</string>
     <string name="text_signup_password">Mật khẩu</string>
+    <string name="text_signup_re_password">Xác nhận mật khẩu</string>
     <string name="text_signup_code">Nhập mã code</string>
     <string name="text_forget_password_email">Nhập email</string>
     <string name="text_signup_notify">Để đăng ký sử dụng, bạn cần thực hiện 3 bước:\n- Chụp ảnh thẻ sinh viên\n- Điền thông tin vào mẫu\n- Xác thực số điện thoại</string>
@@ -73,6 +77,7 @@
     <string name="text_forget_password_input_notify_2">Lưu ý : Mật khẩu mới không được trùng với mật khẩu cũ, đảm bảo trong mật khẩu có cả chữ và số.</string>
     <string name="text_forget_password_complete_notify">Chúc mừng bạn đã lấy lại mật khẩu thành công.</string>
 
+
     <string name="text_button_ok">Đồng ý</string>
     <string name="text_button_no">Không đồng ý</string>
 
@@ -83,5 +88,26 @@
     <string name="text_sex_women">Nữ</string>
 
     <string name="text_permission_camera">Vui lòng cho phép truy cập vào bộ phận chính của ứng dụng</string>
+
+
+    // Error
+
+    <string name="title_dialog_error">Lỗi sai thông tin</string>
+    <string name="title_dialog_error_internet">Lỗi mạng</string>
+    <string name="error_dialog_internet">Bạn chưa kết nối với mạng.\nBạn hãy kết nối với mạng rồi thử lại nhé</string>
+
+    <string name="error_dialog_email_null">Bạn chưa điền thông tin email</string>
+    <string name="error_dialog_email_error">Bạn điền sai định dạng email</string>
+    <string name="error_dialog_password_null">Bạn chưa điền thông tin mật khẩu</string>
+    <string name="error_dialog_password_error">Bạn điền sai định dạng mật khẩu</string>
+    <string name="error_dialog_re_password_null">Bạn chưa điền thông tin xác nhận mật khẩu</string>
+    <string name="error_dialog_re_password_error">Bạn điền sai định dạng xác nhận mật khẩu</string>
+    <string name="error_dialog_password_repassword_not_equal">Bạn điền hai mật khẩu không giống nhau</string>
+    <string name="error_dialog_telephone_null">Bạn chưa điền thông tin số điện thoại di động</string>
+    <string name="error_dialog_telephone_error">Bạn điền sai số điện thoại</string>
+    <string name="error_dialog_full_name_null">Bạn chưa điền thông tin họ tên</string>
+    <string name="error_dialog_dob_null">Bạn chưa điền thông tin ngày sinh</string>
+    <string name="error_dialog_code_null">Bạn chưa điền thông tin code</string>
+    <string name="error_dialog_code_error">Bạn iền sai thông tin code</string>
 
 </resources>

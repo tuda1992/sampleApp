@@ -33,4 +33,24 @@ public class DialogUtil {
                 .show();
     }
 
+    public static void showDialogError(Context context, String message, DialogInterface.OnClickListener okListener) {
+        if (context == null) return;
+        new AlertDialog.Builder(context)
+                .setTitle(context.getResources().getText(R.string.title_dialog_error))
+                .setMessage(message)
+                .setPositiveButton(context.getResources().getText(R.string.text_button_ok), okListener)
+                .create()
+                .show();
+    }
+
+    public static void showDialogErrorInternet(Context context, DialogInterface.OnClickListener okListener) {
+        if (context == null) return;
+        new AlertDialog.Builder(context)
+                .setTitle(context.getResources().getText(R.string.title_dialog_error_internet))
+                .setMessage(context.getResources().getText(R.string.error_dialog_internet))
+                .setPositiveButton(context.getResources().getText(R.string.text_button_ok), okListener)
+                .create()
+                .show();
+    }
+
 }

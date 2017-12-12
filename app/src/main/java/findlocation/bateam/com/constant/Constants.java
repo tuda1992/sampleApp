@@ -8,6 +8,7 @@ public class Constants {
 
     public static final int REQUEST_CAMERA = 2909;
     public static final int PICK_IMAGE_ID = 234;
+    public static final int REQUEST_ACCESS_AND_COARSE_LOCATION = 999;
 
     public static final String FRAGMENT_SIGN_IN = "FRAGMENT_SIGN_IN";
     public static final String FRAGMENT_SIGN_UP = "FRAGMENT_SIGN_UP";

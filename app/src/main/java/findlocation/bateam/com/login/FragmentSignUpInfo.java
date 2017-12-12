@@ -4,6 +4,7 @@ import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
@@ -40,6 +41,9 @@ import findlocation.bateam.com.R;
 import findlocation.bateam.com.adapter.CustomSpinnerAdapter;
 import findlocation.bateam.com.base.BaseFragment;
 import findlocation.bateam.com.constant.Constants;
+import findlocation.bateam.com.util.DialogUtil;
+import findlocation.bateam.com.util.NetworkUtil;
+import findlocation.bateam.com.util.PatternUtil;
 
 /**
  * Created by acv on 12/7/17.
@@ -59,14 +63,22 @@ public class FragmentSignUpInfo extends BaseFragment {
     EditText mEdtEmail;
     @BindView(R.id.edt_password)
     EditText mEdtPassword;
+    @BindView(R.id.edt_re_password)
+    EditText mEdtRePassword;
     @BindView(R.id.edt_telephone)
     EditText mEdtTelephone;
+    @BindView(R.id.edt_address)
+    EditText mEdtAddress;
     @BindView(R.id.tv_dob)
     TextView mTvDob;
     @BindView(R.id.spn_sex)
     Spinner mSpnSex;
-    @BindView(R.id.spn_address)
-    Spinner mSpnAddress;
+    @BindView(R.id.spn_address_town)
+    Spinner mSpnAddressTown;
+    @BindView(R.id.spn_address_district)
+    Spinner mSpnAddressDistrict;
+    @BindView(R.id.spn_address_city)
+    Spinner mSpnAddressCity;
     @BindView(R.id.btn_send)
     Button mBtnSend;
     @BindView(R.id.cb_save_fb)
@@ -79,18 +91,125 @@ public class FragmentSignUpInfo extends BaseFragment {
     String mStrMen;
     @BindString(R.string.text_sex_women)
     String mStrWomen;
+    @BindString(R.string.error_dialog_email_null)
+    String mStrUserNameNull;
+    @BindString(R.string.error_dialog_email_error)
+    String mStrUserNameError;
+    @BindString(R.string.error_dialog_password_null)
+    String mStrPasswordNull;
+    @BindString(R.string.error_dialog_password_error)
+    String mStrPasswordError;
+    @BindString(R.string.error_dialog_re_password_null)
+    String mStrRePasswordNull;
+    @BindString(R.string.error_dialog_re_password_error)
+    String mStrRePasswordError;
+    @BindString(R.string.error_dialog_password_repassword_not_equal)
+    String mStrPasswordNotEqual;
+    @BindString(R.string.error_dialog_full_name_null)
+    String mStrFullNameNull;
+    @BindString(R.string.error_dialog_dob_null)
+    String mStrDobNull;
+    @BindString(R.string.error_dialog_telephone_null)
+    String mStrTelephoneNull;
+    @BindString(R.string.error_dialog_telephone_error)
+    String mStrTelephoneError;
+
 
     private DatePickerDialog.OnDateSetListener mListenerPickter;
     private Calendar mCalendar;
     private CallbackManager mCallBackManager;
     private CustomSpinnerAdapter mAdapter;
-    private CustomSpinnerAdapter mAdapterAddress;
+    private CustomSpinnerAdapter mAdapterAddressCity;
+    private CustomSpinnerAdapter mAdapterAddressTown;
+    private CustomSpinnerAdapter mAdapterAddressDistrict;
     private List<String> mArrSex = new ArrayList<>();
-    private List<String> mArrAddress = new ArrayList<>();
+    private List<String> mArrAddressCity = new ArrayList<>();
+    private List<String> mArrAddressTown = new ArrayList<>();
+    private List<String> mArrAddressDistrict = new ArrayList<>();
 
     @OnClick(R.id.btn_send)
     public void onClickSend() {
+
+        if (!NetworkUtil.isHaveInternet(getActivity())) {
+            DialogUtil.showDialogErrorInternet(getActivity(), null);
+        }
+
         boolean isSaveFb = mCbFb.isChecked();
+        String sex = mArrSex.get(mSpnSex.getSelectedItemPosition());
+        String town = mArrAddressTown.get(mSpnAddressTown.getSelectedItemPosition());
+        String district = mArrAddressDistrict.get(mSpnAddressDistrict.getSelectedItemPosition());
+        String city = mArrAddressCity.get(mSpnAddressCity.getSelectedItemPosition());
+        String address = mEdtAddress.getText().toString();
+        String fullName = mEdtFullName.getText().toString();
+        String schoolName = mEdtSchool.getText().toString();
+        String className = mEdtClass.getText().toString();
+        String grade = mEdtGrade.getText().toString();
+        String email = mEdtEmail.getText().toString();
+        String password = mEdtPassword.getText().toString();
+        String rePassword = mEdtRePassword.getText().toString();
+        String telephone = mEdtTelephone.getText().toString();
+        String dob = mTvDob.getText().toString();
+
+        // Validate
+
+        if (TextUtils.isEmpty(fullName)) {
+            DialogUtil.showDialogError(getActivity(), mStrFullNameNull, null);
+            return;
+        }
+
+        if (TextUtils.isEmpty(dob)) {
+            DialogUtil.showDialogError(getActivity(), mStrDobNull, null);
+            return;
+        }
+
+        if (TextUtils.isEmpty(email)) {
+            DialogUtil.showDialogError(getActivity(), mStrUserNameNull, null);
+            return;
+        }
+
+        if (!android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
+            DialogUtil.showDialogError(getActivity(), mStrUserNameError, null);
+            return;
+        }
+
+        if (TextUtils.isEmpty(password)) {
+            DialogUtil.showDialogError(getActivity(), mStrPasswordNull, null);
+            return;
+        }
+
+        if (!PatternUtil.checkPasswordCharacter(password)) {
+            DialogUtil.showDialogError(getActivity(), mStrPasswordError, null);
+            return;
+        }
+
+        if (TextUtils.isEmpty(rePassword)) {
+            DialogUtil.showDialogError(getActivity(), mStrRePasswordNull, null);
+            return;
+        }
+
+        if (!PatternUtil.checkPasswordCharacter(rePassword)) {
+            DialogUtil.showDialogError(getActivity(), mStrRePasswordError, null);
+            return;
+        }
+
+        if (!password.equalsIgnoreCase(rePassword)) {
+            DialogUtil.showDialogError(getActivity(), mStrPasswordNotEqual, null);
+            return;
+        }
+
+        if (TextUtils.isEmpty(telephone)) {
+            DialogUtil.showDialogError(getActivity(), mStrTelephoneNull, null);
+            return;
+        }
+
+        if (telephone.length() < 10) {
+            DialogUtil.showDialogError(getActivity(), mStrTelephoneError, null);
+            return;
+        }
+
+
+        // After Validate
+
         if (isSaveFb) {
             loginFacebook();
             return;
@@ -128,19 +247,40 @@ public class FragmentSignUpInfo extends BaseFragment {
 
     @Override
     protected void initViews(View view) {
+        // Sex
         mArrSex.add(mStrMen);
         mArrSex.add(mStrWomen);
         mAdapter = new CustomSpinnerAdapter(getActivity(), mArrSex);
         mSpnSex.setAdapter(mAdapter);
 
-        mArrAddress.add("Hà Nội");
-        mArrAddress.add("Đà Nẵng");
-        mArrAddress.add("Nha Trang");
-        mArrAddress.add("Hải Phòng");
-        mArrAddress.add("Thái Bình");
-        mArrAddress.add("Nam Định");
-        mAdapterAddress = new CustomSpinnerAdapter(getActivity(), mArrAddress);
-        mSpnAddress.setAdapter(mAdapterAddress);
+        // City
+        mArrAddressCity.add("Hà Nội");
+        mArrAddressCity.add("Đà Nẵng");
+        mArrAddressCity.add("Nha Trang");
+        mArrAddressCity.add("Hải Phòng");
+        mArrAddressCity.add("Thái Bình");
+        mArrAddressCity.add("Nam Định");
+        mAdapterAddressCity = new CustomSpinnerAdapter(getActivity(), mArrAddressCity);
+        mSpnAddressCity.setAdapter(mAdapterAddressCity);
+
+        // Town
+        mArrAddressTown.add("Văn Chương");
+        mArrAddressTown.add("Hàng Bột");
+        mArrAddressTown.add("Ô Chợ Dừa");
+        mArrAddressTown.add("Thổ Quan");
+        mArrAddressTown.add("Quan Thổ");
+        mAdapterAddressTown = new CustomSpinnerAdapter(getActivity(), mArrAddressTown);
+        mSpnAddressTown.setAdapter(mAdapterAddressTown);
+
+        // District
+        mArrAddressDistrict.add("Đống Đa");
+        mArrAddressDistrict.add("Ba Đình");
+        mArrAddressDistrict.add("Hoàn Kiếm");
+        mArrAddressDistrict.add("Long Biên");
+        mArrAddressDistrict.add("Thanh Xuân");
+        mArrAddressDistrict.add("Cầu giấy");
+        mAdapterAddressDistrict = new CustomSpinnerAdapter(getActivity(), mArrAddressDistrict);
+        mSpnAddressDistrict.setAdapter(mAdapterAddressDistrict);
     }
 
     @Override
@@ -149,7 +289,9 @@ public class FragmentSignUpInfo extends BaseFragment {
         mCallBackManager = CallbackManager.Factory.create();
 
         mSpnSex.setSelection(0);
-        mSpnAddress.setSelection(0);
+        mSpnAddressCity.setSelection(0);
+        mSpnAddressTown.setSelection(0);
+        mSpnAddressDistrict.setSelection(0);
 
         mCalendar = Calendar.getInstance();
         mListenerPickter = new DatePickerDialog.OnDateSetListener() {
