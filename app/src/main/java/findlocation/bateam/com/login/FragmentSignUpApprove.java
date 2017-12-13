@@ -36,6 +36,7 @@ public class FragmentSignUpApprove extends BaseFragment {
 
         if (!NetworkUtil.isHaveInternet(getActivity())) {
             DialogUtil.showDialogErrorInternet(getActivity(), null);
+            return;
         }
 
         String code = mEdtCode.getText().toString().trim();

@@ -14,6 +14,7 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.facebook.AccessToken;
 import com.facebook.CallbackManager;
@@ -132,6 +133,7 @@ public class FragmentSignUpInfo extends BaseFragment {
 
         if (!NetworkUtil.isHaveInternet(getActivity())) {
             DialogUtil.showDialogErrorInternet(getActivity(), null);
+            return;
         }
 
         boolean isSaveFb = mCbFb.isChecked();
@@ -369,6 +371,8 @@ public class FragmentSignUpInfo extends BaseFragment {
                                 profilePicUrl = object.getJSONObject("picture").getJSONObject("data").getString("url");
                                 Log.d(TAG, "profilePicUrl = " + profilePicUrl);
                             }
+
+                            Toast.makeText(getActivity(), "Email : " + email + " id : " + id + " name : " + name + " profilePicture : " + profilePicUrl, Toast.LENGTH_LONG).show();
 
                             FragmentSignUpApprove fragmentSignUpApprove = new FragmentSignUpApprove();
                             addFragment(fragmentSignUpApprove, Constants.FRAGMENT_SIGN_UP_APPROVE);

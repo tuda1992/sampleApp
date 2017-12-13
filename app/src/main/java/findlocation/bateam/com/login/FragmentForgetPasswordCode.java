@@ -40,6 +40,7 @@ public class FragmentForgetPasswordCode extends BaseFragment {
 
         if (!NetworkUtil.isHaveInternet(getActivity())) {
             DialogUtil.showDialogErrorInternet(getActivity(), null);
+            return;
         }
 
         String code = mEdtCode.getText().toString().trim();

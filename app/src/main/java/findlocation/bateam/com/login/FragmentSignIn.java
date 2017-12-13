@@ -63,6 +63,7 @@ public class FragmentSignIn extends BaseFragment {
 
         if (!NetworkUtil.isHaveInternet(getActivity())) {
             DialogUtil.showDialogErrorInternet(getActivity(), null);
+            return;
         }
 
         String userName = mEdtUserName.getText().toString();

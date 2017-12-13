@@ -44,6 +44,7 @@ public class FragmentForgetPasswordInput extends BaseFragment {
 
         if (!NetworkUtil.isHaveInternet(getActivity())) {
             DialogUtil.showDialogErrorInternet(getActivity(), null);
+            return;
         }
 
         String newPass = mEdtNewPass.getText().toString().trim();

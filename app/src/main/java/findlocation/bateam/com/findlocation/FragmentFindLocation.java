@@ -11,6 +11,8 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
@@ -40,6 +42,7 @@ import java.util.List;
 
 import butterknife.BindView;
 import findlocation.bateam.com.R;
+import findlocation.bateam.com.adapter.FindLocationAdapter;
 import findlocation.bateam.com.base.BaseFragment;
 import findlocation.bateam.com.constant.Constants;
 import findlocation.bateam.com.listener.IPermissionCallBack;
@@ -58,10 +61,16 @@ public class FragmentFindLocation extends BaseFragment implements OnMapReadyCall
         , GoogleApiClient.OnConnectionFailedListener
         , LocationListener
         , GoogleMap.OnCameraIdleListener
-        , GoogleMap.OnMarkerClickListener {
+        , GoogleMap.OnMarkerClickListener
+        , FindLocationAdapter.ICallBackItemClick {
 
     @BindView(R.id.map_view)
     MapView mMapView;
+    @BindView(R.id.rv_data)
+    RecyclerView mRvData;
+
+    private FindLocationAdapter mAdapter;
+    private LinearLayoutManager mLinearLayoutManager;
 
     private GoogleMap mGoogleMap;
 
@@ -126,10 +135,17 @@ public class FragmentFindLocation extends BaseFragment implements OnMapReadyCall
                     setUpListenerForMapView();
                 }
             });
-
         } else {
             setUpListenerForMapView();
         }
+
+        // Set up recyclerview
+        mLinearLayoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false);
+        mRvData.setLayoutManager(mLinearLayoutManager);
+        mRvData.setHasFixedSize(true);
+        mAdapter = new FindLocationAdapter(getActivity(),this);
+        mRvData.setAdapter(mAdapter);
+
     }
 
     private void setUpListenerForMapView() {
@@ -406,8 +422,13 @@ public class FragmentFindLocation extends BaseFragment implements OnMapReadyCall
 
     @Override
     public boolean onMarkerClick(Marker marker) {
-        Log.d(TAG,"marker = " + marker.getId());
+        Log.d(TAG, "marker = " + marker.getId());
 
         return false;
+    }
+
+    @Override
+    public void onItemClick(int position) {
+
     }
 }

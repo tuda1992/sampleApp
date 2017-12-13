@@ -36,6 +36,7 @@ public class FragmentForgetPassword extends BaseFragment {
 
         if (!NetworkUtil.isHaveInternet(getActivity())) {
             DialogUtil.showDialogErrorInternet(getActivity(), null);
+            return;
         }
 
         String email = mEdtEmail.getText().toString().trim();
