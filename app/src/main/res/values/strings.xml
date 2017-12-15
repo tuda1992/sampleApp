@@ -10,6 +10,7 @@
     <string name="drawer_open">Open</string>
     <string name="drawer_close">Close</string>
 
+    <string name="nav_item_upload_location">Đăng ký phòng trọ</string>
     <string name="nav_item_login">Đăng nhập</string>
     <string name="nav_item_find_location">Phòng trọ</string>
     <string name="nav_item_find_job">Việc làm</string>
@@ -25,6 +26,14 @@
         <item>@string/nav_item_logout</item>
     </string-array>
 
+    <!-- navigation drawer item labels  -->
+    <string-array name="nav_drawer_labels_2">
+        <item>@string/nav_item_upload_location</item>
+        <item>@string/nav_item_user_info</item>
+        <item>@string/nav_item_logout</item>
+    </string-array>
+
+    <string name="title_upload_location">Đăng ký phòng trọ</string>
     <string name="title_signin">Đăng nhập</string>
     <string name="title_signup">Đăng ký</string>
     <string name="title_forget_password">Lấy lại mật khẩu</string>
@@ -44,7 +53,9 @@
     <string name="text_forgot_password">Quên mật khẩu</string>
 
 
-    <string name="text_signup_fullname">Họ tên</string>
+    <string name="text_signup_family_name">Họ</string>
+    <string name="text_signup_middle_name">Tên đệm</string>
+    <string name="text_signup_first_name">Tên</string>
     <string name="text_signup_dob">Ngày sinh</string>
     <string name="text_signup_sex">Giới tính</string>
     <string name="text_signup_school">Trường học</string>
@@ -54,6 +65,7 @@
     <string name="text_signup_address_town">Phường/Xã</string>
     <string name="text_signup_address_district">Quận/Huyện</string>
     <string name="text_signup_address_city">Tỉnh thành phố</string>
+    <string name="text_signup_address_country">Quốc tịch</string>
     <string name="text_signup_email">Email</string>
     <string name="text_signup_telephone">Số điện thoại di động</string>
     <string name="text_signup_password">Mật khẩu</string>
@@ -77,6 +89,13 @@
     <string name="text_forget_password_input_notify_2">Lưu ý : Mật khẩu mới không được trùng với mật khẩu cũ, đảm bảo trong mật khẩu có cả chữ và số.</string>
     <string name="text_forget_password_complete_notify">Chúc mừng bạn đã lấy lại mật khẩu thành công.</string>
 
+    <string name="text_find_job_notify">Bạn đang có nhu cầu tìm việc làm? Hãy để lại một số thông tin sau để chúng tôi có thể giúp bạn tìm được việc làm ưng ý nhất.</string>
+    <string name="text_find_job_address">Địa điểm làm việc</string>
+    <string name="text_find_job_time">Thời gian làm việc</string>
+    <string name="text_find_job_type">Loại hình công việc</string>
+    <string name="text_button_find_job">Tìm việc</string>
+
+    <string name="text_button_change_info">Thay đổi thông tin</string>
 
     <string name="text_button_ok">Đồng ý</string>
     <string name="text_button_no">Không đồng ý</string>
@@ -105,7 +124,9 @@
     <string name="error_dialog_password_repassword_not_equal">Bạn điền hai mật khẩu không giống nhau</string>
     <string name="error_dialog_telephone_null">Bạn chưa điền thông tin số điện thoại di động</string>
     <string name="error_dialog_telephone_error">Bạn điền sai số điện thoại</string>
-    <string name="error_dialog_full_name_null">Bạn chưa điền thông tin họ tên</string>
+    <string name="error_dialog_family_name_null">Bạn chưa điền thông tin họ</string>
+    <string name="error_dialog_middle_name_null">Bạn chưa điền thông tin tên đệm</string>
+    <string name="error_dialog_first_name_null">Bạn chưa điền thông tin tên</string>
     <string name="error_dialog_dob_null">Bạn chưa điền thông tin ngày sinh</string>
     <string name="error_dialog_code_null">Bạn chưa điền thông tin code</string>
     <string name="error_dialog_code_error">Bạn iền sai thông tin code</string>

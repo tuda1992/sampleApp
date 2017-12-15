@@ -9,10 +9,12 @@ public class Constants {
     public static final int REQUEST_CAMERA = 2909;
     public static final int PICK_IMAGE_ID = 234;
     public static final int REQUEST_ACCESS_AND_COARSE_LOCATION = 999;
+    public static final String BUNDLE_IS_MASTER = "BUNDLE_IS_MASTER";
 
     public static final String FRAGMENT_SIGN_IN = "FRAGMENT_SIGN_IN";
     public static final String FRAGMENT_SIGN_UP = "FRAGMENT_SIGN_UP";
     public static final String FRAGMENT_FIND_LOCATION = "FRAGMENT_FIND_LOCATION";
+    public static final String FRAGMENT_UPLOAD_LOCATION = "FRAGMENT_UPLOAD_LOCATION";
     public static final String FRAGMENT_FIND_JOB = "FRAGMENT_FIND_JOB";
     public static final String FRAGMENT_USER_INFO = "FRAGMENT_USER_INFO";
     public static final String FRAGMENT_SIGN_UP_INFO = "FRAGMENT_SIGN_UP_INFO";

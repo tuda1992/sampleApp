@@ -52,8 +52,12 @@ import findlocation.bateam.com.util.PatternUtil;
 
 public class FragmentSignUpInfo extends BaseFragment {
 
-    @BindView(R.id.edt_fullname)
-    EditText mEdtFullName;
+    @BindView(R.id.edt_family_name)
+    EditText mEdtFamilyName;
+    @BindView(R.id.edt_middle_name)
+    EditText mEdtMiddleName;
+    @BindView(R.id.edt_first_name)
+    EditText mEdtFirstName;
     @BindView(R.id.edt_school)
     EditText mEdtSchool;
     @BindView(R.id.edt_class)
@@ -80,6 +84,8 @@ public class FragmentSignUpInfo extends BaseFragment {
     Spinner mSpnAddressDistrict;
     @BindView(R.id.spn_address_city)
     Spinner mSpnAddressCity;
+    @BindView(R.id.spn_address_country)
+    Spinner mSpnAddressCountry;
     @BindView(R.id.btn_send)
     Button mBtnSend;
     @BindView(R.id.cb_save_fb)
@@ -106,8 +112,12 @@ public class FragmentSignUpInfo extends BaseFragment {
     String mStrRePasswordError;
     @BindString(R.string.error_dialog_password_repassword_not_equal)
     String mStrPasswordNotEqual;
-    @BindString(R.string.error_dialog_full_name_null)
-    String mStrFullNameNull;
+    @BindString(R.string.error_dialog_family_name_null)
+    String mStrFamilyNameNull;
+    @BindString(R.string.error_dialog_middle_name_null)
+    String mStrMiddleNameNull;
+    @BindString(R.string.error_dialog_first_name_null)
+    String mStrFirstNameNull;
     @BindString(R.string.error_dialog_dob_null)
     String mStrDobNull;
     @BindString(R.string.error_dialog_telephone_null)
@@ -123,10 +133,12 @@ public class FragmentSignUpInfo extends BaseFragment {
     private CustomSpinnerAdapter mAdapterAddressCity;
     private CustomSpinnerAdapter mAdapterAddressTown;
     private CustomSpinnerAdapter mAdapterAddressDistrict;
+    private CustomSpinnerAdapter mAdapterAddressCountry;
     private List<String> mArrSex = new ArrayList<>();
     private List<String> mArrAddressCity = new ArrayList<>();
     private List<String> mArrAddressTown = new ArrayList<>();
     private List<String> mArrAddressDistrict = new ArrayList<>();
+    private List<String> mArrAddressCountry = new ArrayList<>();
 
     @OnClick(R.id.btn_send)
     public void onClickSend() {
@@ -142,7 +154,9 @@ public class FragmentSignUpInfo extends BaseFragment {
         String district = mArrAddressDistrict.get(mSpnAddressDistrict.getSelectedItemPosition());
         String city = mArrAddressCity.get(mSpnAddressCity.getSelectedItemPosition());
         String address = mEdtAddress.getText().toString();
-        String fullName = mEdtFullName.getText().toString();
+        String familyName = mEdtFamilyName.getText().toString();
+        String middleName = mEdtFamilyName.getText().toString();
+        String firstName = mEdtFirstName.getText().toString();
         String schoolName = mEdtSchool.getText().toString();
         String className = mEdtClass.getText().toString();
         String grade = mEdtGrade.getText().toString();
@@ -154,8 +168,18 @@ public class FragmentSignUpInfo extends BaseFragment {
 
         // Validate
 
-        if (TextUtils.isEmpty(fullName)) {
-            DialogUtil.showDialogError(getActivity(), mStrFullNameNull, null);
+        if (TextUtils.isEmpty(familyName)) {
+            DialogUtil.showDialogError(getActivity(), mStrFamilyNameNull, null);
+            return;
+        }
+
+        if (TextUtils.isEmpty(middleName)) {
+            DialogUtil.showDialogError(getActivity(), mStrMiddleNameNull, null);
+            return;
+        }
+
+        if (TextUtils.isEmpty(firstName)) {
+            DialogUtil.showDialogError(getActivity(), mStrFirstNameNull, null);
             return;
         }
 
@@ -252,7 +276,7 @@ public class FragmentSignUpInfo extends BaseFragment {
         // Sex
         mArrSex.add(mStrMen);
         mArrSex.add(mStrWomen);
-        mAdapter = new CustomSpinnerAdapter(getActivity(), mArrSex);
+        mAdapter = new CustomSpinnerAdapter(getActivity(), mArrSex,false);
         mSpnSex.setAdapter(mAdapter);
 
         // City
@@ -262,7 +286,7 @@ public class FragmentSignUpInfo extends BaseFragment {
         mArrAddressCity.add("Hải Phòng");
         mArrAddressCity.add("Thái Bình");
         mArrAddressCity.add("Nam Định");
-        mAdapterAddressCity = new CustomSpinnerAdapter(getActivity(), mArrAddressCity);
+        mAdapterAddressCity = new CustomSpinnerAdapter(getActivity(), mArrAddressCity,false);
         mSpnAddressCity.setAdapter(mAdapterAddressCity);
 
         // Town
@@ -271,7 +295,7 @@ public class FragmentSignUpInfo extends BaseFragment {
         mArrAddressTown.add("Ô Chợ Dừa");
         mArrAddressTown.add("Thổ Quan");
         mArrAddressTown.add("Quan Thổ");
-        mAdapterAddressTown = new CustomSpinnerAdapter(getActivity(), mArrAddressTown);
+        mAdapterAddressTown = new CustomSpinnerAdapter(getActivity(), mArrAddressTown,false);
         mSpnAddressTown.setAdapter(mAdapterAddressTown);
 
         // District
@@ -281,8 +305,20 @@ public class FragmentSignUpInfo extends BaseFragment {
         mArrAddressDistrict.add("Long Biên");
         mArrAddressDistrict.add("Thanh Xuân");
         mArrAddressDistrict.add("Cầu giấy");
-        mAdapterAddressDistrict = new CustomSpinnerAdapter(getActivity(), mArrAddressDistrict);
+        mAdapterAddressDistrict = new CustomSpinnerAdapter(getActivity(), mArrAddressDistrict,false);
         mSpnAddressDistrict.setAdapter(mAdapterAddressDistrict);
+
+
+        // Country
+        mArrAddressCountry.add("Việt Nam");
+        mArrAddressCountry.add("Trung Quốc");
+        mArrAddressCountry.add("Nhật Bản");
+        mArrAddressCountry.add("Mỹ");
+        mArrAddressCountry.add("Nga");
+        mArrAddressCountry.add("Hàn Quốc");
+        mAdapterAddressCountry = new CustomSpinnerAdapter(getActivity(), mArrAddressCountry,false);
+        mSpnAddressCountry.setAdapter(mAdapterAddressCountry);
+
     }
 
     @Override

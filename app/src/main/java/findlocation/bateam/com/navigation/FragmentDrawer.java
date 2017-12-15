@@ -44,7 +44,6 @@ public class FragmentDrawer extends BaseFragment {
     public static List<NavDrawerItem> getSources() {
         List<NavDrawerItem> data = new ArrayList<>();
 
-
         // preparing navigation drawer items
         for (int i = 0; i < titles.length; i++) {
             NavDrawerItem navItem = new NavDrawerItem();
@@ -106,7 +105,13 @@ public class FragmentDrawer extends BaseFragment {
 
     }
 
-    public void setUp(int fragmentId, DrawerLayout drawerLayout, final Toolbar toolbar) {
+    public void setUp(int fragmentId, DrawerLayout drawerLayout, final Toolbar toolbar, boolean isMaster) {
+        if (isMaster) {
+            titles = getActivity().getResources().getStringArray(R.array.nav_drawer_labels_2);
+            adapter = new NavigationDrawerAdapter(getActivity(), getSources());
+            recyclerView.setAdapter(adapter);
+        }
+
         containerView = getActivity().findViewById(fragmentId);
         mDrawerLayout = drawerLayout;
         mDrawerToggle = new ActionBarDrawerToggle(getActivity(), drawerLayout, toolbar, R.string.drawer_open, R.string.drawer_close) {

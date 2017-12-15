@@ -17,6 +17,7 @@ import findlocation.bateam.com.base.BaseFragment;
 import findlocation.bateam.com.constant.Constants;
 import findlocation.bateam.com.findjob.FragmentFindJob;
 import findlocation.bateam.com.findlocation.FragmentFindLocation;
+import findlocation.bateam.com.findlocation.FragmentUploadLocation;
 import findlocation.bateam.com.login.FragmentSignIn;
 import findlocation.bateam.com.login.LoginActivity;
 import findlocation.bateam.com.navigation.FragmentDrawer;
@@ -30,6 +31,7 @@ public class MainActivity extends BaseActivity implements FragmentDrawer.Fragmen
     Toolbar mToolbar;
     private FragmentDrawer drawerFragment;
     private int mCurrentTab = -1;
+    private boolean mIsMaster;
 
     @Override
     protected int getLayoutView() {
@@ -38,12 +40,18 @@ public class MainActivity extends BaseActivity implements FragmentDrawer.Fragmen
 
     @Override
     protected void initViews() {
+
+        Bundle bundle = getIntent().getExtras();
+
+        if (bundle != null) {
+            mIsMaster = bundle.getBoolean(Constants.BUNDLE_IS_MASTER, false);
+        }
+
         setSupportActionBar(mToolbar);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
 
-        drawerFragment = (FragmentDrawer)
-                getSupportFragmentManager().findFragmentById(R.id.fragment_navigation_drawer);
-        drawerFragment.setUp(R.id.fragment_navigation_drawer, (DrawerLayout) findViewById(R.id.drawer_layout), mToolbar);
+        drawerFragment = (FragmentDrawer) getSupportFragmentManager().findFragmentById(R.id.fragment_navigation_drawer);
+        drawerFragment.setUp(R.id.fragment_navigation_drawer, (DrawerLayout) findViewById(R.id.drawer_layout), mToolbar, mIsMaster);
         drawerFragment.setDrawerListener(this);
 
         displayView(0);
@@ -74,35 +82,62 @@ public class MainActivity extends BaseActivity implements FragmentDrawer.Fragmen
             return;
         }
 
-        if (position == 3) {
-            mCurrentTab = -1;
-            startActivityAnim(LoginActivity.class,null);
-            finishActivityAnim();
-            return;
-        }
-
         BaseFragment fragment = null;
         String title = getString(R.string.app_name);
         String fragmentName = "";
-        switch (position) {
-            case 0:
-                mCurrentTab = 0;
-                fragment = new FragmentFindLocation();
-                title = getString(R.string.title_find_location);
-                fragmentName = Constants.FRAGMENT_FIND_LOCATION;
-                break;
-            case 1:
-                mCurrentTab = 1;
-                fragment = new FragmentFindJob();
-                title = getString(R.string.title_find_job);
-                fragmentName = Constants.FRAGMENT_FIND_JOB;
-                break;
-            case 2:
-                mCurrentTab = 2;
-                fragment = new FragmentUserInfo();
-                title = getString(R.string.title_user_info);
-                fragmentName = Constants.FRAGMENT_USER_INFO;
-                break;
+
+        if (mIsMaster) {
+
+            if (position == 2) {
+                mCurrentTab = -1;
+                startActivityAnim(LoginActivity.class, null);
+                finishActivityAnim();
+                return;
+            }
+
+            switch (position) {
+                case 0:
+                    mCurrentTab = 0;
+                    fragment = new FragmentUploadLocation();
+                    title = getString(R.string.title_upload_location);
+                    fragmentName = Constants.FRAGMENT_UPLOAD_LOCATION;
+                    break;
+                case 1:
+                    mCurrentTab = 1;
+                    fragment = new FragmentUserInfo();
+                    title = getString(R.string.title_user_info);
+                    fragmentName = Constants.FRAGMENT_USER_INFO;
+                    break;
+            }
+        } else {
+
+            if (position == 3) {
+                mCurrentTab = -1;
+                startActivityAnim(LoginActivity.class, null);
+                finishActivityAnim();
+                return;
+            }
+
+            switch (position) {
+                case 0:
+                    mCurrentTab = 0;
+                    fragment = new FragmentFindLocation();
+                    title = getString(R.string.title_find_location);
+                    fragmentName = Constants.FRAGMENT_FIND_LOCATION;
+                    break;
+                case 1:
+                    mCurrentTab = 1;
+                    fragment = new FragmentFindJob();
+                    title = getString(R.string.title_find_job);
+                    fragmentName = Constants.FRAGMENT_FIND_JOB;
+                    break;
+                case 2:
+                    mCurrentTab = 2;
+                    fragment = new FragmentUserInfo();
+                    title = getString(R.string.title_user_info);
+                    fragmentName = Constants.FRAGMENT_USER_INFO;
+                    break;
+            }
         }
 
         if (fragment != null) {

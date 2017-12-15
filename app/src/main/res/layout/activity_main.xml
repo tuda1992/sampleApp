@@ -32,7 +32,6 @@
 
     </LinearLayout>
 
-
     <fragment
         android:id="@+id/fragment_navigation_drawer"
         android:name="findlocation.bateam.com.navigation.FragmentDrawer"

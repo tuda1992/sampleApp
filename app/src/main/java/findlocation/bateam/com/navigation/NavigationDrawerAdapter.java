@@ -31,7 +31,6 @@ public class NavigationDrawerAdapter extends RecyclerView.Adapter<NavigationDraw
         this.data = data;
     }
 
-
     public void delete(int position) {
         data.remove(position);
         notifyItemRemoved(position);
@@ -48,20 +47,35 @@ public class NavigationDrawerAdapter extends RecyclerView.Adapter<NavigationDraw
     public void onBindViewHolder(MyViewHolder holder, int position) {
         NavDrawerItem current = data.get(position);
         holder.tvTitle.setText(current.getTitle());
-        switch (position) {
-            case 0:
-                holder.ivIcon.setImageResource(R.drawable.ic_find_location);
-                break;
-            case 1:
-                holder.ivIcon.setImageResource(R.drawable.ic_find_job);
-                break;
-            case 2:
-                holder.ivIcon.setImageResource(R.drawable.ic_user);
-                break;
-            case 3:
-                holder.ivIcon.setImageResource(R.drawable.ic_logout);
-                break;
+        if (getItemCount() == 4) {
+            switch (position) {
+                case 0:
+                    holder.ivIcon.setImageResource(R.drawable.ic_find_location);
+                    break;
+                case 1:
+                    holder.ivIcon.setImageResource(R.drawable.ic_find_job);
+                    break;
+                case 2:
+                    holder.ivIcon.setImageResource(R.drawable.ic_user);
+                    break;
+                case 3:
+                    holder.ivIcon.setImageResource(R.drawable.ic_logout);
+                    break;
 
+            }
+        } else {
+            switch (position) {
+                case 0:
+                    holder.ivIcon.setImageResource(R.drawable.ic_find_location);
+                    break;
+                case 1:
+                    holder.ivIcon.setImageResource(R.drawable.ic_user);
+                    break;
+                case 2:
+                    holder.ivIcon.setImageResource(R.drawable.ic_logout);
+                    break;
+
+            }
         }
     }
 

@@ -1,6 +1,7 @@
 package findlocation.bateam.com.adapter;
 
 import android.content.Context;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,10 +19,12 @@ import findlocation.bateam.com.R;
 public class CustomSpinnerAdapter extends BaseAdapter {
     private Context context;
     private List<String> contentArray;
+    private boolean mIsLeft;
 
-    public CustomSpinnerAdapter(Context context, List<String> contentArray) {
+    public CustomSpinnerAdapter(Context context, List<String> contentArray, boolean isLeft) {
         this.context = context;
         this.contentArray = contentArray;
+        this.mIsLeft = isLeft;
     }
 
     @Override
@@ -44,6 +47,11 @@ public class CustomSpinnerAdapter extends BaseAdapter {
         view = (LayoutInflater.from(context)).inflate(R.layout.item_spinner, null);
         TextView textView = (TextView) view.findViewById(R.id.tv_item);
         textView.setText(contentArray.get(i));
+        if (mIsLeft) {
+            textView.setGravity(Gravity.LEFT);
+        } else {
+            textView.setGravity(Gravity.RIGHT);
+        }
         return view;
     }
 }

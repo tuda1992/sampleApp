@@ -20,6 +20,7 @@ import butterknife.OnClick;
 import findlocation.bateam.com.MainActivity;
 import findlocation.bateam.com.R;
 import findlocation.bateam.com.base.BaseFragment;
+import findlocation.bateam.com.constant.Constants;
 import findlocation.bateam.com.util.DialogUtil;
 import findlocation.bateam.com.util.NetworkUtil;
 import findlocation.bateam.com.util.PatternUtil;
@@ -91,13 +92,16 @@ public class FragmentSignIn extends BaseFragment {
 
         int selectedId = mRg.getCheckedRadioButtonId();
         boolean isChecked = mCbSavePassword.isChecked();
+        Bundle bundle = new Bundle();
         if (selectedId == R.id.rd_user) {
             Log.d(TAG, "Login By User isChecked = " + isChecked);
+            bundle.putBoolean(Constants.BUNDLE_IS_MASTER, false);
         } else {
             Log.d(TAG, "Login By Master isChecked = " + isChecked);
+            bundle.putBoolean(Constants.BUNDLE_IS_MASTER, true);
         }
 
-        startActivityAnim(MainActivity.class, null);
+        startActivityAnim(MainActivity.class, bundle);
         finishActivityAnim();
     }
 

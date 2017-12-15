@@ -143,7 +143,7 @@ public class FragmentFindLocation extends BaseFragment implements OnMapReadyCall
         mLinearLayoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false);
         mRvData.setLayoutManager(mLinearLayoutManager);
         mRvData.setHasFixedSize(true);
-        mAdapter = new FindLocationAdapter(getActivity(),this);
+        mAdapter = new FindLocationAdapter(getActivity(), this);
         mRvData.setAdapter(mAdapter);
 
     }
@@ -250,7 +250,6 @@ public class FragmentFindLocation extends BaseFragment implements OnMapReadyCall
     @Override
     public void onPause() {
         super.onPause();
-        stopLocationUpdates();
         mMapView.onPause();
     }
 

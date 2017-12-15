@@ -41,20 +41,85 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/_10sdp"
                 android:layout_marginRight="@dimen/_10sdp"
-
                 android:orientation="horizontal">
 
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="@string/text_signup_fullname"
+                    android:text="@string/text_signup_family_name"
                     android:textColor="@color/textColorPrimary"
                     android:textSize="@dimen/_12sdp"
                     android:textStyle="bold" />
 
                 <EditText
-                    android:id="@+id/edt_fullname"
+                    android:id="@+id/edt_family_name"
+                    android:layout_width="0dp"
+                    android:layout_height="@dimen/_30sdp"
+                    android:layout_weight="1.4"
+                    android:background="@drawable/border_edittext"
+                    android:gravity="right"
+                    android:inputType="textEmailAddress"
+                    android:maxLength="50"
+                    android:padding="@dimen/_5sdp"
+                    android:singleLine="true"
+                    android:textColor="@color/textColorPrimary"
+                    android:textSize="@dimen/_12sdp" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/_10sdp"
+                android:layout_marginRight="@dimen/_10sdp"
+                android:layout_marginTop="@dimen/_20sdp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/text_signup_middle_name"
+                    android:textColor="@color/textColorPrimary"
+                    android:textSize="@dimen/_12sdp"
+                    android:textStyle="bold" />
+
+                <EditText
+                    android:id="@+id/edt_middle_name"
+                    android:layout_width="0dp"
+                    android:layout_height="@dimen/_30sdp"
+                    android:layout_weight="1.4"
+                    android:background="@drawable/border_edittext"
+                    android:gravity="right"
+                    android:inputType="textEmailAddress"
+                    android:maxLength="50"
+                    android:padding="@dimen/_5sdp"
+                    android:singleLine="true"
+                    android:textColor="@color/textColorPrimary"
+                    android:textSize="@dimen/_12sdp" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/_10sdp"
+                android:layout_marginRight="@dimen/_10sdp"
+                android:layout_marginTop="@dimen/_20sdp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/text_signup_first_name"
+                    android:textColor="@color/textColorPrimary"
+                    android:textSize="@dimen/_12sdp"
+                    android:textStyle="bold" />
+
+                <EditText
+                    android:id="@+id/edt_first_name"
                     android:layout_width="0dp"
                     android:layout_height="@dimen/_30sdp"
                     android:layout_weight="1.4"
@@ -265,6 +330,42 @@
                     android:singleLine="true"
                     android:textColor="@color/textColorPrimary"
                     android:textSize="@dimen/_12sdp" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/_10sdp"
+                android:layout_marginRight="@dimen/_10sdp"
+                android:layout_marginTop="@dimen/_20sdp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/text_signup_address_country"
+                    android:textColor="@color/textColorPrimary"
+                    android:textSize="@dimen/_12sdp"
+                    android:textStyle="bold" />
+
+                <RelativeLayout
+                    android:layout_width="0dp"
+                    android:layout_height="@dimen/_30sdp"
+                    android:layout_weight="1.4"
+                    android:padding="@dimen/_1sdp">
+
+                    <Spinner
+                        android:id="@+id/spn_address_country"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@drawable/border_edittext"
+                        android:gravity="right"
+                        android:singleLine="true"
+                        android:textColor="@color/textColorPrimary"
+                        android:textSize="@dimen/_12sdp" />
+                </RelativeLayout>
 
             </LinearLayout>
 

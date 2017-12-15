@@ -24,6 +24,7 @@ import findlocation.bateam.com.R;
 public abstract class BaseActivity extends AppCompatActivity {
 
     protected FragmentManager mFragmentManager;
+    protected String TAG = getClass().getSimpleName();
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -49,7 +50,7 @@ public abstract class BaseActivity extends AppCompatActivity {
     protected abstract void initListeners();
 
     // Init daata
-    protected abstract void initDatas(Bundle saveInstanceStatte);
+    protected abstract void initDatas(Bundle saveInstanceState);
 
     // Get data from server
     protected abstract void getData();

@@ -46,4 +46,5 @@ dependencies {
     compile 'com.android.support:recyclerview-v7:27.0.2'
     compile 'com.facebook.android:facebook-login:[4,5)'
     compile project(':library')
+    compile project(':librarycamera')
 }
