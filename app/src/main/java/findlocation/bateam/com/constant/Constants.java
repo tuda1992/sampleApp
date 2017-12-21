@@ -18,11 +18,19 @@ public class Constants {
     public static final String FRAGMENT_FIND_JOB = "FRAGMENT_FIND_JOB";
     public static final String FRAGMENT_USER_INFO = "FRAGMENT_USER_INFO";
     public static final String FRAGMENT_SIGN_UP_INFO = "FRAGMENT_SIGN_UP_INFO";
+    public static final String FRAGMENT_SIGN_UP_SELFIE = "FRAGMENT_SIGN_UP_SELFIE";
     public static final String FRAGMENT_SIGN_UP_APPROVE = "FRAGMENT_SIGN_UP_APPROVE";
     public static final String FRAGMENT_SIGN_UP_COMPLETE = "FRAGMENT_SIGN_UP_COMPLETE";
     public static final String FRAGMENT_FORGET_PASSWORD = "FRAGMENT_FORGET_PASSWORD";
     public static final String FRAGMENT_FORGET_PASSWORD_CODE = "FRAGMENT_FORGET_PASSWORD_CODE";
     public static final String FRAGMENT_FORGET_PASSWORD_INPUT = "FRAGMENT_FORGET_PASSWORD_INPUT";
     public static final String FRAGMENT_FORGET_PASSWORD_COMPLETE = "FRAGMENT_FORGET_PASSWORD_COMPLETE";
+
+
+    // Querry Google Map
+    public static final String LOCATION = "location";
+    public static final String RADIUS = "radius";
+    public static final String KEY_SEARCH = "name";
+    public static final String API_KEY = "key";
 
 }

@@ -3,6 +3,8 @@ package findlocation.bateam.com.findlocation;
 import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.location.Address;
+import android.location.Geocoder;
 import android.location.Location;
 import android.location.LocationManager;
 import android.os.Build;
@@ -13,16 +15,26 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.Html;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.GooglePlayServicesNotAvailableException;
+import com.google.android.gms.common.GooglePlayServicesRepairableException;
 import com.google.android.gms.common.GooglePlayServicesUtil;
 import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.android.gms.common.api.Status;
 import com.google.android.gms.location.LocationListener;
 import com.google.android.gms.location.LocationRequest;
 import com.google.android.gms.location.LocationServices;
+import com.google.android.gms.location.places.AutocompleteFilter;
+import com.google.android.gms.location.places.Place;
+import com.google.android.gms.location.places.ui.PlaceAutocomplete;
+import com.google.android.gms.location.places.ui.PlaceSelectionListener;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapView;
@@ -31,6 +43,7 @@ import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.LatLngBounds;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.maps.android.clustering.ClusterManager;
@@ -39,8 +52,10 @@ import org.json.JSONException;
 
 import java.io.InputStream;
 import java.util.List;
+import java.util.Locale;
 
 import butterknife.BindView;
+import butterknife.OnClick;
 import findlocation.bateam.com.R;
 import findlocation.bateam.com.adapter.FindLocationAdapter;
 import findlocation.bateam.com.base.BaseFragment;
@@ -50,6 +65,7 @@ import findlocation.bateam.com.model.MyClusterItem;
 import findlocation.bateam.com.util.MyItemReaderUtil;
 import findlocation.bateam.com.util.PermissionUtils;
 
+import static android.app.Activity.RESULT_OK;
 import static com.facebook.FacebookSdk.getApplicationContext;
 
 /**
@@ -62,33 +78,58 @@ public class FragmentFindLocation extends BaseFragment implements OnMapReadyCall
         , LocationListener
         , GoogleMap.OnCameraIdleListener
         , GoogleMap.OnMarkerClickListener
-        , FindLocationAdapter.ICallBackItemClick {
-
-    @BindView(R.id.map_view)
-    MapView mMapView;
-    @BindView(R.id.rv_data)
-    RecyclerView mRvData;
-
-    private FindLocationAdapter mAdapter;
-    private LinearLayoutManager mLinearLayoutManager;
-
+        , FindLocationAdapter.ICallBackItemClick
+        , PlaceSelectionListener {
+    
     private GoogleMap mGoogleMap;
-
     private final static int PLAY_SERVICES_RESOLUTION_REQUEST = 1000;
-
     private Location mLastLocation;
-
     // Google client to interact with Google API
     private GoogleApiClient mGoogleApiClient;
-
     private LocationRequest mLocationRequest;
-
     // Location updates intervals in sec
     private static int UPDATE_INTERVAL = 10000; // 10 sec
     private static int FATEST_INTERVAL = 5000; // 5 sec
     private static int DISPLACEMENT = 0; // 10 meters
-
+    private static final int REQUEST_SELECT_PLACE = 1000;
     private ClusterManager<MyClusterItem> mClusterManager;
+    private boolean mIsHavePlace;
+
+    // Bind View
+
+    @BindView(R.id.map_view)
+    MapView mMapView;
+    @BindView(R.id.tv_search_place)
+    TextView mTvSearchPlace;
+
+    // Bind Event
+
+    @OnClick(R.id.cv_search_place)
+    public void onClickSearchPlace() {
+        try {
+            AutocompleteFilter autocompleteFilter = new AutocompleteFilter.Builder()
+                    .setTypeFilter(Place.TYPE_COUNTRY)
+                    .setCountry("VN")
+                    .build();
+            Intent intent = new PlaceAutocomplete.IntentBuilder
+                    (PlaceAutocomplete.MODE_FULLSCREEN).setFilter(autocompleteFilter)
+                    .build(getActivity());
+            startActivityForResult(intent, REQUEST_SELECT_PLACE);
+        } catch (GooglePlayServicesRepairableException |
+                GooglePlayServicesNotAvailableException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @OnClick(R.id.cv_data)
+    public void onClickShowData() {
+
+    }
+
+    @OnClick(R.id.btn_find)
+    public void onClickFindPlace() {
+
+    }
 
     @Override
     protected void onBackPressFragment() {
@@ -138,13 +179,6 @@ public class FragmentFindLocation extends BaseFragment implements OnMapReadyCall
         } else {
             setUpListenerForMapView();
         }
-
-        // Set up recyclerview
-        mLinearLayoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false);
-        mRvData.setLayoutManager(mLinearLayoutManager);
-        mRvData.setHasFixedSize(true);
-        mAdapter = new FindLocationAdapter(getActivity(), this);
-        mRvData.setAdapter(mAdapter);
 
     }
 
@@ -290,11 +324,12 @@ public class FragmentFindLocation extends BaseFragment implements OnMapReadyCall
         mGoogleMap.setOnCameraIdleListener(mClusterManager);
         mGoogleMap.setOnMarkerClickListener(this);
 
-        try {
-            readItems();
-        } catch (JSONException e) {
-            Toast.makeText(getActivity(), "Problem reading list of markers.", Toast.LENGTH_LONG).show();
-        }
+        // Add location
+//        try {
+//            readItems();
+//        } catch (JSONException e) {
+//            Toast.makeText(getActivity(), "Problem reading list of markers.", Toast.LENGTH_LONG).show();
+//        }
     }
 
     private void readItems() throws JSONException {
@@ -397,7 +432,7 @@ public class FragmentFindLocation extends BaseFragment implements OnMapReadyCall
             mGoogleMap.addMarker(new MarkerOptions().position(sydney).title("My Location").snippet("Vị trí hiện tại của "));
 
             // For zooming automatically to the location of the marker
-            CameraPosition cameraPosition = new CameraPosition.Builder().target(sydney).zoom(12).build();
+            CameraPosition cameraPosition = new CameraPosition.Builder().target(sydney).zoom(24).build();
             mGoogleMap.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
 
         } else {
@@ -409,9 +444,16 @@ public class FragmentFindLocation extends BaseFragment implements OnMapReadyCall
     public void onLocationChanged(Location location) {
         // Assign the new location
         mLastLocation = location;
-
+        if (mIsHavePlace) {
+            stopLocationUpdates();
+            return;
+        }
+        mIsHavePlace = true;
         // Displaying the new location on UI
 //        displayLocation();
+        getCompleteAddressString(location.getLatitude(), location.getLongitude());
+        stopLocationUpdates();
+
     }
 
     @Override
@@ -430,4 +472,66 @@ public class FragmentFindLocation extends BaseFragment implements OnMapReadyCall
     public void onItemClick(int position) {
 
     }
+
+    @Override
+    public void onPlaceSelected(Place place) {
+        mIsHavePlace = true;
+        mTvSearchPlace.setText(place.getAddress());
+        if (!TextUtils.isEmpty(place.getAttributions())) {
+            Log.i(TAG, "Place Selected: " + place.getAttributions().toString());
+        }
+
+        mGoogleMap.addMarker(new MarkerOptions().position(place.getLatLng()).title("My Location").snippet("Vị trí hiện tại của ").icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_ROSE)));
+
+        // For zooming automatically to the location of the marker
+        CameraPosition cameraPosition = new CameraPosition.Builder().target(place.getLatLng()).zoom(24).build();
+        mGoogleMap.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
+
+    }
+
+    @Override
+    public void onError(Status status) {
+        Log.e(TAG, "onError: Status = " + status.toString());
+        Toast.makeText(getActivity(), "Place selection failed: " + status.getStatusMessage(),
+                Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == REQUEST_SELECT_PLACE) {
+            if (resultCode == RESULT_OK) {
+                Place place = PlaceAutocomplete.getPlace(getActivity(), data);
+                this.onPlaceSelected(place);
+            } else if (resultCode == PlaceAutocomplete.RESULT_ERROR) {
+                Status status = PlaceAutocomplete.getStatus(getActivity(), data);
+                this.onError(status);
+            }
+        }
+        super.onActivityResult(requestCode, resultCode, data);
+
+    }
+
+    private String getCompleteAddressString(double LATITUDE, double LONGITUDE) {
+        String strAdd = "";
+        Geocoder geocoder = new Geocoder(getActivity(), Locale.getDefault());
+        try {
+            List<Address> addresses = geocoder.getFromLocation(LATITUDE, LONGITUDE, 1);
+            if (addresses != null) {
+                Address returnedAddress = addresses.get(0);
+                StringBuilder strReturnedAddress = new StringBuilder("");
+
+                for (int i = 0; i <= returnedAddress.getMaxAddressLineIndex(); i++) {
+                    strReturnedAddress.append(returnedAddress.getAddressLine(i)).append("\n");
+                }
+                strAdd = strReturnedAddress.toString();
+
+            }
+            mTvSearchPlace.setText(strAdd);
+        } catch (Exception e) {
+            e.printStackTrace();
+            mTvSearchPlace.setText("");
+        }
+        return strAdd;
+    }
+
 }

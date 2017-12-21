@@ -159,4 +159,12 @@ public class MainActivity extends BaseActivity implements FragmentDrawer.Fragmen
             fragment.onRequestPermissionsResult(requestCode, permissions, grantResults);
         }
     }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        for (Fragment fragment : getSupportFragmentManager().getFragments()) {
+            fragment.onActivityResult(requestCode, resultCode, data);
+        }
+    }
 }

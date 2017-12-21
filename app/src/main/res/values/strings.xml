@@ -58,13 +58,13 @@
     <string name="text_signup_first_name">Tên</string>
     <string name="text_signup_dob">Ngày sinh</string>
     <string name="text_signup_sex">Giới tính</string>
-    <string name="text_signup_school">Trường học</string>
+    <string name="text_signup_school">Trường</string>
     <string name="text_signup_class">Chuyên ngành</string>
     <string name="text_signup_grade">Khoá</string>
     <string name="text_signup_address">Số nhà</string>
     <string name="text_signup_address_town">Phường/Xã</string>
     <string name="text_signup_address_district">Quận/Huyện</string>
-    <string name="text_signup_address_city">Tỉnh thành phố</string>
+    <string name="text_signup_address_city">Thành phố/Tỉnh</string>
     <string name="text_signup_address_country">Quốc tịch</string>
     <string name="text_signup_email">Email</string>
     <string name="text_signup_telephone">Số điện thoại di động</string>
@@ -72,8 +72,9 @@
     <string name="text_signup_re_password">Xác nhận mật khẩu</string>
     <string name="text_signup_code">Nhập mã code</string>
     <string name="text_forget_password_email">Nhập email</string>
-    <string name="text_signup_notify">Để đăng ký sử dụng, bạn cần thực hiện 3 bước:\n- Chụp ảnh thẻ sinh viên\n- Điền thông tin vào mẫu\n- Xác thực số điện thoại</string>
+    <string name="text_signup_notify">Để đăng ký sử dụng, bạn cần thực hiện 4 bước:\n- Chụp ảnh thẻ sinh viên\n- Chụp ảnh selfie\n- Điền thông tin vào mẫu\n- Xác thực số điện thoại</string>
     <string name="text_signup_info_notify">Bạn cần điền thông tin vào mẫu sau:</string>
+    <string name="text_signup_selfie_notify">Bạn cần chụp ảnh selfie</string>
     <string name="text_signup_approve_notify">Hệ thống gửi mã đăng ký qua điện thoại, bạn vui lòng kiểm tra và nhập thông tin để hoàn tất thủ tục đăng ký</string>
     <string name="text_signup_complete_notify">Chúc mừng bạn đã đăng ký sử dụng thành công. Cảm ơn bạn đã đăng ký sử dụng dịch vụ của chúng tôi.</string>
     <string name="text_forget_password_email_notify">Bạn quên mật khẩu? Bạn vui lòng gửi email của mình cho chúng tôi, hệ thống sẽ gửi lại mã code xác nhận qua điện thoại.</string>
@@ -96,6 +97,8 @@
     <string name="text_button_find_job">Tìm việc</string>
 
     <string name="text_button_change_info">Thay đổi thông tin</string>
+
+    <string name="text_button_find_location">Tìm nhà trọ</string>
 
     <string name="text_button_ok">Đồng ý</string>
     <string name="text_button_no">Không đồng ý</string>
