@@ -1,24 +1,24 @@
 package findlocation.bateam.com.findlocation;
 
 import android.Manifest;
+import android.animation.Animator;
+import android.animation.AnimatorListenerAdapter;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Address;
 import android.location.Geocoder;
 import android.location.Location;
-import android.location.LocationManager;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
-import android.text.Html;
+import android.support.v7.widget.CardView;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
+import android.view.animation.TranslateAnimation;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -51,6 +51,7 @@ import com.google.maps.android.clustering.ClusterManager;
 import org.json.JSONException;
 
 import java.io.InputStream;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
@@ -64,6 +65,7 @@ import findlocation.bateam.com.listener.IPermissionCallBack;
 import findlocation.bateam.com.model.MyClusterItem;
 import findlocation.bateam.com.util.MyItemReaderUtil;
 import findlocation.bateam.com.util.PermissionUtils;
+import findlocation.bateam.com.widget.LayoutPlace;
 
 import static android.app.Activity.RESULT_OK;
 import static com.facebook.FacebookSdk.getApplicationContext;
@@ -79,7 +81,8 @@ public class FragmentFindLocation extends BaseFragment implements OnMapReadyCall
         , GoogleMap.OnCameraIdleListener
         , GoogleMap.OnMarkerClickListener
         , FindLocationAdapter.ICallBackItemClick
-        , PlaceSelectionListener {
+        , PlaceSelectionListener
+        , LayoutPlace.LayoutPlaceListener {
 
     private GoogleMap mGoogleMap;
     private final static int PLAY_SERVICES_RESOLUTION_REQUEST = 1000;
@@ -101,6 +104,14 @@ public class FragmentFindLocation extends BaseFragment implements OnMapReadyCall
     MapView mMapView;
     @BindView(R.id.tv_search_place)
     TextView mTvSearchPlace;
+    @BindView(R.id.cv_data)
+    CardView mCvData;
+    @BindView(R.id.layout_result_place)
+    LayoutPlace mLayoutPlace;
+    @BindView(R.id.cv_layout_place)
+    CardView mCvLayoutPlace;
+    @BindView(R.id.tv_data)
+    TextView mTvData;
 
     // Bind Event
 
@@ -123,12 +134,61 @@ public class FragmentFindLocation extends BaseFragment implements OnMapReadyCall
 
     @OnClick(R.id.cv_data)
     public void onClickShowData() {
+        showOrHideView();
+    }
 
+    private void showOrHideView() {
+        if (mCvLayoutPlace.getVisibility() == View.GONE) {
+            mCvLayoutPlace.animate()
+                    .translationY(0)
+                    .alpha(1.0f)
+                    .setDuration(500)
+                    .setListener(new AnimatorListenerAdapter() {
+                        @Override
+                        public void onAnimationStart(Animator animation) {
+                            super.onAnimationStart(animation);
+                            mCvLayoutPlace.setVisibility(View.VISIBLE);
+                        }
+
+                        @Override
+                        public void onAnimationEnd(Animator animation) {
+                            super.onAnimationEnd(animation);
+                        }
+                    });
+        } else {
+            mCvLayoutPlace.animate()
+                    .translationY(mCvLayoutPlace.getHeight())
+                    .alpha(0.0f)
+                    .setDuration(500)
+                    .setListener(new AnimatorListenerAdapter() {
+                        @Override
+                        public void onAnimationEnd(Animator animation) {
+                            super.onAnimationEnd(animation);
+                            mCvLayoutPlace.setVisibility(View.GONE);
+                        }
+                    });
+        }
     }
 
     @OnClick(R.id.btn_find)
     public void onClickFindPlace() {
+        mCvData.setVisibility(View.VISIBLE);
 
+        List<String> listData = new ArrayList<>();
+        listData.add("36 Hoàng Cầu Mới,Ô Chợ Dừa, Đống Đa, Hà Nội, Việt Nam");
+        listData.add("37 Hoàng Cầu Mới,Ô Chợ Dừa, Đống Đa, Hà Nội, Việt Nam");
+        listData.add("38 Hoàng Cầu Mới,Ô Chợ Dừa, Đống Đa, Hà Nội, Việt Nam");
+        listData.add("39 Hoàng Cầu Mới,Ô Chợ Dừa, Đống Đa, Hà Nội, Việt Nam");
+        listData.add("40 Hoàng Cầu Mới,Ô Chợ Dừa, Đống Đa, Hà Nội, Việt Nam");
+        listData.add("41 Hoàng Cầu Mới,Ô Chợ Dừa, Đống Đa, Hà Nội, Việt Nam");
+        listData.add("42 Hoàng Cầu Mới,Ô Chợ Dừa, Đống Đa, Hà Nội, Việt Nam");
+        listData.add("43 Hoàng Cầu Mới,Ô Chợ Dừa, Đống Đa, Hà Nội, Việt Nam");
+        listData.add("44 Hoàng Cầu Mới,Ô Chợ Dừa, Đống Đa, Hà Nội, Việt Nam");
+        listData.add("45 Hoàng Cầu Mới,Ô Chợ Dừa, Đống Đa, Hà Nội, Việt Nam");
+
+        mTvData.setText(listData.get(0));
+
+        mLayoutPlace.setDataForLayoutPlace(listData);
     }
 
     @Override
@@ -179,6 +239,8 @@ public class FragmentFindLocation extends BaseFragment implements OnMapReadyCall
         } else {
             setUpListenerForMapView();
         }
+
+        mLayoutPlace.setLayoutListener(this);
 
     }
 
@@ -312,15 +374,6 @@ public class FragmentFindLocation extends BaseFragment implements OnMapReadyCall
             mGoogleMap.setMyLocationEnabled(true);
         }
 
-        LatLng sydney = new LatLng(51.503186, -0.126446);
-        mGoogleMap.addMarker(new MarkerOptions().position(sydney).title("My Location").snippet("Vị trí hiện tại của ").icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_ROSE)));
-
-        // For zooming automatically to the location of the marker
-        CameraPosition cameraPosition = new CameraPosition.Builder().target(sydney).zoom(10).build();
-        mGoogleMap.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
-
-        mClusterManager = new ClusterManager<MyClusterItem>(getActivity(), mGoogleMap);
-
         mGoogleMap.setOnCameraIdleListener(mClusterManager);
         mGoogleMap.setOnMarkerClickListener(this);
 
@@ -448,12 +501,12 @@ public class FragmentFindLocation extends BaseFragment implements OnMapReadyCall
             stopLocationUpdates();
             return;
         }
-        mIsHavePlace = true;
         // Displaying the new location on UI
 //        displayLocation();
         getCompleteAddressString(location.getLatitude(), location.getLongitude());
         stopLocationUpdates();
-
+        moveCamera(mLastLocation.getLatitude(), mLastLocation.getLongitude());
+        mIsHavePlace = true;
     }
 
     @Override
@@ -477,16 +530,15 @@ public class FragmentFindLocation extends BaseFragment implements OnMapReadyCall
     public void onPlaceSelected(Place place) {
         mIsHavePlace = true;
         mTvSearchPlace.setText(place.getAddress());
-        if (!TextUtils.isEmpty(place.getAttributions())) {
-            Log.i(TAG, "Place Selected: " + place.getAttributions().toString());
-        }
+        moveCamera(place.getLatLng().latitude, place.getLatLng().longitude);
+    }
 
-        mGoogleMap.addMarker(new MarkerOptions().position(place.getLatLng()).title("My Location").snippet("Vị trí hiện tại của ").icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_ROSE)));
-
+    private void moveCamera(double latitude, double longtitute) {
+        LatLng position = new LatLng(latitude, longtitute);
+        mGoogleMap.addMarker(new MarkerOptions().position(position).title("My Location").snippet("Vị trí hiện tại của ").icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_ROSE)));
         // For zooming automatically to the location of the marker
-        CameraPosition cameraPosition = new CameraPosition.Builder().target(place.getLatLng()).zoom(24).build();
-        mGoogleMap.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
-
+        CameraPosition cameraPosition = new CameraPosition.Builder().target(position).zoom(16).build();
+        mGoogleMap.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition), 1000, null);
     }
 
     @Override
@@ -511,11 +563,11 @@ public class FragmentFindLocation extends BaseFragment implements OnMapReadyCall
 
     }
 
-    private String getCompleteAddressString(double LATITUDE, double LONGITUDE) {
+    private String getCompleteAddressString(double latitude, double longtitude) {
         String strAdd = "";
         Geocoder geocoder = new Geocoder(getActivity(), Locale.getDefault());
         try {
-            List<Address> addresses = geocoder.getFromLocation(LATITUDE, LONGITUDE, 1);
+            List<Address> addresses = geocoder.getFromLocation(latitude, longtitude, 1);
             if (addresses != null) {
                 Address returnedAddress = addresses.get(0);
                 StringBuilder strReturnedAddress = new StringBuilder("");
@@ -529,9 +581,19 @@ public class FragmentFindLocation extends BaseFragment implements OnMapReadyCall
             mTvSearchPlace.setText(strAdd);
         } catch (Exception e) {
             e.printStackTrace();
+            Log.d(TAG, "Exception");
             mTvSearchPlace.setText("");
         }
         return strAdd;
     }
 
+    @Override
+    public void onHideLayout() {
+        showOrHideView();
+    }
+
+    @Override
+    public void onItemLayoutClick() {
+        Toast.makeText(getActivity(), "Thông tin nhà trọ sẽ được cập nhật sau", Toast.LENGTH_LONG).show();
+    }
 }

@@ -1,6 +1,7 @@
 package findlocation.bateam.com.adapter;
 
 import android.content.Context;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
@@ -9,11 +10,13 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 import findlocation.bateam.com.R;
 
 /**
@@ -24,10 +27,12 @@ public class FindLocationAdapter extends RecyclerView.Adapter<FindLocationAdapte
 
     private Context mContext;
     private ICallBackItemClick mListener;
+    private List<String> mListData;
 
-    public FindLocationAdapter(Context context, ICallBackItemClick listener) {
+    public FindLocationAdapter(Context context, List<String> listData, ICallBackItemClick listener) {
         this.mContext = context;
         this.mListener = listener;
+        this.mListData = listData;
     }
 
     public interface ICallBackItemClick {
@@ -36,26 +41,34 @@ public class FindLocationAdapter extends RecyclerView.Adapter<FindLocationAdapte
 
     @Override
     public int getItemCount() {
-        return 0;
+        return mListData != null ? mListData.size() : 0;
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+    public class ViewHolder extends RecyclerView.ViewHolder {
 
-        @BindView(R.id.iv_location)
+        @BindView(R.id.iv_data)
         ImageView mIvLocation;
+        @BindView(R.id.tv_data)
+        TextView mTvData;
+        @BindView(R.id.cv_data)
+        CardView mCvData;
+
+        @OnClick(R.id.cv_data)
+        public void onClickItem() {
+            if (mListener != null) {
+                mListener.onItemClick(getAdapterPosition());
+            }
+        }
 
         public ViewHolder(View v) {
             super(v);
             ButterKnife.bind(this, v);
         }
 
-        public void setData() {
+        public void setData(String text) {
+            mTvData.setText(text);
         }
 
-        @Override
-        public void onClick(View view) {
-
-        }
     }
 
     @Override
@@ -66,7 +79,7 @@ public class FindLocationAdapter extends RecyclerView.Adapter<FindLocationAdapte
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        holder.setData();
+        holder.setData(mListData.get(position));
     }
 
 }
