@@ -80,7 +80,7 @@ public class FragmentFindLocation extends BaseFragment implements OnMapReadyCall
         , GoogleMap.OnMarkerClickListener
         , FindLocationAdapter.ICallBackItemClick
         , PlaceSelectionListener {
-    
+
     private GoogleMap mGoogleMap;
     private final static int PLAY_SERVICES_RESOLUTION_REQUEST = 1000;
     private Location mLastLocation;
