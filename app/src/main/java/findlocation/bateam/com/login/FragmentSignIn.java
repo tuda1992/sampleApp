@@ -14,6 +14,8 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 
+import com.google.gson.Gson;
+
 import butterknife.BindString;
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -21,9 +23,11 @@ import findlocation.bateam.com.MainActivity;
 import findlocation.bateam.com.R;
 import findlocation.bateam.com.base.BaseFragment;
 import findlocation.bateam.com.constant.Constants;
+import findlocation.bateam.com.model.UserInfo;
 import findlocation.bateam.com.util.DialogUtil;
 import findlocation.bateam.com.util.NetworkUtil;
 import findlocation.bateam.com.util.PatternUtil;
+import findlocation.bateam.com.util.PrefUtil;
 
 /**
  * Created by acv on 12/4/17.
@@ -100,6 +104,15 @@ public class FragmentSignIn extends BaseFragment {
             Log.d(TAG, "Login By Master isChecked = " + isChecked);
             bundle.putBoolean(Constants.BUNDLE_IS_MASTER, true);
         }
+
+        if (isChecked) {
+            PrefUtil.setSharedPreferenceSaveData(getActivity());
+        }
+        UserInfo userInfo = new UserInfo();
+        Gson gson = new Gson();
+        userInfo.email = userName;
+        String jsonUserInfo = gson.toJson(userInfo);
+        PrefUtil.setSharedPreferenceUserInfo(getActivity(), jsonUserInfo);
 
         startActivityAnim(MainActivity.class, bundle);
         finishActivityAnim();

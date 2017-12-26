@@ -114,8 +114,6 @@ public class FragmentSignUpInfo extends BaseFragment {
     String mStrPasswordNotEqual;
     @BindString(R.string.error_dialog_family_name_null)
     String mStrFamilyNameNull;
-    @BindString(R.string.error_dialog_middle_name_null)
-    String mStrMiddleNameNull;
     @BindString(R.string.error_dialog_first_name_null)
     String mStrFirstNameNull;
     @BindString(R.string.error_dialog_dob_null)
@@ -176,10 +174,6 @@ public class FragmentSignUpInfo extends BaseFragment {
             return;
         }
 
-        if (TextUtils.isEmpty(middleName)) {
-            DialogUtil.showDialogError(getActivity(), mStrMiddleNameNull, null);
-            return;
-        }
 
         if (TextUtils.isEmpty(firstName)) {
             DialogUtil.showDialogError(getActivity(), mStrFirstNameNull, null);

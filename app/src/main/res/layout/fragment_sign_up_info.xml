@@ -62,6 +62,7 @@
                     android:gravity="right"
                     android:inputType="textCapWords|textEmailAddress"
                     android:maxLength="50"
+                    android:hint="VD: Nguyễn"
                     android:padding="@dimen/_5sdp"
                     android:singleLine="true"
                     android:textColor="@color/textColorPrimary"
@@ -96,6 +97,7 @@
                     android:inputType="textCapWords|textEmailAddress"
                     android:maxLength="50"
                     android:padding="@dimen/_5sdp"
+                    android:hint="VD: Văn"
                     android:singleLine="true"
                     android:textColor="@color/textColorPrimary"
                     android:textSize="@dimen/_12sdp" />
@@ -130,6 +132,7 @@
                     android:maxLength="50"
                     android:padding="@dimen/_5sdp"
                     android:singleLine="true"
+                    android:hint="VD: A"
                     android:textColor="@color/textColorPrimary"
                     android:textSize="@dimen/_12sdp" />
 
@@ -161,6 +164,7 @@
                     android:gravity="right"
                     android:padding="@dimen/_5sdp"
                     android:singleLine="true"
+                    android:hint="VD: 04/08/1992"
                     android:textColor="@color/textColorPrimary"
                     android:textSize="@dimen/_12sdp" />
 
@@ -281,6 +285,7 @@
                     android:maxLength="50"
                     android:padding="@dimen/_5sdp"
                     android:singleLine="true"
+                    android:hint="VD: Kinh tế đối ngoại"
                     android:textColor="@color/textColorPrimary"
                     android:textSize="@dimen/_12sdp" />
 
@@ -314,6 +319,7 @@
                     android:maxLength="50"
                     android:padding="@dimen/_5sdp"
                     android:singleLine="true"
+                    android:hint="VD: K50"
                     android:textColor="@color/textColorPrimary"
                     android:textSize="@dimen/_12sdp" />
 
@@ -491,6 +497,7 @@
                     android:inputType="textEmailAddress"
                     android:maxLength="50"
                     android:padding="@dimen/_5sdp"
+                    android:hint="VD: Số 1"
                     android:singleLine="true"
                     android:textColor="@color/textColorPrimary"
                     android:textSize="@dimen/_12sdp" />
@@ -525,6 +532,7 @@
                     android:maxLength="50"
                     android:padding="@dimen/_5sdp"
                     android:singleLine="true"
+                    android:hint="VD: example@gmail.com"
                     android:textColor="@color/textColorPrimary"
                     android:textSize="@dimen/_12sdp" />
 
@@ -558,6 +566,7 @@
                     android:maxLength="50"
                     android:padding="@dimen/_5sdp"
                     android:singleLine="true"
+                    android:hint="VD: 123456hh"
                     android:textColor="@color/textColorPrimary"
                     android:textSize="@dimen/_12sdp" />
 
@@ -589,6 +598,7 @@
                     android:gravity="right"
                     android:inputType="textPassword"
                     android:maxLength="50"
+                    android:hint="VD: 123456hh"
                     android:padding="@dimen/_5sdp"
                     android:singleLine="true"
                     android:textColor="@color/textColorPrimary"
@@ -623,12 +633,12 @@
                     android:inputType="number"
                     android:maxLength="12"
                     android:padding="@dimen/_5sdp"
+                    android:hint="VD: 0962394xxx"
                     android:singleLine="true"
                     android:textColor="@color/textColorPrimary"
                     android:textSize="@dimen/_12sdp" />
 
             </LinearLayout>
-
 
             <LinearLayout
                 android:layout_width="match_parent"

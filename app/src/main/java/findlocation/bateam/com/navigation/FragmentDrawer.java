@@ -10,13 +10,17 @@ import android.support.v7.widget.Toolbar;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
 import android.view.View;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
+import butterknife.OnClick;
 import findlocation.bateam.com.R;
 import findlocation.bateam.com.base.BaseFragment;
+import findlocation.bateam.com.userinfo.UserInfoActivity;
 
 /**
  * Created by acv on 12/4/17.
@@ -26,6 +30,16 @@ public class FragmentDrawer extends BaseFragment {
 
     @BindView(R.id.drawerList)
     RecyclerView recyclerView;
+    @BindView(R.id.tv_user_name)
+    TextView mTvUserName;
+    @BindView(R.id.iv_avatar)
+    ImageView mIvAvatar;
+
+    @OnClick(R.id.iv_avatar)
+    public void onClickUserInfo() {
+        startActivityAnim(UserInfoActivity.class, null);
+    }
+
     private ActionBarDrawerToggle mDrawerToggle;
     private DrawerLayout mDrawerLayout;
     private NavigationDrawerAdapter adapter;
@@ -106,6 +120,7 @@ public class FragmentDrawer extends BaseFragment {
     }
 
     public void setUp(int fragmentId, DrawerLayout drawerLayout, final Toolbar toolbar, boolean isMaster) {
+        mTvUserName.setText("Admin");
         if (isMaster) {
             titles = getActivity().getResources().getStringArray(R.array.nav_drawer_labels_2);
             adapter = new NavigationDrawerAdapter(getActivity(), getSources());

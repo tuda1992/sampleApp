@@ -24,6 +24,7 @@ import findlocation.bateam.com.navigation.FragmentDrawer;
 import findlocation.bateam.com.userinfo.FragmentUserInfo;
 import findlocation.bateam.com.util.ImagePicker;
 import findlocation.bateam.com.util.PermissionUtils;
+import findlocation.bateam.com.util.PrefUtil;
 
 public class MainActivity extends BaseActivity implements FragmentDrawer.FragmentDrawerListener {
 
@@ -87,9 +88,9 @@ public class MainActivity extends BaseActivity implements FragmentDrawer.Fragmen
         String fragmentName = "";
 
         if (mIsMaster) {
-
-            if (position == 2) {
+            if (position == 1) {
                 mCurrentTab = -1;
+                PrefUtil.clearSharedPreference(this);
                 startActivityAnim(LoginActivity.class, null);
                 finishActivityAnim();
                 return;
@@ -102,17 +103,11 @@ public class MainActivity extends BaseActivity implements FragmentDrawer.Fragmen
                     title = getString(R.string.title_upload_location);
                     fragmentName = Constants.FRAGMENT_UPLOAD_LOCATION;
                     break;
-                case 1:
-                    mCurrentTab = 1;
-                    fragment = new FragmentUserInfo();
-                    title = getString(R.string.title_user_info);
-                    fragmentName = Constants.FRAGMENT_USER_INFO;
-                    break;
             }
         } else {
-
-            if (position == 3) {
+            if (position == 2) {
                 mCurrentTab = -1;
+                PrefUtil.clearSharedPreference(this);
                 startActivityAnim(LoginActivity.class, null);
                 finishActivityAnim();
                 return;
@@ -130,12 +125,6 @@ public class MainActivity extends BaseActivity implements FragmentDrawer.Fragmen
                     fragment = new FragmentFindJob();
                     title = getString(R.string.title_find_job);
                     fragmentName = Constants.FRAGMENT_FIND_JOB;
-                    break;
-                case 2:
-                    mCurrentTab = 2;
-                    fragment = new FragmentUserInfo();
-                    title = getString(R.string.title_user_info);
-                    fragmentName = Constants.FRAGMENT_USER_INFO;
                     break;
             }
         }

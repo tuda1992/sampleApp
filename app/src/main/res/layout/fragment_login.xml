@@ -61,10 +61,12 @@
             android:layout_height="wrap_content"
             android:layout_weight="1.4"
             android:background="@drawable/border_edittext"
+            android:gravity="right"
+            android:hint="VD: example@gmail.com"
             android:inputType="textEmailAddress"
             android:padding="@dimen/_5sdp"
-            android:text="admin@gmail.com"
             android:singleLine="true"
+            android:text="admin@gmail.com"
             android:textColor="@color/textColorPrimary"
             android:textSize="@dimen/_15sdp" />
 
@@ -93,10 +95,12 @@
             android:layout_height="wrap_content"
             android:layout_weight="1.4"
             android:background="@drawable/border_edittext"
+            android:gravity="right"
+            android:hint="VD: 123456hh"
             android:inputType="textPassword"
             android:padding="@dimen/_5sdp"
-            android:text="123456hhh"
             android:singleLine="true"
+            android:text="123456hh"
             android:textColor="@color/textColorPrimary"
             android:textSize="@dimen/_15sdp" />
 

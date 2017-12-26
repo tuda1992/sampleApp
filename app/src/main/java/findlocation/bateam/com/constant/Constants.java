@@ -9,7 +9,7 @@ public class Constants {
     public static final int REQUEST_CAMERA = 2909;
     public static final int PICK_IMAGE_ID = 234;
     public static final int REQUEST_ACCESS_AND_COARSE_LOCATION = 999;
-    public static final String BUNDLE_IS_MASTER = "BUNDLE_IS_MASTER";
+
 
     public static final String FRAGMENT_SIGN_IN = "FRAGMENT_SIGN_IN";
     public static final String FRAGMENT_SIGN_UP = "FRAGMENT_SIGN_UP";
@@ -32,5 +32,14 @@ public class Constants {
     public static final String RADIUS = "radius";
     public static final String KEY_SEARCH = "name";
     public static final String API_KEY = "key";
+
+
+    // User Info
+    public static final String USER_INFO = "USER_INFO";
+    public static final String SAVE_DATA = "SAVE_DATA";
+
+    // Bundle
+    public static final String BUNDLE_PLACE_ITEM = "BUNDLE_PLACE_ITEM";
+    public static final String BUNDLE_IS_MASTER = "BUNDLE_IS_MASTER";
 
 }

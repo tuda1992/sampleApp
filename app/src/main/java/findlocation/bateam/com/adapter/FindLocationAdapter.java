@@ -12,12 +12,15 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.google.android.gms.location.places.Place;
+
 import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import findlocation.bateam.com.R;
+import findlocation.bateam.com.model.PlaceModel;
 
 /**
  * Created by acv on 12/13/17.
@@ -27,16 +30,17 @@ public class FindLocationAdapter extends RecyclerView.Adapter<FindLocationAdapte
 
     private Context mContext;
     private ICallBackItemClick mListener;
-    private List<String> mListData;
+    private List<PlaceModel> mListData;
 
-    public FindLocationAdapter(Context context, List<String> listData, ICallBackItemClick listener) {
+    public FindLocationAdapter(Context context, List<PlaceModel> listData, ICallBackItemClick listener) {
         this.mContext = context;
         this.mListener = listener;
         this.mListData = listData;
     }
 
     public interface ICallBackItemClick {
-        void onItemClick(int position);
+        void onItemClick(int position, PlaceModel item);
+        void onItemInfo(int position, PlaceModel item);
     }
 
     @Override
@@ -56,7 +60,14 @@ public class FindLocationAdapter extends RecyclerView.Adapter<FindLocationAdapte
         @OnClick(R.id.cv_data)
         public void onClickItem() {
             if (mListener != null) {
-                mListener.onItemClick(getAdapterPosition());
+                mListener.onItemClick(getAdapterPosition(), mListData.get(getAdapterPosition()));
+            }
+        }
+
+        @OnClick(R.id.iv_info)
+        public void onClicKInfo(){
+            if (mListener != null) {
+                mListener.onItemInfo(getAdapterPosition(), mListData.get(getAdapterPosition()));
             }
         }
 
@@ -65,8 +76,8 @@ public class FindLocationAdapter extends RecyclerView.Adapter<FindLocationAdapte
             ButterKnife.bind(this, v);
         }
 
-        public void setData(String text) {
-            mTvData.setText(text);
+        public void setData(PlaceModel model) {
+            mTvData.setText(model.addressDetail);
         }
 
     }

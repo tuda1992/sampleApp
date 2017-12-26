@@ -18,7 +18,6 @@ import android.support.v7.widget.CardView;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
-import android.view.animation.TranslateAnimation;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -46,11 +45,15 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.LatLngBounds;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import com.google.maps.android.clustering.ClusterManager;
 
 import org.json.JSONException;
 
+import java.io.IOException;
 import java.io.InputStream;
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
@@ -58,11 +61,12 @@ import java.util.Locale;
 import butterknife.BindView;
 import butterknife.OnClick;
 import findlocation.bateam.com.R;
-import findlocation.bateam.com.adapter.FindLocationAdapter;
 import findlocation.bateam.com.base.BaseFragment;
 import findlocation.bateam.com.constant.Constants;
 import findlocation.bateam.com.listener.IPermissionCallBack;
 import findlocation.bateam.com.model.MyClusterItem;
+import findlocation.bateam.com.model.PlaceModel;
+import findlocation.bateam.com.util.JSONResourceReader;
 import findlocation.bateam.com.util.MyItemReaderUtil;
 import findlocation.bateam.com.util.PermissionUtils;
 import findlocation.bateam.com.widget.LayoutPlace;
@@ -80,7 +84,6 @@ public class FragmentFindLocation extends BaseFragment implements OnMapReadyCall
         , LocationListener
         , GoogleMap.OnCameraIdleListener
         , GoogleMap.OnMarkerClickListener
-        , FindLocationAdapter.ICallBackItemClick
         , PlaceSelectionListener
         , LayoutPlace.LayoutPlaceListener {
 
@@ -172,23 +175,22 @@ public class FragmentFindLocation extends BaseFragment implements OnMapReadyCall
 
     @OnClick(R.id.btn_find)
     public void onClickFindPlace() {
-        mCvData.setVisibility(View.VISIBLE);
+        String jsonReader;
+        try {
+            jsonReader = JSONResourceReader.readFileJSONFromRaw(getActivity());
+            Gson gson = new Gson();
+            Type listType = new TypeToken<List<PlaceModel>>() {
+            }.getType();
+            List<PlaceModel> placeModels = (List<PlaceModel>) gson.fromJson(jsonReader, listType);
 
-        List<String> listData = new ArrayList<>();
-        listData.add("36 Hoàng Cầu Mới,Ô Chợ Dừa, Đống Đa, Hà Nội, Việt Nam");
-        listData.add("37 Hoàng Cầu Mới,Ô Chợ Dừa, Đống Đa, Hà Nội, Việt Nam");
-        listData.add("38 Hoàng Cầu Mới,Ô Chợ Dừa, Đống Đa, Hà Nội, Việt Nam");
-        listData.add("39 Hoàng Cầu Mới,Ô Chợ Dừa, Đống Đa, Hà Nội, Việt Nam");
-        listData.add("40 Hoàng Cầu Mới,Ô Chợ Dừa, Đống Đa, Hà Nội, Việt Nam");
-        listData.add("41 Hoàng Cầu Mới,Ô Chợ Dừa, Đống Đa, Hà Nội, Việt Nam");
-        listData.add("42 Hoàng Cầu Mới,Ô Chợ Dừa, Đống Đa, Hà Nội, Việt Nam");
-        listData.add("43 Hoàng Cầu Mới,Ô Chợ Dừa, Đống Đa, Hà Nội, Việt Nam");
-        listData.add("44 Hoàng Cầu Mới,Ô Chợ Dừa, Đống Đa, Hà Nội, Việt Nam");
-        listData.add("45 Hoàng Cầu Mới,Ô Chợ Dừa, Đống Đa, Hà Nội, Việt Nam");
+            mCvData.setVisibility(View.VISIBLE);
 
-        mTvData.setText(listData.get(0));
+            mTvData.setText(placeModels.get(0).addressDetail);
 
-        mLayoutPlace.setDataForLayoutPlace(listData);
+            mLayoutPlace.setDataForLayoutPlace(placeModels);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
@@ -386,18 +388,18 @@ public class FragmentFindLocation extends BaseFragment implements OnMapReadyCall
     }
 
     private void readItems() throws JSONException {
-        InputStream inputStream = getResources().openRawResource(R.raw.radar_search);
-        List<MyClusterItem> items = new MyItemReaderUtil().read(inputStream);
-        for (int i = 0; i < 10; i++) {
-            double offset = i / 60d;
-            for (MyClusterItem item : items) {
-                LatLng position = item.getPosition();
-                double lat = position.latitude + offset;
-                double lng = position.longitude + offset;
-                MyClusterItem offsetItem = new MyClusterItem(lat, lng);
-                mClusterManager.addItem(offsetItem);
-            }
-        }
+//        InputStream inputStream = getResources().openRawResource(R.raw.radar_search);
+//        List<MyClusterItem> items = new MyItemReaderUtil().read(inputStream);
+//        for (int i = 0; i < 10; i++) {
+//            double offset = i / 60d;
+//            for (MyClusterItem item : items) {
+//                LatLng position = item.getPosition();
+//                double lat = position.latitude + offset;
+//                double lng = position.longitude + offset;
+//                MyClusterItem offsetItem = new MyClusterItem(lat, lng);
+//                mClusterManager.addItem(offsetItem);
+//            }
+//        }
     }
 
     @Override
@@ -522,11 +524,6 @@ public class FragmentFindLocation extends BaseFragment implements OnMapReadyCall
     }
 
     @Override
-    public void onItemClick(int position) {
-
-    }
-
-    @Override
     public void onPlaceSelected(Place place) {
         mIsHavePlace = true;
         mTvSearchPlace.setText(place.getAddress());
@@ -593,7 +590,19 @@ public class FragmentFindLocation extends BaseFragment implements OnMapReadyCall
     }
 
     @Override
-    public void onItemLayoutClick() {
-        Toast.makeText(getActivity(), "Thông tin nhà trọ sẽ được cập nhật sau", Toast.LENGTH_LONG).show();
+    public void onItemLayoutClick(int position, PlaceModel item) {
+        mTvData.setText(item.addressDetail);
+        showOrHideView();
+        if (TextUtils.isEmpty(item.lattitude) || TextUtils.isEmpty(item.longitude)) {
+            return;
+        }
+        moveCamera(Double.parseDouble(item.lattitude), Double.parseDouble(item.longitude));
+    }
+
+    @Override
+    public void onItemInfoClick(int position, PlaceModel item) {
+        Bundle bundle = new Bundle();
+        bundle.putParcelable(Constants.BUNDLE_PLACE_ITEM, item);
+        startActivityAnim(InfoPlaceActivity.class, bundle);
     }
 }

@@ -22,14 +22,12 @@
         <!--<item>@string/nav_item_login</item>-->
         <item>@string/nav_item_find_location</item>
         <item>@string/nav_item_find_job</item>
-        <item>@string/nav_item_user_info</item>
         <item>@string/nav_item_logout</item>
     </string-array>
 
     <!-- navigation drawer item labels  -->
     <string-array name="nav_drawer_labels_2">
         <item>@string/nav_item_upload_location</item>
-        <item>@string/nav_item_user_info</item>
         <item>@string/nav_item_logout</item>
     </string-array>
 
@@ -112,6 +110,19 @@
     <string name="text_permission_camera">Vui lòng cho phép truy cập vào bộ phận chính của ứng dụng</string>
 
 
+    // Info Place
+    <string name="text_info_address_detail">Địa chỉ: </string>
+    <string name="text_info_price">Giá thuê: </string>
+    <string name="text_info_contract_name">Chủ nhà trọ: </string>
+    <string name="text_info_phone">Số điện thoại bàn: </string>
+    <string name="text_info_mobile">Số điện thoại di động: </string>
+    <string name="text_info_content">Mô tả chi tiết: </string>
+    <string name="text_info_created_date">Ngày đăng: </string>
+    <string name="text_info_title">Tiêu đề: </string>
+    <string name="text_info_cod_date">Ngày hết hạn: </string>
+    <string name="text_info_city">Thành phố: </string>
+    <string name="text_info_district">Quận/Huyện: </string>
+
     // Error
 
     <string name="title_dialog_error">Lỗi sai thông tin</string>
@@ -128,7 +139,6 @@
     <string name="error_dialog_telephone_null">Bạn chưa điền thông tin số điện thoại di động</string>
     <string name="error_dialog_telephone_error">Bạn điền sai số điện thoại</string>
     <string name="error_dialog_family_name_null">Bạn chưa điền thông tin họ</string>
-    <string name="error_dialog_middle_name_null">Bạn chưa điền thông tin tên đệm</string>
     <string name="error_dialog_first_name_null">Bạn chưa điền thông tin tên</string>
     <string name="error_dialog_dob_null">Bạn chưa điền thông tin ngày sinh</string>
     <string name="error_dialog_code_null">Bạn chưa điền thông tin code</string>

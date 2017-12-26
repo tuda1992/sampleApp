@@ -332,18 +332,18 @@ public class UploadLocationActivity extends BaseActivity implements OnMapReadyCa
     }
 
     private void readItems() throws JSONException {
-        InputStream inputStream = getResources().openRawResource(R.raw.radar_search);
-        List<MyClusterItem> items = new MyItemReaderUtil().read(inputStream);
-        for (int i = 0; i < 10; i++) {
-            double offset = i / 60d;
-            for (MyClusterItem item : items) {
-                LatLng position = item.getPosition();
-                double lat = position.latitude + offset;
-                double lng = position.longitude + offset;
-                MyClusterItem offsetItem = new MyClusterItem(lat, lng);
-                mClusterManager.addItem(offsetItem);
-            }
-        }
+//        InputStream inputStream = getResources().openRawResource(R.raw.radar_search);
+//        List<MyClusterItem> items = new MyItemReaderUtil().read(inputStream);
+//        for (int i = 0; i < 10; i++) {
+//            double offset = i / 60d;
+//            for (MyClusterItem item : items) {
+//                LatLng position = item.getPosition();
+//                double lat = position.latitude + offset;
+//                double lng = position.longitude + offset;
+//                MyClusterItem offsetItem = new MyClusterItem(lat, lng);
+//                mClusterManager.addItem(offsetItem);
+//            }
+//        }
     }
 
     @Override

@@ -13,6 +13,7 @@ import butterknife.OnClick;
 import findlocation.bateam.com.R;
 import findlocation.bateam.com.adapter.FindLocationAdapter;
 import findlocation.bateam.com.base.BaseCustomLayout;
+import findlocation.bateam.com.model.PlaceModel;
 
 /**
  * Created by acv on 12/22/17.
@@ -39,20 +40,29 @@ public class LayoutPlace extends BaseCustomLayout {
     public interface LayoutPlaceListener {
         void onHideLayout();
 
-        void onItemLayoutClick();
+        void onItemLayoutClick(int position, PlaceModel item);
+
+        void onItemInfoClick(int position, PlaceModel item);
     }
 
     public void setLayoutListener(LayoutPlaceListener listener) {
         this.mListener = listener;
     }
 
-    public void setDataForLayoutPlace(List<String> listData) {
+    public void setDataForLayoutPlace(List<PlaceModel> listData) {
         mLinearLayoutManager = new LinearLayoutManager(mContext, LinearLayoutManager.VERTICAL, false);
         mAdapter = new FindLocationAdapter(mContext, listData, new FindLocationAdapter.ICallBackItemClick() {
             @Override
-            public void onItemClick(int position) {
+            public void onItemClick(int position, PlaceModel item) {
                 if (mListener != null) {
-                    mListener.onItemLayoutClick();
+                    mListener.onItemLayoutClick(position, item);
+                }
+            }
+
+            @Override
+            public void onItemInfo(int position, PlaceModel item) {
+                if (mListener != null) {
+                    mListener.onItemInfoClick(position, item);
                 }
             }
         });

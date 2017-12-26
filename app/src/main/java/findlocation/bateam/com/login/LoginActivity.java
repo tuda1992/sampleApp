@@ -15,12 +15,14 @@ import java.util.List;
 
 import butterknife.BindString;
 import butterknife.BindView;
+import findlocation.bateam.com.MainActivity;
 import findlocation.bateam.com.R;
 import findlocation.bateam.com.base.BaseActivity;
 import findlocation.bateam.com.base.BaseFragment;
 import findlocation.bateam.com.constant.Constants;
 import findlocation.bateam.com.util.ImagePicker;
 import findlocation.bateam.com.util.PermissionUtils;
+import findlocation.bateam.com.util.PrefUtil;
 
 /**
  * Created by acv on 12/5/17.
@@ -47,7 +49,6 @@ public class LoginActivity extends BaseActivity {
         setSupportActionBar(mToolbar);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         getSupportActionBar().setTitle(mTitleSignIn);
-
         FragmentSignIn fragmentSignIn = new FragmentSignIn();
         replaceFragment(fragmentSignIn, Constants.FRAGMENT_SIGN_IN);
     }
