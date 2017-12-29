@@ -49,7 +49,6 @@ public class FragmentUploadLocation extends BaseFragment implements UploadLocati
     @BindString(R.string.text_button_take_picture)
     String mStrBtnTakePicture;
 
-
     private UploadLocationAdapter mAdapter;
     private LinearLayoutManager mLinearLayoutManager;
     private boolean mIsCapture = true;

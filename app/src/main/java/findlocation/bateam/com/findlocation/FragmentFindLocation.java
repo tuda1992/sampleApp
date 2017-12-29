@@ -3,17 +3,22 @@ package findlocation.bateam.com.findlocation;
 import android.Manifest;
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
+import android.app.Dialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Address;
 import android.location.Geocoder;
 import android.location.Location;
+import android.location.LocationManager;
 import android.os.Build;
 import android.os.Bundle;
+import android.provider.Settings;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.CardView;
 import android.text.TextUtils;
 import android.util.Log;
@@ -72,6 +77,7 @@ import findlocation.bateam.com.util.PermissionUtils;
 import findlocation.bateam.com.widget.LayoutPlace;
 
 import static android.app.Activity.RESULT_OK;
+import static android.content.Context.LOCATION_SERVICE;
 import static com.facebook.FacebookSdk.getApplicationContext;
 
 /**
@@ -222,6 +228,25 @@ public class FragmentFindLocation extends BaseFragment implements OnMapReadyCall
             createLocationRequest();
         }
 
+        LocationManager lm = (LocationManager) getActivity().getSystemService(LOCATION_SERVICE);
+        if (!lm.isProviderEnabled(LocationManager.GPS_PROVIDER) ||
+                !lm.isProviderEnabled(LocationManager.NETWORK_PROVIDER)) {
+            // Build the alert dialog
+            AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+            builder.setTitle("Location Services Not Active");
+            builder.setMessage("Please enable Location Services and GPS");
+            builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                public void onClick(DialogInterface dialogInterface, int i) {
+                    // Show location settings when the user acknowledges the alert dialog
+                    Intent intent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
+                    startActivity(intent);
+                }
+            });
+            Dialog alertDialog = builder.create();
+            alertDialog.setCanceledOnTouchOutside(false);
+            alertDialog.show();
+        }
+
         mMapView.onCreate(savedInstanceState);
         mMapView.onResume();
 
@@ -275,7 +300,6 @@ public class FragmentFindLocation extends BaseFragment implements OnMapReadyCall
      * Starting the location updates
      */
     protected void startLocationUpdates() {
-
         if (ActivityCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED
                 && ActivityCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             // TODO: Consider calling
@@ -311,9 +335,6 @@ public class FragmentFindLocation extends BaseFragment implements OnMapReadyCall
                 GooglePlayServicesUtil.getErrorDialog(resultCode, getActivity(),
                         PLAY_SERVICES_RESOLUTION_REQUEST).show();
             } else {
-                Toast.makeText(getApplicationContext(),
-                        "This device is not supported.", Toast.LENGTH_LONG)
-                        .show();
                 getActivity().finish();
             }
             return false;
@@ -541,8 +562,6 @@ public class FragmentFindLocation extends BaseFragment implements OnMapReadyCall
     @Override
     public void onError(Status status) {
         Log.e(TAG, "onError: Status = " + status.toString());
-        Toast.makeText(getActivity(), "Place selection failed: " + status.getStatusMessage(),
-                Toast.LENGTH_SHORT).show();
     }
 
     @Override
