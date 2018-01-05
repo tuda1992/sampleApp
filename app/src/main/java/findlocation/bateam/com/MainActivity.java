@@ -1,5 +1,6 @@
 package findlocation.bateam.com;
 
+import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Build;
@@ -10,6 +11,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 
 import butterknife.BindView;
 import findlocation.bateam.com.base.BaseActivity;
@@ -47,7 +49,6 @@ public class MainActivity extends BaseActivity implements FragmentDrawer.Fragmen
         if (bundle != null) {
             mIsMaster = bundle.getBoolean(Constants.BUNDLE_IS_MASTER, false);
         }
-
         setSupportActionBar(mToolbar);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
 
@@ -139,6 +140,15 @@ public class MainActivity extends BaseActivity implements FragmentDrawer.Fragmen
     public void onBackPressed() {
         super.onBackPressed();
         finish();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if (getCurrentFocus() != null) {
+            InputMethodManager inputMethodManager = (InputMethodManager) getSystemService(INPUT_METHOD_SERVICE);
+            inputMethodManager.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), 0);
+        }
     }
 
     @Override

@@ -66,6 +66,7 @@ import java.util.Locale;
 import butterknife.BindView;
 import butterknife.OnClick;
 import findlocation.bateam.com.R;
+import findlocation.bateam.com.adapter.CustomInfoWindowAdapter;
 import findlocation.bateam.com.base.BaseFragment;
 import findlocation.bateam.com.constant.Constants;
 import findlocation.bateam.com.listener.IPermissionCallBack;
@@ -144,6 +145,11 @@ public class FragmentFindLocation extends BaseFragment implements OnMapReadyCall
     @OnClick(R.id.cv_data)
     public void onClickShowData() {
         showOrHideView();
+    }
+
+    @OnClick(R.id.iv_back)
+    public void onClickBackLocation(){
+        moveCamera(null, mLastLocation.getLatitude(), mLastLocation.getLongitude());
     }
 
     private void showOrHideView() {
@@ -528,7 +534,7 @@ public class FragmentFindLocation extends BaseFragment implements OnMapReadyCall
 //        displayLocation();
         getCompleteAddressString(location.getLatitude(), location.getLongitude());
         stopLocationUpdates();
-        moveCamera(mLastLocation.getLatitude(), mLastLocation.getLongitude());
+        moveCamera(null, mLastLocation.getLatitude(), mLastLocation.getLongitude());
         mIsHavePlace = true;
     }
 
@@ -540,7 +546,7 @@ public class FragmentFindLocation extends BaseFragment implements OnMapReadyCall
     @Override
     public boolean onMarkerClick(Marker marker) {
         Log.d(TAG, "marker = " + marker.getId());
-
+        marker.showInfoWindow();
         return false;
     }
 
@@ -548,15 +554,35 @@ public class FragmentFindLocation extends BaseFragment implements OnMapReadyCall
     public void onPlaceSelected(Place place) {
         mIsHavePlace = true;
         mTvSearchPlace.setText(place.getAddress());
-        moveCamera(place.getLatLng().latitude, place.getLatLng().longitude);
+        moveCamera(null, place.getLatLng().latitude, place.getLatLng().longitude);
     }
 
-    private void moveCamera(double latitude, double longtitute) {
+    private void moveCamera(PlaceModel item, double latitude, double longtitute) {
+        String title = "";
+        String price = "";
+        if (item != null) {
+            title = item.addressDetail;
+            price = "Giá thuê : " + item.price + " VNĐ";
+        } else {
+            title = "Vị trí của tôi";
+        }
+        //Marker
         LatLng position = new LatLng(latitude, longtitute);
-        mGoogleMap.addMarker(new MarkerOptions().position(position).title("My Location").snippet("Vị trí hiện tại của ").icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_ROSE)));
+        MarkerOptions markerOpt = new MarkerOptions();
+        markerOpt.position(position)
+                .title(title)
+                .snippet(price)
+                .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_ROSE));
+
+        //Set Custom InfoWindow Adapter
+        CustomInfoWindowAdapter adapter = new CustomInfoWindowAdapter(getActivity());
+        mGoogleMap.setInfoWindowAdapter(adapter);
+        mGoogleMap.addMarker(markerOpt);
+
         // For zooming automatically to the location of the marker
         CameraPosition cameraPosition = new CameraPosition.Builder().target(position).zoom(16).build();
         mGoogleMap.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition), 1000, null);
+
     }
 
     @Override
@@ -615,7 +641,9 @@ public class FragmentFindLocation extends BaseFragment implements OnMapReadyCall
         if (TextUtils.isEmpty(item.lattitude) || TextUtils.isEmpty(item.longitude)) {
             return;
         }
-        moveCamera(Double.parseDouble(item.lattitude), Double.parseDouble(item.longitude));
+
+        moveCamera(item, Double.parseDouble(item.lattitude), Double.parseDouble(item.longitude));
+
     }
 
     @Override

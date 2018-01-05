@@ -4,7 +4,27 @@
     android:id="@+id/toolbar"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:minHeight="?attr/actionBarSize"
     android:background="?attr/colorPrimary"
-    local:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
-    local:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
+    android:minHeight="?attr/actionBarSize"
+    local:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+    local:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
+
+    <ImageView
+        android:id="@+id/iv_logo"
+        android:layout_width="@dimen/_30sdp"
+        android:visibility="gone"
+        android:layout_height="@dimen/_30sdp"
+        android:src="@drawable/ic_logo" />
+
+    <TextView
+        android:id="@+id/tv_title_logo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/_15sdp"
+        android:visibility="gone"
+        android:textColor="@android:color/white"
+        android:textSize="@dimen/_18sdp"
+        android:textStyle="bold" />
+
+
+</android.support.v7.widget.Toolbar>
