@@ -69,6 +69,7 @@ import findlocation.bateam.com.R;
 import findlocation.bateam.com.adapter.CustomInfoWindowAdapter;
 import findlocation.bateam.com.base.BaseFragment;
 import findlocation.bateam.com.constant.Constants;
+import findlocation.bateam.com.drawline.DrawRouteMaps;
 import findlocation.bateam.com.listener.IPermissionCallBack;
 import findlocation.bateam.com.model.MyClusterItem;
 import findlocation.bateam.com.model.PlaceModel;
@@ -641,6 +642,12 @@ public class FragmentFindLocation extends BaseFragment implements OnMapReadyCall
         if (TextUtils.isEmpty(item.lattitude) || TextUtils.isEmpty(item.longitude)) {
             return;
         }
+
+        LatLng origin = new LatLng(mLastLocation.getLatitude(), mLastLocation.getLongitude());
+        LatLng destination = new LatLng(Double.parseDouble(item.lattitude), Double.parseDouble(item.longitude));
+
+        DrawRouteMaps.getInstance(getActivity())
+                .draw(origin, destination, mGoogleMap);
 
         moveCamera(item, Double.parseDouble(item.lattitude), Double.parseDouble(item.longitude));
 
