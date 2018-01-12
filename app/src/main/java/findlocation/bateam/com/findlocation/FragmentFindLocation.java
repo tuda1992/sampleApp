@@ -7,6 +7,7 @@ import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.Color;
 import android.location.Address;
 import android.location.Geocoder;
 import android.location.Location;
@@ -149,7 +150,7 @@ public class FragmentFindLocation extends BaseFragment implements OnMapReadyCall
     }
 
     @OnClick(R.id.iv_back)
-    public void onClickBackLocation(){
+    public void onClickBackLocation() {
         moveCamera(null, mLastLocation.getLatitude(), mLastLocation.getLongitude());
     }
 
@@ -188,21 +189,35 @@ public class FragmentFindLocation extends BaseFragment implements OnMapReadyCall
 
     @OnClick(R.id.btn_find)
     public void onClickFindPlace() {
-        String jsonReader;
-        try {
-            jsonReader = JSONResourceReader.readFileJSONFromRaw(getActivity());
-            Gson gson = new Gson();
-            Type listType = new TypeToken<List<PlaceModel>>() {
-            }.getType();
-            List<PlaceModel> placeModels = (List<PlaceModel>) gson.fromJson(jsonReader, listType);
+        if (mCvData.getVisibility() == View.GONE) {
+            String jsonReader;
+            try {
+                jsonReader = JSONResourceReader.readFileJSONFromRaw(getActivity());
+                Gson gson = new Gson();
+                Type listType = new TypeToken<List<PlaceModel>>() {
+                }.getType();
+                List<PlaceModel> placeModels = (List<PlaceModel>) gson.fromJson(jsonReader, listType);
 
-            mCvData.setVisibility(View.VISIBLE);
+                mCvData.setVisibility(View.VISIBLE);
 
-            mTvData.setText(placeModels.get(0).addressDetail);
+                mTvData.setText(placeModels.get(0).addressDetail);
 
-            mLayoutPlace.setDataForLayoutPlace(placeModels);
-        } catch (IOException e) {
-            e.printStackTrace();
+                mLayoutPlace.setDataForLayoutPlace(placeModels);
+
+                if (mLastLocation == null)
+                    return;
+
+                LatLng origin = new LatLng(mLastLocation.getLatitude(), mLastLocation.getLongitude());
+                LatLng destination = new LatLng(Double.parseDouble(placeModels.get(0).lattitude), Double.parseDouble(placeModels.get(0).longitude));
+
+                DrawRouteMaps.getInstance(getActivity())
+                        .draw(origin, destination, mGoogleMap);
+
+                moveCamera(placeModels.get(0), Double.parseDouble(placeModels.get(0).lattitude), Double.parseDouble(placeModels.get(0).longitude));
+
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
     }
 
@@ -223,7 +238,7 @@ public class FragmentFindLocation extends BaseFragment implements OnMapReadyCall
 
     @Override
     protected void initViews(View view) {
-
+        mCvLayoutPlace.setCardBackgroundColor(Color.TRANSPARENT);
     }
 
     @Override
@@ -240,9 +255,9 @@ public class FragmentFindLocation extends BaseFragment implements OnMapReadyCall
                 !lm.isProviderEnabled(LocationManager.NETWORK_PROVIDER)) {
             // Build the alert dialog
             AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-            builder.setTitle("Location Services Not Active");
-            builder.setMessage("Please enable Location Services and GPS");
-            builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+            builder.setTitle("Location Services chưa được kích hoạt");
+            builder.setMessage("Hãy kích hoạt Location Services và GPS");
+            builder.setPositiveButton("Đồng ý", new DialogInterface.OnClickListener() {
                 public void onClick(DialogInterface dialogInterface, int i) {
                     // Show location settings when the user acknowledges the alert dialog
                     Intent intent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
@@ -639,9 +654,10 @@ public class FragmentFindLocation extends BaseFragment implements OnMapReadyCall
     public void onItemLayoutClick(int position, PlaceModel item) {
         mTvData.setText(item.addressDetail);
         showOrHideView();
-        if (TextUtils.isEmpty(item.lattitude) || TextUtils.isEmpty(item.longitude)) {
+        if (TextUtils.isEmpty(item.lattitude) || TextUtils.isEmpty(item.longitude) || mLastLocation == null) {
             return;
         }
+
 
         LatLng origin = new LatLng(mLastLocation.getLatitude(), mLastLocation.getLongitude());
         LatLng destination = new LatLng(Double.parseDouble(item.lattitude), Double.parseDouble(item.longitude));

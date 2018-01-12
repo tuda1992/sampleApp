@@ -32,13 +32,12 @@ public class FragmentFindJob extends BaseFragment {
     Button mBtnFindJob;
 
     @OnClick(R.id.btn_find_job)
-    public void onClickFindJob(){
-
+    public void onClickFindJob() {
         if (!NetworkUtil.isHaveInternet(getActivity())) {
             DialogUtil.showDialogErrorInternet(getActivity(), null);
             return;
         }
-
+        startActivityAnim(FindJobActivity.class, null);
     }
 
     private CustomSpinnerAdapter mAdapterAddress;
@@ -74,7 +73,7 @@ public class FragmentFindJob extends BaseFragment {
         mArrAddress.add("Hải Phòng");
         mArrAddress.add("Thái Bình");
         mArrAddress.add("Nam Định");
-        mAdapterAddress = new CustomSpinnerAdapter(getActivity(), mArrAddress,true);
+        mAdapterAddress = new CustomSpinnerAdapter(getActivity(), mArrAddress, true);
         mSpnAddress.setAdapter(mAdapterAddress);
 
         // Time
@@ -84,7 +83,7 @@ public class FragmentFindJob extends BaseFragment {
         mArrTime.add("Ca chiều");
         mArrTime.add("Ca đêm");
         mArrTime.add("Toàn thời gian cố định");
-        mAdapterTime = new CustomSpinnerAdapter(getActivity(), mArrTime,true);
+        mAdapterTime = new CustomSpinnerAdapter(getActivity(), mArrTime, true);
         mSpnTime.setAdapter(mAdapterTime);
 
         // Type
@@ -95,7 +94,7 @@ public class FragmentFindJob extends BaseFragment {
         mArrType.add("Điện");
         mArrType.add("Sale");
         mArrType.add("Marketing");
-        mAdapterType = new CustomSpinnerAdapter(getActivity(), mArrType,true);
+        mAdapterType = new CustomSpinnerAdapter(getActivity(), mArrType, true);
         mSpnType.setAdapter(mAdapterType);
 
 

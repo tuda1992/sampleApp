@@ -36,7 +36,28 @@ public class JSONResourceReader {
         } finally {
             is.close();
         }
-        return  writer.toString();
+        return writer.toString();
     }
+
+    public static String readFileJSONJobFromRaw(Context context) throws IOException {
+        InputStream is = context.getResources().openRawResource(R.raw.jobinfo);
+        Writer writer = new StringWriter();
+        char[] buffer = new char[1024];
+        try {
+            Reader reader = new BufferedReader(new InputStreamReader(is, "UTF-8"));
+            int n;
+            while ((n = reader.read(buffer)) != -1) {
+                writer.write(buffer, 0, n);
+            }
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            is.close();
+        }
+        return writer.toString();
+    }
+
 
 }
