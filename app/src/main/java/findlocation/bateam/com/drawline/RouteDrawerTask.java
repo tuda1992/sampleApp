@@ -4,8 +4,11 @@ import android.os.AsyncTask;
 import android.support.v4.content.ContextCompat;
 import android.util.Log;
 
+import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Polyline;
 import com.google.android.gms.maps.model.PolylineOptions;
 
 import org.json.JSONObject;
@@ -60,8 +63,9 @@ public class RouteDrawerTask extends AsyncTask<String, Integer, List<List<HashMa
     }
 
     private void drawPolyLine(List<List<HashMap<String, String>>> result) {
-        ArrayList<LatLng> points;
+        ArrayList<LatLng> points = null;
         lineOptions = null;
+        Log.d("drawPolyLine", "result = " + result);
 
         for (int i = 0; i < result.size(); i++) {
             points = new ArrayList<>();
@@ -83,7 +87,7 @@ public class RouteDrawerTask extends AsyncTask<String, Integer, List<List<HashMa
 
             // Adding all the points in the route to LineOptions
             lineOptions.addAll(points);
-            lineOptions.width(6);
+            lineOptions.width(15);
             routeColor = ContextCompat.getColor(DrawRouteMaps.getContext(), R.color.colorRouteLine);
             if (routeColor == 0)
                 lineOptions.color(0xFF0A8F08);
@@ -94,6 +98,11 @@ public class RouteDrawerTask extends AsyncTask<String, Integer, List<List<HashMa
         // Drawing polyline in the Google Map for the i-th route
         if (lineOptions != null && mMap != null) {
             mMap.addPolyline(lineOptions);
+            if (points != null) {
+                CameraPosition cameraPosition = new CameraPosition.Builder().target(points.get((int) points.size() / 2)).zoom(13).build();
+                mMap.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition), 1000, null);
+            }
+
         } else {
             Log.d("onPostExecute", "without Polylines draw");
         }

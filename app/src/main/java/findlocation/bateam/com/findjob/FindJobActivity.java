@@ -21,6 +21,8 @@ import butterknife.BindView;
 import findlocation.bateam.com.R;
 import findlocation.bateam.com.adapter.FindJobAdapter;
 import findlocation.bateam.com.base.BaseActivity;
+import findlocation.bateam.com.constant.Constants;
+import findlocation.bateam.com.findlocation.InfoPlaceActivity;
 import findlocation.bateam.com.model.JobModel;
 import findlocation.bateam.com.model.PlaceModel;
 import findlocation.bateam.com.util.JSONResourceReader;
@@ -93,7 +95,9 @@ public class FindJobActivity extends BaseActivity implements FindJobAdapter.ICal
 
     @Override
     public void onItemClick(int position, JobModel item) {
-        Toast.makeText(this, "Chức năng đang hoàn thiện", Toast.LENGTH_SHORT).show();
+        Bundle bundle = new Bundle();
+        bundle.putParcelable(Constants.BUNDLE_PLACE_ITEM, item);
+        startActivityAnim(JobDetailActivity.class, bundle);
     }
 
     @Override

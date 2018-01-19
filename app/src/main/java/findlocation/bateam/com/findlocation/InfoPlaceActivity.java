@@ -199,7 +199,7 @@ public class InfoPlaceActivity extends BaseActivity {
             String htmlMobile = TextUtils.isEmpty(mItem.mobile) ? "<i>" + mStrMobile + "</i>" : "<i>" + mStrMobile + "</i>" + " <u>" + mItem.mobile + "</u>";
             mTvMobile.setText(Html.fromHtml(htmlMobile));
 
-            String htmlContent = TextUtils.isEmpty(mItem.content) ? "<i>" + mStrContent + "</i>" : "<i>" + mStrContent + "</i>" + "\n" + mItem.content;
+            String htmlContent = TextUtils.isEmpty(mItem.content) ? "<i>" + mStrContent + "</i>" : "<i>" + mStrContent + "</i>" + "<br>" + mItem.content + "</br";
             mTvContent.setText(Html.fromHtml(htmlContent));
         }
 

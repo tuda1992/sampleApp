@@ -37,6 +37,7 @@
     <string name="title_forget_password">Lấy lại mật khẩu</string>
     <string name="title_find_location">Tìm phòng trọ</string>
     <string name="title_find_job">Tìm việc làm</string>
+    <string name="title_detail_job">Thông tin chi tiết</string>
     <string name="title_user_info">Thông tin cá nhân</string>
 
 
@@ -122,6 +123,22 @@
     <string name="text_info_cod_date">Ngày hết hạn: </string>
     <string name="text_info_city">Thành phố: </string>
     <string name="text_info_district">Quận/Huyện: </string>
+
+    // Info Job
+    <string name="text_info_job_offer">Mức lương:</string>
+    <string name="text_info_job_experience">Kinh nghiệm:</string>
+    <string name="text_info_job_certificate">Yêu cầu bằng cấp:</string>
+    <string name="text_info_job_hiring_number">Số lượng cần tuyển:</string>
+    <string name="text_info_job_career">Ngành nghề:</string>
+    <string name="text_info_job_location">Địa điểm làm việc:</string>
+    <string name="text_info_job_level">Chức vụ:</string>
+    <string name="text_info_job_working_form">Hình thức làm việc:</string>
+    <string name="text_info_job_sex">Yêu cầu giới tính:</string>
+    <string name="text_info_job_age">Yêu cầu độ tuổi:</string>
+    <string name="text_info_job_description">Mô tả công việc</string>
+    <string name="text_info_job_benefits">Quyền lợi được hưởng</string>
+    <string name="text_info_job_button">apply now</string>
+
 
     // Error
 

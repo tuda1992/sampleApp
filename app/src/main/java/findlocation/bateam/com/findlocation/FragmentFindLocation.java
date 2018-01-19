@@ -51,6 +51,7 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.LatLngBounds;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.android.gms.maps.model.Polyline;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.google.maps.android.clustering.ClusterManager;
@@ -60,6 +61,8 @@ import org.json.JSONException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.lang.reflect.Type;
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
@@ -109,6 +112,8 @@ public class FragmentFindLocation extends BaseFragment implements OnMapReadyCall
     private static final int REQUEST_SELECT_PLACE = 1000;
     private ClusterManager<MyClusterItem> mClusterManager;
     private boolean mIsHavePlace;
+    private List<PlaceModel> mListPlaceModel = new ArrayList<>();
+
 
     // Bind View
 
@@ -204,17 +209,36 @@ public class FragmentFindLocation extends BaseFragment implements OnMapReadyCall
 
                 mLayoutPlace.setDataForLayoutPlace(placeModels);
 
-                if (mLastLocation == null)
-                    return;
 
-                LatLng origin = new LatLng(mLastLocation.getLatitude(), mLastLocation.getLongitude());
-                LatLng destination = new LatLng(Double.parseDouble(placeModels.get(0).lattitude), Double.parseDouble(placeModels.get(0).longitude));
+                //Marker
+                for (int i = 0; i < 10; i++) {
+                    mListPlaceModel.add(placeModels.get(i));
+                    if (TextUtils.isEmpty(placeModels.get(i).lattitude) || TextUtils.isEmpty(placeModels.get(i).longitude)) {
+                        // Dont do anything
+                    } else {
+                        String title = "";
+                        String price = "";
 
-                DrawRouteMaps.getInstance(getActivity())
-                        .draw(origin, destination, mGoogleMap);
+                        if (placeModels.get(i) != null) {
+                            title = placeModels.get(i).addressDetail;
+                            NumberFormat formatter = new DecimalFormat("#,###");
+                            String formatPrice = formatter.format(Double.parseDouble(TextUtils.isEmpty(placeModels.get(i).price) ? "0" : placeModels.get(i).price)) + " VNĐ";
+                            price = "Giá thuê : " + formatPrice;
+                        }
 
-                moveCamera(placeModels.get(0), Double.parseDouble(placeModels.get(0).lattitude), Double.parseDouble(placeModels.get(0).longitude));
+                        LatLng position = new LatLng(Double.parseDouble(placeModels.get(i).lattitude), Double.parseDouble(placeModels.get(i).longitude));
+                        MarkerOptions markerOpt = new MarkerOptions();
+                        markerOpt.position(position)
+                                .title(title)
+                                .snippet(price)
+                                .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_ROSE));
 
+                        //Set Custom InfoWindow Adapter
+                        CustomInfoWindowAdapter adapter = new CustomInfoWindowAdapter(getActivity());
+                        mGoogleMap.setInfoWindowAdapter(adapter);
+                        mGoogleMap.addMarker(markerOpt);
+                    }
+                }
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -578,7 +602,9 @@ public class FragmentFindLocation extends BaseFragment implements OnMapReadyCall
         String price = "";
         if (item != null) {
             title = item.addressDetail;
-            price = "Giá thuê : " + item.price + " VNĐ";
+            NumberFormat formatter = new DecimalFormat("#,###");
+            String formatPrice = formatter.format(Double.parseDouble(TextUtils.isEmpty(item.price) ? "0" : item.price)) + " VNĐ";
+            price = "Giá thuê : " + formatPrice;
         } else {
             title = "Vị trí của tôi";
         }
@@ -600,6 +626,36 @@ public class FragmentFindLocation extends BaseFragment implements OnMapReadyCall
         mGoogleMap.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition), 1000, null);
 
     }
+
+    private void moveCameraCenter(PlaceModel item, double latitude, double longtitute) {
+        String title = "";
+        String price = "";
+        if (item != null) {
+            title = item.addressDetail;
+            NumberFormat formatter = new DecimalFormat("#,###");
+            String formatPrice = formatter.format(Double.parseDouble(TextUtils.isEmpty(item.price) ? "0" : item.price)) + " VNĐ";
+            price = "Giá thuê : " + formatPrice;
+        } else {
+            title = "Vị trí của tôi";
+        }
+        //Marker
+        LatLng position = new LatLng(latitude, longtitute);
+        MarkerOptions markerOpt = new MarkerOptions();
+        markerOpt.position(position)
+                .title(title)
+                .snippet(price)
+                .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_ROSE));
+
+        //Set Custom InfoWindow Adapter
+        CustomInfoWindowAdapter adapter = new CustomInfoWindowAdapter(getActivity());
+        mGoogleMap.setInfoWindowAdapter(adapter);
+        mGoogleMap.addMarker(markerOpt);
+
+        // For zooming automatically to the location of the marker
+
+
+    }
+
 
     @Override
     public void onError(Status status) {
@@ -654,10 +710,27 @@ public class FragmentFindLocation extends BaseFragment implements OnMapReadyCall
     public void onItemLayoutClick(int position, PlaceModel item) {
         mTvData.setText(item.addressDetail);
         showOrHideView();
-        if (TextUtils.isEmpty(item.lattitude) || TextUtils.isEmpty(item.longitude) || mLastLocation == null) {
+
+        if (mLastLocation == null)
+            return;
+
+        mGoogleMap.clear();
+
+        LatLng currentPosition = new LatLng(mLastLocation.getLatitude(), mLastLocation.getLongitude());
+        MarkerOptions markerOpt = new MarkerOptions();
+        markerOpt.position(currentPosition)
+                .title("Vị trí của tôi")
+                .snippet("")
+                .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_ROSE));
+
+        //Set Custom InfoWindow Adapter
+        CustomInfoWindowAdapter adapter = new CustomInfoWindowAdapter(getActivity());
+        mGoogleMap.setInfoWindowAdapter(adapter);
+        mGoogleMap.addMarker(markerOpt);
+
+        if (TextUtils.isEmpty(item.lattitude) || TextUtils.isEmpty(item.longitude)) {
             return;
         }
-
 
         LatLng origin = new LatLng(mLastLocation.getLatitude(), mLastLocation.getLongitude());
         LatLng destination = new LatLng(Double.parseDouble(item.lattitude), Double.parseDouble(item.longitude));
@@ -665,7 +738,8 @@ public class FragmentFindLocation extends BaseFragment implements OnMapReadyCall
         DrawRouteMaps.getInstance(getActivity())
                 .draw(origin, destination, mGoogleMap);
 
-        moveCamera(item, Double.parseDouble(item.lattitude), Double.parseDouble(item.longitude));
+
+        moveCameraCenter(item, Double.parseDouble(item.lattitude), Double.parseDouble(item.longitude));
 
     }
 
