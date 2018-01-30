@@ -21,7 +21,9 @@ import butterknife.BindView;
 import butterknife.OnClick;
 import findlocation.bateam.com.R;
 import findlocation.bateam.com.adapter.CustomSpinnerAdapter;
+import findlocation.bateam.com.adapter.SexSpinnerAdapter;
 import findlocation.bateam.com.base.BaseActivity;
+import findlocation.bateam.com.model.Cities;
 
 /**
  * Created by doanhtu on 12/25/17.
@@ -98,17 +100,17 @@ public class UserInfoActivity extends BaseActivity {
     private Calendar mCalendar;
     private Calendar mDefaultCalendar;
     private CallbackManager mCallBackManager;
-    private CustomSpinnerAdapter mAdapter;
+    private SexSpinnerAdapter mAdapter;
     private CustomSpinnerAdapter mAdapterAddressCity;
     private CustomSpinnerAdapter mAdapterAddressTown;
     private CustomSpinnerAdapter mAdapterAddressDistrict;
     private CustomSpinnerAdapter mAdapterAddressCountry;
-    private CustomSpinnerAdapter mAdapterSchool;
+    private SexSpinnerAdapter mAdapterSchool;
     private List<String> mArrSex = new ArrayList<>();
-    private List<String> mArrAddressCity = new ArrayList<>();
-    private List<String> mArrAddressTown = new ArrayList<>();
-    private List<String> mArrAddressDistrict = new ArrayList<>();
-    private List<String> mArrAddressCountry = new ArrayList<>();
+    private List<Cities> mArrAddressCity = new ArrayList<>();
+    private List<Cities> mArrAddressTown = new ArrayList<>();
+    private List<Cities> mArrAddressDistrict = new ArrayList<>();
+    private List<Cities> mArrAddressCountry = new ArrayList<>();
     private List<String> mArrSchool = new ArrayList<>();
 
     @Override
@@ -126,46 +128,23 @@ public class UserInfoActivity extends BaseActivity {
         // Sex
         mArrSex.add(mStrMen);
         mArrSex.add(mStrWomen);
-        mAdapter = new CustomSpinnerAdapter(this, mArrSex, false);
+        mAdapter = new SexSpinnerAdapter(this, mArrSex, false);
         mSpnSex.setAdapter(mAdapter);
 
         // City
-        mArrAddressCity.add("Hà Nội");
-        mArrAddressCity.add("Đà Nẵng");
-        mArrAddressCity.add("Nha Trang");
-        mArrAddressCity.add("Hải Phòng");
-        mArrAddressCity.add("Thái Bình");
-        mArrAddressCity.add("Nam Định");
         mAdapterAddressCity = new CustomSpinnerAdapter(this, mArrAddressCity, false);
         mSpnAddressCity.setAdapter(mAdapterAddressCity);
 
         // Town
-        mArrAddressTown.add("Văn Chương");
-        mArrAddressTown.add("Hàng Bột");
-        mArrAddressTown.add("Ô Chợ Dừa");
-        mArrAddressTown.add("Thổ Quan");
-        mArrAddressTown.add("Quan Thổ");
         mAdapterAddressTown = new CustomSpinnerAdapter(this, mArrAddressTown, false);
         mSpnAddressTown.setAdapter(mAdapterAddressTown);
 
         // District
-        mArrAddressDistrict.add("Đống Đa");
-        mArrAddressDistrict.add("Ba Đình");
-        mArrAddressDistrict.add("Hoàn Kiếm");
-        mArrAddressDistrict.add("Long Biên");
-        mArrAddressDistrict.add("Thanh Xuân");
-        mArrAddressDistrict.add("Cầu giấy");
         mAdapterAddressDistrict = new CustomSpinnerAdapter(this, mArrAddressDistrict, false);
         mSpnAddressDistrict.setAdapter(mAdapterAddressDistrict);
 
 
         // Country
-        mArrAddressCountry.add("Việt Nam");
-        mArrAddressCountry.add("Trung Quốc");
-        mArrAddressCountry.add("Nhật Bản");
-        mArrAddressCountry.add("Mỹ");
-        mArrAddressCountry.add("Nga");
-        mArrAddressCountry.add("Hàn Quốc");
         mAdapterAddressCountry = new CustomSpinnerAdapter(this, mArrAddressCountry, false);
         mSpnAddressCountry.setAdapter(mAdapterAddressCountry);
 
@@ -176,7 +155,7 @@ public class UserInfoActivity extends BaseActivity {
         mArrSchool.add("Đại học Ngoại Thương");
         mArrSchool.add("Đại học Kinh Tế Quốc Dân");
         mArrSchool.add("Đại học Bách Khoa");
-        mAdapterSchool = new CustomSpinnerAdapter(this, mArrSchool, false);
+        mAdapterSchool = new SexSpinnerAdapter(this, mArrSchool, false);
         mSpnSchool.setAdapter(mAdapterSchool);
 
     }

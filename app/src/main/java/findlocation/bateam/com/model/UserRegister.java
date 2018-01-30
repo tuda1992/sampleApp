@@ -4,11 +4,11 @@ import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 /**
- * Created by doanhtu on 12/25/17.
+ * Created by doanhtu on 1/30/18.
  */
 
-public class UserInfo {
-    
+public class UserRegister {
+
     @SerializedName("Id")
     @Expose
     public Integer id;
@@ -63,12 +63,6 @@ public class UserInfo {
     @SerializedName("FacebookId")
     @Expose
     public String facebookId;
-    @SerializedName("Avatar")
-    @Expose
-    public String avatar;
-    @SerializedName("StudentCard")
-    @Expose
-    public String studentCard;
     @SerializedName("Message")
     @Expose
     public String message;

@@ -87,6 +87,8 @@ public class InfoPlaceActivity extends BaseActivity {
     String mStrMobile;
     @BindString(R.string.text_info_content)
     String mStrContent;
+    @BindString(R.string.title_detail_location)
+    String mStrTitleLocation;
 
     @OnClick(R.id.ll_mobile)
     public void onClickCallMobile() {
@@ -147,10 +149,7 @@ public class InfoPlaceActivity extends BaseActivity {
         setSupportActionBar(mToolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
-        getSupportActionBar().setTitle("");
-        mIvLogo.setVisibility(View.VISIBLE);
-        mTvTitleLogo.setVisibility(View.VISIBLE);
-        mTvTitleLogo.setText("SiVi");
+        getSupportActionBar().setTitle(mStrTitleLocation);
     }
 
     @Override
@@ -169,37 +168,36 @@ public class InfoPlaceActivity extends BaseActivity {
             mMobile = TextUtils.isEmpty(mItem.mobile) ? "" : mItem.mobile;
             mPhone = TextUtils.isEmpty(mItem.phone) || mItem.phone.contains("None") ? "" : mItem.phone;
 
-            String htmlTitle = TextUtils.isEmpty(mItem.title) ? "<i>" + mStrTitle + "</i>" : "<i>" + mStrTitle + "</i>" + " " + mItem.title;
-            mTvTitle.setText(Html.fromHtml(htmlTitle));
+            mTvTitle.setText(mItem.title);
 
-            String htmlDate = TextUtils.isEmpty(mItem.createdDate) ? "<i>" + mStrCreatedDate + "</i>" : "<i>" + mStrCreatedDate + "</i>" + " " + mItem.createdDate;
+            String htmlDate = TextUtils.isEmpty(mItem.createdDate) ? "<b><i>" + mStrCreatedDate + "</i></b>" : "<b><i>" + mStrCreatedDate + "</i></b>" + " " + mItem.createdDate;
             mTvCreatedDate.setText(Html.fromHtml(htmlDate));
 
-            String htmlCity = TextUtils.isEmpty(mItem.city) ? "<i>" + mStrCity + "</i>" : "<i>" + mStrCity + "</i>" + " " + mItem.city;
+            String htmlCity = TextUtils.isEmpty(mItem.city) ? "<b><i>" + mStrCity + "</i></b>" : "<b><i>" + mStrCity + "</i></b>" + " " + mItem.city;
             mTvCity.setText(Html.fromHtml(htmlCity));
 
-            String htmlDistrict = TextUtils.isEmpty(mItem.district) ? "<i>" + mStrDistrict + "</i>" : "<i>" + mStrDistrict + "</i>" + " " + mItem.district;
+            String htmlDistrict = TextUtils.isEmpty(mItem.district) ? "<b><i>" + mStrDistrict + "</i></b>" : "<b><i>" + mStrDistrict + "</i></b>" + " " + mItem.district;
             mTvDistrict.setText(Html.fromHtml(htmlDistrict));
 
-            String htmlAddress = TextUtils.isEmpty(mItem.addressDetail) ? "<i>" + mStrAdress + "</i>" : "<i>" + mStrAdress + "</i>" + " " + mItem.addressDetail;
+            String htmlAddress = TextUtils.isEmpty(mItem.addressDetail) ? "<b><i>" + mStrAdress + "</i></b>" : "<b><i>" + mStrAdress + "</i></b>" + " " + mItem.addressDetail;
             mTvAddress.setText(Html.fromHtml(htmlAddress));
 
             NumberFormat formatter = new DecimalFormat("#,###");
             String formatPrice = formatter.format(Double.parseDouble(TextUtils.isEmpty(mItem.price) ? "0" : mItem.price)) + " VNĐ";
 
-            String htmlPrice = TextUtils.isEmpty(mItem.price) ? "<i>" + mStrPrice + "</i>" : "<i>" + mStrPrice + "</i>" + " " + formatPrice;
+            String htmlPrice = TextUtils.isEmpty(mItem.price) ? "<b><i>" + mStrPrice + "</i></b>" : "<b><i>" + mStrPrice + "</i></b>" + " " + formatPrice;
             mTvPrice.setText(Html.fromHtml(htmlPrice));
 
-            String htmlContract = TextUtils.isEmpty(mItem.contractName) ? "<i>" + mStrContractName + "</i>" : "<i>" + mStrContractName + "</i>" + " " + mItem.contractName;
+            String htmlContract = TextUtils.isEmpty(mItem.contractName) ? "<b><i>" + mStrContractName + "</i></b>" : "<b><i>" + mStrContractName + "</i></b>" + " " + mItem.contractName;
             mTvContractName.setText(Html.fromHtml(htmlContract));
 
-            String htmlPhone = TextUtils.isEmpty(mItem.phone) || mItem.phone.contains("None") ? "<i>" + mStrPhone + "</i>" : "<i>" + mStrPhone + "</i>" + " <u>" + mItem.phone + "</u>";
+            String htmlPhone = TextUtils.isEmpty(mItem.phone) || mItem.phone.contains("None") ? "<b><i>" + mStrPhone + "</i></b>" : "<b><i>" + mStrPhone + "</i></b>" + " <u>" + mItem.phone.replace(".", "") + "</u>";
             mTvPhone.setText(Html.fromHtml(htmlPhone));
 
-            String htmlMobile = TextUtils.isEmpty(mItem.mobile) ? "<i>" + mStrMobile + "</i>" : "<i>" + mStrMobile + "</i>" + " <u>" + mItem.mobile + "</u>";
+            String htmlMobile = TextUtils.isEmpty(mItem.mobile) ? "<b><i>" + mStrMobile + "</i></b>" : "<b><i>" + mStrMobile + "</i></b>" + " <u>" + mItem.mobile.replace(".", "") + "</u>";
             mTvMobile.setText(Html.fromHtml(htmlMobile));
 
-            String htmlContent = TextUtils.isEmpty(mItem.content) ? "<i>" + mStrContent + "</i>" : "<i>" + mStrContent + "</i>" + "<br>" + mItem.content + "</br";
+            String htmlContent = TextUtils.isEmpty(mItem.content) ? "<b><i>" + mStrContent + "</i></b>" : "<b><i>" + mStrContent + "</i></b>" + "<br>" + mItem.content + "</br";
             mTvContent.setText(Html.fromHtml(htmlContent));
         }
 

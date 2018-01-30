@@ -54,8 +54,6 @@ public class FindLocationAdapter extends RecyclerView.Adapter<FindLocationAdapte
         ImageView mIvLocation;
         @BindView(R.id.tv_data)
         TextView mTvData;
-        @BindView(R.id.cv_data)
-        CardView mCvData;
 
         @OnClick(R.id.cv_data)
         public void onClickItem() {

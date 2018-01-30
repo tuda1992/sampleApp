@@ -14,17 +14,17 @@ import findlocation.bateam.com.R;
 import findlocation.bateam.com.model.Cities;
 
 /**
- * Created by acv on 12/7/17.
+ * Created by doanhtu on 1/29/18.
  */
 
-public class CustomSpinnerAdapter extends BaseAdapter {
+public class SexSpinnerAdapter extends BaseAdapter {
 
     private Context context;
-    private List<Cities> contentArray;
+    private List<String> contentArray;
 
     private boolean mIsLeft;
 
-    public CustomSpinnerAdapter(Context context, List<Cities> contentArray, boolean isLeft) {
+    public SexSpinnerAdapter(Context context, List<String> contentArray, boolean isLeft) {
         this.context = context;
         this.contentArray = contentArray;
         this.mIsLeft = isLeft;
@@ -49,7 +49,7 @@ public class CustomSpinnerAdapter extends BaseAdapter {
     public View getView(int i, View view, ViewGroup viewGroup) {
         view = (LayoutInflater.from(context)).inflate(R.layout.item_spinner, null);
         TextView textView = (TextView) view.findViewById(R.id.tv_item);
-        textView.setText(contentArray.get(i).name);
+        textView.setText(contentArray.get(i));
         if (mIsLeft) {
             textView.setGravity(Gravity.LEFT);
         } else {

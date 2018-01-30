@@ -10,6 +10,12 @@ public class Constants {
     public static final int PICK_IMAGE_ID = 234;
     public static final int REQUEST_ACCESS_AND_COARSE_LOCATION = 999;
 
+    public static final String CITY_ID = "cityId";
+    public static final String DISTRICT_ID = "districtId";
+
+    public static final String AVATAR = "Avatar";
+    public static final String STUDENT_CARD = "StudentCard";
+
 
     public static final String FRAGMENT_SIGN_IN = "FRAGMENT_SIGN_IN";
     public static final String FRAGMENT_SIGN_UP = "FRAGMENT_SIGN_UP";
@@ -41,5 +47,7 @@ public class Constants {
     // Bundle
     public static final String BUNDLE_PLACE_ITEM = "BUNDLE_PLACE_ITEM";
     public static final String BUNDLE_IS_MASTER = "BUNDLE_IS_MASTER";
+
+
 
 }

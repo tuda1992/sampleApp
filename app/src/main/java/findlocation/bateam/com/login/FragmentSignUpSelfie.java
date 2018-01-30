@@ -58,6 +58,7 @@ public class FragmentSignUpSelfie extends BaseFragment {
     @Override
     protected void onBackPressFragment() {
         finishFragment();
+        LoginActivity.mFileAvatar = null;
     }
 
     @Override
@@ -88,6 +89,7 @@ public class FragmentSignUpSelfie extends BaseFragment {
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
+        LoginActivity.mFileAvatar = ImagePicker.getFileFromResult(getActivity(), resultCode, data);
         Bitmap bm = ImagePicker.getImageFromResult(getActivity(), resultCode, data);
         if (bm != null) {
             mIvSelfie.setVisibility(View.VISIBLE);

@@ -21,7 +21,6 @@
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/rl_bottom"
         android:layout_below="@+id/container_toolbar"
         android:layout_marginBottom="@dimen/_10sdp"
         android:layout_marginTop="@dimen/_10sdp"
@@ -473,34 +472,17 @@
         </LinearLayout>
     </ScrollView>
 
-    <RelativeLayout
-        android:id="@+id/rl_bottom"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/_50sdp"
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/btn_apply"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:visibility="visible">
-
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:orientation="horizontal">
-
-            <Button
-                android:id="@+id/btn_apply"
-                android:layout_width="@dimen/_70sdp"
-                android:layout_height="@dimen/_30sdp"
-                android:layout_marginRight="@dimen/_20sdp"
-                android:background="@drawable/effect_button"
-                android:gravity="center"
-                android:includeFontPadding="false"
-                android:text="@string/text_info_job_button"
-                android:textColor="@android:color/white"
-                android:textSize="@dimen/_10sdp"
-                android:textStyle="bold" />
-        </LinearLayout>
-
-    </RelativeLayout>
+        android:layout_alignParentRight="true"
+        android:layout_marginBottom="@dimen/_15sdp"
+        android:layout_marginRight="@dimen/_15sdp"
+        android:clickable="true"
+        android:foreground="?android:attr/selectableItemBackground"
+        android:src="@drawable/ic_apply_job" />
 
 
 </RelativeLayout>

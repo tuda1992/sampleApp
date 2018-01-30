@@ -12,6 +12,7 @@ import butterknife.BindView;
 import butterknife.OnClick;
 import findlocation.bateam.com.R;
 import findlocation.bateam.com.adapter.CustomSpinnerAdapter;
+import findlocation.bateam.com.adapter.SexSpinnerAdapter;
 import findlocation.bateam.com.base.BaseFragment;
 import findlocation.bateam.com.util.DialogUtil;
 import findlocation.bateam.com.util.NetworkUtil;
@@ -40,9 +41,9 @@ public class FragmentFindJob extends BaseFragment {
         startActivityAnim(FindJobActivity.class, null);
     }
 
-    private CustomSpinnerAdapter mAdapterAddress;
-    private CustomSpinnerAdapter mAdapterTime;
-    private CustomSpinnerAdapter mAdapterType;
+    private SexSpinnerAdapter mAdapterAddress;
+    private SexSpinnerAdapter mAdapterTime;
+    private SexSpinnerAdapter mAdapterType;
     private List<String> mArrAddress = new ArrayList<>();
     private List<String> mArrTime = new ArrayList<>();
     private List<String> mArrType = new ArrayList<>();
@@ -73,7 +74,7 @@ public class FragmentFindJob extends BaseFragment {
         mArrAddress.add("Hải Phòng");
         mArrAddress.add("Thái Bình");
         mArrAddress.add("Nam Định");
-        mAdapterAddress = new CustomSpinnerAdapter(getActivity(), mArrAddress, true);
+        mAdapterAddress = new SexSpinnerAdapter(getActivity(), mArrAddress, true);
         mSpnAddress.setAdapter(mAdapterAddress);
 
         // Time
@@ -83,7 +84,7 @@ public class FragmentFindJob extends BaseFragment {
         mArrTime.add("Ca chiều");
         mArrTime.add("Ca đêm");
         mArrTime.add("Toàn thời gian cố định");
-        mAdapterTime = new CustomSpinnerAdapter(getActivity(), mArrTime, true);
+        mAdapterTime = new SexSpinnerAdapter(getActivity(), mArrTime, true);
         mSpnTime.setAdapter(mAdapterTime);
 
         // Type
@@ -94,7 +95,7 @@ public class FragmentFindJob extends BaseFragment {
         mArrType.add("Điện");
         mArrType.add("Sale");
         mArrType.add("Marketing");
-        mAdapterType = new CustomSpinnerAdapter(getActivity(), mArrType, true);
+        mAdapterType = new SexSpinnerAdapter(getActivity(), mArrType, true);
         mSpnType.setAdapter(mAdapterType);
 
 

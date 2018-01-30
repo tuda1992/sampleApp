@@ -24,24 +24,38 @@ import com.facebook.GraphRequest;
 import com.facebook.GraphResponse;
 import com.facebook.login.LoginManager;
 import com.facebook.login.LoginResult;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.File;
+import java.lang.reflect.Type;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 
 import butterknife.BindString;
 import butterknife.BindView;
 import butterknife.OnClick;
 import findlocation.bateam.com.R;
 import findlocation.bateam.com.adapter.CustomSpinnerAdapter;
+import findlocation.bateam.com.adapter.SexSpinnerAdapter;
+import findlocation.bateam.com.api.FastNetworking;
 import findlocation.bateam.com.base.BaseFragment;
 import findlocation.bateam.com.constant.Constants;
+import findlocation.bateam.com.listener.JsonArrayCallBackListener;
+import findlocation.bateam.com.listener.JsonObjectCallBackListener;
+import findlocation.bateam.com.listener.StringCallBackListener;
+import findlocation.bateam.com.model.Cities;
+import findlocation.bateam.com.model.UserRegister;
 import findlocation.bateam.com.util.DialogUtil;
 import findlocation.bateam.com.util.NetworkUtil;
 import findlocation.bateam.com.util.PatternUtil;
@@ -124,22 +138,25 @@ public class FragmentSignUpInfo extends BaseFragment {
     String mStrTelephoneError;
 
 
+    private Gson mGson;
     private DatePickerDialog.OnDateSetListener mListenerPickter;
     private Calendar mCalendar;
     private Calendar mDefaultCalendar;
     private CallbackManager mCallBackManager;
-    private CustomSpinnerAdapter mAdapter;
+    private SexSpinnerAdapter mAdapter;
     private CustomSpinnerAdapter mAdapterAddressCity;
     private CustomSpinnerAdapter mAdapterAddressTown;
     private CustomSpinnerAdapter mAdapterAddressDistrict;
     private CustomSpinnerAdapter mAdapterAddressCountry;
-    private CustomSpinnerAdapter mAdapterSchool;
+    private SexSpinnerAdapter mAdapterSchool;
     private List<String> mArrSex = new ArrayList<>();
-    private List<String> mArrAddressCity = new ArrayList<>();
-    private List<String> mArrAddressTown = new ArrayList<>();
-    private List<String> mArrAddressDistrict = new ArrayList<>();
-    private List<String> mArrAddressCountry = new ArrayList<>();
+    private List<Cities> mArrAddressCity = new ArrayList<>();
+    private List<Cities> mArrAddressTown = new ArrayList<>();
+    private List<Cities> mArrAddressDistrict = new ArrayList<>();
+    private List<Cities> mArrAddressCountry = new ArrayList<>();
     private List<String> mArrSchool = new ArrayList<>();
+    private Map<String, File> mMapFile = new HashMap<>();
+    private UserRegister mUserRegister = new UserRegister();
 
     @OnClick(R.id.btn_send)
     public void onClickSend() {
@@ -151,9 +168,9 @@ public class FragmentSignUpInfo extends BaseFragment {
 
         boolean isSaveFb = mCbFb.isChecked();
         String sex = mArrSex.get(mSpnSex.getSelectedItemPosition());
-        String town = mArrAddressTown.get(mSpnAddressTown.getSelectedItemPosition());
-        String district = mArrAddressDistrict.get(mSpnAddressDistrict.getSelectedItemPosition());
-        String city = mArrAddressCity.get(mSpnAddressCity.getSelectedItemPosition());
+        String town = mArrAddressTown.get(mSpnAddressTown.getSelectedItemPosition()).name;
+        String district = mArrAddressDistrict.get(mSpnAddressDistrict.getSelectedItemPosition()).name;
+        String city = mArrAddressCity.get(mSpnAddressCity.getSelectedItemPosition()).name;
         String address = mEdtAddress.getText().toString();
         String familyName = mEdtFamilyName.getText().toString();
         String middleName = mEdtFamilyName.getText().toString();
@@ -231,6 +248,17 @@ public class FragmentSignUpInfo extends BaseFragment {
         }
 
 
+        mUserRegister.email = email;
+        mUserRegister.familyName = familyName;
+        mUserRegister.name = firstName;
+        mUserRegister.middleName = middleName;
+        mUserRegister.password = password;
+        mUserRegister.phoneNumber = telephone;
+        mUserRegister.cityId = mArrAddressCity.get(mSpnAddressCity.getSelectedItemPosition()).id;
+        mUserRegister.districtId = mArrAddressDistrict.get(mSpnAddressDistrict.getSelectedItemPosition()).id;
+        mUserRegister.wardId = mArrAddressTown.get(mSpnAddressTown.getSelectedItemPosition()).id;
+
+
         // After Validate
 
         if (isSaveFb) {
@@ -238,8 +266,25 @@ public class FragmentSignUpInfo extends BaseFragment {
             return;
         }
 
-        FragmentSignUpApprove fragmentSignUpApprove = new FragmentSignUpApprove();
-        addFragment(fragmentSignUpApprove, Constants.FRAGMENT_SIGN_UP_APPROVE);
+        callApiRegister();
+    }
+
+    private void callApiRegister() {
+        mMapFile.put(Constants.AVATAR, LoginActivity.mFileAvatar);
+        mMapFile.put(Constants.STUDENT_CARD, LoginActivity.mFileLicense);
+
+        FastNetworking fastNetworking = new FastNetworking(getActivity(), new StringCallBackListener() {
+            @Override
+            public void onResponse(String string) {
+                Log.d(TAG, "onResponse : " + string);
+            }
+
+            @Override
+            public void onError(String messageError) {
+                Log.d(TAG, "onError : " + messageError);
+            }
+        });
+        fastNetworking.callApiRegister(mMapFile, mUserRegister);
     }
 
     @OnClick(R.id.tv_dob)
@@ -275,62 +320,7 @@ public class FragmentSignUpInfo extends BaseFragment {
 
     @Override
     protected void initViews(View view) {
-        // Sex
-        mArrSex.add(mStrMen);
-        mArrSex.add(mStrWomen);
-        mAdapter = new CustomSpinnerAdapter(getActivity(), mArrSex, false);
-        mSpnSex.setAdapter(mAdapter);
-
-        // City
-        mArrAddressCity.add("Hà Nội");
-        mArrAddressCity.add("Đà Nẵng");
-        mArrAddressCity.add("Nha Trang");
-        mArrAddressCity.add("Hải Phòng");
-        mArrAddressCity.add("Thái Bình");
-        mArrAddressCity.add("Nam Định");
-        mAdapterAddressCity = new CustomSpinnerAdapter(getActivity(), mArrAddressCity, false);
-        mSpnAddressCity.setAdapter(mAdapterAddressCity);
-
-        // Town
-        mArrAddressTown.add("Văn Chương");
-        mArrAddressTown.add("Hàng Bột");
-        mArrAddressTown.add("Ô Chợ Dừa");
-        mArrAddressTown.add("Thổ Quan");
-        mArrAddressTown.add("Quan Thổ");
-        mAdapterAddressTown = new CustomSpinnerAdapter(getActivity(), mArrAddressTown, false);
-        mSpnAddressTown.setAdapter(mAdapterAddressTown);
-
-        // District
-        mArrAddressDistrict.add("Đống Đa");
-        mArrAddressDistrict.add("Ba Đình");
-        mArrAddressDistrict.add("Hoàn Kiếm");
-        mArrAddressDistrict.add("Long Biên");
-        mArrAddressDistrict.add("Thanh Xuân");
-        mArrAddressDistrict.add("Cầu giấy");
-        mAdapterAddressDistrict = new CustomSpinnerAdapter(getActivity(), mArrAddressDistrict, false);
-        mSpnAddressDistrict.setAdapter(mAdapterAddressDistrict);
-
-
-        // Country
-        mArrAddressCountry.add("Việt Nam");
-        mArrAddressCountry.add("Trung Quốc");
-        mArrAddressCountry.add("Nhật Bản");
-        mArrAddressCountry.add("Mỹ");
-        mArrAddressCountry.add("Nga");
-        mArrAddressCountry.add("Hàn Quốc");
-        mAdapterAddressCountry = new CustomSpinnerAdapter(getActivity(), mArrAddressCountry, false);
-        mSpnAddressCountry.setAdapter(mAdapterAddressCountry);
-
-        // School
-        mArrSchool.add("Học viện Ngân Hàng");
-        mArrSchool.add("Học viện Hàng Không");
-        mArrSchool.add("Học viện Ngoại Giao");
-        mArrSchool.add("Đại học Ngoại Thương");
-        mArrSchool.add("Đại học Kinh Tế Quốc Dân");
-        mArrSchool.add("Đại học Bách Khoa");
-        mAdapterSchool = new CustomSpinnerAdapter(getActivity(), mArrSchool, false);
-        mSpnSchool.setAdapter(mAdapterSchool);
-
+        mGson = new Gson();
     }
 
     @Override
@@ -357,6 +347,38 @@ public class FragmentSignUpInfo extends BaseFragment {
                 mTvDob.setText(sdf.format(mCalendar.getTime()));
             }
         };
+
+        mSpnAddressCity.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
+                Log.d(TAG, "mSpnAddressCity onItemSelected");
+                if (mArrAddressCity.size() > 0) {
+                    getDistricts(mArrAddressCity.get(position).id);
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parentView) {
+                Log.d(TAG, "mSpnAddressCity onNothingSelected");
+            }
+
+        });
+
+
+        mSpnAddressDistrict.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                Log.d(TAG, "mSpnAddressDistrict onItemSelected");
+                if (mArrAddressDistrict.size() > 0) {
+                    getWards(mArrAddressDistrict.get(i).id);
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+                Log.d(TAG, "mSpnAddressDistrict onNothingSelected");
+            }
+        });
     }
 
     private void loginFacebook() {
@@ -422,10 +444,14 @@ public class FragmentSignUpInfo extends BaseFragment {
                                 Log.d(TAG, "profilePicUrl = " + profilePicUrl);
                             }
 
+                            mUserRegister.facebookEmail = email;
+                            mUserRegister.facebookAvatar = profilePicUrl;
+                            mUserRegister.facebookUserName = name;
+                            mUserRegister.facebookId = id;
+
                             Toast.makeText(getActivity(), "Email : " + email + " id : " + id + " name : " + name + " profilePicture : " + profilePicUrl, Toast.LENGTH_LONG).show();
 
-                            FragmentSignUpApprove fragmentSignUpApprove = new FragmentSignUpApprove();
-                            addFragment(fragmentSignUpApprove, Constants.FRAGMENT_SIGN_UP_APPROVE);
+                            callApiRegister();
 
                         } catch (Exception e) {
                             e.printStackTrace();
@@ -438,10 +464,97 @@ public class FragmentSignUpInfo extends BaseFragment {
         request.executeAsync();
     }
 
+
     @Override
     protected void getData() {
+        // Sex
+        mArrSex.add(mStrMen);
+        mArrSex.add(mStrWomen);
+        mAdapter = new SexSpinnerAdapter(getActivity(), mArrSex, false);
+        mSpnSex.setAdapter(mAdapter);
 
+        getCities();
+
+        // Country
+        mAdapterAddressCountry = new CustomSpinnerAdapter(getActivity(), mArrAddressCountry, false);
+        mSpnAddressCountry.setAdapter(mAdapterAddressCountry);
+
+        // School
+        mArrSchool.add("Học viện Ngân Hàng");
+        mArrSchool.add("Học viện Hàng Không");
+        mArrSchool.add("Học viện Ngoại Giao");
+        mArrSchool.add("Đại học Ngoại Thương");
+        mArrSchool.add("Đại học Kinh Tế Quốc Dân");
+        mArrSchool.add("Đại học Bách Khoa");
+        mAdapterSchool = new SexSpinnerAdapter(getActivity(), mArrSchool, false);
+        mSpnSchool.setAdapter(mAdapterSchool);
     }
+
+    private void getCities() {
+        FastNetworking fastNetworking = new FastNetworking(getActivity(), new JsonArrayCallBackListener() {
+            @Override
+            public void onResponse(JSONArray jsonArray) {
+                Type listType = new TypeToken<List<Cities>>() {
+                }.getType();
+                List<Cities> list = (List<Cities>) mGson.fromJson(jsonArray.toString(), listType);
+                mArrAddressCity.addAll(list);
+                mAdapterAddressCity = new CustomSpinnerAdapter(getActivity(), mArrAddressCity, false);
+                mSpnAddressCity.setAdapter(mAdapterAddressCity);
+            }
+
+            @Override
+            public void onError(String messageError) {
+
+            }
+        });
+
+        fastNetworking.callApiGetCities();
+    }
+
+    private void getDistricts(String cityId) {
+        FastNetworking fastNetworking = new FastNetworking(getActivity(), new JsonArrayCallBackListener() {
+            @Override
+            public void onResponse(JSONArray jsonArray) {
+                Type listType = new TypeToken<List<Cities>>() {
+                }.getType();
+                List<Cities> list = (List<Cities>) mGson.fromJson(jsonArray.toString(), listType);
+                mArrAddressDistrict.clear();
+                mArrAddressDistrict.addAll(list);
+                mAdapterAddressDistrict = new CustomSpinnerAdapter(getActivity(), mArrAddressDistrict, false);
+                mSpnAddressDistrict.setAdapter(mAdapterAddressDistrict);
+            }
+
+            @Override
+            public void onError(String messageError) {
+
+            }
+        });
+
+        fastNetworking.callApiGetDistricts(cityId);
+    }
+
+    private void getWards(String districtId) {
+        FastNetworking fastNetworking = new FastNetworking(getActivity(), new JsonArrayCallBackListener() {
+            @Override
+            public void onResponse(JSONArray jsonArray) {
+                Type listType = new TypeToken<List<Cities>>() {
+                }.getType();
+                List<Cities> list = (List<Cities>) mGson.fromJson(jsonArray.toString(), listType);
+                mArrAddressTown.clear();
+                mArrAddressTown.addAll(list);
+                mAdapterAddressTown = new CustomSpinnerAdapter(getActivity(), mArrAddressTown, false);
+                mSpnAddressTown.setAdapter(mAdapterAddressTown);
+            }
+
+            @Override
+            public void onError(String messageError) {
+
+            }
+        });
+
+        fastNetworking.callApiGetWards(districtId);
+    }
+
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {

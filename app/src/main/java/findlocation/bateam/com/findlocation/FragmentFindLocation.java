@@ -711,10 +711,11 @@ public class FragmentFindLocation extends BaseFragment implements OnMapReadyCall
         mTvData.setText(item.addressDetail);
         showOrHideView();
 
+        mGoogleMap.clear();
+
         if (mLastLocation == null)
             return;
 
-        mGoogleMap.clear();
 
         LatLng currentPosition = new LatLng(mLastLocation.getLatitude(), mLastLocation.getLongitude());
         MarkerOptions markerOpt = new MarkerOptions();

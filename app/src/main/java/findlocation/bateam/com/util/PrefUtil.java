@@ -105,7 +105,7 @@ public class PrefUtil {
         SharedPreferences settings = context.getSharedPreferences(PREF_FILE, 0);
         String userInfo = settings.getString(USER_INFO, "");
         if (TextUtils.isEmpty(userInfo)) {
-            return new UserInfo();
+            return null;
         } else {
             Gson gson = new Gson();
             return gson.fromJson(userInfo, UserInfo.class);

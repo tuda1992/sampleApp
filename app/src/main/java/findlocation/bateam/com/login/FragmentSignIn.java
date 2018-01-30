@@ -16,14 +16,19 @@ import android.widget.TextView;
 
 import com.google.gson.Gson;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import butterknife.BindString;
 import butterknife.BindView;
 import butterknife.OnClick;
 import findlocation.bateam.com.MainActivity;
 import findlocation.bateam.com.R;
+import findlocation.bateam.com.api.FastNetworking;
 import findlocation.bateam.com.base.BaseFragment;
 import findlocation.bateam.com.constant.Constants;
-import findlocation.bateam.com.model.UserInfo;
+import findlocation.bateam.com.listener.JsonObjectCallBackListener;
+import findlocation.bateam.com.model.UserLogin;
 import findlocation.bateam.com.util.DialogUtil;
 import findlocation.bateam.com.util.NetworkUtil;
 import findlocation.bateam.com.util.PatternUtil;
@@ -62,6 +67,8 @@ public class FragmentSignIn extends BaseFragment {
     String mStrPasswordNull;
     @BindString(R.string.error_dialog_password_error)
     String mStrPasswordError;
+
+    private Gson mGson;
 
     @OnClick(R.id.btn_signin)
     public void onClickSignIn() {
@@ -108,14 +115,41 @@ public class FragmentSignIn extends BaseFragment {
         if (isChecked) {
             PrefUtil.setSharedPreferenceSaveData(getActivity());
         }
-        UserInfo userInfo = new UserInfo();
-        Gson gson = new Gson();
-        userInfo.email = userName;
-        String jsonUserInfo = gson.toJson(userInfo);
-        PrefUtil.setSharedPreferenceUserInfo(getActivity(), jsonUserInfo);
 
-        startActivityAnim(MainActivity.class, bundle);
-        finishActivityAnim();
+        try {
+            callApiLogin(userName, userPass, bundle);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+    }
+
+
+    private void callApiLogin(String un, String pw, final Bundle bundle) throws JSONException {
+
+        UserLogin userLogin = new UserLogin();
+        userLogin.userName = un;
+        userLogin.password = pw;
+
+        String json = mGson.toJson(userLogin);
+        JSONObject jsonObject = new JSONObject(json);
+
+        FastNetworking fastNetworking = new FastNetworking(getActivity(), new JsonObjectCallBackListener() {
+            @Override
+            public void onResponse(JSONObject jsonObject) {
+                PrefUtil.setSharedPreferenceUserInfo(getActivity(), jsonObject.toString());
+
+                startActivityAnim(MainActivity.class, bundle);
+                finishActivityAnim();
+            }
+
+            @Override
+            public void onError(String messageError) {
+
+            }
+        });
+
+        fastNetworking.callApiLogin(jsonObject);
+
     }
 
     @OnClick(R.id.btn_signup)
@@ -145,7 +179,7 @@ public class FragmentSignIn extends BaseFragment {
 
     @Override
     protected void initDatas(Bundle savedInstanceState) {
-
+        mGson = new Gson();
     }
 
     @Override

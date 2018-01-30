@@ -11,6 +11,7 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
 
+import java.io.File;
 import java.util.List;
 
 import butterknife.BindString;
@@ -38,6 +39,9 @@ public class LoginActivity extends BaseActivity {
     String mTitleSignUp;
     @BindString(R.string.title_forget_password)
     String mTitleForgetPassword;
+
+    public static File mFileLicense = null;
+    public static File mFileAvatar = null;
 
     @Override
     protected int getLayoutView() {

@@ -39,6 +39,7 @@
     <string name="title_find_job">Tìm việc làm</string>
     <string name="title_detail_job">Thông tin chi tiết</string>
     <string name="title_user_info">Thông tin cá nhân</string>
+    <string name="title_detail_location">Thông tin phòng trọ</string>
 
 
     <string name="text_radio_user">Người dùng</string>

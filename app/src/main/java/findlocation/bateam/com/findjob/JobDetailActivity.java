@@ -1,5 +1,7 @@
 package findlocation.bateam.com.findjob;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
@@ -58,7 +60,10 @@ public class JobDetailActivity extends BaseActivity {
 
     @OnClick(R.id.btn_apply)
     public void onClickApplyJob() {
-
+        String url = "https://www.vietnamworks.com";
+        Intent i = new Intent(Intent.ACTION_VIEW);
+        i.setData(Uri.parse(url));
+        startActivity(i);
     }
 
     @Override
