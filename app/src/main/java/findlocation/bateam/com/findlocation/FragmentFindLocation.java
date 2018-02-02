@@ -56,7 +56,9 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.google.maps.android.clustering.ClusterManager;
 
+import org.json.JSONArray;
 import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -69,12 +71,17 @@ import java.util.Locale;
 
 import butterknife.BindView;
 import butterknife.OnClick;
+import findlocation.bateam.com.MainActivity;
 import findlocation.bateam.com.R;
 import findlocation.bateam.com.adapter.CustomInfoWindowAdapter;
+import findlocation.bateam.com.api.FastNetworking;
 import findlocation.bateam.com.base.BaseFragment;
 import findlocation.bateam.com.constant.Constants;
 import findlocation.bateam.com.drawline.DrawRouteMaps;
 import findlocation.bateam.com.listener.IPermissionCallBack;
+import findlocation.bateam.com.listener.JsonArrayCallBackListener;
+import findlocation.bateam.com.listener.JsonObjectCallBackListener;
+import findlocation.bateam.com.model.HousingInfo;
 import findlocation.bateam.com.model.MyClusterItem;
 import findlocation.bateam.com.model.PlaceModel;
 import findlocation.bateam.com.util.JSONResourceReader;
@@ -112,8 +119,9 @@ public class FragmentFindLocation extends BaseFragment implements OnMapReadyCall
     private static final int REQUEST_SELECT_PLACE = 1000;
     private ClusterManager<MyClusterItem> mClusterManager;
     private boolean mIsHavePlace;
-    private List<PlaceModel> mListPlaceModel = new ArrayList<>();
-
+    private List<PlaceModel> mAllListPlaceModel = new ArrayList<>();
+    private Gson mGson = new Gson();
+    private int mCurrentPage = 1;
 
     // Bind View
 
@@ -194,55 +202,103 @@ public class FragmentFindLocation extends BaseFragment implements OnMapReadyCall
 
     @OnClick(R.id.btn_find)
     public void onClickFindPlace() {
-        if (mCvData.getVisibility() == View.GONE) {
-            String jsonReader;
-            try {
-                jsonReader = JSONResourceReader.readFileJSONFromRaw(getActivity());
-                Gson gson = new Gson();
-                Type listType = new TypeToken<List<PlaceModel>>() {
-                }.getType();
-                List<PlaceModel> placeModels = (List<PlaceModel>) gson.fromJson(jsonReader, listType);
+        try {
+            callApiGetHouseInfo(true);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+    }
 
+    private void callApiGetHouseInfo(final boolean isShowLoading) throws JSONException {
+        PlaceModel item = new PlaceModel();
+        item.lattitude = String.valueOf(mLastLocation.getLatitude());
+        item.longitude = String.valueOf(mLastLocation.getLongitude());
+        item.distance = "5";
+        item.pageIndex = mCurrentPage;
+        item.pageSize = 20;
+
+        String json = mGson.toJson(item);
+        JSONObject jsonObject = new JSONObject(json);
+
+        FastNetworking fastNetworking = new FastNetworking(getActivity(), new JsonObjectCallBackListener() {
+
+            @Override
+            public void onResponse(JSONObject jsonObject) {
+                mLayoutPlace.setRefreshing();
+
+                HousingInfo housingInfo = mGson.fromJson(jsonObject.toString(), HousingInfo.class);
+                if (!isShowLoading) {
+                    mGoogleMap.clear();
+                    mAllListPlaceModel.clear();
+
+                    if (mLastLocation == null)
+                        return;
+
+
+                    LatLng currentPosition = new LatLng(mLastLocation.getLatitude(), mLastLocation.getLongitude());
+                    MarkerOptions markerOpt = new MarkerOptions();
+                    markerOpt.position(currentPosition)
+                            .title("Vị trí của tôi")
+                            .snippet("")
+                            .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_ROSE));
+                    mGoogleMap.addMarker(markerOpt);
+                    moveCamera(null, mLastLocation.getLatitude(), mLastLocation.getLongitude());
+
+                }
                 mCvData.setVisibility(View.VISIBLE);
 
-                mTvData.setText(placeModels.get(0).addressDetail);
-
-                mLayoutPlace.setDataForLayoutPlace(placeModels);
-
-
-                //Marker
-                for (int i = 0; i < 10; i++) {
-                    mListPlaceModel.add(placeModels.get(i));
-                    if (TextUtils.isEmpty(placeModels.get(i).lattitude) || TextUtils.isEmpty(placeModels.get(i).longitude)) {
-                        // Dont do anything
-                    } else {
-                        String title = "";
-                        String price = "";
-
-                        if (placeModels.get(i) != null) {
-                            title = placeModels.get(i).addressDetail;
-                            NumberFormat formatter = new DecimalFormat("#,###");
-                            String formatPrice = formatter.format(Double.parseDouble(TextUtils.isEmpty(placeModels.get(i).price) ? "0" : placeModels.get(i).price)) + " VNĐ";
-                            price = "Giá thuê : " + formatPrice;
-                        }
-
-                        LatLng position = new LatLng(Double.parseDouble(placeModels.get(i).lattitude), Double.parseDouble(placeModels.get(i).longitude));
-                        MarkerOptions markerOpt = new MarkerOptions();
-                        markerOpt.position(position)
-                                .title(title)
-                                .snippet(price)
-                                .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_ROSE));
-
-                        //Set Custom InfoWindow Adapter
-                        CustomInfoWindowAdapter adapter = new CustomInfoWindowAdapter(getActivity());
-                        mGoogleMap.setInfoWindowAdapter(adapter);
-                        mGoogleMap.addMarker(markerOpt);
+                if (housingInfo.data != null && housingInfo.data.size() > 0) {
+                    if (mCurrentPage <= housingInfo.pagination.pageCount) {
+                        mCurrentPage++;
+                        mAllListPlaceModel.addAll(housingInfo.data);
+                        mTvData.setText(mAllListPlaceModel.get(0).street);
+                        mLayoutPlace.setDataForLayoutPlace(mAllListPlaceModel);
                     }
                 }
-            } catch (IOException e) {
-                e.printStackTrace();
+
+                if (mCurrentPage <= 2 && mAllListPlaceModel.size() > 0) {
+                    //Marker
+                    for (int i = 0; i < 10; i++) {
+                        if (TextUtils.isEmpty(mAllListPlaceModel.get(i).latResult) || TextUtils.isEmpty(mAllListPlaceModel.get(i).longResult)) {
+                            // Dont do anything
+                        } else {
+                            String title = "";
+                            String price = "";
+
+                            if (mAllListPlaceModel.get(i) != null) {
+                                title = mAllListPlaceModel.get(i).street;
+                                NumberFormat formatter = new DecimalFormat("#,###");
+                                String formatPrice = formatter.format(Double.parseDouble(TextUtils.isEmpty(mAllListPlaceModel.get(i).price) ? "0" : mAllListPlaceModel.get(i).price)) + " VNĐ";
+                                price = "Giá thuê : " + formatPrice;
+                            }
+
+                            LatLng position = new LatLng(Double.parseDouble(mAllListPlaceModel.get(i).latResult), Double.parseDouble(mAllListPlaceModel.get(i).longResult));
+                            MarkerOptions markerOpt = new MarkerOptions();
+                            markerOpt.position(position)
+                                    .title(title)
+                                    .snippet(price)
+                                    .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_VIOLET));
+
+                            //Set Custom InfoWindow Adapter
+                            CustomInfoWindowAdapter adapter = new CustomInfoWindowAdapter(getActivity());
+                            mGoogleMap.setInfoWindowAdapter(adapter);
+                            mGoogleMap.addMarker(markerOpt);
+                        }
+                    }
+                }
             }
-        }
+
+            @Override
+            public void onError(String messageError) {
+                mLayoutPlace.setRefreshing();
+                if (!isShowLoading) {
+                    mAllListPlaceModel.clear();
+                    mLayoutPlace.setNotifyAdapter();
+                }
+            }
+        });
+        fastNetworking.callApiHouseInfo(jsonObject, MainActivity.mUserInfo.securityToken, isShowLoading);
+
     }
 
     @Override
@@ -446,28 +502,8 @@ public class FragmentFindLocation extends BaseFragment implements OnMapReadyCall
         mGoogleMap.setOnCameraIdleListener(mClusterManager);
         mGoogleMap.setOnMarkerClickListener(this);
 
-        // Add location
-//        try {
-//            readItems();
-//        } catch (JSONException e) {
-//            Toast.makeText(getActivity(), "Problem reading list of markers.", Toast.LENGTH_LONG).show();
-//        }
     }
 
-    private void readItems() throws JSONException {
-//        InputStream inputStream = getResources().openRawResource(R.raw.radar_search);
-//        List<MyClusterItem> items = new MyItemReaderUtil().read(inputStream);
-//        for (int i = 0; i < 10; i++) {
-//            double offset = i / 60d;
-//            for (MyClusterItem item : items) {
-//                LatLng position = item.getPosition();
-//                double lat = position.latitude + offset;
-//                double lng = position.longitude + offset;
-//                MyClusterItem offsetItem = new MyClusterItem(lat, lng);
-//                mClusterManager.addItem(offsetItem);
-//            }
-//        }
-    }
 
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
@@ -601,7 +637,7 @@ public class FragmentFindLocation extends BaseFragment implements OnMapReadyCall
         String title = "";
         String price = "";
         if (item != null) {
-            title = item.addressDetail;
+            title = item.street;
             NumberFormat formatter = new DecimalFormat("#,###");
             String formatPrice = formatter.format(Double.parseDouble(TextUtils.isEmpty(item.price) ? "0" : item.price)) + " VNĐ";
             price = "Giá thuê : " + formatPrice;
@@ -622,7 +658,7 @@ public class FragmentFindLocation extends BaseFragment implements OnMapReadyCall
         mGoogleMap.addMarker(markerOpt);
 
         // For zooming automatically to the location of the marker
-        CameraPosition cameraPosition = new CameraPosition.Builder().target(position).zoom(16).build();
+        CameraPosition cameraPosition = new CameraPosition.Builder().target(position).zoom(13).build();
         mGoogleMap.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition), 1000, null);
 
     }
@@ -631,7 +667,7 @@ public class FragmentFindLocation extends BaseFragment implements OnMapReadyCall
         String title = "";
         String price = "";
         if (item != null) {
-            title = item.addressDetail;
+            title = item.street;
             NumberFormat formatter = new DecimalFormat("#,###");
             String formatPrice = formatter.format(Double.parseDouble(TextUtils.isEmpty(item.price) ? "0" : item.price)) + " VNĐ";
             price = "Giá thuê : " + formatPrice;
@@ -644,7 +680,7 @@ public class FragmentFindLocation extends BaseFragment implements OnMapReadyCall
         markerOpt.position(position)
                 .title(title)
                 .snippet(price)
-                .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_ROSE));
+                .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_VIOLET));
 
         //Set Custom InfoWindow Adapter
         CustomInfoWindowAdapter adapter = new CustomInfoWindowAdapter(getActivity());
@@ -653,9 +689,7 @@ public class FragmentFindLocation extends BaseFragment implements OnMapReadyCall
 
         // For zooming automatically to the location of the marker
 
-
     }
-
 
     @Override
     public void onError(Status status) {
@@ -708,7 +742,7 @@ public class FragmentFindLocation extends BaseFragment implements OnMapReadyCall
 
     @Override
     public void onItemLayoutClick(int position, PlaceModel item) {
-        mTvData.setText(item.addressDetail);
+        mTvData.setText(item.street);
         showOrHideView();
 
         mGoogleMap.clear();
@@ -729,18 +763,18 @@ public class FragmentFindLocation extends BaseFragment implements OnMapReadyCall
         mGoogleMap.setInfoWindowAdapter(adapter);
         mGoogleMap.addMarker(markerOpt);
 
-        if (TextUtils.isEmpty(item.lattitude) || TextUtils.isEmpty(item.longitude)) {
+        if (TextUtils.isEmpty(item.latResult) || TextUtils.isEmpty(item.longResult)) {
             return;
         }
 
         LatLng origin = new LatLng(mLastLocation.getLatitude(), mLastLocation.getLongitude());
-        LatLng destination = new LatLng(Double.parseDouble(item.lattitude), Double.parseDouble(item.longitude));
+        LatLng destination = new LatLng(Double.parseDouble(item.latResult), Double.parseDouble(item.longResult));
 
         DrawRouteMaps.getInstance(getActivity())
                 .draw(origin, destination, mGoogleMap);
 
 
-        moveCameraCenter(item, Double.parseDouble(item.lattitude), Double.parseDouble(item.longitude));
+        moveCameraCenter(item, Double.parseDouble(item.latResult), Double.parseDouble(item.longResult));
 
     }
 
@@ -749,5 +783,24 @@ public class FragmentFindLocation extends BaseFragment implements OnMapReadyCall
         Bundle bundle = new Bundle();
         bundle.putParcelable(Constants.BUNDLE_PLACE_ITEM, item);
         startActivityAnim(InfoPlaceActivity.class, bundle);
+    }
+
+    @Override
+    public void onLoadMore() {
+        try {
+            callApiGetHouseInfo(true);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Override
+    public void onPullToRefresh() {
+        try {
+            mCurrentPage = 1;
+            callApiGetHouseInfo(false);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
     }
 }

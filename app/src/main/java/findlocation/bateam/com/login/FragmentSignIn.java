@@ -96,10 +96,10 @@ public class FragmentSignIn extends BaseFragment {
             return;
         }
 
-        if (!PatternUtil.checkPasswordCharacter(userPass)) {
-            DialogUtil.showDialogError(getActivity(), mStrPasswordError, null);
-            return;
-        }
+//        if (!PatternUtil.checkPasswordCharacter(userPass)) {
+//            DialogUtil.showDialogError(getActivity(), mStrPasswordError, null);
+//            return;
+//        }
 
         int selectedId = mRg.getCheckedRadioButtonId();
         boolean isChecked = mCbSavePassword.isChecked();
@@ -137,7 +137,6 @@ public class FragmentSignIn extends BaseFragment {
             @Override
             public void onResponse(JSONObject jsonObject) {
                 PrefUtil.setSharedPreferenceUserInfo(getActivity(), jsonObject.toString());
-
                 startActivityAnim(MainActivity.class, bundle);
                 finishActivityAnim();
             }

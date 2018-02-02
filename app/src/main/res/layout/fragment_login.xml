@@ -66,7 +66,7 @@
             android:inputType="textEmailAddress"
             android:padding="@dimen/_5sdp"
             android:singleLine="true"
-            android:text="admin@gmail.com"
+            android:text="dhd@aod.vn"
             android:textColor="@color/textColorPrimary"
             android:textSize="@dimen/_15sdp" />
 
@@ -100,7 +100,7 @@
             android:inputType="textPassword"
             android:padding="@dimen/_5sdp"
             android:singleLine="true"
-            android:text="123456hh"
+            android:text="1234"
             android:textColor="@color/textColorPrimary"
             android:textSize="@dimen/_15sdp" />
 

@@ -75,7 +75,7 @@ public class FindLocationAdapter extends RecyclerView.Adapter<FindLocationAdapte
         }
 
         public void setData(PlaceModel model) {
-            mTvData.setText(model.addressDetail);
+            mTvData.setText(model.street);
         }
 
     }

@@ -12,48 +12,72 @@ import com.google.gson.annotations.SerializedName;
 
 public class PlaceModel implements Parcelable {
 
-    @SerializedName("cob_date")
+    @SerializedName("Id")
     @Expose
-    public String cobDate;
-    @SerializedName("title")
+    public Integer id;
+    @SerializedName("FullAddress")
+    @Expose
+    public String fullAddress;
+    @SerializedName("Title")
     @Expose
     public String title;
-    @SerializedName("created_date")
-    @Expose
-    public String createdDate;
-    @SerializedName("city")
-    @Expose
-    public String city;
-    @SerializedName("district")
-    @Expose
-    public String district;
-    @SerializedName("address_detail")
-    @Expose
-    public String addressDetail;
-    @SerializedName("price")
-    @Expose
-    public String price;
-    @SerializedName("area")
-    @Expose
-    public String area;
-    @SerializedName("contract_name")
-    @Expose
-    public String contractName;
-    @SerializedName("phone")
-    @Expose
-    public String phone;
-    @SerializedName("mobile")
-    @Expose
-    public String mobile;
-    @SerializedName("content")
+    @SerializedName("Content")
     @Expose
     public String content;
-    @SerializedName("lattitude")
+    @SerializedName("ContactPerson")
     @Expose
-    public String lattitude;
-    @SerializedName("longitude")
+    public String contractName;
+    @SerializedName("ContactMobile")
+    @Expose
+    public String mobile;
+    @SerializedName("ContactPhone")
+    @Expose
+    public String phone;
+    @SerializedName("Distance")
+    @Expose
+    public String distance;
+    @SerializedName("Price")
+    @Expose
+    public String price;
+    @SerializedName("TotalRows")
+    @Expose
+    public Integer totalRows;
+    @SerializedName("Province")
+    @Expose
+    public String province;
+    @SerializedName("District")
+    @Expose
+    public String district;
+    @SerializedName("Street")
+    @Expose
+    public String street;
+    @SerializedName("Long")
     @Expose
     public String longitude;
+    @SerializedName("Lat")
+    @Expose
+    public String lattitude;
+    @SerializedName("Size")
+    @Expose
+    public Integer size;
+    @SerializedName("PostDate")
+    @Expose
+    public String createdDate;
+    @SerializedName("ExpiryDate")
+    @Expose
+    public String cobDate;
+    @SerializedName("IsShowDistance")
+    @Expose
+    public boolean isShowDistance = false;
+    @SerializedName("PageIndex")
+    public Integer pageIndex;
+    @SerializedName("PageSize")
+    public Integer pageSize;
+    @SerializedName("Longitude")
+    public String longResult;
+    @SerializedName("Lattitude")
+    public String latResult;
+
 
     @Override
     public int describeContents() {
@@ -65,17 +89,19 @@ public class PlaceModel implements Parcelable {
         parcel.writeString(cobDate);
         parcel.writeString(title);
         parcel.writeString(createdDate);
-        parcel.writeString(city);
+        parcel.writeString(province);
         parcel.writeString(district);
         parcel.writeString(price);
-        parcel.writeString(area);
+        parcel.writeString(street);
         parcel.writeString(contractName);
         parcel.writeString(phone);
         parcel.writeString(mobile);
         parcel.writeString(content);
         parcel.writeString(lattitude);
         parcel.writeString(longitude);
-        parcel.writeString(addressDetail);
+        parcel.writeString(latResult);
+        parcel.writeString(longResult);
+        parcel.writeString(distance);
     }
 
     // this is used to regenerate your object. All Parcelables must have a CREATOR that implements these two methods
@@ -94,17 +120,22 @@ public class PlaceModel implements Parcelable {
         cobDate = in.readString();
         title = in.readString();
         createdDate = in.readString();
-        city = in.readString();
+        province = in.readString();
         district = in.readString();
         price = in.readString();
-        area = in.readString();
+        street = in.readString();
         contractName = in.readString();
         phone = in.readString();
         mobile = in.readString();
         content = in.readString();
         lattitude = in.readString();
         longitude = in.readString();
-        addressDetail = in.readString();
+        distance = in.readString();
+        longResult = in.readString();
+        latResult = in.readString();
     }
 
+    public PlaceModel() {
+
+    }
 }

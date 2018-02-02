@@ -1,6 +1,7 @@
 package findlocation.bateam.com.widget;
 
 import android.content.Context;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.AttributeSet;
@@ -24,9 +25,12 @@ public class LayoutPlace extends BaseCustomLayout {
     private LinearLayoutManager mLinearLayoutManager;
     private FindLocationAdapter mAdapter;
     private Context mContext;
+    private EndlessRecyclerViewScrollListener mLazyLoadListener;
 
     @BindView(R.id.rv_data)
     RecyclerView mRvData;
+    @BindView(R.id.swipe_refresh)
+    SwipeRefreshLayout mSwipe;
 
     @OnClick(R.id.iv_down)
     public void onClickHideLayout() {
@@ -43,6 +47,10 @@ public class LayoutPlace extends BaseCustomLayout {
         void onItemLayoutClick(int position, PlaceModel item);
 
         void onItemInfoClick(int position, PlaceModel item);
+
+        void onLoadMore();
+
+        void onPullToRefresh();
     }
 
     public void setLayoutListener(LayoutPlaceListener listener) {
@@ -50,7 +58,7 @@ public class LayoutPlace extends BaseCustomLayout {
     }
 
     public void setDataForLayoutPlace(List<PlaceModel> listData) {
-        mLinearLayoutManager = new LinearLayoutManager(mContext, LinearLayoutManager.VERTICAL, false);
+
         mAdapter = new FindLocationAdapter(mContext, listData, new FindLocationAdapter.ICallBackItemClick() {
             @Override
             public void onItemClick(int position, PlaceModel item) {
@@ -66,8 +74,7 @@ public class LayoutPlace extends BaseCustomLayout {
                 }
             }
         });
-        mRvData.setLayoutManager(mLinearLayoutManager);
-        mRvData.setHasFixedSize(true);
+
         mRvData.setAdapter(mAdapter);
     }
 
@@ -92,10 +99,42 @@ public class LayoutPlace extends BaseCustomLayout {
 
     @Override
     protected void initData() {
+        mLinearLayoutManager = new LinearLayoutManager(mContext, LinearLayoutManager.VERTICAL, false);
+        mRvData.setLayoutManager(mLinearLayoutManager);
+        mRvData.setHasFixedSize(true);
     }
 
     @Override
     protected void initListener() {
 
+        mLazyLoadListener = new EndlessRecyclerViewScrollListener(mLinearLayoutManager) {
+            @Override
+            public void onLoadMore(int page) {
+                if (mListener != null) {
+                    mListener.onLoadMore();
+                }
+            }
+        };
+
+        mRvData.addOnScrollListener(mLazyLoadListener);
+
+        mSwipe.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                mLazyLoadListener.resetState();
+                if (mListener != null) {
+                    mListener.onPullToRefresh();
+                }
+            }
+        });
     }
+
+    public void setRefreshing() {
+        mSwipe.setRefreshing(false);
+    }
+
+    public void setNotifyAdapter(){
+        mAdapter.notifyDataSetChanged();
+    }
+
 }

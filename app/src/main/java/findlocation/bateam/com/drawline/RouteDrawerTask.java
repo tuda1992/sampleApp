@@ -99,7 +99,7 @@ public class RouteDrawerTask extends AsyncTask<String, Integer, List<List<HashMa
         if (lineOptions != null && mMap != null) {
             mMap.addPolyline(lineOptions);
             if (points != null) {
-                CameraPosition cameraPosition = new CameraPosition.Builder().target(points.get((int) points.size() / 2)).zoom(13).build();
+                CameraPosition cameraPosition = new CameraPosition.Builder().target(points.get((int) points.size() / 2)).zoom(12.5f).build();
                 mMap.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition), 1000, null);
             }
 

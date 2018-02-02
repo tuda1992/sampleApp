@@ -3,10 +3,12 @@ package findlocation.bateam.com.adapter;
 import android.content.Context;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import java.util.List;
@@ -56,6 +58,8 @@ public class FindJobAdapter extends RecyclerView.Adapter<FindJobAdapter.ViewHold
         TextView mTvLocation;
         @BindView(R.id.cv_data)
         CardView mCvData;
+        @BindView(R.id.rl_salary)
+        RelativeLayout mRlSalary;
 
         @OnClick(R.id.cv_data)
         public void onClickItem() {
@@ -72,7 +76,12 @@ public class FindJobAdapter extends RecyclerView.Adapter<FindJobAdapter.ViewHold
         public void setData(JobModel model) {
             mTvData.setText(model.jobTitle);
             mTvCompany.setText(model.companyName);
-            mTvSalary.setText(model.salary);
+            if (TextUtils.isEmpty(model.salary) || model.salary.contains("NULL")) {
+                mRlSalary.setVisibility(View.INVISIBLE);
+            } else {
+                mRlSalary.setVisibility(View.VISIBLE);
+                mTvSalary.setText(model.salary);
+            }
             mTvLocation.setText(model.workingArea);
         }
 

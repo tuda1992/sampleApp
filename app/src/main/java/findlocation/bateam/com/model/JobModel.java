@@ -12,75 +12,78 @@ import com.google.gson.annotations.SerializedName;
 
 public class JobModel implements Parcelable {
 
-    @SerializedName("Age_Requirement")
+    @SerializedName("Id")
     @Expose
-    public String ageRequirement;
-    @SerializedName("Applicaiton_Deadline")
+    public String id;
+    @SerializedName("JobTitle")
     @Expose
-    public String applicaitonDeadline;
-    @SerializedName("Benefits")
+    public String jobTitle;
+    @SerializedName("JobLevel")
     @Expose
-    public String benefits;
-    @SerializedName("Company_Address")
+    public String jobLevel;
+    @SerializedName("JobDescription")
     @Expose
-    public String companyAddress;
-    @SerializedName("Company_Name")
-    @Expose
-    public String companyName;
-    @SerializedName("Contact_Email")
-    @Expose
-    public String contactEmail;
-    @SerializedName("Contact_Number")
-    @Expose
-    public String contactNumber;
-    @SerializedName("Contact_Person")
-    @Expose
-    public String contactPerson;
-    @SerializedName("Create_Date")
-    @Expose
-    public String createDate;
-    @SerializedName("Education_Requirement")
-    @Expose
-    public String educationRequirement;
-    @SerializedName("Exipry_Date")
-    @Expose
-    public String exipryDate;
-    @SerializedName("Experience_Requirement")
-    @Expose
-    public String experienceRequirement;
-    @SerializedName("Gender_Requirement")
-    @Expose
-    public String genderRequirement;
+    public String jobDescription;
     @SerializedName("Industry")
     @Expose
     public String industry;
-    @SerializedName("JobID")
+    @SerializedName("CompanyName")
     @Expose
-    public Integer jobID;
-    @SerializedName("Job_Description")
+    public String companyName;
+    @SerializedName("CompanyAddress")
     @Expose
-    public String jobDescription;
-    @SerializedName("Job_Level")
+    public String companyAddress;
+    @SerializedName("ContactNumber")
     @Expose
-    public String jobLevel;
-    @SerializedName("Job_Link")
+    public String contactNumber;
+    @SerializedName("ContactEmail")
     @Expose
-    public String jobLink;
-    @SerializedName("Job_Source")
+    public String contactEmail;
+    @SerializedName("ContactPerson")
     @Expose
-    public String jobSource;
-    @SerializedName("Job_Title")
+    public String contactPerson;
+    @SerializedName("WorkingArea")
     @Expose
-    public String jobTitle;
+    public String workingArea;
     @SerializedName("Salary")
     @Expose
     public String salary;
-    @SerializedName("Trial_Period")
+    @SerializedName("Benefits")
+    @Expose
+    public String benefits;
+    @SerializedName("AgeRequirement")
+    @Expose
+    public String ageRequirement;
+    @SerializedName("GenderRequirement")
+    @Expose
+    public String genderRequirement;
+    @SerializedName("ExperienceRequirement")
+    @Expose
+    public String experienceRequirement;
+    @SerializedName("EducationRequirement")
+    @Expose
+    public String educationRequirement;
+    @SerializedName("TrialPeriod")
     @Expose
     public String trialPeriod;
-    @SerializedName("Working_Area")
+    @SerializedName("CreateDate")
     @Expose
-    public String workingArea;
+    public String createDate;
+    @SerializedName("ExipryDate")
+    @Expose
+    public String exipryDate;
+    @SerializedName("ApplicaitonDeadline")
+    @Expose
+    public String applicaitonDeadline;
+    @SerializedName("JobSource")
+    @Expose
+    public String jobSource;
+    @SerializedName("JobLink")
+    @Expose
+    public String jobLink;
+    @SerializedName("JobType")
+    @Expose
+    public String jobType;
 
     @Override
     public int describeContents() {
@@ -103,7 +106,7 @@ public class JobModel implements Parcelable {
         parcel.writeString(experienceRequirement);
         parcel.writeString(genderRequirement);
         parcel.writeString(industry);
-        parcel.writeInt(jobID);
+        parcel.writeString(id);
         parcel.writeString(jobDescription);
         parcel.writeString(jobLevel);
         parcel.writeString(jobLink);
@@ -141,7 +144,7 @@ public class JobModel implements Parcelable {
         experienceRequirement = in.readString();
         genderRequirement = in.readString();
         industry = in.readString();
-        jobID = in.readInt();
+        id = in.readString();
         jobDescription = in.readString();
         jobLevel = in.readString();
         jobLink = in.readString();
@@ -150,6 +153,10 @@ public class JobModel implements Parcelable {
         salary = in.readString();
         trialPeriod = in.readString();
         workingArea = in.readString();
+    }
+
+    public JobModel(){
+
     }
 
 }

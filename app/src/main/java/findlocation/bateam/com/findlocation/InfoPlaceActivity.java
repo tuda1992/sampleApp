@@ -173,13 +173,13 @@ public class InfoPlaceActivity extends BaseActivity {
             String htmlDate = TextUtils.isEmpty(mItem.createdDate) ? "<b><i>" + mStrCreatedDate + "</i></b>" : "<b><i>" + mStrCreatedDate + "</i></b>" + " " + mItem.createdDate;
             mTvCreatedDate.setText(Html.fromHtml(htmlDate));
 
-            String htmlCity = TextUtils.isEmpty(mItem.city) ? "<b><i>" + mStrCity + "</i></b>" : "<b><i>" + mStrCity + "</i></b>" + " " + mItem.city;
+            String htmlCity = TextUtils.isEmpty(mItem.province) ? "<b><i>" + mStrCity + "</i></b>" : "<b><i>" + mStrCity + "</i></b>" + " " + mItem.province;
             mTvCity.setText(Html.fromHtml(htmlCity));
 
             String htmlDistrict = TextUtils.isEmpty(mItem.district) ? "<b><i>" + mStrDistrict + "</i></b>" : "<b><i>" + mStrDistrict + "</i></b>" + " " + mItem.district;
             mTvDistrict.setText(Html.fromHtml(htmlDistrict));
 
-            String htmlAddress = TextUtils.isEmpty(mItem.addressDetail) ? "<b><i>" + mStrAdress + "</i></b>" : "<b><i>" + mStrAdress + "</i></b>" + " " + mItem.addressDetail;
+            String htmlAddress = TextUtils.isEmpty(mItem.street) ? "<b><i>" + mStrAdress + "</i></b>" : "<b><i>" + mStrAdress + "</i></b>" + " " + mItem.street;
             mTvAddress.setText(Html.fromHtml(htmlAddress));
 
             NumberFormat formatter = new DecimalFormat("#,###");

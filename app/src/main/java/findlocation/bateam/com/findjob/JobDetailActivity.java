@@ -6,6 +6,8 @@ import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import butterknife.BindString;
@@ -48,6 +50,29 @@ public class JobDetailActivity extends BaseActivity {
     TextView mTvSex;
     @BindView(R.id.tv_age)
     TextView mTvAge;
+
+
+    @BindView(R.id.ll_offer)
+    LinearLayout mLlOffer;
+    @BindView(R.id.ll_experience)
+    LinearLayout mLlExperience;
+    @BindView(R.id.ll_certificate)
+    LinearLayout mLlCertificate;
+    @BindView(R.id.ll_hiring)
+    LinearLayout mLlHiring;
+    @BindView(R.id.ll_career)
+    LinearLayout mLlCareer;
+    @BindView(R.id.ll_location)
+    LinearLayout mLlLocation;
+    @BindView(R.id.ll_level)
+    LinearLayout mLlLevel;
+    @BindView(R.id.ll_form)
+    LinearLayout mLlForm;
+    @BindView(R.id.ll_sex)
+    LinearLayout mLlSex;
+    @BindView(R.id.ll_age)
+    LinearLayout mLlAge;
+
     @BindView(R.id.tv_description)
     TextView mTvDescription;
     @BindView(R.id.tv_benefits)
@@ -94,16 +119,62 @@ public class JobDetailActivity extends BaseActivity {
         if (mItem != null) {
             mTvJobTitle.setText(mItem.jobTitle);
             mTvCompany.setText(mItem.companyName);
-            mTvOffer.setText(mItem.salary);
-            mTvExperience.setText(mItem.experienceRequirement);
-            mTvCertificate.setText(mItem.educationRequirement);
-            mTvCareer.setText(mItem.industry);
-            mTvLocation.setText(mItem.workingArea);
-            mTvLevel.setText(!TextUtils.isEmpty(mItem.jobLevel) ? mItem.jobLevel : "");
-            mTvAge.setText(!TextUtils.isEmpty(mItem.ageRequirement) ? mItem.ageRequirement : "");
-            mTvSex.setText(mItem.genderRequirement);
+
+            if (TextUtils.isEmpty(mItem.salary) || mItem.salary.contains("NULL")) {
+                mLlOffer.setVisibility(View.GONE);
+            } else {
+                mTvOffer.setText(mItem.salary);
+            }
+
+            if (TextUtils.isEmpty(mItem.experienceRequirement) || mItem.experienceRequirement.contains("NULL")) {
+                mLlExperience.setVisibility(View.GONE);
+            } else {
+                mTvExperience.setText(mItem.experienceRequirement);
+            }
+
+            if (TextUtils.isEmpty(mItem.educationRequirement) || mItem.educationRequirement.contains("NULL")) {
+                mLlCertificate.setVisibility(View.GONE);
+            } else {
+                mTvCertificate.setText(mItem.educationRequirement);
+            }
+
+            if (TextUtils.isEmpty(mItem.industry) || mItem.industry.contains("NULL")) {
+                mLlCareer.setVisibility(View.GONE);
+            } else {
+                mTvCareer.setText(mItem.industry);
+            }
+
+            if (TextUtils.isEmpty(mItem.workingArea) || mItem.workingArea.contains("NULL")) {
+                mLlLocation.setVisibility(View.GONE);
+            } else {
+                mTvLocation.setText(mItem.workingArea);
+            }
+
+            if (TextUtils.isEmpty(mItem.jobLevel) || mItem.jobLevel.contains("NULL")) {
+                mLlLevel.setVisibility(View.GONE);
+            } else {
+                mTvLevel.setText(mItem.jobLevel);
+            }
+
+            if (TextUtils.isEmpty(mItem.ageRequirement) || mItem.ageRequirement.contains("NULL")) {
+                mLlAge.setVisibility(View.GONE);
+            } else {
+                mTvAge.setText(mItem.ageRequirement);
+            }
+
+            if (TextUtils.isEmpty(mItem.genderRequirement) || mItem.genderRequirement.contains("NULL")) {
+                mLlSex.setVisibility(View.GONE);
+            } else {
+                mTvSex.setText(mItem.genderRequirement);
+            }
+
             mTvDescription.setText(mItem.jobDescription);
-            mTvBenefits.setText(mItem.benefits);
+            if (TextUtils.isEmpty(mItem.benefits) || mItem.benefits.contains("NULL")) {
+
+            } else {
+                mTvBenefits.setText(mItem.benefits);
+            }
+
         }
 
     }

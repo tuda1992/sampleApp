@@ -22,6 +22,7 @@ import findlocation.bateam.com.findlocation.FragmentFindLocation;
 import findlocation.bateam.com.findlocation.FragmentUploadLocation;
 import findlocation.bateam.com.login.FragmentSignIn;
 import findlocation.bateam.com.login.LoginActivity;
+import findlocation.bateam.com.model.UserInfo;
 import findlocation.bateam.com.navigation.FragmentDrawer;
 import findlocation.bateam.com.userinfo.FragmentUserInfo;
 import findlocation.bateam.com.util.ImagePicker;
@@ -35,6 +36,7 @@ public class MainActivity extends BaseActivity implements FragmentDrawer.Fragmen
     private FragmentDrawer drawerFragment;
     private int mCurrentTab = -1;
     private boolean mIsMaster;
+    public static UserInfo mUserInfo;
 
     @Override
     protected int getLayoutView() {
@@ -51,6 +53,8 @@ public class MainActivity extends BaseActivity implements FragmentDrawer.Fragmen
         }
         setSupportActionBar(mToolbar);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
+
+        mUserInfo = PrefUtil.getSharedPreferenceUserInfo(this);
 
         drawerFragment = (FragmentDrawer) getSupportFragmentManager().findFragmentById(R.id.fragment_navigation_drawer);
         drawerFragment.setUp(R.id.fragment_navigation_drawer, (DrawerLayout) findViewById(R.id.drawer_layout), mToolbar, mIsMaster);
@@ -90,6 +94,7 @@ public class MainActivity extends BaseActivity implements FragmentDrawer.Fragmen
 
         if (mIsMaster) {
             if (position == 1) {
+                mUserInfo = null;
                 mCurrentTab = -1;
                 PrefUtil.clearSharedPreference(this);
                 startActivityAnim(LoginActivity.class, null);
@@ -107,6 +112,7 @@ public class MainActivity extends BaseActivity implements FragmentDrawer.Fragmen
             }
         } else {
             if (position == 2) {
+                mUserInfo = null;
                 mCurrentTab = -1;
                 PrefUtil.clearSharedPreference(this);
                 startActivityAnim(LoginActivity.class, null);

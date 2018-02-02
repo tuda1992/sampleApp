@@ -23,6 +23,7 @@ import findlocation.bateam.com.constant.Constants;
 import findlocation.bateam.com.listener.JsonArrayCallBackListener;
 import findlocation.bateam.com.listener.JsonObjectCallBackListener;
 import findlocation.bateam.com.listener.StringCallBackListener;
+import findlocation.bateam.com.model.PlaceModel;
 import findlocation.bateam.com.model.UserInfo;
 import findlocation.bateam.com.model.UserRegister;
 import findlocation.bateam.com.util.DialogUtil;
@@ -45,6 +46,7 @@ public class FastNetworking {
     public static final String URL_HOUSE = "/HousingInfos/ListByDistance";
     public static final String URL_JOB = "/JobInfos/Filter";
     public static final String URL_WARD = "/Wards/ListByDistrictId";
+    public static final String URL_FILTER = "/JobInfos/ListJobInfoFilters";
 
     private Context mContext;
     private JsonObjectCallBackListener mListenerObject;
@@ -71,6 +73,13 @@ public class FastNetworking {
     }
 
     public void callApiLogin(JSONObject jsonObject) {
+
+        if (!NetworkUtil.isHaveInternet(mContext)) {
+            DialogUtil.showDialogErrorInternet(mContext, null);
+            return;
+        }
+        mProgress.showDialog();
+
         try {
             jsonObject.put("VersionApp", mContext.getPackageManager().getPackageInfo(mContext.getPackageName(), 0).versionName);
         } catch (JSONException e) {
@@ -86,14 +95,84 @@ public class FastNetworking {
                 .getAsJSONObject(new JSONObjectRequestListener() {
                     @Override
                     public void onResponse(JSONObject response) {
+                        mProgress.hideDialog();
                         if (mListenerObject != null)
                             mListenerObject.onResponse(response);
                     }
 
                     @Override
                     public void onError(ANError error) {
+                        mProgress.hideDialog();
+                        DialogUtil.showDialogError(mContext, "Đường truyền của bạn đang gặp vấn đề !!!", null);
                         if (mListenerObject != null)
-                            mListenerObject.onError(error.getErrorBody().toString());
+                            mListenerArray.onError("Đường truyền của bạn đang gặp vấn đề !!!");
+                    }
+                });
+    }
+
+    public void callApiHouseInfo(JSONObject jsonObject, String token, boolean isShowLoading) {
+        if (!NetworkUtil.isHaveInternet(mContext)) {
+            DialogUtil.showDialogErrorInternet(mContext, null);
+            return;
+        }
+        if (isShowLoading) {
+            mProgress.showDialog();
+        }
+        HashMap<String, String> headers = initCustomContentType();
+        AndroidNetworking.post(BASE_URL + URL_HOUSE)
+                .addHeaders(headers)
+                .addStringBody("application/json")
+                .addQueryParameter(Constants.SECURITY_TOKEN, token)
+                .addJSONObjectBody(jsonObject)
+                .build()
+                .getAsJSONObject(new JSONObjectRequestListener() {
+                    @Override
+                    public void onResponse(JSONObject jsonObject) {
+                        mProgress.hideDialog();
+                        if (mListenerObject != null) {
+                            mListenerObject.onResponse(jsonObject);
+                        }
+                    }
+
+                    @Override
+                    public void onError(ANError anError) {
+                        mProgress.hideDialog();
+                        DialogUtil.showDialogError(mContext, "Đường truyền của bạn đang gặp vấn đề !!!", null);
+                        if (mListenerObject != null)
+                            mListenerArray.onError("Đường truyền của bạn đang gặp vấn đề !!!");
+                    }
+                });
+    }
+
+    public void callApiJobInfo(JSONObject jsonObject, String token, boolean isShowLoading) {
+        if (!NetworkUtil.isHaveInternet(mContext)) {
+            DialogUtil.showDialogErrorInternet(mContext, null);
+            return;
+        }
+        if (isShowLoading) {
+            mProgress.showDialog();
+        }
+        HashMap<String, String> headers = initCustomContentType();
+        AndroidNetworking.post(BASE_URL + URL_JOB)
+                .addHeaders(headers)
+                .addStringBody("application/json")
+                .addQueryParameter(Constants.SECURITY_TOKEN, token)
+                .addJSONObjectBody(jsonObject)
+                .build()
+                .getAsJSONArray(new JSONArrayRequestListener() {
+                    @Override
+                    public void onResponse(JSONArray response) {
+                        mProgress.hideDialog();
+                        if (mListenerArray != null)
+                            mListenerArray.onResponse(response);
+                    }
+
+                    @Override
+                    public void onError(ANError anError) {
+                        mProgress.hideDialog();
+                        DialogUtil.showDialogError(mContext, "Đường truyền của bạn đang gặp vấn đề !!!", null);
+                        if (mListenerArray != null)
+                            mListenerArray.onError("Đường truyền của bạn đang gặp vấn đề !!!");
                     }
                 });
     }
@@ -117,8 +196,36 @@ public class FastNetworking {
                     @Override
                     public void onError(ANError anError) {
                         mProgress.hideDialog();
+                        DialogUtil.showDialogError(mContext, "Đường truyền của bạn đang gặp vấn đề !!!", null);
                         if (mListenerArray != null)
                             mListenerArray.onError("Đường truyền của bạn đang gặp vấn đề !!!");
+                    }
+                });
+    }
+
+    public void callApiGetJobFilter(String token) {
+        if (!NetworkUtil.isHaveInternet(mContext)) {
+            DialogUtil.showDialogErrorInternet(mContext, null);
+            return;
+        }
+        mProgress.showDialog();
+        AndroidNetworking.get(BASE_URL + URL_FILTER)
+                .addQueryParameter(Constants.SECURITY_TOKEN, token)
+                .build()
+                .getAsJSONObject(new JSONObjectRequestListener() {
+                    @Override
+                    public void onResponse(JSONObject jsonObject) {
+                        mProgress.hideDialog();
+                        if (mListenerObject != null)
+                            mListenerObject.onResponse(jsonObject);
+                    }
+
+                    @Override
+                    public void onError(ANError anError) {
+                        mProgress.hideDialog();
+                        DialogUtil.showDialogError(mContext, "Đường truyền của bạn đang gặp vấn đề !!!", null);
+                        if (mListenerObject != null)
+                            mListenerObject.onError("Đường truyền của bạn đang gặp vấn đề !!!");
                     }
                 });
     }
@@ -143,6 +250,7 @@ public class FastNetworking {
                     @Override
                     public void onError(ANError anError) {
                         mProgress.hideDialog();
+                        DialogUtil.showDialogError(mContext, "Đường truyền của bạn đang gặp vấn đề !!!", null);
                         if (mListenerArray != null)
                             mListenerArray.onError("Đường truyền của bạn đang gặp vấn đề !!!");
                     }
@@ -169,6 +277,7 @@ public class FastNetworking {
                     @Override
                     public void onError(ANError anError) {
                         mProgress.hideDialog();
+                        DialogUtil.showDialogError(mContext, "Đường truyền của bạn đang gặp vấn đề !!!", null);
                         if (mListenerArray != null)
                             mListenerArray.onError("Đường truyền của bạn đang gặp vấn đề !!!");
                     }
@@ -188,6 +297,7 @@ public class FastNetworking {
                 .addHeaders(headers)
                 .addMultipartFile(mapFile)
                 .addMultipartParameter(userRegister)
+
                 .build()
                 .getAsString(new StringRequestListener() {
 
@@ -201,6 +311,7 @@ public class FastNetworking {
                     @Override
                     public void onError(ANError anError) {
                         mProgress.hideDialog();
+                        DialogUtil.showDialogError(mContext, "Đường truyền của bạn đang gặp vấn đề !!!", null);
                         if (mListenerString != null)
                             mListenerString.onError("Đường truyền của bạn đang gặp vấn đề !!!");
                     }
