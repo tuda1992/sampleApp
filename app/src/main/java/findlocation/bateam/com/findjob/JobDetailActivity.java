@@ -72,6 +72,8 @@ public class JobDetailActivity extends BaseActivity {
     LinearLayout mLlSex;
     @BindView(R.id.ll_age)
     LinearLayout mLlAge;
+    @BindView(R.id.ll_benefits)
+    LinearLayout mLlBenefits;
 
     @BindView(R.id.tv_description)
     TextView mTvDescription;
@@ -170,7 +172,7 @@ public class JobDetailActivity extends BaseActivity {
 
             mTvDescription.setText(mItem.jobDescription);
             if (TextUtils.isEmpty(mItem.benefits) || mItem.benefits.contains("NULL")) {
-
+                mLlBenefits.setVisibility(View.GONE);
             } else {
                 mTvBenefits.setText(mItem.benefits);
             }

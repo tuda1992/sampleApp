@@ -131,8 +131,7 @@ public class LoginActivity extends BaseActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        for (Fragment fragment : getSupportFragmentManager().getFragments()) {
-            fragment.onActivityResult(requestCode, resultCode, data);
-        }
+        Fragment f = getSupportFragmentManager().findFragmentById(R.id.container_body);
+        f.onActivityResult(requestCode, resultCode, data);
     }
 }

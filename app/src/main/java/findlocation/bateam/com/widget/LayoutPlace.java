@@ -13,6 +13,7 @@ import butterknife.BindView;
 import butterknife.OnClick;
 import findlocation.bateam.com.R;
 import findlocation.bateam.com.adapter.FindLocationAdapter;
+import findlocation.bateam.com.adapter.FindLocationFooterAdapter;
 import findlocation.bateam.com.base.BaseCustomLayout;
 import findlocation.bateam.com.model.PlaceModel;
 
@@ -23,8 +24,9 @@ import findlocation.bateam.com.model.PlaceModel;
 public class LayoutPlace extends BaseCustomLayout {
 
     private LinearLayoutManager mLinearLayoutManager;
-    private FindLocationAdapter mAdapter;
+    private FindLocationFooterAdapter mAdapter;
     private Context mContext;
+    private List<PlaceModel> mListData = new ArrayList<>();
     private EndlessRecyclerViewScrollListener mLazyLoadListener;
 
     @BindView(R.id.rv_data)
@@ -57,9 +59,14 @@ public class LayoutPlace extends BaseCustomLayout {
         this.mListener = listener;
     }
 
-    public void setDataForLayoutPlace(List<PlaceModel> listData) {
+    public void setDataForLayoutPlace(List<PlaceModel> listData, boolean isCreated) {
+        mListData = listData;
+        if (isCreated) {
+            mAdapter.notifyDataSetChanged();
+            return;
+        }
 
-        mAdapter = new FindLocationAdapter(mContext, listData, new FindLocationAdapter.ICallBackItemClick() {
+        mAdapter = new FindLocationFooterAdapter(mContext, mListData, new FindLocationFooterAdapter.ICallBackItemClick() {
             @Override
             public void onItemClick(int position, PlaceModel item) {
                 if (mListener != null) {
@@ -71,6 +78,13 @@ public class LayoutPlace extends BaseCustomLayout {
             public void onItemInfo(int position, PlaceModel item) {
                 if (mListener != null) {
                     mListener.onItemInfoClick(position, item);
+                }
+            }
+
+            @Override
+            public void onLoadMore() {
+                if (mListener != null) {
+                    mListener.onLoadMore();
                 }
             }
         });
@@ -116,7 +130,7 @@ public class LayoutPlace extends BaseCustomLayout {
             }
         };
 
-        mRvData.addOnScrollListener(mLazyLoadListener);
+//        mRvData.addOnScrollListener(mLazyLoadListener);
 
         mSwipe.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
@@ -133,7 +147,7 @@ public class LayoutPlace extends BaseCustomLayout {
         mSwipe.setRefreshing(false);
     }
 
-    public void setNotifyAdapter(){
+    public void setNotifyAdapter() {
         mAdapter.notifyDataSetChanged();
     }
 

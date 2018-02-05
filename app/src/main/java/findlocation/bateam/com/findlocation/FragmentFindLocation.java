@@ -202,20 +202,22 @@ public class FragmentFindLocation extends BaseFragment implements OnMapReadyCall
 
     @OnClick(R.id.btn_find)
     public void onClickFindPlace() {
+        mCurrentPage = 1;
+
         try {
-            callApiGetHouseInfo(true);
+            callApiGetHouseInfo(true, false);
         } catch (JSONException e) {
             e.printStackTrace();
         }
     }
 
-    private void callApiGetHouseInfo(final boolean isShowLoading) throws JSONException {
+    private void callApiGetHouseInfo(final boolean isShowLoading, final boolean isCreated) throws JSONException {
         PlaceModel item = new PlaceModel();
         item.lattitude = String.valueOf(mLastLocation.getLatitude());
         item.longitude = String.valueOf(mLastLocation.getLongitude());
         item.distance = "5";
         item.pageIndex = mCurrentPage;
-        item.pageSize = 20;
+        item.pageSize = 10;
 
         String json = mGson.toJson(item);
         JSONObject jsonObject = new JSONObject(json);
@@ -227,9 +229,13 @@ public class FragmentFindLocation extends BaseFragment implements OnMapReadyCall
                 mLayoutPlace.setRefreshing();
 
                 HousingInfo housingInfo = mGson.fromJson(jsonObject.toString(), HousingInfo.class);
+
+                if (mCurrentPage == 1) {
+                    mAllListPlaceModel.clear();
+                }
+
                 if (!isShowLoading) {
                     mGoogleMap.clear();
-                    mAllListPlaceModel.clear();
 
                     if (mLastLocation == null)
                         return;
@@ -252,13 +258,13 @@ public class FragmentFindLocation extends BaseFragment implements OnMapReadyCall
                         mCurrentPage++;
                         mAllListPlaceModel.addAll(housingInfo.data);
                         mTvData.setText(mAllListPlaceModel.get(0).street);
-                        mLayoutPlace.setDataForLayoutPlace(mAllListPlaceModel);
+                        mLayoutPlace.setDataForLayoutPlace(mAllListPlaceModel, isCreated);
                     }
                 }
 
                 if (mCurrentPage <= 2 && mAllListPlaceModel.size() > 0) {
                     //Marker
-                    for (int i = 0; i < 10; i++) {
+                    for (int i = 0; i < mAllListPlaceModel.size(); i++) {
                         if (TextUtils.isEmpty(mAllListPlaceModel.get(i).latResult) || TextUtils.isEmpty(mAllListPlaceModel.get(i).longResult)) {
                             // Dont do anything
                         } else {
@@ -601,15 +607,15 @@ public class FragmentFindLocation extends BaseFragment implements OnMapReadyCall
     @Override
     public void onLocationChanged(Location location) {
         // Assign the new location
-        mLastLocation = location;
+
         if (mIsHavePlace) {
             stopLocationUpdates();
             return;
         }
+        mLastLocation = location;
         // Displaying the new location on UI
 //        displayLocation();
         getCompleteAddressString(location.getLatitude(), location.getLongitude());
-        stopLocationUpdates();
         moveCamera(null, mLastLocation.getLatitude(), mLastLocation.getLongitude());
         mIsHavePlace = true;
     }
@@ -628,6 +634,10 @@ public class FragmentFindLocation extends BaseFragment implements OnMapReadyCall
 
     @Override
     public void onPlaceSelected(Place place) {
+        mGoogleMap.clear();
+        mLastLocation = new Location(LocationManager.GPS_PROVIDER);
+        mLastLocation.setLatitude(place.getLatLng().latitude);
+        mLastLocation.setLongitude(place.getLatLng().longitude);
         mIsHavePlace = true;
         mTvSearchPlace.setText(place.getAddress());
         moveCamera(null, place.getLatLng().latitude, place.getLatLng().longitude);
@@ -788,7 +798,7 @@ public class FragmentFindLocation extends BaseFragment implements OnMapReadyCall
     @Override
     public void onLoadMore() {
         try {
-            callApiGetHouseInfo(true);
+            callApiGetHouseInfo(true, true);
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -798,7 +808,7 @@ public class FragmentFindLocation extends BaseFragment implements OnMapReadyCall
     public void onPullToRefresh() {
         try {
             mCurrentPage = 1;
-            callApiGetHouseInfo(false);
+            callApiGetHouseInfo(false, false);
         } catch (JSONException e) {
             e.printStackTrace();
         }

@@ -42,7 +42,7 @@
                 android:textAllCaps="true"
                 android:textColor="@color/colorPrimaryDark"
                 android:textSize="@dimen/_15sdp"
-                android:textStyle="italic|bold" />
+                android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/tv_company"
@@ -56,7 +56,7 @@
                 android:textAllCaps="true"
                 android:textColor="@color/textColorPrimary"
                 android:textSize="@dimen/_12sdp"
-                android:textStyle="italic|bold" />
+                android:textStyle="bold" />
 
             <LinearLayout
                 android:id="@+id/ll_offer"
@@ -81,7 +81,7 @@
                     android:text="@string/text_info_job_offer"
                     android:textColor="@color/textColorPrimary"
                     android:textSize="@dimen/_14sdp"
-                    android:textStyle="italic|bold" />
+                    android:textStyle="bold" />
 
                 <TextView
                     android:id="@+id/tv_offer"
@@ -116,7 +116,7 @@
                     android:text="@string/text_info_job_experience"
                     android:textColor="@color/textColorPrimary"
                     android:textSize="@dimen/_14sdp"
-                    android:textStyle="italic|bold" />
+                    android:textStyle="bold" />
 
                 <TextView
                     android:id="@+id/tv_experience"
@@ -152,7 +152,7 @@
                     android:text="@string/text_info_job_certificate"
                     android:textColor="@color/textColorPrimary"
                     android:textSize="@dimen/_14sdp"
-                    android:textStyle="italic|bold" />
+                    android:textStyle="bold" />
 
                 <TextView
                     android:id="@+id/tv_certificate"
@@ -223,7 +223,7 @@
                     android:text="@string/text_info_job_career"
                     android:textColor="@color/textColorPrimary"
                     android:textSize="@dimen/_14sdp"
-                    android:textStyle="italic|bold" />
+                    android:textStyle="bold" />
 
                 <TextView
                     android:id="@+id/tv_career"
@@ -258,7 +258,7 @@
                     android:text="@string/text_info_job_location"
                     android:textColor="@color/textColorPrimary"
                     android:textSize="@dimen/_14sdp"
-                    android:textStyle="italic|bold" />
+                    android:textStyle="bold" />
 
                 <TextView
                     android:id="@+id/tv_location"
@@ -293,7 +293,7 @@
                     android:text="@string/text_info_job_level"
                     android:textColor="@color/textColorPrimary"
                     android:textSize="@dimen/_14sdp"
-                    android:textStyle="italic|bold" />
+                    android:textStyle="bold" />
 
                 <TextView
                     android:id="@+id/tv_level"
@@ -365,7 +365,7 @@
                     android:text="@string/text_info_job_sex"
                     android:textColor="@color/textColorPrimary"
                     android:textSize="@dimen/_14sdp"
-                    android:textStyle="italic|bold" />
+                    android:textStyle="bold" />
 
                 <TextView
                     android:id="@+id/tv_sex"
@@ -400,7 +400,7 @@
                     android:text="@string/text_info_job_age"
                     android:textColor="@color/textColorPrimary"
                     android:textSize="@dimen/_14sdp"
-                    android:textStyle="italic|bold" />
+                    android:textStyle="bold" />
 
                 <TextView
                     android:id="@+id/tv_age"
@@ -430,7 +430,7 @@
                     android:textAllCaps="true"
                     android:textColor="@color/textColorPrimary"
                     android:textSize="@dimen/_15sdp"
-                    android:textStyle="italic|bold" />
+                    android:textStyle="bold" />
 
                 <TextView
                     android:id="@+id/tv_description"
@@ -448,6 +448,7 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/ll_benefits"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/_10sdp"
@@ -464,7 +465,7 @@
                     android:textAllCaps="true"
                     android:textColor="@color/textColorPrimary"
                     android:textSize="@dimen/_15sdp"
-                    android:textStyle="italic|bold" />
+                    android:textStyle="bold" />
 
                 <TextView
                     android:id="@+id/tv_benefits"

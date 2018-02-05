@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Build;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -28,9 +29,9 @@ public class FragmentSignUpSelfie extends BaseFragment {
     @BindView(R.id.iv_selfie)
     ImageView mIvSelfie;
     @BindView(R.id.btn_take_picture)
-    Button mBtnTakePicture;
+    FloatingActionButton mBtnTakePicture;
     @BindView(R.id.btn_next)
-    Button mBtnNext;
+    FloatingActionButton mBtnNext;
 
     @OnClick(R.id.btn_take_picture)
     public void onClickTakePicture() {

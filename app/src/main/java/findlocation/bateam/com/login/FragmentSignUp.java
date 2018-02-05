@@ -7,6 +7,7 @@ import android.graphics.Bitmap;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.design.widget.FloatingActionButton;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -32,9 +33,9 @@ public class FragmentSignUp extends BaseFragment {
     @BindView(R.id.iv_card)
     ImageView mIvCard;
     @BindView(R.id.btn_take_picture)
-    Button mBtnTakePicture;
+    FloatingActionButton mBtnTakePicture;
     @BindView(R.id.btn_next)
-    Button mBtnNext;
+    FloatingActionButton mBtnNext;
 
     @OnClick(R.id.btn_take_picture)
     public void onClickTakePicture() {

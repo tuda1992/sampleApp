@@ -297,7 +297,6 @@ public class FastNetworking {
                 .addHeaders(headers)
                 .addMultipartFile(mapFile)
                 .addMultipartParameter(userRegister)
-
                 .build()
                 .getAsString(new StringRequestListener() {
 

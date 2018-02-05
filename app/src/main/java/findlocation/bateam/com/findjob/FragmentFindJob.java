@@ -110,14 +110,14 @@ public class FragmentFindJob extends BaseFragment {
                     mSpnAddress.setAdapter(mAdapterAddress);
                 }
 
-                // Time
+                // Type
                 if (jobFilter.industries != null && jobFilter.industries.size() > 0) {
                     mArrTime.addAll(jobFilter.industries);
                     mAdapterTime = new SexSpinnerAdapter(getActivity(), mArrTime, true);
                     mSpnTime.setAdapter(mAdapterTime);
                 }
 
-                // Type
+                // Time
                 if (jobFilter.jobTypes != null && jobFilter.jobTypes.size() > 0) {
                     mArrType.addAll(jobFilter.jobTypes);
                     mAdapterType = new SexSpinnerAdapter(getActivity(), mArrType, true);
