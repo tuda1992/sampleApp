@@ -104,7 +104,8 @@ public class FragmentFindLocation extends BaseFragment implements OnMapReadyCall
         , GoogleMap.OnCameraIdleListener
         , GoogleMap.OnMarkerClickListener
         , PlaceSelectionListener
-        , LayoutPlace.LayoutPlaceListener {
+        , LayoutPlace.LayoutPlaceListener
+        , GoogleMap.OnInfoWindowClickListener {
 
     private GoogleMap mGoogleMap;
     private final static int PLAY_SERVICES_RESOLUTION_REQUEST = 1000;
@@ -507,6 +508,7 @@ public class FragmentFindLocation extends BaseFragment implements OnMapReadyCall
 
         mGoogleMap.setOnCameraIdleListener(mClusterManager);
         mGoogleMap.setOnMarkerClickListener(this);
+        mGoogleMap.setOnInfoWindowClickListener(this);
 
     }
 
@@ -629,6 +631,7 @@ public class FragmentFindLocation extends BaseFragment implements OnMapReadyCall
     public boolean onMarkerClick(Marker marker) {
         Log.d(TAG, "marker = " + marker.getId());
         marker.showInfoWindow();
+
         return false;
     }
 
@@ -812,5 +815,22 @@ public class FragmentFindLocation extends BaseFragment implements OnMapReadyCall
         } catch (JSONException e) {
             e.printStackTrace();
         }
+    }
+
+    @Override
+    public void onInfoWindowClick(Marker marker) {
+        PlaceModel placeModel = null;
+        for (int i = 0; i < mAllListPlaceModel.size(); i++) {
+            if (marker.getTitle().equalsIgnoreCase(mAllListPlaceModel.get(i).street)) {
+                placeModel = mAllListPlaceModel.get(i);
+                break;
+            }
+        }
+        if (placeModel != null) {
+            Bundle bundle = new Bundle();
+            bundle.putParcelable(Constants.BUNDLE_PLACE_ITEM, placeModel);
+            startActivityAnim(InfoPlaceActivity.class, bundle);
+        }
+
     }
 }

@@ -50,7 +50,7 @@ public class NavigationDrawerAdapter extends RecyclerView.Adapter<NavigationDraw
         if (getItemCount() == 4) {
             switch (position) {
                 case 0:
-                    holder.ivIcon.setImageResource(R.drawable.ic_find_location);
+                    holder.ivIcon.setImageResource(R.drawable.ic_house);
                     break;
                 case 1:
                     holder.ivIcon.setImageResource(R.drawable.ic_find_job);
@@ -66,7 +66,7 @@ public class NavigationDrawerAdapter extends RecyclerView.Adapter<NavigationDraw
         } else {
             switch (position) {
                 case 0:
-                    holder.ivIcon.setImageResource(R.drawable.ic_find_location);
+                    holder.ivIcon.setImageResource(R.drawable.ic_house);
                     break;
                 case 1:
                     holder.ivIcon.setImageResource(R.drawable.ic_user);

@@ -3,8 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:clickable="true"
     android:background="@android:color/white"
+    android:clickable="true"
     android:orientation="vertical">
 
     <LinearLayout
@@ -48,6 +48,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
+                    android:padding="@dimen/_2sdp"
                     android:text="@string/text_signup_family_name"
                     android:textColor="@color/textColorPrimary"
                     android:textSize="@dimen/_12sdp"
@@ -62,7 +63,6 @@
                     android:gravity="right"
                     android:inputType="textCapWords|textEmailAddress"
                     android:maxLength="50"
-                    android:hint="VD: Nguyễn"
                     android:padding="@dimen/_5sdp"
                     android:singleLine="true"
                     android:textColor="@color/textColorPrimary"
@@ -82,6 +82,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
+                    android:padding="@dimen/_2sdp"
                     android:text="@string/text_signup_middle_name"
                     android:textColor="@color/textColorPrimary"
                     android:textSize="@dimen/_12sdp"
@@ -97,7 +98,6 @@
                     android:inputType="textCapWords|textEmailAddress"
                     android:maxLength="50"
                     android:padding="@dimen/_5sdp"
-                    android:hint="VD: Văn"
                     android:singleLine="true"
                     android:textColor="@color/textColorPrimary"
                     android:textSize="@dimen/_12sdp" />
@@ -116,6 +116,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
+                    android:padding="@dimen/_2sdp"
                     android:text="@string/text_signup_first_name"
                     android:textColor="@color/textColorPrimary"
                     android:textSize="@dimen/_12sdp"
@@ -132,7 +133,6 @@
                     android:maxLength="50"
                     android:padding="@dimen/_5sdp"
                     android:singleLine="true"
-                    android:hint="VD: A"
                     android:textColor="@color/textColorPrimary"
                     android:textSize="@dimen/_12sdp" />
 
@@ -150,6 +150,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
+                    android:padding="@dimen/_2sdp"
                     android:text="@string/text_signup_dob"
                     android:textColor="@color/textColorPrimary"
                     android:textSize="@dimen/_12sdp"
@@ -164,7 +165,6 @@
                     android:gravity="right"
                     android:padding="@dimen/_5sdp"
                     android:singleLine="true"
-                    android:hint="VD: 04/08/1992"
                     android:textColor="@color/textColorPrimary"
                     android:textSize="@dimen/_12sdp" />
 
@@ -182,6 +182,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
+                    android:padding="@dimen/_2sdp"
                     android:text="@string/text_signup_sex"
                     android:textColor="@color/textColorPrimary"
                     android:textSize="@dimen/_12sdp"
@@ -218,11 +219,11 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
+                    android:padding="@dimen/_2sdp"
                     android:text="@string/text_signup_school"
                     android:textColor="@color/textColorPrimary"
                     android:textSize="@dimen/_12sdp"
                     android:textStyle="bold" />
-
 
                 <RelativeLayout
                     android:layout_width="0dp"
@@ -230,30 +231,17 @@
                     android:layout_weight="1.4"
                     android:padding="@dimen/_1sdp">
 
-                    <Spinner
-                        android:id="@+id/spn_school"
+                    <AutoCompleteTextView
+                        android:id="@+id/edt_school"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:background="@drawable/border_edittext"
-                        android:gravity="right"
+                        android:gravity="right|center"
+                        android:padding="@dimen/_5sdp"
                         android:singleLine="true"
                         android:textColor="@color/textColorPrimary"
                         android:textSize="@dimen/_12sdp" />
                 </RelativeLayout>
-
-                <!--<EditText-->
-                    <!--android:id="@+id/edt_school"-->
-                    <!--android:layout_width="0dp"-->
-                    <!--android:layout_height="@dimen/_30sdp"-->
-                    <!--android:layout_weight="1.4"-->
-                    <!--android:background="@drawable/border_edittext"-->
-                    <!--android:gravity="right"-->
-                    <!--android:inputType="textEmailAddress"-->
-                    <!--android:maxLength="50"-->
-                    <!--android:padding="@dimen/_5sdp"-->
-                    <!--android:singleLine="true"-->
-                    <!--android:textColor="@color/textColorPrimary"-->
-                    <!--android:textSize="@dimen/_12sdp" />-->
 
             </LinearLayout>
 
@@ -269,6 +257,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
+                    android:padding="@dimen/_2sdp"
                     android:text="@string/text_signup_class"
                     android:textColor="@color/textColorPrimary"
                     android:textSize="@dimen/_12sdp"
@@ -285,7 +274,6 @@
                     android:maxLength="50"
                     android:padding="@dimen/_5sdp"
                     android:singleLine="true"
-                    android:hint="VD: Kinh tế đối ngoại"
                     android:textColor="@color/textColorPrimary"
                     android:textSize="@dimen/_12sdp" />
 
@@ -303,6 +291,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
+                    android:padding="@dimen/_2sdp"
                     android:text="@string/text_signup_grade"
                     android:textColor="@color/textColorPrimary"
                     android:textSize="@dimen/_12sdp"
@@ -319,7 +308,6 @@
                     android:maxLength="50"
                     android:padding="@dimen/_5sdp"
                     android:singleLine="true"
-                    android:hint="VD: K50"
                     android:textColor="@color/textColorPrimary"
                     android:textSize="@dimen/_12sdp" />
 
@@ -338,6 +326,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
+                    android:padding="@dimen/_2sdp"
                     android:text="@string/text_signup_address_country"
                     android:textColor="@color/textColorPrimary"
                     android:textSize="@dimen/_12sdp"
@@ -374,6 +363,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
+                    android:padding="@dimen/_2sdp"
                     android:text="@string/text_signup_address_city"
                     android:textColor="@color/textColorPrimary"
                     android:textSize="@dimen/_12sdp"
@@ -410,6 +400,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
+                    android:padding="@dimen/_2sdp"
                     android:text="@string/text_signup_address_district"
                     android:textColor="@color/textColorPrimary"
                     android:textSize="@dimen/_12sdp"
@@ -446,6 +437,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
+                    android:padding="@dimen/_2sdp"
                     android:text="@string/text_signup_address_town"
                     android:textColor="@color/textColorPrimary"
                     android:textSize="@dimen/_12sdp"
@@ -482,6 +474,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
+                    android:padding="@dimen/_2sdp"
                     android:text="@string/text_signup_address"
                     android:textColor="@color/textColorPrimary"
                     android:textSize="@dimen/_12sdp"
@@ -497,7 +490,6 @@
                     android:inputType="textEmailAddress"
                     android:maxLength="50"
                     android:padding="@dimen/_5sdp"
-                    android:hint="VD: Số 1"
                     android:singleLine="true"
                     android:textColor="@color/textColorPrimary"
                     android:textSize="@dimen/_12sdp" />
@@ -516,6 +508,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
+                    android:padding="@dimen/_2sdp"
                     android:text="@string/text_signup_email"
                     android:textColor="@color/textColorPrimary"
                     android:textSize="@dimen/_12sdp"
@@ -528,11 +521,11 @@
                     android:layout_weight="1.4"
                     android:background="@drawable/border_edittext"
                     android:gravity="right"
+                    android:hint="example@gmail.com"
                     android:inputType="textEmailAddress"
                     android:maxLength="50"
                     android:padding="@dimen/_5sdp"
                     android:singleLine="true"
-                    android:hint="VD: example@gmail.com"
                     android:textColor="@color/textColorPrimary"
                     android:textSize="@dimen/_12sdp" />
 
@@ -550,6 +543,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
+                    android:padding="@dimen/_2sdp"
                     android:text="@string/text_signup_password"
                     android:textColor="@color/textColorPrimary"
                     android:textSize="@dimen/_12sdp"
@@ -562,11 +556,11 @@
                     android:layout_weight="1.4"
                     android:background="@drawable/border_edittext"
                     android:gravity="right"
+                    android:hint="8 ký tự gồm chữ và số"
                     android:inputType="textPassword"
                     android:maxLength="50"
                     android:padding="@dimen/_5sdp"
                     android:singleLine="true"
-                    android:hint="VD: 123456hh"
                     android:textColor="@color/textColorPrimary"
                     android:textSize="@dimen/_12sdp" />
 
@@ -584,6 +578,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
+                    android:padding="@dimen/_2sdp"
                     android:text="@string/text_signup_re_password"
                     android:textColor="@color/textColorPrimary"
                     android:textSize="@dimen/_12sdp"
@@ -596,9 +591,9 @@
                     android:layout_weight="1.4"
                     android:background="@drawable/border_edittext"
                     android:gravity="right"
+                    android:hint="8 ký tự gồm chữ và số"
                     android:inputType="textPassword"
                     android:maxLength="50"
-                    android:hint="VD: 123456hh"
                     android:padding="@dimen/_5sdp"
                     android:singleLine="true"
                     android:textColor="@color/textColorPrimary"
@@ -618,6 +613,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
+                    android:padding="@dimen/_3sdp"
                     android:text="@string/text_signup_telephone"
                     android:textColor="@color/textColorPrimary"
                     android:textSize="@dimen/_12sdp"
@@ -633,7 +629,6 @@
                     android:inputType="number"
                     android:maxLength="12"
                     android:padding="@dimen/_5sdp"
-                    android:hint="VD: 0962394xxx"
                     android:singleLine="true"
                     android:textColor="@color/textColorPrimary"
                     android:textSize="@dimen/_12sdp" />

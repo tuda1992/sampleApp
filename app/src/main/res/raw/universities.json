@@ -1,0 +1,1160 @@
+[
+  {
+    "ID": 1,
+    "U_CODE": "ANH",
+    "UNIVERSITY_NAME": "Học Viện An Ninh Nhân Dân",
+    "REGION": "Hà Nội"
+  },
+  {
+    "ID": 2,
+    "U_CODE": "BKA",
+    "UNIVERSITY_NAME": "Đại Học Bách Khoa Hà Nội",
+    "REGION": "Hà Nội"
+  },
+  {
+    "ID": 3,
+    "U_CODE": "BPH",
+    "UNIVERSITY_NAME": "Học Viện Biên Phòng",
+    "REGION": "Hà Nội"
+  },
+  {
+    "ID": 4,
+    "U_CODE": "BVH",
+    "UNIVERSITY_NAME": "Học Viện Công Nghệ Bưu Chính Viễn Thông (Phía Bắc)",
+    "REGION": "Hà Nội"
+  },
+  {
+    "ID": 5,
+    "U_CODE": "CCM",
+    "UNIVERSITY_NAME": "Đại Học Công Nghiệp Dệt May Hà Nội",
+    "REGION": "Hà Nội"
+  },
+  {
+    "ID": 6,
+    "U_CODE": "CSH",
+    "UNIVERSITY_NAME": "Học Viện Cảnh Sát Nhân Dân",
+    "REGION": "Hà Nội"
+  },
+  {
+    "ID": 7,
+    "U_CODE": "DBH",
+    "UNIVERSITY_NAME": "Đại Học Quốc Tế Bắc Hà",
+    "REGION": "Hà Nội"
+  },
+  {
+    "ID": 8,
+    "U_CODE": "DCH",
+    "UNIVERSITY_NAME": "Trường Sĩ Quan Đặc Công",
+    "REGION": "Hà Nội"
+  },
+  {
+    "ID": 9,
+    "U_CODE": "DCN",
+    "UNIVERSITY_NAME": "Đại Học Công Nghiệp Hà Nội",
+    "REGION": "Hà Nội"
+  },
+  {
+    "ID": 10,
+    "U_CODE": "DCQ",
+    "UNIVERSITY_NAME": "Đại Học Công Nghệ và Quản Lý Hữu Nghị",
+    "REGION": "Hà Nội"
+  },
+  {
+    "ID": 11,
+    "U_CODE": "DDD",
+    "UNIVERSITY_NAME": "Đại Học Dân Lập Đông Đô",
+    "REGION": "Hà Nội"
+  },
+  {
+    "ID": 12,
+    "U_CODE": "DDL",
+    "UNIVERSITY_NAME": "Đại Học Điện Lực",
+    "REGION": "Hà Nội"
+  },
+  {
+    "ID": 13,
+    "U_CODE": "DDN",
+    "UNIVERSITY_NAME": "Đại Học Đại Nam",
+    "REGION": "Hà Nội"
+  },
+  {
+    "ID": 14,
+    "U_CODE": "DKH",
+    "UNIVERSITY_NAME": "Đại Học Dược Hà Nội",
+    "REGION": "Hà Nội"
+  },
+  {
+    "ID": 15,
+    "U_CODE": "DKK",
+    "UNIVERSITY_NAME": "Đại Học Kinh Tế Kỹ Thuật Công Nghiệp",
+    "REGION": "Hà Nội"
+  },
+  {
+    "ID": 16,
+    "U_CODE": "DLT",
+    "UNIVERSITY_NAME": "Đại Học Lao Động – Xã Hội (Cơ sở Sơn Tây)",
+    "REGION": "Hà Nội"
+  },
+  {
+    "ID": 17,
+    "U_CODE": "DLX",
+    "UNIVERSITY_NAME": "Đại Học Lao Động – Xã Hội (Cơ sở Hà Nội)",
+    "REGION": "Hà Nội"
+  },
+  {
+    "ID": 18,
+    "U_CODE": "DMT",
+    "UNIVERSITY_NAME": "Đại học Tài Nguyên và Môi Trường Hà Nội",
+    "REGION": "Hà Nội"
+  },
+  {
+    "ID": 19,
+    "U_CODE": "DNH",
+    "UNIVERSITY_NAME": "Học Viện Khoa Học Quân Sự - Hệ Dân sự",
+    "REGION": "Hà Nội"
+  },
+  {
+    "ID": 20,
+    "U_CODE": "DNV",
+    "UNIVERSITY_NAME": "Đại Học Nội Vụ",
+    "REGION": "Hà Nội"
+  },
+  {
+    "ID": 21,
+    "U_CODE": "DPD",
+    "UNIVERSITY_NAME": "Đại Học Dân Lập Phương Đông",
+    "REGION": "Hà Nội"
+  },
+  {
+    "ID": 22,
+    "U_CODE": "DQH",
+    "UNIVERSITY_NAME": "Học Viện Kĩ Thuật Quân Sự - Hệ Dân sự",
+    "REGION": "Hà Nội"
+  },
+  {
+    "ID": 23,
+    "U_CODE": "DQK",
+    "UNIVERSITY_NAME": "Đại Học Kinh Doanh và Công Nghệ Hà Nội",
+    "REGION": "Hà Nội"
+  },
+  {
+    "ID": 24,
+    "U_CODE": "DTA",
+    "UNIVERSITY_NAME": "Đại Học Thành Tây",
+    "REGION": "Hà Nội"
+  },
+  {
+    "ID": 25,
+    "U_CODE": "DTL",
+    "UNIVERSITY_NAME": "Đại Học Thăng Long",
+    "REGION": "Hà Nội"
+  },
+  {
+    "ID": 26,
+    "U_CODE": "DYH",
+    "UNIVERSITY_NAME": "Học Viện Quân Y - Hệ Dân sự",
+    "REGION": "Hà Nội"
+  },
+  {
+    "ID": 27,
+    "U_CODE": "ETU",
+    "UNIVERSITY_NAME": "Đại Học Hòa Bình",
+    "REGION": "Hà Nội"
+  },
+  {
+    "ID": 28,
+    "U_CODE": "FBU",
+    "UNIVERSITY_NAME": "Đại Học Tài Chính Ngân Hàng Hà Nội",
+    "REGION": "Hà Nội"
+  },
+  {
+    "ID": 29,
+    "U_CODE": "FPT",
+    "UNIVERSITY_NAME": "Đại Học FPT",
+    "REGION": "Hà Nội"
+  },
+  {
+    "ID": 30,
+    "U_CODE": "GHA",
+    "UNIVERSITY_NAME": "Đại Học Giao Thông Vận Tải (Cơ sở Phía Bắc)",
+    "REGION": "Hà Nội"
+  },
+  {
+    "ID": 31,
+    "U_CODE": "GNT",
+    "UNIVERSITY_NAME": "Đại Học Sư Phạm Nghệ Thuật Trung Ương",
+    "REGION": "Hà Nội"
+  },
+  {
+    "ID": 32,
+    "U_CODE": "GTA",
+    "UNIVERSITY_NAME": "Đại học Công nghệ Giao thông vận tải",
+    "REGION": "Hà Nội"
+  },
+  {
+    "ID": 33,
+    "U_CODE": "HBT",
+    "UNIVERSITY_NAME": "Học Viện Báo Chí – Tuyên Truyền",
+    "REGION": "Hà Nội"
+  },
+  {
+    "ID": 34,
+    "U_CODE": "HCH",
+    "UNIVERSITY_NAME": "Học Viện Hành Chính Quốc Gia (phía Bắc)",
+    "REGION": "Hà Nội"
+  },
+  {
+    "ID": 35,
+    "U_CODE": "HCP",
+    "UNIVERSITY_NAME": "Học Viên Chính Sách và Phát Triển",
+    "REGION": "Hà Nội"
+  },
+  {
+    "ID": 36,
+    "U_CODE": "HGH",
+    "UNIVERSITY_NAME": "Trường Sĩ Quan Phòng Hóa",
+    "REGION": "Hà Nội"
+  },
+  {
+    "ID": 37,
+    "U_CODE": "HNM",
+    "UNIVERSITY_NAME": "Đại học Thủ Đô Hà Nội",
+    "REGION": "Hà Nội"
+  },
+  {
+    "ID": 38,
+    "U_CODE": "HQT",
+    "UNIVERSITY_NAME": "Học Viện Ngoại Giao",
+    "REGION": "Hà Nội"
+  },
+  {
+    "ID": 39,
+    "U_CODE": "HTC",
+    "UNIVERSITY_NAME": "Học Viện Tài Chính",
+    "REGION": "Hà Nội"
+  },
+  {
+    "ID": 40,
+    "U_CODE": "HTN",
+    "UNIVERSITY_NAME": "Học Viện Thanh Thiếu Niên Việt Nam",
+    "REGION": "Hà Nội"
+  },
+  {
+    "ID": 41,
+    "U_CODE": "HVQ",
+    "UNIVERSITY_NAME": "Học Viện Quản Lý Giáo Dục",
+    "REGION": "Hà Nội"
+  },
+  {
+    "ID": 42,
+    "U_CODE": "HYD",
+    "UNIVERSITY_NAME": "Học Viện Y Dược Học Cổ Truyền Việt Nam",
+    "REGION": "Hà Nội"
+  },
+  {
+    "ID": 43,
+    "U_CODE": "KCN",
+    "UNIVERSITY_NAME": "Đại Học Khoa Học Và Công Nghệ Hà Nội",
+    "REGION": "Hà Nội"
+  },
+  {
+    "ID": 44,
+    "U_CODE": "KHA",
+    "UNIVERSITY_NAME": "Đại Học Kinh Tế Quốc Dân",
+    "REGION": "Hà Nội"
+  },
+  {
+    "ID": 45,
+    "U_CODE": "KMA",
+    "UNIVERSITY_NAME": "Học Viện Kỹ Thuật Mật Mã",
+    "REGION": "Hà Nội"
+  },
+  {
+    "ID": 46,
+    "U_CODE": "KQH",
+    "UNIVERSITY_NAME": "Học Viện Kĩ Thuật Quân Sự - Hệ Quân sự",
+    "REGION": "Hà Nội"
+  },
+  {
+    "ID": 47,
+    "U_CODE": "KTA",
+    "UNIVERSITY_NAME": "Đại Học Kiến Trúc Hà Nội",
+    "REGION": "Hà Nội"
+  },
+  {
+    "ID": 48,
+    "U_CODE": "LAH",
+    "UNIVERSITY_NAME": "Trường Sĩ Quan Lục Quân 1 - Đại học Trần Quốc Tuấn",
+    "REGION": "Hà Nội"
+  },
+  {
+    "ID": 49,
+    "U_CODE": "LDA",
+    "UNIVERSITY_NAME": "Đại Học Công Đoàn",
+    "REGION": "Hà Nội"
+  },
+  {
+    "ID": 50,
+    "U_CODE": "LNH",
+    "UNIVERSITY_NAME": "Đại Học Lâm Nghiệp (Cơ sở 1)",
+    "REGION": "Hà Nội"
+  },
+  {
+    "ID": 51,
+    "U_CODE": "LPH",
+    "UNIVERSITY_NAME": "Đại Học Luật Hà Nội",
+    "REGION": "Hà Nội"
+  },
+  {
+    "ID": 52,
+    "U_CODE": "MDA",
+    "UNIVERSITY_NAME": "Đại Học Mỏ Địa Chất",
+    "REGION": "Hà Nội"
+  },
+  {
+    "ID": 53,
+    "U_CODE": "MHN",
+    "UNIVERSITY_NAME": "Viện Đại Học Mở Hà Nội",
+    "REGION": "Hà Nội"
+  },
+  {
+    "ID": 54,
+    "U_CODE": "MTC",
+    "UNIVERSITY_NAME": "Đại Học Mỹ Thuật Công Nghiệp",
+    "REGION": "Hà Nội"
+  },
+  {
+    "ID": 55,
+    "U_CODE": "MTH",
+    "UNIVERSITY_NAME": "Đại Học Mỹ Thuật Việt Nam",
+    "REGION": "Hà Nội"
+  },
+  {
+    "ID": 56,
+    "U_CODE": "NHF",
+    "UNIVERSITY_NAME": "Đại Học Hà Nội",
+    "REGION": "Hà Nội"
+  },
+  {
+    "ID": 57,
+    "U_CODE": "NHH",
+    "UNIVERSITY_NAME": "Học Viện Ngân Hàng",
+    "REGION": "Hà Nội"
+  },
+  {
+    "ID": 58,
+    "U_CODE": "NTH",
+    "UNIVERSITY_NAME": "Đại Học Ngoại Thương (Cơ sở phía Bắc)",
+    "REGION": "Hà Nội"
+  },
+  {
+    "ID": 59,
+    "U_CODE": "NTU",
+    "UNIVERSITY_NAME": "Đại Học Nguyễn Trãi",
+    "REGION": "Hà Nội"
+  },
+  {
+    "ID": 60,
+    "U_CODE": "NVH",
+    "UNIVERSITY_NAME": "Học Viện Âm Nhạc Quốc Gia Việt Nam",
+    "REGION": "Hà Nội"
+  },
+  {
+    "ID": 61,
+    "U_CODE": "PBH",
+    "UNIVERSITY_NAME": "Trường Sĩ Quan Pháo Binh",
+    "REGION": "Hà Nội"
+  },
+  {
+    "ID": 62,
+    "U_CODE": "PCH",
+    "UNIVERSITY_NAME": "Đại Học Phòng Cháy Chữa Cháy (Phía Bắc)",
+    "REGION": "Hà Nội"
+  },
+  {
+    "ID": 63,
+    "U_CODE": "PCH1",
+    "UNIVERSITY_NAME": "Đại Học Phòng Cháy Chữa Cháy (Hệ Dân sự Phía Bắc)",
+    "REGION": "Hà Nội"
+  },
+  {
+    "ID": 64,
+    "U_CODE": "PKH",
+    "UNIVERSITY_NAME": "Học Viện Phòng Không – Không Quân",
+    "REGION": "Hà Nội"
+  },
+  {
+    "ID": 65,
+    "U_CODE": "PVU",
+    "UNIVERSITY_NAME": "Đại Học Dầu Khí Việt Nam",
+    "REGION": "Hà Nội"
+  },
+  {
+    "ID": 66,
+    "U_CODE": "QHE",
+    "UNIVERSITY_NAME": "Đại Học Kinh Tế – Đại Học Quốc Gia Hà Nội",
+    "REGION": "Hà Nội"
+  },
+  {
+    "ID": 67,
+    "U_CODE": "QHF",
+    "UNIVERSITY_NAME": "Đại Học Ngoại Ngữ – Đại Học Quốc Gia Hà Nội",
+    "REGION": "Hà Nội"
+  },
+  {
+    "ID": 68,
+    "U_CODE": "QHI",
+    "UNIVERSITY_NAME": "Đại Học Công Nghệ – Đại Học Quốc Gia Hà Nội",
+    "REGION": "Hà Nội"
+  },
+  {
+    "ID": 69,
+    "U_CODE": "QHL",
+    "UNIVERSITY_NAME": "Khoa Luật – Đại Học Quốc Gia Hà Nội",
+    "REGION": "Hà Nội"
+  },
+  {
+    "ID": 70,
+    "U_CODE": "QHQ",
+    "UNIVERSITY_NAME": "Khoa Quốc Tế – Đại Học Quốc Gia Hà Nội",
+    "REGION": "Hà Nội"
+  },
+  {
+    "ID": 71,
+    "U_CODE": "QHS",
+    "UNIVERSITY_NAME": "Đại Học Giáo Dục - Đại học Quốc Gia Hà Nội",
+    "REGION": "Hà Nội"
+  },
+  {
+    "ID": 72,
+    "U_CODE": "QHT",
+    "UNIVERSITY_NAME": "Đại Học Khoa Học Tự Nhiên – Đại Học Quốc Gia Hà Nội",
+    "REGION": "Hà Nội"
+  },
+  {
+    "ID": 73,
+    "U_CODE": "QHX",
+    "UNIVERSITY_NAME": "Đại Học Khoa Học Xã Hội và Nhân Văn – Đại Học Quốc Gia Hà Nội",
+    "REGION": "Hà Nội"
+  },
+  {
+    "ID": 74,
+    "U_CODE": "QHY",
+    "UNIVERSITY_NAME": "Khoa Y Dược - Đại học Quốc Gia Hà Nội",
+    "REGION": "Hà Nội"
+  },
+  {
+    "ID": 75,
+    "U_CODE": "RHM",
+    "UNIVERSITY_NAME": "Đại Học Răng – Hàm – Mặt",
+    "REGION": "Hà Nội"
+  },
+  {
+    "ID": 76,
+    "U_CODE": "RMU",
+    "UNIVERSITY_NAME": "Đại Học Quốc Tế RMIT Việt Nam",
+    "REGION": "Hà Nội"
+  },
+  {
+    "ID": 77,
+    "U_CODE": "SKD",
+    "UNIVERSITY_NAME": "Đại Học Sân Khấu Điện Ảnh",
+    "REGION": "Hà Nội"
+  },
+  {
+    "ID": 78,
+    "U_CODE": "SPH",
+    "UNIVERSITY_NAME": "Đại Học Sư Phạm Hà Nội",
+    "REGION": "Hà Nội"
+  },
+  {
+    "ID": 79,
+    "U_CODE": "TDD",
+    "UNIVERSITY_NAME": "Đại học Thành Đô",
+    "REGION": "Hà Nội"
+  },
+  {
+    "ID": 80,
+    "U_CODE": "TDH",
+    "UNIVERSITY_NAME": "Đại Học Sư Phạm Thể Dục Thể Thao Hà Nội",
+    "REGION": "Hà Nội"
+  },
+  {
+    "ID": 81,
+    "U_CODE": "TLA",
+    "UNIVERSITY_NAME": "Đại Học Thủy Lợi (Cơ sở 1)",
+    "REGION": "Hà Nội"
+  },
+  {
+    "ID": 82,
+    "U_CODE": "TMA",
+    "UNIVERSITY_NAME": "Đại Học Thương Mại",
+    "REGION": "Hà Nội"
+  },
+  {
+    "ID": 83,
+    "U_CODE": "VHD",
+    "UNIVERSITY_NAME": "Đại Học Công Nghiệp Việt Hung",
+    "REGION": "Hà Nội"
+  },
+  {
+    "ID": 84,
+    "U_CODE": "VHH",
+    "UNIVERSITY_NAME": "Đại Học Văn Hóa Hà Nội",
+    "REGION": "Hà Nội"
+  },
+  {
+    "ID": 85,
+    "U_CODE": "XDA",
+    "UNIVERSITY_NAME": "Đại Học Xây Dựng Hà Nội",
+    "REGION": "Hà Nội"
+  },
+  {
+    "ID": 86,
+    "U_CODE": "YHB",
+    "UNIVERSITY_NAME": "Đại Học Y Hà Nội",
+    "REGION": "Hà Nội"
+  },
+  {
+    "ID": 87,
+    "U_CODE": "YQH",
+    "UNIVERSITY_NAME": "Học Viện Quân Y - Hệ Quân sự",
+    "REGION": "Hà Nội"
+  },
+  {
+    "ID": 88,
+    "U_CODE": "YTC",
+    "UNIVERSITY_NAME": "Đại Học Y Tế Công Cộng",
+    "REGION": "Hà Nội"
+  },
+  {
+    "ID": 89,
+    "U_CODE": "ZNH",
+    "UNIVERSITY_NAME": "Đại Học Văn Hóa – Nghệ Thuật Quân Đội",
+    "REGION": "Hà Nội"
+  },
+  {
+    "ID": 90,
+    "U_CODE": "C20",
+    "UNIVERSITY_NAME": "Cao Đẳng Sư Phạm Hà Tây",
+    "REGION": "Hà Nội"
+  },
+  {
+    "ID": 91,
+    "U_CODE": "CBT",
+    "UNIVERSITY_NAME": "Cao Đẳng Công Nghệ và Thương Mại Hà Nội",
+    "REGION": "Hà Nội"
+  },
+  {
+    "ID": 92,
+    "U_CODE": "CCI",
+    "UNIVERSITY_NAME": "Cao Đẳng Công Nghiệp In",
+    "REGION": "Hà Nội"
+  },
+  {
+    "ID": 93,
+    "U_CODE": "CCK",
+    "UNIVERSITY_NAME": "Cao Đẳng Kinh Tế Công Nghiệp Hà Nội",
+    "REGION": "Hà Nội"
+  },
+  {
+    "ID": 94,
+    "U_CODE": "CDH",
+    "UNIVERSITY_NAME": "Cao Đẳng Du Lịch Hà Nội",
+    "REGION": "Hà Nội"
+  },
+  {
+    "ID": 95,
+    "U_CODE": "CDT",
+    "UNIVERSITY_NAME": "Cao Đẳng Xây Dựng Công Trình Đô Thị",
+    "REGION": "Hà Nội"
+  },
+  {
+    "ID": 96,
+    "U_CODE": "CEO",
+    "UNIVERSITY_NAME": "Cao Đẳng Đại Việt",
+    "REGION": "Hà Nội"
+  },
+  {
+    "ID": 97,
+    "U_CODE": "CHK",
+    "UNIVERSITY_NAME": "Cao Đẳng Công Nghệ Và Kinh Tế Hà Nội",
+    "REGION": "Hà Nội"
+  },
+  {
+    "ID": 98,
+    "U_CODE": "CHN",
+    "UNIVERSITY_NAME": "Cao Đẳng Cộng Đồng Hà Nội",
+    "REGION": "Hà Nội"
+  },
+  {
+    "ID": 99,
+    "U_CODE": "CKN",
+    "UNIVERSITY_NAME": "Cao Đẳng Kinh Tế – Kỹ Thuật Hà Nội",
+    "REGION": "Hà Nội"
+  },
+  {
+    "ID": 100,
+    "U_CODE": "CLH",
+    "UNIVERSITY_NAME": "Cao Đẳng Điện Tử - Điện Lạnh Hà Nội",
+    "REGION": "Hà Nội"
+  },
+  {
+    "ID": 101,
+    "U_CODE": "CM1",
+    "UNIVERSITY_NAME": "Cao Đẳng Sư Phạm Trung Ương",
+    "REGION": "Hà Nội"
+  },
+  {
+    "ID": 102,
+    "U_CODE": "CMD",
+    "UNIVERSITY_NAME": "Cao Đẳng Thương Mại Và Du Lịch Hà Nội",
+    "REGION": "Hà Nội"
+  },
+  {
+    "ID": 103,
+    "U_CODE": "CMH",
+    "UNIVERSITY_NAME": "Cao Đẳng Múa Việt Nam",
+    "REGION": "Hà Nội"
+  },
+  {
+    "ID": 104,
+    "U_CODE": "CNH",
+    "UNIVERSITY_NAME": "Cao Đẳng Công Nghệ Hà Nội",
+    "REGION": "Hà Nội"
+  },
+  {
+    "ID": 105,
+    "U_CODE": "CNP",
+    "UNIVERSITY_NAME": "Cao Đẳng Nông Nghiệp và Phát Triển Nông Thôn Bắc Bộ",
+    "REGION": "Hà Nội"
+  },
+  {
+    "ID": 106,
+    "U_CODE": "CNT",
+    "UNIVERSITY_NAME": "Cao Đẳng Nghệ Thuật Hà Nội",
+    "REGION": "Hà Nội"
+  },
+  {
+    "ID": 107,
+    "U_CODE": "COT",
+    "UNIVERSITY_NAME": "Cao Đẳng Công Nghệ Và Kỹ Thuật Ô Tô",
+    "REGION": "Hà Nội"
+  },
+  {
+    "ID": 108,
+    "U_CODE": "CTH",
+    "UNIVERSITY_NAME": "Cao Đẳng Kinh Tế – Kỹ Thuật Thương Mại",
+    "REGION": "Hà Nội"
+  },
+  {
+    "ID": 109,
+    "U_CODE": "CTV",
+    "UNIVERSITY_NAME": "Cao Đẳng Truyền Hình",
+    "REGION": "Hà Nội"
+  },
+  {
+    "ID": 110,
+    "U_CODE": "CTW",
+    "UNIVERSITY_NAME": "Cao Đẳng Kinh Tế - Kỹ Thuật Trung Ương",
+    "REGION": "Hà Nội"
+  },
+  {
+    "ID": 111,
+    "U_CODE": "CXH",
+    "UNIVERSITY_NAME": "Cao Đẳng Xây Dựng Số 1",
+    "REGION": "Hà Nội"
+  },
+  {
+    "ID": 112,
+    "U_CODE": "CYM",
+    "UNIVERSITY_NAME": "Cao Đẳng Y Tế Hà Đông",
+    "REGION": "Hà Nội"
+  },
+  {
+    "ID": 113,
+    "U_CODE": "CYZ",
+    "UNIVERSITY_NAME": "Cao Đẳng Y Tế Hà Nội",
+    "REGION": "Hà Nội"
+  },
+  {
+    "ID": 114,
+    "U_CODE": "D20",
+    "UNIVERSITY_NAME": "Cao Đẳng Cộng Đồng Hà Tây",
+    "REGION": "Hà Nội"
+  },
+  {
+    "ID": 115,
+    "U_CODE": "ANS",
+    "UNIVERSITY_NAME": "Đại Học An Ninh Nhân Dân",
+    "REGION": "Hồ Chí Minh"
+  },
+  {
+    "ID": 116,
+    "U_CODE": "BVS",
+    "UNIVERSITY_NAME": "Học Viện Công Nghệ Bưu Chính Viễn Thông (phía Nam)",
+    "REGION": "Hồ Chí Minh"
+  },
+  {
+    "ID": 117,
+    "U_CODE": "CSS",
+    "UNIVERSITY_NAME": "Đại Học Cảnh Sát Nhân Dân",
+    "REGION": "Hồ Chí Minh"
+  },
+  {
+    "ID": 118,
+    "U_CODE": "DCG",
+    "UNIVERSITY_NAME": "Đại Học Tư Thục Công Nghệ Thông Tin Gia Định",
+    "REGION": "Hồ Chí Minh"
+  },
+  {
+    "ID": 119,
+    "U_CODE": "DCT",
+    "UNIVERSITY_NAME": "Đại Học Công Nghiệp Thực Phẩm TP HCM",
+    "REGION": "Hồ Chí Minh"
+  },
+  {
+    "ID": 120,
+    "U_CODE": "DKC",
+    "UNIVERSITY_NAME": "Đại học Công Nghệ TPHCM",
+    "REGION": "Hồ Chí Minh"
+  },
+  {
+    "ID": 121,
+    "U_CODE": "DLS",
+    "UNIVERSITY_NAME": "Đại Học Lao Động – Xã Hội (Cơ sở phía Nam)",
+    "REGION": "Hồ Chí Minh"
+  },
+  {
+    "ID": 122,
+    "U_CODE": "DMS",
+    "UNIVERSITY_NAME": "Đại Học Tài Chính Marketing",
+    "REGION": "Hồ Chí Minh"
+  },
+  {
+    "ID": 123,
+    "U_CODE": "DNT",
+    "UNIVERSITY_NAME": "Đại Học Ngoại Ngữ – Tin Học TPHCM",
+    "REGION": "Hồ Chí Minh"
+  },
+  {
+    "ID": 124,
+    "U_CODE": "DSD",
+    "UNIVERSITY_NAME": "Đại Học Sân Khấu, Điện Ảnh TPHCM",
+    "REGION": "Hồ Chí Minh"
+  },
+  {
+    "ID": 125,
+    "U_CODE": "DSG",
+    "UNIVERSITY_NAME": "Đại Học Công Nghệ Sài Gòn",
+    "REGION": "Hồ Chí Minh"
+  },
+  {
+    "ID": 126,
+    "U_CODE": "DTH",
+    "UNIVERSITY_NAME": "Đại Học Hoa Sen",
+    "REGION": "Hồ Chí Minh"
+  },
+  {
+    "ID": 127,
+    "U_CODE": "DTM",
+    "UNIVERSITY_NAME": "ĐH Tài Nguyên môi trường TPHCM",
+    "REGION": "Hồ Chí Minh"
+  },
+  {
+    "ID": 128,
+    "U_CODE": "DTT",
+    "UNIVERSITY_NAME": "Đại Học Tôn Đức Thắng",
+    "REGION": "Hồ Chí Minh"
+  },
+  {
+    "ID": 129,
+    "U_CODE": "DVH",
+    "UNIVERSITY_NAME": "Đại Học Văn Hiến",
+    "REGION": "Hồ Chí Minh"
+  },
+  {
+    "ID": 130,
+    "U_CODE": "DVL",
+    "UNIVERSITY_NAME": "Đại Học Dân Lập Văn Lang",
+    "REGION": "Hồ Chí Minh"
+  },
+  {
+    "ID": 131,
+    "U_CODE": "GSA",
+    "UNIVERSITY_NAME": "Đại Học Giao Thông Vận Tải (Cơ sở Phía Nam)",
+    "REGION": "Hồ Chí Minh"
+  },
+  {
+    "ID": 132,
+    "U_CODE": "GTS",
+    "UNIVERSITY_NAME": "Đại Học Giao Thông Vận Tải TPHCM",
+    "REGION": "Hồ Chí Minh"
+  },
+  {
+    "ID": 133,
+    "U_CODE": "HBU",
+    "UNIVERSITY_NAME": "Đại Học Quốc Tế Hồng Bàng",
+    "REGION": "Hồ Chí Minh"
+  },
+  {
+    "ID": 134,
+    "U_CODE": "HCS",
+    "UNIVERSITY_NAME": "Học Viện Hành Chính Quốc Gia (phía Nam)",
+    "REGION": "Hồ Chí Minh"
+  },
+  {
+    "ID": 135,
+    "U_CODE": "HHK",
+    "UNIVERSITY_NAME": "Học Viện Hàng Không Việt Nam",
+    "REGION": "Hồ Chí Minh"
+  },
+  {
+    "ID": 136,
+    "U_CODE": "HUI",
+    "UNIVERSITY_NAME": "Đại Học Công Nghiệp TPHCM",
+    "REGION": "Hồ Chí Minh"
+  },
+  {
+    "ID": 137,
+    "U_CODE": "KSA",
+    "UNIVERSITY_NAME": "Đại Học Kinh Tế TPHCM",
+    "REGION": "Hồ Chí Minh"
+  },
+  {
+    "ID": 138,
+    "U_CODE": "KTC",
+    "UNIVERSITY_NAME": "Đại Học Kinh Tế -Tài Chính TPHCM",
+    "REGION": "Hồ Chí Minh"
+  },
+  {
+    "ID": 139,
+    "U_CODE": "KTS",
+    "UNIVERSITY_NAME": "Đại Học Kiến Trúc TPHCM",
+    "REGION": "Hồ Chí Minh"
+  },
+  {
+    "ID": 140,
+    "U_CODE": "LPS",
+    "UNIVERSITY_NAME": "Đại Học Luật TPHCM",
+    "REGION": "Hồ Chí Minh"
+  },
+  {
+    "ID": 141,
+    "U_CODE": "MBS",
+    "UNIVERSITY_NAME": "Đại Học Mở TPHCM",
+    "REGION": "Hồ Chí Minh"
+  },
+  {
+    "ID": 142,
+    "U_CODE": "MTS",
+    "UNIVERSITY_NAME": "Đại Học Mỹ Thuật TPHCM",
+    "REGION": "Hồ Chí Minh"
+  },
+  {
+    "ID": 143,
+    "U_CODE": "NHS",
+    "UNIVERSITY_NAME": "Đại Học Ngân Hàng TPHCM",
+    "REGION": "Hồ Chí Minh"
+  },
+  {
+    "ID": 144,
+    "U_CODE": "NLS",
+    "UNIVERSITY_NAME": "Đại Học Nông Lâm TPHCM",
+    "REGION": "Hồ Chí Minh"
+  },
+  {
+    "ID": 145,
+    "U_CODE": "NTS",
+    "UNIVERSITY_NAME": "Đại Học Ngoại Thương (phía Nam)",
+    "REGION": "Hồ Chí Minh"
+  },
+  {
+    "ID": 146,
+    "U_CODE": "NTT",
+    "UNIVERSITY_NAME": "Đại Học Nguyễn Tất Thành",
+    "REGION": "Hồ Chí Minh"
+  },
+  {
+    "ID": 147,
+    "U_CODE": "NVS",
+    "UNIVERSITY_NAME": "Nhạc Viện TPHCM",
+    "REGION": "Hồ Chí Minh"
+  },
+  {
+    "ID": 148,
+    "U_CODE": "PCS",
+    "UNIVERSITY_NAME": "Đại Học Phòng Cháy Chữa Cháy (phía Nam)",
+    "REGION": "Hồ Chí Minh"
+  },
+  {
+    "ID": 149,
+    "U_CODE": "PCS1",
+    "UNIVERSITY_NAME": "Đại Học Phòng Cháy Chữa Cháy (Hệ Dân sự Phía Nam)",
+    "REGION": "Hồ Chí Minh"
+  },
+  {
+    "ID": 150,
+    "U_CODE": "QSB",
+    "UNIVERSITY_NAME": "Đại Học Bách Khoa – Đại Học Quốc Gia TPHCM",
+    "REGION": "Hồ Chí Minh"
+  },
+  {
+    "ID": 151,
+    "U_CODE": "QSC",
+    "UNIVERSITY_NAME": "Đại Học Công Nghệ Thông Tin – Đại Học Quốc Gia TPHCM",
+    "REGION": "Hồ Chí Minh"
+  },
+  {
+    "ID": 152,
+    "U_CODE": "QSK",
+    "UNIVERSITY_NAME": "Đại học Kinh Tế – Luật – Đại Học Quốc Gia TPHCM",
+    "REGION": "Hồ Chí Minh"
+  },
+  {
+    "ID": 153,
+    "U_CODE": "QSQ",
+    "UNIVERSITY_NAME": "Đại Học Quốc Tế – Đại Học Quốc Gia TPHCM",
+    "REGION": "Hồ Chí Minh"
+  },
+  {
+    "ID": 154,
+    "U_CODE": "QST",
+    "UNIVERSITY_NAME": "Đại Học Khoa Học Tự Nhiên – Đại Học Quốc Gia TPHCM",
+    "REGION": "Hồ Chí Minh"
+  },
+  {
+    "ID": 155,
+    "U_CODE": "QSX",
+    "UNIVERSITY_NAME": "Đại Học Khoa Học Xã Hội và Nhân Văn – Đại Học Quốc Gia TPHCM",
+    "REGION": "Hồ Chí Minh"
+  },
+  {
+    "ID": 156,
+    "U_CODE": "QSY",
+    "UNIVERSITY_NAME": "Khoa Y - Đại học Quốc Gia TPHCM",
+    "REGION": "Hồ Chí Minh"
+  },
+  {
+    "ID": 157,
+    "U_CODE": "RMU",
+    "UNIVERSITY_NAME": "Đại Học Quốc Tế RMIT Việt Nam",
+    "REGION": "Hồ Chí Minh"
+  },
+  {
+    "ID": 158,
+    "U_CODE": "SGD",
+    "UNIVERSITY_NAME": "Đại Học Sài Gòn",
+    "REGION": "Hồ Chí Minh"
+  },
+  {
+    "ID": 159,
+    "U_CODE": "SPK",
+    "UNIVERSITY_NAME": "Đại Học Sư Phạm Kỹ Thuật TPHCM",
+    "REGION": "Hồ Chí Minh"
+  },
+  {
+    "ID": 160,
+    "U_CODE": "SPS",
+    "UNIVERSITY_NAME": "Đại Học Sư Phạm TPHCM",
+    "REGION": "Hồ Chí Minh"
+  },
+  {
+    "ID": 161,
+    "U_CODE": "STS",
+    "UNIVERSITY_NAME": "Đại Học Sư Phạm Thể DụcThể Thao TPHCM",
+    "REGION": "Hồ Chí Minh"
+  },
+  {
+    "ID": 162,
+    "U_CODE": "TDS",
+    "UNIVERSITY_NAME": "Đại Học Thể Dục Thể Thao TPHCM",
+    "REGION": "Hồ Chí Minh"
+  },
+  {
+    "ID": 163,
+    "U_CODE": "TLS",
+    "UNIVERSITY_NAME": "Đại Học Thủy Lợi (Cơ sở 2)",
+    "REGION": "Hồ Chí Minh"
+  },
+  {
+    "ID": 164,
+    "U_CODE": "TTQ",
+    "UNIVERSITY_NAME": "Đại Học Quốc Tế Sài Gòn",
+    "REGION": "Hồ Chí Minh"
+  },
+  {
+    "ID": 165,
+    "U_CODE": "TYS",
+    "UNIVERSITY_NAME": "Đại Học Y Khoa Phạm Ngọc Thạch",
+    "REGION": "Hồ Chí Minh"
+  },
+  {
+    "ID": 166,
+    "U_CODE": "VGU",
+    "UNIVERSITY_NAME": "Đại Học Việt Đức",
+    "REGION": "Hồ Chí Minh"
+  },
+  {
+    "ID": 167,
+    "U_CODE": "VHS",
+    "UNIVERSITY_NAME": "Đại Học Văn Hóa TPHCM",
+    "REGION": "Hồ Chí Minh"
+  },
+  {
+    "ID": 168,
+    "U_CODE": "VPH",
+    "UNIVERSITY_NAME": "Trường Sĩ Quan Kĩ Thuật Quân Sự - Hệ Quân sự - Đại Học Trần Đại Nghĩa",
+    "REGION": "Hồ Chí Minh"
+  },
+  {
+    "ID": 169,
+    "U_CODE": "YDS",
+    "UNIVERSITY_NAME": "Đại Học Y Dược TPHCM",
+    "REGION": "Hồ Chí Minh"
+  },
+  {
+    "ID": 170,
+    "U_CODE": "ZPH",
+    "UNIVERSITY_NAME": "Trường Sĩ Quan Kĩ Thuật Quân Sự - Hệ Dân sự - Đại Học Trần Đại Nghĩa",
+    "REGION": "Hồ Chí Minh"
+  },
+  {
+    "ID": 171,
+    "U_CODE": "CBC",
+    "UNIVERSITY_NAME": "Cao Đẳng Bán Công Công Nghệ và Quản Trị Doanh Nghiệp",
+    "REGION": "Hồ Chí Minh"
+  },
+  {
+    "ID": 172,
+    "U_CODE": "CBV",
+    "UNIVERSITY_NAME": "Cao Đẳng Bách Việt",
+    "REGION": "Hồ Chí Minh"
+  },
+  {
+    "ID": 173,
+    "U_CODE": "CCO",
+    "UNIVERSITY_NAME": "Cao Đẳng Công Nghệ Thủ Đức",
+    "REGION": "Hồ Chí Minh"
+  },
+  {
+    "ID": 174,
+    "U_CODE": "CCS",
+    "UNIVERSITY_NAME": "Cao Đẳng Kinh Tế Kỹ Thuật Vinatex TPHCM",
+    "REGION": "Hồ Chí Minh"
+  },
+  {
+    "ID": 175,
+    "U_CODE": "CDE",
+    "UNIVERSITY_NAME": "Cao Đẳng Điện Lực TPHCM",
+    "REGION": "Hồ Chí Minh"
+  },
+  {
+    "ID": 176,
+    "U_CODE": "CDV",
+    "UNIVERSITY_NAME": "Cao Đẳng Viễn Đông",
+    "REGION": "Hồ Chí Minh"
+  },
+  {
+    "ID": 177,
+    "U_CODE": "CEP",
+    "UNIVERSITY_NAME": "Cao Đẳng Kinh Tế TPHCM",
+    "REGION": "Hồ Chí Minh"
+  },
+  {
+    "ID": 178,
+    "U_CODE": "CES",
+    "UNIVERSITY_NAME": "Cao Đẳng Công Thương TPHCM",
+    "REGION": "Hồ Chí Minh"
+  },
+  {
+    "ID": 179,
+    "U_CODE": "CET",
+    "UNIVERSITY_NAME": "Cao Đẳng Kinh Tế-Công Nghệ TPHCM",
+    "REGION": "Hồ Chí Minh"
+  },
+  {
+    "ID": 180,
+    "U_CODE": "CGS",
+    "UNIVERSITY_NAME": "Cao Đẳng Giao Thông Vận Tải 3",
+    "REGION": "Hồ Chí Minh"
+  },
+  {
+    "ID": 181,
+    "U_CODE": "CGT",
+    "UNIVERSITY_NAME": "Cao Đẳng Giao Thông Vận Tải TPHCM",
+    "REGION": "Hồ Chí Minh"
+  },
+  {
+    "ID": 182,
+    "U_CODE": "CKC",
+    "UNIVERSITY_NAME": "Cao Đẳng Kỹ Thuật Cao Thắng",
+    "REGION": "Hồ Chí Minh"
+  },
+  {
+    "ID": 183,
+    "U_CODE": "CKD",
+    "UNIVERSITY_NAME": "Cao Đẳng Kinh Tế Đối Ngoại",
+    "REGION": "Hồ Chí Minh"
+  },
+  {
+    "ID": 184,
+    "U_CODE": "CKM",
+    "UNIVERSITY_NAME": "Cao Đẳng Kinh Tế Kỹ Thuật Miền Nam",
+    "REGION": "Hồ Chí Minh"
+  },
+  {
+    "ID": 185,
+    "U_CODE": "CKP",
+    "UNIVERSITY_NAME": "Cao Đẳng Kỹ Thuật Lý Tự Trọng TPHCM",
+    "REGION": "Hồ Chí Minh"
+  },
+  {
+    "ID": 186,
+    "U_CODE": "CM3",
+    "UNIVERSITY_NAME": "Cao Đẳng Sư Phạm Trung Ương TPHCM",
+    "REGION": "Hồ Chí Minh"
+  },
+  {
+    "ID": 187,
+    "U_CODE": "CPL",
+    "UNIVERSITY_NAME": "Cao Đẳng Kinh Tế Kỹ Thuật TP HCM",
+    "REGION": "Hồ Chí Minh"
+  },
+  {
+    "ID": 188,
+    "U_CODE": "CPS",
+    "UNIVERSITY_NAME": "Cao Đẳng Phát Thanh Truyền Hình II",
+    "REGION": "Hồ Chí Minh"
+  },
+  {
+    "ID": 189,
+    "U_CODE": "CTS",
+    "UNIVERSITY_NAME": "Cao Đẳng Tài Chính Hải Quan",
+    "REGION": "Hồ Chí Minh"
+  },
+  {
+    "ID": 190,
+    "U_CODE": "CVN",
+    "UNIVERSITY_NAME": "Cao Đẳng Văn Hóa Nghệ Thuật TPHCM",
+    "REGION": "Hồ Chí Minh"
+  },
+  {
+    "ID": 191,
+    "U_CODE": "CVS",
+    "UNIVERSITY_NAME": "Cao Đẳng Văn Hóa Nghệ Thuật và Du Lịch Sài Gòn",
+    "REGION": "Hồ Chí Minh"
+  },
+  {
+    "ID": 192,
+    "U_CODE": "CVX",
+    "UNIVERSITY_NAME": "Cao Đẳng Kỹ Thuật-Công Nghệ Vạn Xuân",
+    "REGION": "Hồ Chí Minh"
+  },
+  {
+    "ID": 193,
+    "U_CODE": "CXS",
+    "UNIVERSITY_NAME": "Cao Đẳng Xây Dựng Số 2",
+    "REGION": "Hồ Chí Minh"
+  }
+]

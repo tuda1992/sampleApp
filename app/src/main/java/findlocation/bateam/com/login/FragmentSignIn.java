@@ -28,6 +28,7 @@ import findlocation.bateam.com.api.FastNetworking;
 import findlocation.bateam.com.base.BaseFragment;
 import findlocation.bateam.com.constant.Constants;
 import findlocation.bateam.com.listener.JsonObjectCallBackListener;
+import findlocation.bateam.com.model.UserInfo;
 import findlocation.bateam.com.model.UserLogin;
 import findlocation.bateam.com.util.DialogUtil;
 import findlocation.bateam.com.util.NetworkUtil;
@@ -96,10 +97,10 @@ public class FragmentSignIn extends BaseFragment {
             return;
         }
 
-//        if (!PatternUtil.checkPasswordCharacter(userPass)) {
-//            DialogUtil.showDialogError(getActivity(), mStrPasswordError, null);
-//            return;
-//        }
+        if (!PatternUtil.checkPasswordCharacter(userPass)) {
+            DialogUtil.showDialogError(getActivity(), mStrPasswordError, null);
+            return;
+        }
 
         int selectedId = mRg.getCheckedRadioButtonId();
         boolean isChecked = mCbSavePassword.isChecked();
@@ -126,7 +127,7 @@ public class FragmentSignIn extends BaseFragment {
 
     private void callApiLogin(String un, String pw, final Bundle bundle) throws JSONException {
 
-        UserLogin userLogin = new UserLogin();
+        final UserLogin userLogin = new UserLogin();
         userLogin.userName = un;
         userLogin.password = pw;
 
@@ -136,6 +137,13 @@ public class FragmentSignIn extends BaseFragment {
         FastNetworking fastNetworking = new FastNetworking(getActivity(), new JsonObjectCallBackListener() {
             @Override
             public void onResponse(JSONObject jsonObject) {
+
+                UserInfo userLoginSuccess = mGson.fromJson(jsonObject.toString(), UserInfo.class);
+                if (TextUtils.isEmpty(userLoginSuccess.securityToken)){
+                    DialogUtil.showDialogError(getActivity(),"Bạn điền sai thông tin email hoặc mật khẩu",null);
+                    return;
+                }
+
                 PrefUtil.setSharedPreferenceUserInfo(getActivity(), jsonObject.toString());
                 startActivityAnim(MainActivity.class, bundle);
                 finishActivityAnim();

@@ -1,6 +1,7 @@
 package findlocation.bateam.com.login;
 
 import android.app.DatePickerDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
@@ -8,6 +9,7 @@ import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.DatePicker;
@@ -28,10 +30,10 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
 import org.json.JSONArray;
-import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.File;
+import java.io.IOException;
 import java.lang.reflect.Type;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -46,17 +48,21 @@ import butterknife.BindString;
 import butterknife.BindView;
 import butterknife.OnClick;
 import findlocation.bateam.com.R;
+import findlocation.bateam.com.adapter.AutoCompleteUniversityAdapter;
 import findlocation.bateam.com.adapter.CustomSpinnerAdapter;
+import findlocation.bateam.com.adapter.NationSpinnerAdapter;
 import findlocation.bateam.com.adapter.SexSpinnerAdapter;
 import findlocation.bateam.com.api.FastNetworking;
 import findlocation.bateam.com.base.BaseFragment;
 import findlocation.bateam.com.constant.Constants;
 import findlocation.bateam.com.listener.JsonArrayCallBackListener;
-import findlocation.bateam.com.listener.JsonObjectCallBackListener;
 import findlocation.bateam.com.listener.StringCallBackListener;
 import findlocation.bateam.com.model.Cities;
+import findlocation.bateam.com.model.NationModel;
+import findlocation.bateam.com.model.UniversityModel;
 import findlocation.bateam.com.model.UserRegister;
 import findlocation.bateam.com.util.DialogUtil;
+import findlocation.bateam.com.util.JSONResourceReader;
 import findlocation.bateam.com.util.NetworkUtil;
 import findlocation.bateam.com.util.PatternUtil;
 
@@ -72,8 +78,8 @@ public class FragmentSignUpInfo extends BaseFragment {
     EditText mEdtMiddleName;
     @BindView(R.id.edt_first_name)
     EditText mEdtFirstName;
-    @BindView(R.id.spn_school)
-    Spinner mSpnSchool;
+    @BindView(R.id.edt_school)
+    AutoCompleteTextView mEdtSchool;
     @BindView(R.id.edt_class)
     EditText mEdtClass;
     @BindView(R.id.edt_grade)
@@ -104,6 +110,7 @@ public class FragmentSignUpInfo extends BaseFragment {
     Button mBtnSend;
     @BindView(R.id.cb_save_fb)
     CheckBox mCbFb;
+
     @BindString(R.string.text_button_date_picker_ok)
     String mStrOk;
     @BindString(R.string.text_button_date_picker_no)
@@ -147,14 +154,14 @@ public class FragmentSignUpInfo extends BaseFragment {
     private CustomSpinnerAdapter mAdapterAddressCity;
     private CustomSpinnerAdapter mAdapterAddressTown;
     private CustomSpinnerAdapter mAdapterAddressDistrict;
-    private CustomSpinnerAdapter mAdapterAddressCountry;
-    private SexSpinnerAdapter mAdapterSchool;
+    private NationSpinnerAdapter mAdapterAddressCountry;
+    private AutoCompleteUniversityAdapter mAdapterSchool;
     private List<String> mArrSex = new ArrayList<>();
     private List<Cities> mArrAddressCity = new ArrayList<>();
     private List<Cities> mArrAddressTown = new ArrayList<>();
     private List<Cities> mArrAddressDistrict = new ArrayList<>();
-    private List<Cities> mArrAddressCountry = new ArrayList<>();
-    private List<String> mArrSchool = new ArrayList<>();
+    private List<NationModel> mArrAddressCountry = new ArrayList<>();
+    private ArrayList<UniversityModel> mArrSchool = new ArrayList<>();
     private Map<String, File> mMapFile = new HashMap<>();
     private UserRegister mUserRegister = new UserRegister();
 
@@ -173,9 +180,9 @@ public class FragmentSignUpInfo extends BaseFragment {
         String city = mArrAddressCity.get(mSpnAddressCity.getSelectedItemPosition()).name;
         String address = mEdtAddress.getText().toString();
         String familyName = mEdtFamilyName.getText().toString();
-        String middleName = mEdtFamilyName.getText().toString();
+        String middleName = mEdtMiddleName.getText().toString();
         String firstName = mEdtFirstName.getText().toString();
-        String schoolName = mArrSchool.get(mSpnSchool.getSelectedItemPosition());
+        String schoolName = mEdtSchool.getText().toString();
         String className = mEdtClass.getText().toString();
         String grade = mEdtGrade.getText().toString();
         String email = mEdtEmail.getText().toString();
@@ -183,6 +190,7 @@ public class FragmentSignUpInfo extends BaseFragment {
         String rePassword = mEdtRePassword.getText().toString();
         String telephone = mEdtTelephone.getText().toString();
         String dob = mTvDob.getText().toString();
+        String country = mArrAddressCountry.get(mSpnAddressCountry.getSelectedItemPosition()).nation;
 
         // Validate
 
@@ -257,6 +265,17 @@ public class FragmentSignUpInfo extends BaseFragment {
         mUserRegister.cityId = mArrAddressCity.get(mSpnAddressCity.getSelectedItemPosition()).id;
         mUserRegister.districtId = mArrAddressDistrict.get(mSpnAddressDistrict.getSelectedItemPosition()).id;
         mUserRegister.wardId = mArrAddressTown.get(mSpnAddressTown.getSelectedItemPosition()).id;
+        mUserRegister.nationality = country;
+        mUserRegister.schoolName = schoolName;
+        mUserRegister.schoolYear = grade;
+        mUserRegister.specializedSubject = className;
+        if (sex.equalsIgnoreCase("Nam")) {
+            mUserRegister.sex = "0";
+        } else {
+            mUserRegister.sex = "1";
+        }
+        mUserRegister.dob = dob;
+        mUserRegister.address = address;
 
 
         // After Validate
@@ -277,6 +296,19 @@ public class FragmentSignUpInfo extends BaseFragment {
             @Override
             public void onResponse(String string) {
                 Log.d(TAG, "onResponse : " + string);
+                if (string.contains("Đăng ký tài khoản thành công")) {
+                    DialogUtil.showDialogSuccess(getActivity(), string, new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+                            LoginActivity.mFileAvatar = null;
+                            LoginActivity.mFileLicense = null;
+                            FragmentSignUpApprove fragmentSignUpApprove = new FragmentSignUpApprove();
+                            replaceFragment(fragmentSignUpApprove, Constants.FRAGMENT_SIGN_UP_APPROVE);
+                        }
+                    });
+                } else {
+                    DialogUtil.showDialogError(getActivity(), string, null);
+                }
             }
 
             @Override
@@ -294,12 +326,9 @@ public class FragmentSignUpInfo extends BaseFragment {
                 mCalendar.get(Calendar.DAY_OF_MONTH));
         Calendar c = Calendar.getInstance();
         c.set(Calendar.YEAR, mDefaultCalendar.get(Calendar.YEAR) - 16);
-        c.set(Calendar.DATE, 1);
-        c.set(Calendar.MONTH, 0);
-        datePickerDialog.getDatePicker().setMinDate(c.getTimeInMillis());
         datePickerDialog.setButton(DatePickerDialog.BUTTON_POSITIVE, mStrOk, datePickerDialog);
         datePickerDialog.setButton(DatePickerDialog.BUTTON_NEGATIVE, mStrNo, datePickerDialog);
-        datePickerDialog.getDatePicker().setMaxDate(mDefaultCalendar.getTimeInMillis());
+        datePickerDialog.getDatePicker().setMaxDate(c.getTimeInMillis());
         datePickerDialog.show();
     }
 
@@ -332,7 +361,6 @@ public class FragmentSignUpInfo extends BaseFragment {
         mSpnAddressCity.setSelection(0);
         mSpnAddressTown.setSelection(0);
         mSpnAddressDistrict.setSelection(0);
-        mSpnSchool.setSelection(0);
 
         mDefaultCalendar = Calendar.getInstance();
         mCalendar = Calendar.getInstance();
@@ -379,6 +407,7 @@ public class FragmentSignUpInfo extends BaseFragment {
                 Log.d(TAG, "mSpnAddressDistrict onNothingSelected");
             }
         });
+
     }
 
     private void loginFacebook() {
@@ -475,19 +504,57 @@ public class FragmentSignUpInfo extends BaseFragment {
 
         getCities();
 
-        // Country
-        mAdapterAddressCountry = new CustomSpinnerAdapter(getActivity(), mArrAddressCountry, false);
-        mSpnAddressCountry.setAdapter(mAdapterAddressCountry);
-
         // School
-        mArrSchool.add("Học viện Ngân Hàng");
-        mArrSchool.add("Học viện Hàng Không");
-        mArrSchool.add("Học viện Ngoại Giao");
-        mArrSchool.add("Đại học Ngoại Thương");
-        mArrSchool.add("Đại học Kinh Tế Quốc Dân");
-        mArrSchool.add("Đại học Bách Khoa");
-        mAdapterSchool = new SexSpinnerAdapter(getActivity(), mArrSchool, false);
-        mSpnSchool.setAdapter(mAdapterSchool);
+        String jsonReaderUniversities;
+        try {
+            jsonReaderUniversities = JSONResourceReader.readFileJSONUniversityFromRaw(getActivity());
+            Gson gson = new Gson();
+            Type listType = new TypeToken<List<UniversityModel>>() {
+            }.getType();
+            List<UniversityModel> universityList = (List<UniversityModel>) gson.fromJson(jsonReaderUniversities, listType);
+            mArrSchool.clear();
+            mArrSchool.addAll(universityList);
+            mAdapterSchool = new AutoCompleteUniversityAdapter(getActivity(), mArrSchool);
+            mEdtSchool.setAdapter(mAdapterSchool);
+            mEdtSchool.setThreshold(1);
+
+            mEdtSchool.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                @Override
+                public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                    String universityName = ((UniversityModel) (mEdtSchool.getAdapter().getItem(i))).universityName;
+                    mEdtSchool.setText(universityName);
+                    mEdtSchool.setSelection(universityName.length());
+                }
+            });
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        // Country
+        String jsonReader;
+        try {
+            jsonReader = JSONResourceReader.readFileJSONNationsFromRaw(getActivity());
+            Gson gson = new Gson();
+            Type listType = new TypeToken<List<NationModel>>() {
+            }.getType();
+            List<NationModel> nationList = (List<NationModel>) gson.fromJson(jsonReader, listType);
+            mArrAddressCountry.clear();
+            for (NationModel item : nationList) {
+                if (item.id.equalsIgnoreCase("191")) {
+                    mArrAddressCountry.add(0, item);
+                } else {
+                    mArrAddressCountry.add(item);
+                }
+            }
+
+            mAdapterAddressCountry = new NationSpinnerAdapter(getActivity(), mArrAddressCountry, false);
+            mSpnAddressCountry.setAdapter(mAdapterAddressCountry);
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
     }
 
     private void getCities() {
@@ -561,4 +628,5 @@ public class FragmentSignUpInfo extends BaseFragment {
         super.onActivityResult(requestCode, resultCode, data);
         mCallBackManager.onActivityResult(requestCode, resultCode, data);
     }
+
 }

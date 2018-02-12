@@ -19,8 +19,8 @@ import findlocation.bateam.com.R;
 
 public class JSONResourceReader {
 
-    public static String readFileJSONFromRaw(Context context) throws IOException {
-        InputStream is = context.getResources().openRawResource(R.raw.data);
+    public static String readFileJSONNationsFromRaw(Context context) throws IOException {
+        InputStream is = context.getResources().openRawResource(R.raw.nations);
         Writer writer = new StringWriter();
         char[] buffer = new char[1024];
         try {
@@ -39,8 +39,8 @@ public class JSONResourceReader {
         return writer.toString();
     }
 
-    public static String readFileJSONJobFromRaw(Context context) throws IOException {
-        InputStream is = context.getResources().openRawResource(R.raw.jobinfo);
+    public static String readFileJSONUniversityFromRaw(Context context) throws IOException {
+        InputStream is = context.getResources().openRawResource(R.raw.universities);
         Writer writer = new StringWriter();
         char[] buffer = new char[1024];
         try {

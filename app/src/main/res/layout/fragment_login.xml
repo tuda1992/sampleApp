@@ -13,7 +13,8 @@
         android:layout_marginLeft="@dimen/_30sdp"
         android:layout_marginRight="@dimen/_30sdp"
         android:layout_marginTop="@dimen/_20sdp"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:visibility="gone">
 
         <RadioButton
             android:id="@+id/rd_user"
@@ -43,13 +44,14 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="@dimen/_10sdp"
         android:layout_marginRight="@dimen/_10sdp"
-        android:layout_marginTop="@dimen/_30sdp"
+        android:layout_marginTop="@dimen/_35sdp"
         android:orientation="horizontal">
 
         <TextView
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:padding="@dimen/_2sdp"
             android:text="@string/text_email"
             android:textColor="@color/textColorPrimary"
             android:textSize="@dimen/_15sdp"
@@ -62,11 +64,10 @@
             android:layout_weight="1.4"
             android:background="@drawable/border_edittext"
             android:gravity="right"
-            android:hint="VD: example@gmail.com"
+            android:hint="example@gmail.com"
             android:inputType="textEmailAddress"
             android:padding="@dimen/_5sdp"
             android:singleLine="true"
-            android:text="dhd@aod.vn"
             android:textColor="@color/textColorPrimary"
             android:textSize="@dimen/_15sdp" />
 
@@ -84,6 +85,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:padding="@dimen/_2sdp"
             android:text="@string/text_user_password"
             android:textColor="@color/textColorPrimary"
             android:textSize="@dimen/_15sdp"
@@ -96,11 +98,10 @@
             android:layout_weight="1.4"
             android:background="@drawable/border_edittext"
             android:gravity="right"
-            android:hint="VD: 123456hh"
+            android:hint="8 ký tự gồm chữ và số"
             android:inputType="textPassword"
             android:padding="@dimen/_5sdp"
             android:singleLine="true"
-            android:text="1234"
             android:textColor="@color/textColorPrimary"
             android:textSize="@dimen/_15sdp" />
 

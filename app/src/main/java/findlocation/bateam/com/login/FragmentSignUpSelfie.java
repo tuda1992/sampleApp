@@ -95,6 +95,7 @@ public class FragmentSignUpSelfie extends BaseFragment {
         if (bm != null) {
             mIvSelfie.setVisibility(View.VISIBLE);
             mIvSelfie.setImageBitmap(bm);
+//            LoginActivity.mFileAvatar = ImagePicker.convertToFile(getActivity(), bm);
         }
         if (mIvSelfie.getVisibility() == View.VISIBLE) {
             mBtnNext.setVisibility(View.VISIBLE);

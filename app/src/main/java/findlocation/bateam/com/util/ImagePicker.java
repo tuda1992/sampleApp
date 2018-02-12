@@ -15,10 +15,16 @@ import android.os.Parcelable;
 import android.provider.MediaStore;
 import android.util.Log;
 
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 /**
  * Created by acv on 12/7/17.
@@ -28,7 +34,7 @@ public class ImagePicker {
 
     private static final int DEFAULT_MIN_WIDTH_QUALITY = 200;        // min pixels
     private static final String TAG = "ImagePicker";
-    private static final String TEMP_IMAGE_NAME = "tempImage";
+    private static final String TEMP_IMAGE_NAME = "tempImage.jpg";
 
     public static int minWidthQuality = DEFAULT_MIN_WIDTH_QUALITY;
 
@@ -49,7 +55,7 @@ public class ImagePicker {
 
         if (intentList.size() > 0) {
             chooserIntent = Intent.createChooser(intentList.remove(intentList.size() - 1),
-                    "Select Your Option");
+                    "Lựa chọn một trong các camera sau");
             chooserIntent.putExtra(Intent.EXTRA_INITIAL_INTENTS, intentList.toArray(new Parcelable[]{}));
         }
 
@@ -132,28 +138,53 @@ public class ImagePicker {
         return result;
     }
 
+    public static File convertToFile(Context context,
+                                     Bitmap bitmap) {
+
+        String timeStamp = "img_ " + System.currentTimeMillis() + ".png";
+
+        File f = new File(context.getExternalCacheDir(), timeStamp);
+        try {
+            f.createNewFile();
+
+            ByteArrayOutputStream bos = new ByteArrayOutputStream();
+            bitmap.compress(Bitmap.CompressFormat.PNG, 100 /*ignored for PNG*/, bos);
+            byte[] bitmapdata = bos.toByteArray();
+
+            //write the bytes in file
+            FileOutputStream fos = new FileOutputStream(f);
+            fos.write(bitmapdata);
+            fos.flush();
+            fos.close();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        return f;
+    }
+
     private static File getTempFile(Context context) {
-        File imageFile = new File(context.getExternalCacheDir(), TEMP_IMAGE_NAME);
+        File imageFile = new File(context.getExternalCacheDir(), "tempImage.jpeg");
         imageFile.getParentFile().mkdirs();
         return imageFile;
     }
 
     private static Bitmap decodeBitmap(Context context, Uri theUri, int sampleSize) {
+        Bitmap actuallyUsableBitmap = null;
         BitmapFactory.Options options = new BitmapFactory.Options();
         options.inSampleSize = sampleSize;
 
         AssetFileDescriptor fileDescriptor = null;
         try {
             fileDescriptor = context.getContentResolver().openAssetFileDescriptor(theUri, "r");
+            if (fileDescriptor != null) {
+                actuallyUsableBitmap = BitmapFactory.decodeFileDescriptor(
+                        fileDescriptor.getFileDescriptor(), null, options);
+            }
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
-
-        Bitmap actuallyUsableBitmap = BitmapFactory.decodeFileDescriptor(
-                fileDescriptor.getFileDescriptor(), null, options);
-
-        Log.d(TAG, options.inSampleSize + " sample method bitmap ... " +
-                actuallyUsableBitmap.getWidth() + " " + actuallyUsableBitmap.getHeight());
 
         return actuallyUsableBitmap;
     }

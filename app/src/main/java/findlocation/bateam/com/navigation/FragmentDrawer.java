@@ -13,13 +13,18 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.squareup.picasso.Picasso;
+
 import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
 import butterknife.OnClick;
 import findlocation.bateam.com.R;
+import findlocation.bateam.com.api.FastNetworking;
 import findlocation.bateam.com.base.BaseFragment;
+import findlocation.bateam.com.constant.Constants;
+import findlocation.bateam.com.model.UserInfo;
 import findlocation.bateam.com.userinfo.UserInfoActivity;
 
 /**
@@ -119,8 +124,12 @@ public class FragmentDrawer extends BaseFragment {
 
     }
 
-    public void setUp(int fragmentId, DrawerLayout drawerLayout, final Toolbar toolbar, boolean isMaster) {
-        mTvUserName.setText("Admin");
+    public void setUp(int fragmentId, DrawerLayout drawerLayout, final Toolbar toolbar, boolean isMaster, UserInfo userInfo) {
+        if (userInfo != null) {
+            mTvUserName.setText(userInfo.familyName + " " + userInfo.middleName + " " + userInfo.name);
+            Picasso.with(getActivity()).load(Constants.BASE_IMAGE + userInfo.avatar).error(R.drawable.ic_logo).into(mIvAvatar);
+        }
+
         if (isMaster) {
             titles = getActivity().getResources().getStringArray(R.array.nav_drawer_labels_2);
             adapter = new NavigationDrawerAdapter(getActivity(), getSources());

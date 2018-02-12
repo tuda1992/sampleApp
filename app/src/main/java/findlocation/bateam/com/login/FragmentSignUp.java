@@ -98,6 +98,7 @@ public class FragmentSignUp extends BaseFragment {
         if (bm != null) {
             mIvCard.setVisibility(View.VISIBLE);
             mIvCard.setImageBitmap(bm);
+
         }
         if (mIvCard.getVisibility() == View.VISIBLE) {
             mBtnNext.setVisibility(View.VISIBLE);

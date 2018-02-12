@@ -36,7 +36,7 @@ import findlocation.bateam.com.util.ProgressDialogUtils;
 
 public class FastNetworking {
 
-    private final String BASE_URL = "http://45.117.81.141/api";
+    public static final String BASE_URL = "http://45.117.81.141/api";
 
     public static final String URL_LOGIN = "/Users/Login";
     public static final String URL_REGISTER = "/Users/Register";
@@ -103,7 +103,7 @@ public class FastNetworking {
                     @Override
                     public void onError(ANError error) {
                         mProgress.hideDialog();
-                        DialogUtil.showDialogError(mContext, "Đường truyền của bạn đang gặp vấn đề !!!", null);
+                        DialogUtil.showDialogErrorLowInternet(mContext, "Đường truyền của bạn đang gặp vấn đề !!!", null);
                         if (mListenerObject != null)
                             mListenerArray.onError("Đường truyền của bạn đang gặp vấn đề !!!");
                     }
@@ -137,7 +137,7 @@ public class FastNetworking {
                     @Override
                     public void onError(ANError anError) {
                         mProgress.hideDialog();
-                        DialogUtil.showDialogError(mContext, "Đường truyền của bạn đang gặp vấn đề !!!", null);
+                        DialogUtil.showDialogErrorLowInternet(mContext, "Đường truyền của bạn đang gặp vấn đề !!!", null);
                         if (mListenerObject != null)
                             mListenerArray.onError("Đường truyền của bạn đang gặp vấn đề !!!");
                     }
@@ -170,7 +170,7 @@ public class FastNetworking {
                     @Override
                     public void onError(ANError anError) {
                         mProgress.hideDialog();
-                        DialogUtil.showDialogError(mContext, "Đường truyền của bạn đang gặp vấn đề !!!", null);
+                        DialogUtil.showDialogErrorLowInternet(mContext, "Đường truyền của bạn đang gặp vấn đề !!!", null);
                         if (mListenerArray != null)
                             mListenerArray.onError("Đường truyền của bạn đang gặp vấn đề !!!");
                     }
@@ -182,21 +182,18 @@ public class FastNetworking {
             DialogUtil.showDialogErrorInternet(mContext, null);
             return;
         }
-        mProgress.showDialog();
         AndroidNetworking.get(BASE_URL + URL_CITY)
                 .build()
                 .getAsJSONArray(new JSONArrayRequestListener() {
                     @Override
                     public void onResponse(JSONArray response) {
-                        mProgress.hideDialog();
                         if (mListenerArray != null)
                             mListenerArray.onResponse(response);
                     }
 
                     @Override
                     public void onError(ANError anError) {
-                        mProgress.hideDialog();
-                        DialogUtil.showDialogError(mContext, "Đường truyền của bạn đang gặp vấn đề !!!", null);
+                        DialogUtil.showDialogErrorLowInternet(mContext, "Đường truyền của bạn đang gặp vấn đề !!!", null);
                         if (mListenerArray != null)
                             mListenerArray.onError("Đường truyền của bạn đang gặp vấn đề !!!");
                     }
@@ -223,7 +220,7 @@ public class FastNetworking {
                     @Override
                     public void onError(ANError anError) {
                         mProgress.hideDialog();
-                        DialogUtil.showDialogError(mContext, "Đường truyền của bạn đang gặp vấn đề !!!", null);
+                        DialogUtil.showDialogErrorLowInternet(mContext, "Đường truyền của bạn đang gặp vấn đề !!!", null);
                         if (mListenerObject != null)
                             mListenerObject.onError("Đường truyền của bạn đang gặp vấn đề !!!");
                     }
@@ -235,22 +232,19 @@ public class FastNetworking {
             DialogUtil.showDialogErrorInternet(mContext, null);
             return;
         }
-        mProgress.showDialog();
         AndroidNetworking.get(BASE_URL + URL_DISTRICTS)
                 .addQueryParameter(Constants.CITY_ID, cityId)
                 .build()
                 .getAsJSONArray(new JSONArrayRequestListener() {
                     @Override
                     public void onResponse(JSONArray response) {
-                        mProgress.hideDialog();
                         if (mListenerArray != null)
                             mListenerArray.onResponse(response);
                     }
 
                     @Override
                     public void onError(ANError anError) {
-                        mProgress.hideDialog();
-                        DialogUtil.showDialogError(mContext, "Đường truyền của bạn đang gặp vấn đề !!!", null);
+                        DialogUtil.showDialogErrorLowInternet(mContext, "Đường truyền của bạn đang gặp vấn đề !!!", null);
                         if (mListenerArray != null)
                             mListenerArray.onError("Đường truyền của bạn đang gặp vấn đề !!!");
                     }
@@ -262,22 +256,19 @@ public class FastNetworking {
             DialogUtil.showDialogErrorInternet(mContext, null);
             return;
         }
-        mProgress.showDialog();
         AndroidNetworking.get(BASE_URL + URL_WARD)
                 .addQueryParameter(Constants.DISTRICT_ID, districtId)
                 .build()
                 .getAsJSONArray(new JSONArrayRequestListener() {
                     @Override
                     public void onResponse(JSONArray response) {
-                        mProgress.hideDialog();
                         if (mListenerArray != null)
                             mListenerArray.onResponse(response);
                     }
 
                     @Override
                     public void onError(ANError anError) {
-                        mProgress.hideDialog();
-                        DialogUtil.showDialogError(mContext, "Đường truyền của bạn đang gặp vấn đề !!!", null);
+                        DialogUtil.showDialogErrorLowInternet(mContext, "Đường truyền của bạn đang gặp vấn đề !!!", null);
                         if (mListenerArray != null)
                             mListenerArray.onError("Đường truyền của bạn đang gặp vấn đề !!!");
                     }
@@ -310,11 +301,47 @@ public class FastNetworking {
                     @Override
                     public void onError(ANError anError) {
                         mProgress.hideDialog();
-                        DialogUtil.showDialogError(mContext, "Đường truyền của bạn đang gặp vấn đề !!!", null);
+                        DialogUtil.showDialogErrorLowInternet(mContext, "Đường truyền của bạn đang gặp vấn đề !!!", null);
                         if (mListenerString != null)
                             mListenerString.onError("Đường truyền của bạn đang gặp vấn đề !!!");
                     }
                 });
+    }
+
+    public void callApiUpdate(Map<String, File> mapFile, UserInfo userInfo) {
+        if (!NetworkUtil.isHaveInternet(mContext)) {
+            DialogUtil.showDialogErrorInternet(mContext, null);
+            return;
+        }
+        mProgress.showDialog();
+
+        HashMap<String, String> headers = initCustomContentType();
+
+        AndroidNetworking.upload(BASE_URL + URL_UPDATE)
+                .addHeaders(headers)
+                .addQueryParameter(Constants.SECURITY_TOKEN, userInfo.securityToken)
+                .addMultipartFile(mapFile)
+                .addMultipartParameter(userInfo)
+                .build()
+                .getAsString(new StringRequestListener() {
+
+                    @Override
+                    public void onResponse(String s) {
+                        mProgress.hideDialog();
+                        if (mListenerString != null)
+                            mListenerString.onResponse(s);
+                    }
+
+                    @Override
+                    public void onError(ANError anError) {
+                        mProgress.hideDialog();
+                        DialogUtil.showDialogErrorLowInternet(mContext, "Đường truyền của bạn đang gặp vấn đề !!!", null);
+                        if (mListenerString != null)
+                            mListenerString.onError("Đường truyền của bạn đang gặp vấn đề !!!");
+                    }
+                });
+
+
     }
 
 

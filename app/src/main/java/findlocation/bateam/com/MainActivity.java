@@ -57,7 +57,7 @@ public class MainActivity extends BaseActivity implements FragmentDrawer.Fragmen
         mUserInfo = PrefUtil.getSharedPreferenceUserInfo(this);
 
         drawerFragment = (FragmentDrawer) getSupportFragmentManager().findFragmentById(R.id.fragment_navigation_drawer);
-        drawerFragment.setUp(R.id.fragment_navigation_drawer, (DrawerLayout) findViewById(R.id.drawer_layout), mToolbar, mIsMaster);
+        drawerFragment.setUp(R.id.fragment_navigation_drawer, (DrawerLayout) findViewById(R.id.drawer_layout), mToolbar, mIsMaster,mUserInfo);
         drawerFragment.setDrawerListener(this);
 
         displayView(0);

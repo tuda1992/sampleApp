@@ -144,6 +144,7 @@
     // Error
 
     <string name="title_dialog_error">Lỗi sai thông tin</string>
+    <string name="title_dialog_success">Đăng ký</string>
     <string name="title_dialog_error_internet">Lỗi mạng</string>
     <string name="error_dialog_internet">Bạn chưa kết nối với mạng.\nBạn hãy kết nối với mạng rồi thử lại nhé</string>
 

@@ -47,5 +47,6 @@ dependencies {
     compile 'com.facebook.android:facebook-login:[4,5)'
     compile project(':library')
     compile project(':librarycamera')
+    compile 'de.hdodenhof:circleimageview:2.2.0'
     compile 'com.amitshekhar.android:android-networking:1.0.1'
 }

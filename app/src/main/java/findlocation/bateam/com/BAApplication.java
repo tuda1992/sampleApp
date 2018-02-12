@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.Signature;
+import android.graphics.Typeface;
 import android.util.Base64;
 import android.util.Log;
 
@@ -12,6 +13,8 @@ import com.facebook.FacebookSdk;
 
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+
+import findlocation.bateam.com.util.TypefaceUtil;
 
 /**
  * Created by acv on 12/7/17.
@@ -24,6 +27,7 @@ public class BAApplication extends Application {
         super.onCreate();
         FacebookSdk.sdkInitialize(this);
         printHashKey(getApplicationContext());
+        TypefaceUtil.overrideFont(getApplicationContext(), "SERIF", "fonts/segoeui.ttf");
     }
 
     public void printHashKey(Context pContext) {

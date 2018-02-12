@@ -11,7 +11,7 @@ public class UserInfo {
     
     @SerializedName("Id")
     @Expose
-    public Integer id;
+    public String id;
     @SerializedName("FamilyName")
     @Expose
     public String familyName;
@@ -33,9 +33,9 @@ public class UserInfo {
     @SerializedName("WardId")
     @Expose
     public String wardId;
-    @SerializedName("SchoolId")
+    @SerializedName("SchoolName")
     @Expose
-    public String schoolId;
+    public String schoolName;
     @SerializedName("SchoolYear")
     @Expose
     public String schoolYear;
@@ -75,5 +75,11 @@ public class UserInfo {
     @SerializedName("SecurityToken")
     @Expose
     public String securityToken;
+    @SerializedName("Sex")
+    public String sex;
+    @SerializedName("Address")
+    public String address;
+    @SerializedName("DateOfBirth")
+    public String dob;
 
 }
