@@ -3,8 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:clickable="true"
     android:background="@android:color/white"
+    android:clickable="true"
     android:orientation="vertical">
 
     <LinearLayout
@@ -35,7 +35,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
+            android:layout_marginTop="@dimen/_80sdp"
             android:orientation="vertical">
 
             <TextView
@@ -56,10 +56,10 @@
                 android:layout_marginTop="@dimen/_5sdp"
                 android:background="@drawable/border_edittext"
                 android:gravity="center"
+                android:hint="VD : QWR123"
                 android:inputType="textEmailAddress"
-                android:maxLength="4"
+                android:maxLength="6"
                 android:padding="@dimen/_5sdp"
-                android:hint="VD : QW12"
                 android:singleLine="true"
                 android:textColor="@color/textColorPrimary"
                 android:textSize="@dimen/_12sdp"

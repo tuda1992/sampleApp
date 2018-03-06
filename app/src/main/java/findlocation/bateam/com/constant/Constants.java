@@ -6,7 +6,7 @@ package findlocation.bateam.com.constant;
 
 public class Constants {
 
-    public static final String BASE_IMAGE  = "http://45.117.81.141";
+    public static final String BASE_IMAGE = "http://sividns.southeastasia.cloudapp.azure.com";
 
     public static final int REQUEST_CAMERA = 2909;
     public static final int PICK_IMAGE_ID = 234;
@@ -19,8 +19,8 @@ public class Constants {
     public static final String STUDENT_CARD = "StudentCard";
     public static final String SECURITY_TOKEN = "securitytoken";
 
-    public static final String STUDENT_CARD_FILE  = "studentcarduser";
-    public static final String AVATAR_FILE  = "avataruser";
+    public static final String STUDENT_CARD_FILE = "studentcarduser";
+    public static final String AVATAR_FILE = "avataruser";
 
 
     public static final String FRAGMENT_SIGN_IN = "FRAGMENT_SIGN_IN";
@@ -54,7 +54,7 @@ public class Constants {
     public static final String BUNDLE_PLACE_ITEM = "BUNDLE_PLACE_ITEM";
     public static final String BUNDLE_IS_MASTER = "BUNDLE_IS_MASTER";
     public static final String BUNDLE_JOB_ITEM = "BUNDLE_JOB_ITEM";
-
+    public static final String BUNDLE_EMAIL = "BUNDLE_EMAIL";
 
 
 }

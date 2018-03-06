@@ -9,6 +9,7 @@ import butterknife.OnClick;
 import findlocation.bateam.com.MainActivity;
 import findlocation.bateam.com.R;
 import findlocation.bateam.com.base.BaseFragment;
+import findlocation.bateam.com.constant.Constants;
 
 /**
  * Created by acv on 12/8/17.
@@ -21,8 +22,8 @@ public class FragmentSignUpComplete extends BaseFragment {
 
     @OnClick(R.id.btn_next)
     public void onClickNext() {
-        startActivityAnim(MainActivity.class, null);
-        finishActivityAnim();
+        FragmentSignIn fragmentSignIn = new FragmentSignIn();
+        replaceFragment(fragmentSignIn, Constants.FRAGMENT_SIGN_IN);
     }
 
     @Override

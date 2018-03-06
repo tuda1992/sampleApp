@@ -203,6 +203,11 @@ public class FragmentFindLocation extends BaseFragment implements OnMapReadyCall
 
     @OnClick(R.id.btn_find)
     public void onClickFindPlace() {
+
+        if (mLastLocation == null) {
+            return;
+        }
+
         mCurrentPage = 1;
 
         try {

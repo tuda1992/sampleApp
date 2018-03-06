@@ -2,6 +2,7 @@ package findlocation.bateam.com.userinfo;
 
 import android.Manifest;
 import android.app.DatePickerDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
@@ -320,6 +321,19 @@ public class UserInfoActivity extends BaseActivity {
             @Override
             public void onResponse(String string) {
                 Log.d(TAG, "onResponse : " + string);
+                if (string.contains("Chỉnh sửa Tài khoản thành công")) {
+                    DialogUtil.showDialogUpdateSuccess(UserInfoActivity.this, string, new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+                            mUserInfo = null;
+                            PrefUtil.clearSharedPreference(UserInfoActivity.this);
+                            startActivityAnim(LoginActivity.class, null);
+                            finishActivityAnim();
+                        }
+                    });
+                    return;
+                }
+                DialogUtil.showDialogUpdateFail(UserInfoActivity.this, string, null);
 
             }
 
@@ -366,7 +380,6 @@ public class UserInfoActivity extends BaseActivity {
 
     @Override
     protected void initListeners() {
-
     }
 
     @Override

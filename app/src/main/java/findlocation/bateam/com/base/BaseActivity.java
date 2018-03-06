@@ -80,6 +80,8 @@ public abstract class BaseActivity extends AppCompatActivity {
         if (b != null) {
             i.putExtras(b);
         }
+        i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(i);
         overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_right);
     }

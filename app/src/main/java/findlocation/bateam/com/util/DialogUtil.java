@@ -43,10 +43,60 @@ public class DialogUtil {
                 .show();
     }
 
+    public static void showDialogResetPwFail(Context context, String message, DialogInterface.OnClickListener okListener) {
+        if (context == null) return;
+        new AlertDialog.Builder(context)
+                .setTitle(context.getResources().getText(R.string.title_dialog_reset_pw_fail))
+                .setMessage(message)
+                .setPositiveButton(context.getResources().getText(R.string.text_button_ok), okListener)
+                .create()
+                .show();
+    }
+
+    public static void showDialogUpdateFail(Context context, String message, DialogInterface.OnClickListener okListener) {
+        if (context == null) return;
+        new AlertDialog.Builder(context)
+                .setTitle(context.getResources().getText(R.string.title_dialog_update_fail))
+                .setMessage(message)
+                .setPositiveButton(context.getResources().getText(R.string.text_button_ok), okListener)
+                .create()
+                .show();
+    }
+
+    public static void showDialogErrorNotActive(Context context, String message, DialogInterface.OnClickListener okListener) {
+        if (context == null) return;
+        new AlertDialog.Builder(context)
+                .setTitle(context.getResources().getText(R.string.title_dialog_error_not_active))
+                .setMessage(message)
+                .setPositiveButton(context.getResources().getText(R.string.text_button_ok), okListener)
+                .create()
+                .show();
+    }
+
     public static void showDialogSuccess(Context context, String message, DialogInterface.OnClickListener okListener) {
         if (context == null) return;
         new AlertDialog.Builder(context)
                 .setTitle(context.getResources().getText(R.string.title_dialog_success))
+                .setMessage(message)
+                .setPositiveButton(context.getResources().getText(R.string.text_button_ok), okListener)
+                .create()
+                .show();
+    }
+
+    public static void showDialogResetPwSuccess(Context context, String message, DialogInterface.OnClickListener okListener) {
+        if (context == null) return;
+        new AlertDialog.Builder(context)
+                .setTitle(context.getResources().getText(R.string.title_dialog_reset_pw_success))
+                .setMessage(message)
+                .setPositiveButton(context.getResources().getText(R.string.text_button_ok), okListener)
+                .create()
+                .show();
+    }
+
+    public static void showDialogUpdateSuccess(Context context, String message, DialogInterface.OnClickListener okListener) {
+        if (context == null) return;
+        new AlertDialog.Builder(context)
+                .setTitle(context.getResources().getText(R.string.title_dialog_update_success))
                 .setMessage(message)
                 .setPositiveButton(context.getResources().getText(R.string.text_button_ok), okListener)
                 .create()

@@ -134,4 +134,10 @@ public class LoginActivity extends BaseActivity {
         Fragment f = getSupportFragmentManager().findFragmentById(R.id.container_body);
         f.onActivityResult(requestCode, resultCode, data);
     }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        finish();
+    }
 }

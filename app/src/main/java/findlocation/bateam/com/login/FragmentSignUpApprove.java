@@ -2,17 +2,23 @@ package findlocation.bateam.com.login;
 
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import butterknife.BindString;
 import butterknife.BindView;
 import butterknife.OnClick;
 import findlocation.bateam.com.MainActivity;
 import findlocation.bateam.com.R;
+import findlocation.bateam.com.api.FastNetworking;
 import findlocation.bateam.com.base.BaseFragment;
 import findlocation.bateam.com.constant.Constants;
+import findlocation.bateam.com.listener.StringCallBackListener;
 import findlocation.bateam.com.util.DialogUtil;
 import findlocation.bateam.com.util.NetworkUtil;
 
@@ -31,6 +37,8 @@ public class FragmentSignUpApprove extends BaseFragment {
     @BindString(R.string.error_dialog_code_error)
     String mStrCodeError;
 
+    String mEmail;
+
     @OnClick(R.id.btn_send_code)
     public void onClicKSendCode() {
 
@@ -47,13 +55,40 @@ public class FragmentSignUpApprove extends BaseFragment {
             return;
         }
 
-        if (code.length() < 4){
+        if (code.length() < 6) {
             DialogUtil.showDialogError(getActivity(), mStrCodeError, null);
             return;
         }
 
-        FragmentSignUpComplete fragmentSignUpComplete = new FragmentSignUpComplete();
-        addFragment(fragmentSignUpComplete, Constants.FRAGMENT_SIGN_UP_COMPLETE);
+        JSONObject jsonObject = new JSONObject();
+        try {
+            jsonObject.put("Email", mEmail);
+            jsonObject.put("ActivationCode", code);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        callApiActiveUser(jsonObject);
+
+    }
+
+    private void callApiActiveUser(JSONObject jsonObject) {
+        FastNetworking fastNetworking = new FastNetworking(getActivity(), new StringCallBackListener() {
+            @Override
+            public void onResponse(String string) {
+                Log.d(TAG, "string = " + string);
+                if (string.contains("Kích hoạt tài khoản thành công")) {
+                    FragmentSignUpComplete fragmentSignUpComplete = new FragmentSignUpComplete();
+                    addFragment(fragmentSignUpComplete, Constants.FRAGMENT_SIGN_UP_COMPLETE);
+                }
+            }
+
+            @Override
+            public void onError(String messageError) {
+                Log.d(TAG, "messageError = " + messageError);
+            }
+        });
+        fastNetworking.callApiActive(jsonObject);
     }
 
     @Override
@@ -78,7 +113,10 @@ public class FragmentSignUpApprove extends BaseFragment {
 
     @Override
     protected void initDatas(Bundle savedInstanceState) {
-
+        Bundle b = getArguments();
+        if (b != null) {
+            mEmail = b.getString(Constants.BUNDLE_EMAIL, "");
+        }
     }
 
     @Override

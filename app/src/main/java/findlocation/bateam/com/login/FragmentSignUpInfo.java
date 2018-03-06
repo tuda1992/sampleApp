@@ -303,6 +303,9 @@ public class FragmentSignUpInfo extends BaseFragment {
                             LoginActivity.mFileAvatar = null;
                             LoginActivity.mFileLicense = null;
                             FragmentSignUpApprove fragmentSignUpApprove = new FragmentSignUpApprove();
+                            Bundle bundle = new Bundle();
+                            bundle.putString(Constants.BUNDLE_EMAIL, mEdtEmail.getText().toString());
+                            fragmentSignUpApprove.setArguments(bundle);
                             replaceFragment(fragmentSignUpApprove, Constants.FRAGMENT_SIGN_UP_APPROVE);
                         }
                     });

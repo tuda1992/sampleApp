@@ -86,6 +86,7 @@
 
     <string name="text_forget_password_input_notify">Bạn vui lòng nhập mật khẩu mới.</string>
     <string name="text_forget_password_new_pass">Mật khẩu</string>
+    <string name="text_forget_password_old_pass">Mật khẩu cũ</string>
     <string name="text_forget_password_new_pass_reinput">Nhập lại mật khẩu</string>
     <string name="text_forget_password_input_notify_2">Lưu ý : Mật khẩu mới không được trùng với mật khẩu cũ, đảm bảo trong mật khẩu có cả chữ và số.</string>
     <string name="text_forget_password_complete_notify">Chúc mừng bạn đã lấy lại mật khẩu thành công.</string>
@@ -144,13 +145,19 @@
     // Error
 
     <string name="title_dialog_error">Lỗi sai thông tin</string>
+    <string name="title_dialog_reset_pw_fail">Lỗi lấy lại mật khẩu</string>
+    <string name="title_dialog_update_fail">Lỗi cập nhật thông tin</string>
+    <string name="title_dialog_error_not_active">Lỗi chưa kích hoạt</string>
     <string name="title_dialog_success">Đăng ký</string>
+    <string name="title_dialog_update_success">Cập nhật thông tin</string>
+    <string name="title_dialog_reset_pw_success">Lấy lại mật khẩu</string>
     <string name="title_dialog_error_internet">Lỗi mạng</string>
     <string name="error_dialog_internet">Bạn chưa kết nối với mạng.\nBạn hãy kết nối với mạng rồi thử lại nhé</string>
 
     <string name="error_dialog_email_null">Bạn chưa điền thông tin email</string>
     <string name="error_dialog_email_error">Bạn điền sai định dạng email</string>
     <string name="error_dialog_password_null">Bạn chưa điền thông tin mật khẩu</string>
+    <string name="error_dialog_old_password_null">Bạn chưa điền thông tin mật khẩu cũ</string>
     <string name="error_dialog_password_error">Bạn điền sai định dạng mật khẩu</string>
     <string name="error_dialog_re_password_null">Bạn chưa điền thông tin xác nhận mật khẩu</string>
     <string name="error_dialog_re_password_error">Bạn điền sai định dạng xác nhận mật khẩu</string>
@@ -161,6 +168,6 @@
     <string name="error_dialog_first_name_null">Bạn chưa điền thông tin tên</string>
     <string name="error_dialog_dob_null">Bạn chưa điền thông tin ngày sinh</string>
     <string name="error_dialog_code_null">Bạn chưa điền thông tin code</string>
-    <string name="error_dialog_code_error">Bạn iền sai thông tin code</string>
+    <string name="error_dialog_code_error">Bạn điền sai thông tin code</string>
 
 </resources>

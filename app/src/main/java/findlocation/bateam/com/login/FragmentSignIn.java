@@ -1,5 +1,6 @@
 package findlocation.bateam.com.login;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Paint;
 import android.os.Bundle;
@@ -97,10 +98,10 @@ public class FragmentSignIn extends BaseFragment {
             return;
         }
 
-        if (!PatternUtil.checkPasswordCharacter(userPass)) {
-            DialogUtil.showDialogError(getActivity(), mStrPasswordError, null);
-            return;
-        }
+//        if (!PatternUtil.checkPasswordCharacter(userPass)) {
+//            DialogUtil.showDialogError(getActivity(), mStrPasswordError, null);
+//            return;
+//        }
 
         int selectedId = mRg.getCheckedRadioButtonId();
         boolean isChecked = mCbSavePassword.isChecked();
@@ -139,14 +140,28 @@ public class FragmentSignIn extends BaseFragment {
             public void onResponse(JSONObject jsonObject) {
 
                 UserInfo userLoginSuccess = mGson.fromJson(jsonObject.toString(), UserInfo.class);
-                if (TextUtils.isEmpty(userLoginSuccess.securityToken)){
-                    DialogUtil.showDialogError(getActivity(),"Bạn điền sai thông tin email hoặc mật khẩu",null);
+                if (TextUtils.isEmpty(userLoginSuccess.securityToken)) {
+                    if (userLoginSuccess.message.contains("Tài khoản chưa được kích hoạt")) {
+                        DialogUtil.showDialogErrorNotActive(getActivity(), userLoginSuccess.message, new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+                                FragmentSignUpApprove fragmentSignUpApprove = new FragmentSignUpApprove();
+                                Bundle bundle = new Bundle();
+                                bundle.putString(Constants.BUNDLE_EMAIL, userLogin.userName);
+                                fragmentSignUpApprove.setArguments(bundle);
+                                replaceFragment(fragmentSignUpApprove, Constants.FRAGMENT_SIGN_UP_APPROVE);
+                            }
+                        });
+                    } else {
+                       DialogUtil.showDialogError(getActivity(),userLoginSuccess.message,null);
+                    }
                     return;
                 }
 
                 PrefUtil.setSharedPreferenceUserInfo(getActivity(), jsonObject.toString());
                 startActivityAnim(MainActivity.class, bundle);
                 finishActivityAnim();
+
             }
 
             @Override
