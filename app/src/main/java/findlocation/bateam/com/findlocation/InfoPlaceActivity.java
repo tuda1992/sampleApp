@@ -183,7 +183,12 @@ public class InfoPlaceActivity extends BaseActivity {
             mTvAddress.setText(Html.fromHtml(htmlAddress));
 
             NumberFormat formatter = new DecimalFormat("#,###");
-            String formatPrice = formatter.format(Double.parseDouble(TextUtils.isEmpty(mItem.price) ? "0" : mItem.price)) + " VNĐ";
+            String formatPrice = "";
+            try {
+                formatPrice = formatter.format(Double.parseDouble(TextUtils.isEmpty(mItem.price) ? "0" : mItem.price)) + " VNĐ";
+            } catch (Exception e) {
+                formatPrice = mItem.price;
+            }
 
             String htmlPrice = TextUtils.isEmpty(mItem.price) ? "<b>" + mStrPrice + "</b>" : "<b>" + mStrPrice + "</b>" + " " + formatPrice;
             mTvPrice.setText(Html.fromHtml(htmlPrice));

@@ -47,29 +47,33 @@
         android:layout_marginTop="@dimen/_35sdp"
         android:orientation="horizontal">
 
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:padding="@dimen/_2sdp"
-            android:text="@string/text_email"
-            android:textColor="@color/textColorPrimary"
-            android:textSize="@dimen/_15sdp"
-            android:textStyle="bold" />
+        <!--<TextView-->
+        <!--android:layout_width="0dp"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_weight="1"-->
+        <!--android:padding="@dimen/_2sdp"-->
+        <!--android:text="@string/text_email"-->
+        <!--android:textColor="@color/textGrey"-->
+        <!--android:textSize="@dimen/_15sdp"-->
+        <!--android:textStyle="bold" />-->
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/input_layout_email"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
-        <EditText
-            android:id="@+id/edt_user_name"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1.4"
-            android:background="@drawable/border_edittext"
-            android:gravity="right"
-            android:hint="example@gmail.com"
-            android:inputType="textEmailAddress"
-            android:padding="@dimen/_5sdp"
-            android:singleLine="true"
-            android:textColor="@color/textColorPrimary"
-            android:textSize="@dimen/_15sdp" />
+            <EditText
+                android:id="@+id/edt_user_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="left"
+                android:hint="Email đăng nhập"
+                android:inputType="textEmailAddress"
+                android:padding="@dimen/_5sdp"
+                android:singleLine="true"
+                android:textColor="@color/textGrey"
+                android:textColorHint="@color/textColorPrimary"
+                android:textSize="@dimen/_15sdp" />
+        </android.support.design.widget.TextInputLayout>
 
     </LinearLayout>
 
@@ -81,29 +85,33 @@
         android:layout_marginTop="@dimen/_20sdp"
         android:orientation="horizontal">
 
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:padding="@dimen/_2sdp"
-            android:text="@string/text_user_password"
-            android:textColor="@color/textColorPrimary"
-            android:textSize="@dimen/_15sdp"
-            android:textStyle="bold" />
+        <!--<TextView-->
+        <!--android:layout_width="0dp"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_weight="1"-->
+        <!--android:padding="@dimen/_2sdp"-->
+        <!--android:text="@string/text_user_password"-->
+        <!--android:textColor="@color/textGrey"-->
+        <!--android:textSize="@dimen/_15sdp"-->
+        <!--android:textStyle="bold" />-->
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/input_layout_password"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
-        <EditText
-            android:id="@+id/edt_user_password"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1.4"
-            android:background="@drawable/border_edittext"
-            android:gravity="right"
-            android:hint="8 ký tự gồm chữ và số"
-            android:inputType="textPassword"
-            android:padding="@dimen/_5sdp"
-            android:singleLine="true"
-            android:textColor="@color/textColorPrimary"
-            android:textSize="@dimen/_15sdp" />
+            <EditText
+                android:id="@+id/edt_user_password"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="left"
+                android:hint="Mật khẩu"
+                android:inputType="textPassword"
+                android:padding="@dimen/_5sdp"
+                android:singleLine="true"
+                android:textColor="@color/textGrey"
+                android:textColorHint="@color/textColorPrimary"
+                android:textSize="@dimen/_15sdp" />
+        </android.support.design.widget.TextInputLayout>
 
     </LinearLayout>
 
@@ -172,7 +180,7 @@
             android:layout_height="wrap_content"
             android:buttonTint="@color/colorAccent"
             android:text="@string/text_save_info"
-            android:textColor="@color/textColorPrimary"
+            android:textColor="@color/textGrey"
             android:textSize="@dimen/_12sdp"
             android:textStyle="bold" />
 
@@ -191,7 +199,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/text_forgot_password"
-            android:textColor="@color/textColorPrimary"
+            android:textColor="@color/textGrey"
             android:textSize="@dimen/_11sdp"
             android:textStyle="bold" />
 

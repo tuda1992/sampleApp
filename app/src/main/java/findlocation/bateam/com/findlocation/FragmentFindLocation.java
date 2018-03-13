@@ -14,6 +14,7 @@ import android.location.Location;
 import android.location.LocationManager;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
 import android.provider.Settings;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -123,6 +124,7 @@ public class FragmentFindLocation extends BaseFragment implements OnMapReadyCall
     private List<PlaceModel> mAllListPlaceModel = new ArrayList<>();
     private Gson mGson = new Gson();
     private int mCurrentPage = 1;
+    private int mIntOut;
 
     // Bind View
 
@@ -280,8 +282,13 @@ public class FragmentFindLocation extends BaseFragment implements OnMapReadyCall
                             if (mAllListPlaceModel.get(i) != null) {
                                 title = mAllListPlaceModel.get(i).street;
                                 NumberFormat formatter = new DecimalFormat("#,###");
-                                String formatPrice = formatter.format(Double.parseDouble(TextUtils.isEmpty(mAllListPlaceModel.get(i).price) ? "0" : mAllListPlaceModel.get(i).price)) + " VNĐ";
-                                price = "Giá thuê : " + formatPrice;
+                                try {
+                                    String formatPrice = formatter.format(Double.parseDouble(TextUtils.isEmpty(mAllListPlaceModel.get(i).price) ? "0" : mAllListPlaceModel.get(i).price)) + " VNĐ";
+                                    price = "Giá thuê : " + formatPrice;
+                                } catch (Exception e) {
+                                    price = "Giá thuê : " + mAllListPlaceModel.get(i).price;
+                                }
+
                             }
 
                             LatLng position = new LatLng(Double.parseDouble(mAllListPlaceModel.get(i).latResult), Double.parseDouble(mAllListPlaceModel.get(i).longResult));
@@ -315,7 +322,18 @@ public class FragmentFindLocation extends BaseFragment implements OnMapReadyCall
 
     @Override
     protected void onBackPressFragment() {
-        getActivity().finish();
+        mIntOut++;
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                mIntOut = 0;
+            }
+        }, 500);
+        if (mIntOut == 2) {
+            getActivity().finish();
+        } else {
+            Toast.makeText(getActivity(), "Ấn back 2 lần để thoát ứng dụng", Toast.LENGTH_SHORT).show();
+        }
     }
 
     @Override
@@ -657,8 +675,13 @@ public class FragmentFindLocation extends BaseFragment implements OnMapReadyCall
         if (item != null) {
             title = item.street;
             NumberFormat formatter = new DecimalFormat("#,###");
-            String formatPrice = formatter.format(Double.parseDouble(TextUtils.isEmpty(item.price) ? "0" : item.price)) + " VNĐ";
-            price = "Giá thuê : " + formatPrice;
+            try {
+                String formatPrice = formatter.format(Double.parseDouble(TextUtils.isEmpty(item.price) ? "0" : item.price)) + " VNĐ";
+                price = "Giá thuê : " + formatPrice;
+            } catch (Exception e) {
+                price = "Giá thuê : " + item.price;
+            }
+
         } else {
             title = "Vị trí của tôi";
         }

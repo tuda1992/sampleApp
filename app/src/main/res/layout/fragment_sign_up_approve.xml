@@ -43,7 +43,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:text="@string/text_signup_code"
-                android:textColor="@color/textColorPrimary"
+                android:textColor="@color/textGrey"
                 android:textSize="@dimen/_12sdp"
                 android:textStyle="bold" />
 
@@ -61,7 +61,7 @@
                 android:maxLength="6"
                 android:padding="@dimen/_5sdp"
                 android:singleLine="true"
-                android:textColor="@color/textColorPrimary"
+                android:textColor="@color/textGrey"
                 android:textSize="@dimen/_12sdp"
                 android:textStyle="bold" />
         </LinearLayout>
@@ -80,18 +80,13 @@
             android:layout_alignParentRight="true"
             android:orientation="horizontal">
 
-            <Button
+            <android.support.design.widget.FloatingActionButton
                 android:id="@+id/btn_send_code"
-                android:layout_width="@dimen/_70sdp"
-                android:layout_height="@dimen/_30sdp"
+                android:layout_width="@dimen/_45sdp"
+                android:layout_height="@dimen/_45sdp"
                 android:layout_marginRight="@dimen/_20sdp"
-                android:background="@drawable/effect_button"
-                android:gravity="center"
-                android:includeFontPadding="false"
-                android:text="@string/text_button_send"
-                android:textColor="@android:color/white"
-                android:textSize="@dimen/_10sdp"
-                android:textStyle="bold" />
+                android:foreground="?android:attr/selectableItemBackground"
+                android:src="@drawable/ic_apply_job" />
         </LinearLayout>
 
     </RelativeLayout>

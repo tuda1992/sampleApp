@@ -203,7 +203,7 @@ public class ImagePicker {
         } while (bm.getWidth() < minWidthQuality && i < sampleSizes.length);
 
 
-        bm = ScalingUtil.getScaledDownBitmap(bm, 1024, ScalingUtil.ScalingLogic.CROP);
+        bm = ScalingUtil.getScaledDownBitmap(bm, 800, ScalingUtil.ScalingLogic.CROP);
 
         return bm;
     }

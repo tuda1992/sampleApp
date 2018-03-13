@@ -7,9 +7,11 @@ import android.text.TextUtils;
 import com.google.gson.Gson;
 
 import findlocation.bateam.com.model.UserInfo;
+import findlocation.bateam.com.model.UserLogin;
 
 import static findlocation.bateam.com.constant.Constants.SAVE_DATA;
 import static findlocation.bateam.com.constant.Constants.USER_INFO;
+import static findlocation.bateam.com.constant.Constants.USER_LOGIN;
 
 /**
  * Created by doanhtu on 12/25/17.
@@ -101,6 +103,26 @@ public class PrefUtil {
         editor.commit();
     }
 
+
+    public static void setSharedPreferenceUserLogin(Context context, String json) {
+        SharedPreferences settings = context.getSharedPreferences(PREF_FILE, 0);
+        SharedPreferences.Editor editor = settings.edit();
+        editor.putString(USER_LOGIN, json);
+        editor.commit();
+    }
+
+    public static UserLogin getSharedPreferenceUserLogin(Context context) {
+        SharedPreferences settings = context.getSharedPreferences(PREF_FILE, 0);
+        String userInfo = settings.getString(USER_LOGIN, "");
+        if (TextUtils.isEmpty(userInfo)) {
+            return null;
+        } else {
+            Gson gson = new Gson();
+            return gson.fromJson(userInfo, UserLogin.class);
+        }
+    }
+
+
     public static UserInfo getSharedPreferenceUserInfo(Context context) {
         SharedPreferences settings = context.getSharedPreferences(PREF_FILE, 0);
         String userInfo = settings.getString(USER_INFO, "");
@@ -126,6 +148,7 @@ public class PrefUtil {
 
     public static void clearSharedPreference(Context context) {
         SharedPreferences settings = context.getSharedPreferences(PREF_FILE, 0);
-        settings.edit().clear().apply();
+        settings.edit().remove(USER_INFO).apply();
+        settings.edit().remove(SAVE_DATA).apply();
     }
 }

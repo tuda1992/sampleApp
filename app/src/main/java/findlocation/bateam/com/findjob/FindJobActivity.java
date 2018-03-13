@@ -1,9 +1,11 @@
 package findlocation.bateam.com.findjob;
 
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.text.TextUtils;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
@@ -32,6 +34,7 @@ import findlocation.bateam.com.findlocation.InfoPlaceActivity;
 import findlocation.bateam.com.listener.JsonArrayCallBackListener;
 import findlocation.bateam.com.model.JobModel;
 import findlocation.bateam.com.model.PlaceModel;
+import findlocation.bateam.com.util.DialogUtil;
 import findlocation.bateam.com.util.JSONResourceReader;
 
 /**
@@ -112,6 +115,16 @@ public class FindJobActivity extends BaseActivity implements FindJobAdapter.ICal
         FastNetworking fastNetworking = new FastNetworking(this, new JsonArrayCallBackListener() {
             @Override
             public void onResponse(JSONArray jsonArray) {
+                if (jsonArray.toString().equalsIgnoreCase("[]") || TextUtils.isEmpty(jsonArray.toString())) {
+                    DialogUtil.showDialogErrorJob(FindJobActivity.this, "Hiện tại chưa có công việc bạn cần tìm!!!", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+                            finishActivityAnim();
+                        }
+                    });
+                    return;
+                }
+
                 Type listType = new TypeToken<List<JobModel>>() {
                 }.getType();
                 List<JobModel> jobModels = (List<JobModel>) mGson.fromJson(jsonArray.toString(), listType);
@@ -120,7 +133,6 @@ public class FindJobActivity extends BaseActivity implements FindJobAdapter.ICal
 
                 mListData.addAll(jobModels);
                 mAdapter.notifyDataSetChanged();
-
             }
 
             @Override

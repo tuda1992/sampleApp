@@ -1,6 +1,7 @@
 package findlocation.bateam.com.login;
 
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
@@ -31,7 +32,7 @@ public class FragmentSignUpApprove extends BaseFragment {
     @BindView(R.id.edt_code)
     EditText mEdtCode;
     @BindView(R.id.btn_send_code)
-    Button mBtnSendCode;
+    FloatingActionButton mBtnSendCode;
     @BindString(R.string.error_dialog_code_null)
     String mStrCodeNull;
     @BindString(R.string.error_dialog_code_error)
@@ -80,6 +81,8 @@ public class FragmentSignUpApprove extends BaseFragment {
                 if (string.contains("Kích hoạt tài khoản thành công")) {
                     FragmentSignUpComplete fragmentSignUpComplete = new FragmentSignUpComplete();
                     addFragment(fragmentSignUpComplete, Constants.FRAGMENT_SIGN_UP_COMPLETE);
+                }else {
+                    DialogUtil.showDialogErrorActive(getActivity(), "Nhập sai mã kích hoạt!!!", null);
                 }
             }
 

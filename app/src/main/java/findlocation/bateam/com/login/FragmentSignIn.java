@@ -4,6 +4,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Paint;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.text.TextUtils;
 import android.util.Log;
@@ -14,6 +15,7 @@ import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.gson.Gson;
 
@@ -71,6 +73,7 @@ public class FragmentSignIn extends BaseFragment {
     String mStrPasswordError;
 
     private Gson mGson;
+    private int mIntOut;
 
     @OnClick(R.id.btn_signin)
     public void onClickSignIn() {
@@ -132,13 +135,12 @@ public class FragmentSignIn extends BaseFragment {
         userLogin.userName = un;
         userLogin.password = pw;
 
-        String json = mGson.toJson(userLogin);
+        final String json = mGson.toJson(userLogin);
         JSONObject jsonObject = new JSONObject(json);
 
         FastNetworking fastNetworking = new FastNetworking(getActivity(), new JsonObjectCallBackListener() {
             @Override
             public void onResponse(JSONObject jsonObject) {
-
                 UserInfo userLoginSuccess = mGson.fromJson(jsonObject.toString(), UserInfo.class);
                 if (TextUtils.isEmpty(userLoginSuccess.securityToken)) {
                     if (userLoginSuccess.message.contains("Tài khoản chưa được kích hoạt")) {
@@ -152,13 +154,15 @@ public class FragmentSignIn extends BaseFragment {
                                 replaceFragment(fragmentSignUpApprove, Constants.FRAGMENT_SIGN_UP_APPROVE);
                             }
                         });
+
                     } else {
-                       DialogUtil.showDialogError(getActivity(),userLoginSuccess.message,null);
+                        DialogUtil.showDialogError(getActivity(), userLoginSuccess.message, null);
                     }
                     return;
                 }
 
                 PrefUtil.setSharedPreferenceUserInfo(getActivity(), jsonObject.toString());
+                PrefUtil.setSharedPreferenceUserLogin(getActivity(), json);
                 startActivityAnim(MainActivity.class, bundle);
                 finishActivityAnim();
 
@@ -202,6 +206,13 @@ public class FragmentSignIn extends BaseFragment {
     @Override
     protected void initDatas(Bundle savedInstanceState) {
         mGson = new Gson();
+
+        if (PrefUtil.getSharedPreferenceUserLogin(getActivity()) != null) {
+            UserLogin userLogin = PrefUtil.getSharedPreferenceUserLogin(getActivity());
+            mEdtUserName.setText(userLogin.userName);
+            mEdtUserPass.setText(userLogin.password);
+        }
+
     }
 
     @Override
@@ -211,7 +222,19 @@ public class FragmentSignIn extends BaseFragment {
 
     @Override
     public void onBackPressFragment() {
-        getActivity().finish();
+        mIntOut++;
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                mIntOut = 0;
+            }
+        }, 500);
+        if (mIntOut == 2) {
+            getActivity().finish();
+        } else {
+            Toast.makeText(getActivity(), "Ấn back 2 lần để thoát ứng dụng", Toast.LENGTH_SHORT).show();
+        }
+
     }
 
 }

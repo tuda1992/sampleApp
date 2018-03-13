@@ -13,7 +13,7 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.squareup.picasso.Picasso;
+import com.bumptech.glide.Glide;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -26,6 +26,7 @@ import findlocation.bateam.com.base.BaseFragment;
 import findlocation.bateam.com.constant.Constants;
 import findlocation.bateam.com.model.UserInfo;
 import findlocation.bateam.com.userinfo.UserInfoActivity;
+import findlocation.bateam.com.widget.ImageLoading;
 
 /**
  * Created by acv on 12/4/17.
@@ -38,7 +39,7 @@ public class FragmentDrawer extends BaseFragment {
     @BindView(R.id.tv_user_name)
     TextView mTvUserName;
     @BindView(R.id.iv_avatar)
-    ImageView mIvAvatar;
+    ImageLoading mILAvatar;
 
     @OnClick(R.id.iv_avatar)
     public void onClickUserInfo() {
@@ -127,7 +128,7 @@ public class FragmentDrawer extends BaseFragment {
     public void setUp(int fragmentId, DrawerLayout drawerLayout, final Toolbar toolbar, boolean isMaster, UserInfo userInfo) {
         if (userInfo != null) {
             mTvUserName.setText(userInfo.familyName + " " + userInfo.middleName + " " + userInfo.name);
-            Picasso.with(getActivity()).load(Constants.BASE_IMAGE + userInfo.avatar).error(R.drawable.ic_logo).into(mIvAvatar);
+            mILAvatar.loadUrl(Constants.BASE_IMAGE + userInfo.avatar);
         }
 
         if (isMaster) {

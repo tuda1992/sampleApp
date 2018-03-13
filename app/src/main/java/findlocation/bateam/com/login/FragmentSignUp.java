@@ -93,9 +93,10 @@ public class FragmentSignUp extends BaseFragment {
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        LoginActivity.mFileLicense = ImagePicker.getFileFromResult(getActivity(), resultCode, data);
+//        LoginActivity.mFileLicense = ImagePicker.getFileFromResult(getActivity(), resultCode, data);
         Bitmap bm = ImagePicker.getImageFromResult(getActivity(), resultCode, data);
         if (bm != null) {
+            LoginActivity.mFileLicense = ImagePicker.convertToFile(getActivity(), bm);
             mIvCard.setVisibility(View.VISIBLE);
             mIvCard.setImageBitmap(bm);
 

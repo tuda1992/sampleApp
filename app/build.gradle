@@ -1,6 +1,7 @@
 buildscript {
     repositories {
         mavenCentral()
+        google()
     }
 }
 
@@ -14,7 +15,7 @@ android {
         minSdkVersion 21
         targetSdkVersion 26
         versionCode 1
-        versionName "1.0.2"
+        versionName "1.0.5"
         multiDexEnabled true
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
@@ -33,7 +34,6 @@ dependencies {
     })
     compile 'com.jakewharton:butterknife:8.8.1'
     compile 'com.google.code.gson:gson:2.2.4'
-    compile 'com.squareup.picasso:picasso:2.3.2'
     compile 'com.google.android.gms:play-services:10.0.0'
     compile 'com.google.android.gms:play-services-maps:10.0.0'
     testCompile 'junit:junit:4.12'
@@ -49,4 +49,6 @@ dependencies {
     compile project(':librarycamera')
     compile 'de.hdodenhof:circleimageview:2.2.0'
     compile 'com.amitshekhar.android:android-networking:1.0.1'
+    compile 'com.github.bumptech.glide:glide:4.6.1'
+    annotationProcessor 'com.github.bumptech.glide:compiler:4.6.1'
 }

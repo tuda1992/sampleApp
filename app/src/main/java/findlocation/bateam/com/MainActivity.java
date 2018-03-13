@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Build;
+import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.DrawerLayout;
@@ -12,6 +13,7 @@ import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.Toast;
 
 import butterknife.BindView;
 import findlocation.bateam.com.base.BaseActivity;
@@ -57,7 +59,7 @@ public class MainActivity extends BaseActivity implements FragmentDrawer.Fragmen
         mUserInfo = PrefUtil.getSharedPreferenceUserInfo(this);
 
         drawerFragment = (FragmentDrawer) getSupportFragmentManager().findFragmentById(R.id.fragment_navigation_drawer);
-        drawerFragment.setUp(R.id.fragment_navigation_drawer, (DrawerLayout) findViewById(R.id.drawer_layout), mToolbar, mIsMaster,mUserInfo);
+        drawerFragment.setUp(R.id.fragment_navigation_drawer, (DrawerLayout) findViewById(R.id.drawer_layout), mToolbar, mIsMaster, mUserInfo);
         drawerFragment.setDrawerListener(this);
 
         displayView(0);
@@ -111,7 +113,7 @@ public class MainActivity extends BaseActivity implements FragmentDrawer.Fragmen
                     break;
             }
         } else {
-            if (position == 2) {
+            if (position == 3) {
                 mUserInfo = null;
                 mCurrentTab = -1;
                 PrefUtil.clearSharedPreference(this);
@@ -132,6 +134,12 @@ public class MainActivity extends BaseActivity implements FragmentDrawer.Fragmen
                     fragment = new FragmentFindJob();
                     title = getString(R.string.title_find_job);
                     fragmentName = Constants.FRAGMENT_FIND_JOB;
+                    break;
+                case 2:
+                    mCurrentTab = 2;
+                    fragment = new FragmentAboutSivi();
+                    title = getString(R.string.title_about_sivi);
+                    fragmentName = Constants.FRAGMENT_ABOUT_SIVI;
                     break;
             }
         }

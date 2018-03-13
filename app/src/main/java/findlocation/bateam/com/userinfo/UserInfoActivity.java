@@ -22,10 +22,9 @@ import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
 
-import com.facebook.CallbackManager;
+import com.bumptech.glide.Glide;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
-import com.squareup.picasso.Picasso;
 
 import org.json.JSONArray;
 
@@ -67,6 +66,7 @@ import findlocation.bateam.com.util.NetworkUtil;
 import findlocation.bateam.com.util.PatternUtil;
 import findlocation.bateam.com.util.PermissionUtils;
 import findlocation.bateam.com.util.PrefUtil;
+import findlocation.bateam.com.widget.ImageLoading;
 
 /**
  * Created by doanhtu on 12/25/17.
@@ -107,7 +107,7 @@ public class UserInfoActivity extends BaseActivity {
     @BindView(R.id.spn_address_country)
     Spinner mSpnAddressCountry;
     @BindView(R.id.iv_avatar_user)
-    ImageView mIvAvatarUser;
+    ImageLoading mILAvatarUser;
 
     @BindString(R.string.title_user_info)
     String mStrTitle;
@@ -143,7 +143,10 @@ public class UserInfoActivity extends BaseActivity {
     String mStrTelephoneNull;
     @BindString(R.string.error_dialog_telephone_error)
     String mStrTelephoneError;
+    @BindString(R.string.error_dialog_school_error)
+    String mStrSchoolError;
 
+    private String mStrUniversityName;
     private File mFileAvatar;
     private Map<String, File> mMapFile = new HashMap<>();
 
@@ -179,12 +182,11 @@ public class UserInfoActivity extends BaseActivity {
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        mFileAvatar = ImagePicker.getFileFromResult(this, resultCode, data);
         Bitmap bm = ImagePicker.getImageFromResult(this, resultCode, data);
         if (bm != null) {
-            mIvAvatarUser.setImageBitmap(bm);
+            mFileAvatar = ImagePicker.convertToFile(this, bm);
+            mILAvatarUser.loadBitmap(bm);
         }
-
     }
 
     @Override
@@ -288,6 +290,11 @@ public class UserInfoActivity extends BaseActivity {
             return;
         }
 
+        if (!schoolName.equalsIgnoreCase(mStrUniversityName)) {
+            DialogUtil.showDialogError(this, mStrSchoolError, null);
+            return;
+        }
+
         mUserInfo.email = email;
         mUserInfo.familyName = familyName;
         mUserInfo.name = firstName;
@@ -327,8 +334,9 @@ public class UserInfoActivity extends BaseActivity {
                         public void onClick(DialogInterface dialogInterface, int i) {
                             mUserInfo = null;
                             PrefUtil.clearSharedPreference(UserInfoActivity.this);
+                            finishAffinity();
                             startActivityAnim(LoginActivity.class, null);
-                            finishActivityAnim();
+
                         }
                     });
                     return;
@@ -469,8 +477,9 @@ public class UserInfoActivity extends BaseActivity {
             mEdtSchool.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 @Override
                 public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                    String universityName = ((UniversityModel) (mEdtSchool.getAdapter().getItem(i))).universityName;
+                    String universityName = mAdapterSchool.mFilterUniver.get(i).universityName;
                     mEdtSchool.setText(universityName);
+                    mStrUniversityName = universityName;
                     mEdtSchool.setSelection(universityName.length());
                 }
             });
@@ -517,9 +526,10 @@ public class UserInfoActivity extends BaseActivity {
             }
 
             mEdtSchool.setText(mUserInfo.schoolName);
+            mStrUniversityName = mUserInfo.schoolName;
             mEdtEmail.setText(mUserInfo.email);
             mEdtTelephone.setText(mUserInfo.phoneNumber);
-            Picasso.with(this).load(Constants.BASE_IMAGE + mUserInfo.avatar).error(R.drawable.ic_logo).into(mIvAvatarUser);
+            mILAvatarUser.loadUrl(Constants.BASE_IMAGE + mUserInfo.avatar);
             mEdtAddress.setText(mUserInfo.address);
             mEdtClass.setText(mUserInfo.specializedSubject);
             mTvDob.setText(mUserInfo.dob);

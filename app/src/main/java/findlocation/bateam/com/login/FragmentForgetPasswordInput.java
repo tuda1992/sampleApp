@@ -2,6 +2,7 @@ package findlocation.bateam.com.login;
 
 import android.content.DialogInterface;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
@@ -35,7 +36,7 @@ public class FragmentForgetPasswordInput extends BaseFragment {
     @BindView(R.id.edt_old_pass)
     EditText mEdtOldPass;
     @BindView(R.id.btn_send_email)
-    Button mBtnSendEmail;
+    FloatingActionButton mBtnSendEmail;
     @BindString(R.string.error_dialog_password_null)
     String mStrPasswordNull;
     @BindString(R.string.error_dialog_password_error)

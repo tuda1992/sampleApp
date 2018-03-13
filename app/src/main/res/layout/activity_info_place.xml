@@ -46,9 +46,9 @@
                     android:maxLines="2"
                     android:text="@string/text_info_title"
                     android:textAllCaps="true"
-                    android:textColor="@color/colorPrimaryDark"
+                    android:textColor="@color/textGrey"
                     android:textSize="@dimen/_15sdp"
-                    android:textStyle="italic|bold" />
+                    android:textStyle="bold" />
 
 
             </LinearLayout>
@@ -64,7 +64,8 @@
                 <ImageView
                     android:layout_width="@dimen/_24sdp"
                     android:layout_height="@dimen/_24sdp"
-                    android:src="@drawable/ic_date" />
+                    android:src="@drawable/ic_date"
+                    android:tint="@color/textGrey" />
 
                 <TextView
                     android:id="@+id/tv_created_date"
@@ -73,7 +74,7 @@
                     android:layout_gravity="center_vertical"
                     android:layout_marginLeft="@dimen/_3sdp"
                     android:text="@string/text_info_created_date"
-                    android:textColor="@color/textColorPrimary"
+                    android:textColor="@color/textGrey"
                     android:textSize="@dimen/_14sdp" />
 
             </LinearLayout>
@@ -90,7 +91,8 @@
                     android:layout_width="@dimen/_24sdp"
                     android:layout_height="@dimen/_24sdp"
                     android:layout_gravity="center"
-                    android:src="@drawable/ic_city" />
+                    android:src="@drawable/ic_city"
+                    android:tint="@color/textGrey" />
 
                 <TextView
                     android:id="@+id/tv_city"
@@ -99,7 +101,7 @@
                     android:layout_gravity="center_vertical"
                     android:layout_marginLeft="@dimen/_3sdp"
                     android:text="@string/text_info_city"
-                    android:textColor="@color/textColorPrimary"
+                    android:textColor="@color/textGrey"
                     android:textSize="@dimen/_14sdp" />
 
             </LinearLayout>
@@ -116,7 +118,8 @@
                     android:layout_width="@dimen/_24sdp"
                     android:layout_height="@dimen/_24sdp"
                     android:layout_gravity="center"
-                    android:src="@drawable/ic_district" />
+                    android:src="@drawable/ic_district"
+                    android:tint="@color/textGrey" />
 
                 <TextView
                     android:id="@+id/tv_district"
@@ -125,7 +128,7 @@
                     android:layout_gravity="center_vertical"
                     android:layout_marginLeft="@dimen/_3sdp"
                     android:text="@string/text_info_district"
-                    android:textColor="@color/textColorPrimary"
+                    android:textColor="@color/textGrey"
                     android:textSize="@dimen/_14sdp" />
 
             </LinearLayout>
@@ -142,7 +145,8 @@
                 <ImageView
                     android:layout_width="@dimen/_24sdp"
                     android:layout_height="@dimen/_24sdp"
-                    android:src="@drawable/ic_address" />
+                    android:src="@drawable/ic_address"
+                    android:tint="@color/textGrey" />
 
                 <TextView
                     android:id="@+id/tv_address"
@@ -152,7 +156,7 @@
                     android:layout_marginLeft="@dimen/_3sdp"
                     android:maxLines="2"
                     android:text="@string/text_info_address_detail"
-                    android:textColor="@color/textColorPrimary"
+                    android:textColor="@color/textGrey"
                     android:textSize="@dimen/_14sdp" />
 
             </LinearLayout>
@@ -168,7 +172,7 @@
                 <ImageView
                     android:layout_width="@dimen/_22sdp"
                     android:layout_height="@dimen/_22sdp"
-                    android:src="@drawable/ic_money" />
+                    android:src="@drawable/ic_money_grey" />
 
                 <TextView
                     android:id="@+id/tv_price"
@@ -177,7 +181,7 @@
                     android:layout_gravity="center_vertical"
                     android:layout_marginLeft="@dimen/_5sdp"
                     android:text="@string/text_info_price"
-                    android:textColor="@color/textColorPrimary"
+                    android:textColor="@color/textGrey"
                     android:textSize="@dimen/_14sdp" />
 
             </LinearLayout>
@@ -193,6 +197,7 @@
                 <ImageView
                     android:layout_width="@dimen/_23sdp"
                     android:layout_height="@dimen/_23sdp"
+                    android:tint="@color/textGrey"
                     android:src="@drawable/ic_master" />
 
                 <TextView
@@ -202,7 +207,7 @@
                     android:layout_gravity="center_vertical"
                     android:layout_marginLeft="@dimen/_4sdp"
                     android:text="@string/text_info_contract_name"
-                    android:textColor="@color/textColorPrimary"
+                    android:textColor="@color/textGrey"
                     android:textSize="@dimen/_14sdp" />
 
             </LinearLayout>
@@ -218,6 +223,7 @@
 
                 <ImageView
                     android:layout_width="@dimen/_22sdp"
+                    android:tint="@color/textGrey"
                     android:layout_height="@dimen/_22sdp"
                     android:src="@drawable/ic_phone" />
 
@@ -228,7 +234,7 @@
                     android:layout_gravity="center_vertical"
                     android:layout_marginLeft="@dimen/_5sdp"
                     android:text="@string/text_info_phone"
-                    android:textColor="@color/textColorPrimary"
+                    android:textColor="@color/textGrey"
                     android:textSize="@dimen/_14sdp" />
 
             </LinearLayout>
@@ -245,6 +251,7 @@
                 <ImageView
                     android:layout_width="@dimen/_22sdp"
                     android:layout_height="@dimen/_22sdp"
+                    android:tint="@color/textGrey"
                     android:src="@drawable/ic_smart_phone" />
 
                 <TextView
@@ -254,7 +261,7 @@
                     android:layout_gravity="center_vertical"
                     android:layout_marginLeft="@dimen/_5sdp"
                     android:text="@string/text_info_mobile"
-                    android:textColor="@color/textColorPrimary"
+                    android:textColor="@color/textGrey"
                     android:textSize="@dimen/_14sdp" />
 
             </LinearLayout>
@@ -273,7 +280,7 @@
                     android:layout_height="wrap_content"
                     android:lineSpacingExtra="@dimen/_3sdp"
                     android:text="@string/text_info_content"
-                    android:textColor="@color/textColorPrimary"
+                    android:textColor="@color/textGrey"
                     android:textSize="@dimen/_14sdp" />
 
             </LinearLayout>

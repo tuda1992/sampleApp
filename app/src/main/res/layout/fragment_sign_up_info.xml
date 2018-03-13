@@ -50,7 +50,7 @@
                     android:layout_weight="1"
                     android:padding="@dimen/_2sdp"
                     android:text="@string/text_signup_family_name"
-                    android:textColor="@color/textColorPrimary"
+                    android:textColor="@color/textGrey"
                     android:textSize="@dimen/_12sdp"
                     android:textStyle="bold" />
 
@@ -65,7 +65,7 @@
                     android:maxLength="50"
                     android:padding="@dimen/_5sdp"
                     android:singleLine="true"
-                    android:textColor="@color/textColorPrimary"
+                    android:textColor="@color/textGrey"
                     android:textSize="@dimen/_12sdp" />
 
             </LinearLayout>
@@ -84,7 +84,7 @@
                     android:layout_weight="1"
                     android:padding="@dimen/_2sdp"
                     android:text="@string/text_signup_middle_name"
-                    android:textColor="@color/textColorPrimary"
+                    android:textColor="@color/textGrey"
                     android:textSize="@dimen/_12sdp"
                     android:textStyle="bold" />
 
@@ -99,7 +99,7 @@
                     android:maxLength="50"
                     android:padding="@dimen/_5sdp"
                     android:singleLine="true"
-                    android:textColor="@color/textColorPrimary"
+                    android:textColor="@color/textGrey"
                     android:textSize="@dimen/_12sdp" />
 
             </LinearLayout>
@@ -118,7 +118,7 @@
                     android:layout_weight="1"
                     android:padding="@dimen/_2sdp"
                     android:text="@string/text_signup_first_name"
-                    android:textColor="@color/textColorPrimary"
+                    android:textColor="@color/textGrey"
                     android:textSize="@dimen/_12sdp"
                     android:textStyle="bold" />
 
@@ -133,7 +133,7 @@
                     android:maxLength="50"
                     android:padding="@dimen/_5sdp"
                     android:singleLine="true"
-                    android:textColor="@color/textColorPrimary"
+                    android:textColor="@color/textGrey"
                     android:textSize="@dimen/_12sdp" />
 
             </LinearLayout>
@@ -152,7 +152,7 @@
                     android:layout_weight="1"
                     android:padding="@dimen/_2sdp"
                     android:text="@string/text_signup_dob"
-                    android:textColor="@color/textColorPrimary"
+                    android:textColor="@color/textGrey"
                     android:textSize="@dimen/_12sdp"
                     android:textStyle="bold" />
 
@@ -165,7 +165,7 @@
                     android:gravity="right"
                     android:padding="@dimen/_5sdp"
                     android:singleLine="true"
-                    android:textColor="@color/textColorPrimary"
+                    android:textColor="@color/textGrey"
                     android:textSize="@dimen/_12sdp" />
 
             </LinearLayout>
@@ -184,7 +184,7 @@
                     android:layout_weight="1"
                     android:padding="@dimen/_2sdp"
                     android:text="@string/text_signup_sex"
-                    android:textColor="@color/textColorPrimary"
+                    android:textColor="@color/textGrey"
                     android:textSize="@dimen/_12sdp"
                     android:textStyle="bold" />
 
@@ -201,7 +201,7 @@
                         android:background="@drawable/border_edittext"
                         android:gravity="right"
                         android:singleLine="true"
-                        android:textColor="@color/textColorPrimary"
+                        android:textColor="@color/textGrey"
                         android:textSize="@dimen/_12sdp" />
                 </RelativeLayout>
 
@@ -221,7 +221,7 @@
                     android:layout_weight="1"
                     android:padding="@dimen/_2sdp"
                     android:text="@string/text_signup_school"
-                    android:textColor="@color/textColorPrimary"
+                    android:textColor="@color/textGrey"
                     android:textSize="@dimen/_12sdp"
                     android:textStyle="bold" />
 
@@ -239,7 +239,7 @@
                         android:gravity="right|center"
                         android:padding="@dimen/_5sdp"
                         android:singleLine="true"
-                        android:textColor="@color/textColorPrimary"
+                        android:textColor="@color/textGrey"
                         android:textSize="@dimen/_12sdp" />
                 </RelativeLayout>
 
@@ -259,7 +259,7 @@
                     android:layout_weight="1"
                     android:padding="@dimen/_2sdp"
                     android:text="@string/text_signup_class"
-                    android:textColor="@color/textColorPrimary"
+                    android:textColor="@color/textGrey"
                     android:textSize="@dimen/_12sdp"
                     android:textStyle="bold" />
 
@@ -274,7 +274,7 @@
                     android:maxLength="50"
                     android:padding="@dimen/_5sdp"
                     android:singleLine="true"
-                    android:textColor="@color/textColorPrimary"
+                    android:textColor="@color/textGrey"
                     android:textSize="@dimen/_12sdp" />
 
             </LinearLayout>
@@ -293,7 +293,7 @@
                     android:layout_weight="1"
                     android:padding="@dimen/_2sdp"
                     android:text="@string/text_signup_grade"
-                    android:textColor="@color/textColorPrimary"
+                    android:textColor="@color/textGrey"
                     android:textSize="@dimen/_12sdp"
                     android:textStyle="bold" />
 
@@ -308,7 +308,7 @@
                     android:maxLength="50"
                     android:padding="@dimen/_5sdp"
                     android:singleLine="true"
-                    android:textColor="@color/textColorPrimary"
+                    android:textColor="@color/textGrey"
                     android:textSize="@dimen/_12sdp" />
 
             </LinearLayout>
@@ -328,7 +328,7 @@
                     android:layout_weight="1"
                     android:padding="@dimen/_2sdp"
                     android:text="@string/text_signup_address_country"
-                    android:textColor="@color/textColorPrimary"
+                    android:textColor="@color/textGrey"
                     android:textSize="@dimen/_12sdp"
                     android:textStyle="bold" />
 
@@ -345,7 +345,7 @@
                         android:background="@drawable/border_edittext"
                         android:gravity="right"
                         android:singleLine="true"
-                        android:textColor="@color/textColorPrimary"
+                        android:textColor="@color/textGrey"
                         android:textSize="@dimen/_12sdp" />
                 </RelativeLayout>
 
@@ -365,7 +365,7 @@
                     android:layout_weight="1"
                     android:padding="@dimen/_2sdp"
                     android:text="@string/text_signup_address_city"
-                    android:textColor="@color/textColorPrimary"
+                    android:textColor="@color/textGrey"
                     android:textSize="@dimen/_12sdp"
                     android:textStyle="bold" />
 
@@ -382,7 +382,7 @@
                         android:background="@drawable/border_edittext"
                         android:gravity="right"
                         android:singleLine="true"
-                        android:textColor="@color/textColorPrimary"
+                        android:textColor="@color/textGrey"
                         android:textSize="@dimen/_12sdp" />
                 </RelativeLayout>
 
@@ -402,7 +402,7 @@
                     android:layout_weight="1"
                     android:padding="@dimen/_2sdp"
                     android:text="@string/text_signup_address_district"
-                    android:textColor="@color/textColorPrimary"
+                    android:textColor="@color/textGrey"
                     android:textSize="@dimen/_12sdp"
                     android:textStyle="bold" />
 
@@ -419,7 +419,7 @@
                         android:background="@drawable/border_edittext"
                         android:gravity="right"
                         android:singleLine="true"
-                        android:textColor="@color/textColorPrimary"
+                        android:textColor="@color/textGrey"
                         android:textSize="@dimen/_12sdp" />
                 </RelativeLayout>
 
@@ -439,7 +439,7 @@
                     android:layout_weight="1"
                     android:padding="@dimen/_2sdp"
                     android:text="@string/text_signup_address_town"
-                    android:textColor="@color/textColorPrimary"
+                    android:textColor="@color/textGrey"
                     android:textSize="@dimen/_12sdp"
                     android:textStyle="bold" />
 
@@ -456,7 +456,7 @@
                         android:background="@drawable/border_edittext"
                         android:gravity="right"
                         android:singleLine="true"
-                        android:textColor="@color/textColorPrimary"
+                        android:textColor="@color/textGrey"
                         android:textSize="@dimen/_12sdp" />
                 </RelativeLayout>
 
@@ -476,7 +476,7 @@
                     android:layout_weight="1"
                     android:padding="@dimen/_2sdp"
                     android:text="@string/text_signup_address"
-                    android:textColor="@color/textColorPrimary"
+                    android:textColor="@color/textGrey"
                     android:textSize="@dimen/_12sdp"
                     android:textStyle="bold" />
 
@@ -491,7 +491,7 @@
                     android:maxLength="50"
                     android:padding="@dimen/_5sdp"
                     android:singleLine="true"
-                    android:textColor="@color/textColorPrimary"
+                    android:textColor="@color/textGrey"
                     android:textSize="@dimen/_12sdp" />
 
             </LinearLayout>
@@ -510,7 +510,7 @@
                     android:layout_weight="1"
                     android:padding="@dimen/_2sdp"
                     android:text="@string/text_signup_email"
-                    android:textColor="@color/textColorPrimary"
+                    android:textColor="@color/textGrey"
                     android:textSize="@dimen/_12sdp"
                     android:textStyle="bold" />
 
@@ -526,7 +526,7 @@
                     android:maxLength="50"
                     android:padding="@dimen/_5sdp"
                     android:singleLine="true"
-                    android:textColor="@color/textColorPrimary"
+                    android:textColor="@color/textGrey"
                     android:textSize="@dimen/_12sdp" />
 
             </LinearLayout>
@@ -545,7 +545,7 @@
                     android:layout_weight="1"
                     android:padding="@dimen/_2sdp"
                     android:text="@string/text_signup_password"
-                    android:textColor="@color/textColorPrimary"
+                    android:textColor="@color/textGrey"
                     android:textSize="@dimen/_12sdp"
                     android:textStyle="bold" />
 
@@ -561,7 +561,7 @@
                     android:maxLength="50"
                     android:padding="@dimen/_5sdp"
                     android:singleLine="true"
-                    android:textColor="@color/textColorPrimary"
+                    android:textColor="@color/textGrey"
                     android:textSize="@dimen/_12sdp" />
 
             </LinearLayout>
@@ -580,7 +580,7 @@
                     android:layout_weight="1"
                     android:padding="@dimen/_2sdp"
                     android:text="@string/text_signup_re_password"
-                    android:textColor="@color/textColorPrimary"
+                    android:textColor="@color/textGrey"
                     android:textSize="@dimen/_12sdp"
                     android:textStyle="bold" />
 
@@ -596,7 +596,7 @@
                     android:maxLength="50"
                     android:padding="@dimen/_5sdp"
                     android:singleLine="true"
-                    android:textColor="@color/textColorPrimary"
+                    android:textColor="@color/textGrey"
                     android:textSize="@dimen/_12sdp" />
 
             </LinearLayout>
@@ -615,7 +615,7 @@
                     android:layout_weight="1"
                     android:padding="@dimen/_3sdp"
                     android:text="@string/text_signup_telephone"
-                    android:textColor="@color/textColorPrimary"
+                    android:textColor="@color/textGrey"
                     android:textSize="@dimen/_12sdp"
                     android:textStyle="bold" />
 
@@ -630,7 +630,7 @@
                     android:maxLength="12"
                     android:padding="@dimen/_5sdp"
                     android:singleLine="true"
-                    android:textColor="@color/textColorPrimary"
+                    android:textColor="@color/textGrey"
                     android:textSize="@dimen/_12sdp" />
 
             </LinearLayout>
@@ -649,8 +649,9 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:buttonTint="@color/colorAccent"
+                    android:checked="true"
                     android:text="@string/text_save_info_fb"
-                    android:textColor="@color/textColorPrimary"
+                    android:textColor="@color/textGrey"
                     android:textSize="@dimen/_12sdp"
                     android:textStyle="bold" />
 
@@ -671,18 +672,13 @@
             android:layout_alignParentRight="true"
             android:orientation="horizontal">
 
-            <Button
+            <android.support.design.widget.FloatingActionButton
                 android:id="@+id/btn_send"
-                android:layout_width="@dimen/_70sdp"
-                android:layout_height="@dimen/_30sdp"
+                android:layout_width="@dimen/_45sdp"
+                android:layout_height="@dimen/_45sdp"
                 android:layout_marginRight="@dimen/_20sdp"
-                android:background="@drawable/effect_button"
-                android:gravity="center"
-                android:includeFontPadding="false"
-                android:text="@string/text_button_send"
-                android:textColor="@android:color/white"
-                android:textSize="@dimen/_10sdp"
-                android:textStyle="bold" />
+                android:foreground="?android:attr/selectableItemBackground"
+                android:src="@drawable/ic_apply_job" />
         </LinearLayout>
 
     </RelativeLayout>

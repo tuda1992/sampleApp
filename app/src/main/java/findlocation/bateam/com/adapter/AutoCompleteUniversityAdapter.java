@@ -1,6 +1,7 @@
 package findlocation.bateam.com.adapter;
 
 import android.content.Context;
+import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,7 +22,7 @@ import findlocation.bateam.com.model.UniversityModel;
 public class AutoCompleteUniversityAdapter extends ArrayAdapter<UniversityModel> {
 
     private final List<UniversityModel> mListUniversities;
-    protected List<UniversityModel> mFilterUniver = new ArrayList<>();
+    public List<UniversityModel> mFilterUniver = new ArrayList<>();
 
     public AutoCompleteUniversityAdapter(Context context, List<UniversityModel> universities) {
         super(context, 0, universities);
@@ -36,6 +37,12 @@ public class AutoCompleteUniversityAdapter extends ArrayAdapter<UniversityModel>
     @Override
     public Filter getFilter() {
         return new UniversityFilter(this, mListUniversities);
+    }
+
+    @Nullable
+    @Override
+    public UniversityModel getItem(int position) {
+        return super.getItem(position);
     }
 
     @Override

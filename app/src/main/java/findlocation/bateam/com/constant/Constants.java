@@ -28,6 +28,7 @@ public class Constants {
     public static final String FRAGMENT_FIND_LOCATION = "FRAGMENT_FIND_LOCATION";
     public static final String FRAGMENT_UPLOAD_LOCATION = "FRAGMENT_UPLOAD_LOCATION";
     public static final String FRAGMENT_FIND_JOB = "FRAGMENT_FIND_JOB";
+    public static final String FRAGMENT_ABOUT_SIVI = "FRAGMENT_ABOUT_SIVI";
     public static final String FRAGMENT_USER_INFO = "FRAGMENT_USER_INFO";
     public static final String FRAGMENT_SIGN_UP_INFO = "FRAGMENT_SIGN_UP_INFO";
     public static final String FRAGMENT_SIGN_UP_SELFIE = "FRAGMENT_SIGN_UP_SELFIE";
@@ -48,6 +49,7 @@ public class Constants {
 
     // User Info
     public static final String USER_INFO = "USER_INFO";
+    public static final String USER_LOGIN = "USER_LOGIN";
     public static final String SAVE_DATA = "SAVE_DATA";
 
     // Bundle

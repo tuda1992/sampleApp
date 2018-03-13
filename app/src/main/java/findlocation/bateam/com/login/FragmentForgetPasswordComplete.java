@@ -1,6 +1,7 @@
 package findlocation.bateam.com.login;
 
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -22,7 +23,7 @@ public class FragmentForgetPasswordComplete extends BaseFragment {
     @BindView(R.id.tv_notify)
     TextView mTvNotify;
     @BindView(R.id.btn_next)
-    Button mBtnNext;
+    FloatingActionButton mBtnNext;
     @BindString(R.string.text_forget_password_complete_notify)
     String mStrNotify;
 

@@ -56,7 +56,7 @@ public class NavigationDrawerAdapter extends RecyclerView.Adapter<NavigationDraw
                     holder.ivIcon.setImageResource(R.drawable.ic_find_job);
                     break;
                 case 2:
-                    holder.ivIcon.setImageResource(R.drawable.ic_user);
+                    holder.ivIcon.setImageResource(R.drawable.ic_about_app);
                     break;
                 case 3:
                     holder.ivIcon.setImageResource(R.drawable.ic_logout);

@@ -43,6 +43,16 @@ public class DialogUtil {
                 .show();
     }
 
+    public static void showDialogErrorJob(Context context, String message, DialogInterface.OnClickListener okListener) {
+        if (context == null) return;
+        new AlertDialog.Builder(context)
+                .setTitle(context.getResources().getText(R.string.title_dialog_error_job))
+                .setMessage(message)
+                .setPositiveButton(context.getResources().getText(R.string.text_button_ok), okListener)
+                .create()
+                .show();
+    }
+
     public static void showDialogResetPwFail(Context context, String message, DialogInterface.OnClickListener okListener) {
         if (context == null) return;
         new AlertDialog.Builder(context)
@@ -67,6 +77,16 @@ public class DialogUtil {
         if (context == null) return;
         new AlertDialog.Builder(context)
                 .setTitle(context.getResources().getText(R.string.title_dialog_error_not_active))
+                .setMessage(message)
+                .setPositiveButton(context.getResources().getText(R.string.text_button_ok), okListener)
+                .create()
+                .show();
+    }
+
+    public static void showDialogErrorActive(Context context, String message, DialogInterface.OnClickListener okListener) {
+        if (context == null) return;
+        new AlertDialog.Builder(context)
+                .setTitle(context.getResources().getText(R.string.title_dialog_error_active))
                 .setMessage(message)
                 .setPositiveButton(context.getResources().getText(R.string.text_button_ok), okListener)
                 .create()

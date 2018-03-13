@@ -16,7 +16,7 @@
             android:gravity="right"
             android:padding="@dimen/_5sdp"
             android:singleLine="true"
-            android:textColor="@color/textColorPrimary"
+            android:textColor="@color/textGrey"
             android:textSize="@dimen/_12sdp" />
     </LinearLayout>
 </RelativeLayout>

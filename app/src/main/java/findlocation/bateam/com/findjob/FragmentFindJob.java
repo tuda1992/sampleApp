@@ -1,9 +1,12 @@
 package findlocation.bateam.com.findjob;
 
 import android.os.Bundle;
+import android.os.Handler;
+import android.support.design.widget.FloatingActionButton;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -49,7 +52,7 @@ public class FragmentFindJob extends BaseFragment {
     @BindView(R.id.spn_type)
     Spinner mSpnType;
     @BindView(R.id.btn_find_job)
-    Button mBtnFindJob;
+    FloatingActionButton mBtnFindJob;
 
     @OnClick(R.id.btn_find_job)
     public void onClickFindJob() {
@@ -76,10 +79,22 @@ public class FragmentFindJob extends BaseFragment {
     private List<String> mArrAddress = new ArrayList<>();
     private List<String> mArrTime = new ArrayList<>();
     private List<String> mArrType = new ArrayList<>();
+    private int mIntOut;
 
     @Override
     protected void onBackPressFragment() {
-
+        mIntOut++;
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                mIntOut = 0;
+            }
+        }, 500);
+        if (mIntOut == 2) {
+            getActivity().finish();
+        } else {
+            Toast.makeText(getActivity(), "Ấn back 2 lần để thoát ứng dụng", Toast.LENGTH_SHORT).show();
+        }
     }
 
     @Override

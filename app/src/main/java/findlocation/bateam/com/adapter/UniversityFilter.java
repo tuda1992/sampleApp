@@ -39,7 +39,7 @@ public class UniversityFilter extends Filter {
 
             // Your filtering logic goes in here
             for (final UniversityModel dog : originalList) {
-                if (deAccent(dog.universityName.toLowerCase()).contains(filterPattern.toLowerCase())) {
+                if (deAccent(dog.universityName.toLowerCase()).contains((deAccent(filterPattern)).toLowerCase())) {
                     filteredList.add(dog);
                 }
             }

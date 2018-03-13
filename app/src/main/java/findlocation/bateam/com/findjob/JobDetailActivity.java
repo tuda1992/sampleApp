@@ -87,10 +87,13 @@ public class JobDetailActivity extends BaseActivity {
 
     @OnClick(R.id.btn_apply)
     public void onClickApplyJob() {
-        String url = "https://www.vietnamworks.com";
-        Intent i = new Intent(Intent.ACTION_VIEW);
-        i.setData(Uri.parse(url));
-        startActivity(i);
+        try {
+            Intent i = new Intent(Intent.ACTION_VIEW);
+            i.setData(Uri.parse(mItem.jobLink));
+            startActivity(i);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     @Override

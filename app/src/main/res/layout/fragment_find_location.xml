@@ -30,6 +30,7 @@
                 android:id="@+id/iv_marker"
                 android:layout_width="@dimen/_25sdp"
                 android:layout_height="@dimen/_25sdp"
+                android:tint="@color/textGrey"
                 android:layout_centerVertical="true"
                 android:src="@drawable/ic_find_location_new" />
 
@@ -42,7 +43,7 @@
                 android:gravity="center_vertical"
                 android:maxLines="2"
                 android:padding="@dimen/_3sdp"
-                android:textColor="@color/textColorPrimary"
+                android:textColor="@color/textGrey"
                 android:textSize="@dimen/_11sdp" />
 
         </RelativeLayout>
@@ -99,7 +100,7 @@
                 android:includeFontPadding="false"
                 android:maxLines="2"
                 android:padding="@dimen/_5sdp"
-                android:textColor="@color/textColorPrimary"
+                android:textColor="@color/textGrey"
                 android:textSize="@dimen/_11sdp" />
 
         </RelativeLayout>

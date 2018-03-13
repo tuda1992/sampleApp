@@ -3,8 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:clickable="true"
     android:background="@android:color/white"
+    android:clickable="true"
     android:orientation="vertical">
 
     <LinearLayout
@@ -47,7 +47,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="@string/text_forget_password_old_pass"
-                android:textColor="@color/textColorPrimary"
+                android:textColor="@color/textGrey"
                 android:textSize="@dimen/_12sdp"
                 android:textStyle="bold" />
 
@@ -62,11 +62,10 @@
                 android:maxLength="50"
                 android:padding="@dimen/_5sdp"
                 android:singleLine="true"
-                android:textColor="@color/textColorPrimary"
+                android:textColor="@color/textGrey"
                 android:textSize="@dimen/_12sdp" />
 
         </LinearLayout>
-
 
 
         <LinearLayout
@@ -82,7 +81,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="@string/text_forget_password_new_pass"
-                android:textColor="@color/textColorPrimary"
+                android:textColor="@color/textGrey"
                 android:textSize="@dimen/_12sdp"
                 android:textStyle="bold" />
 
@@ -93,12 +92,12 @@
                 android:layout_weight="1.4"
                 android:background="@drawable/border_edittext"
                 android:gravity="right"
+                android:hint="VD: 123456hh"
                 android:inputType="textPassword"
                 android:maxLength="50"
                 android:padding="@dimen/_5sdp"
-                android:hint="VD: 123456hh"
                 android:singleLine="true"
-                android:textColor="@color/textColorPrimary"
+                android:textColor="@color/textGrey"
                 android:textSize="@dimen/_12sdp" />
 
         </LinearLayout>
@@ -116,7 +115,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="@string/text_forget_password_new_pass_reinput"
-                android:textColor="@color/textColorPrimary"
+                android:textColor="@color/textGrey"
                 android:textSize="@dimen/_12sdp"
                 android:textStyle="bold" />
 
@@ -127,12 +126,12 @@
                 android:layout_weight="1.4"
                 android:background="@drawable/border_edittext"
                 android:gravity="right"
+                android:hint="VD: 123456hh"
                 android:inputType="textPassword"
                 android:maxLength="50"
                 android:padding="@dimen/_5sdp"
-                android:hint="VD: 123456hh"
                 android:singleLine="true"
-                android:textColor="@color/textColorPrimary"
+                android:textColor="@color/textGrey"
                 android:textSize="@dimen/_12sdp" />
 
         </LinearLayout>
@@ -149,18 +148,13 @@
                 android:layout_alignParentRight="true"
                 android:orientation="horizontal">
 
-                <Button
+                <android.support.design.widget.FloatingActionButton
                     android:id="@+id/btn_send_email"
-                    android:layout_width="@dimen/_70sdp"
-                    android:layout_height="@dimen/_30sdp"
+                    android:layout_width="@dimen/_45sdp"
+                    android:layout_height="@dimen/_45sdp"
                     android:layout_marginRight="@dimen/_20sdp"
-                    android:background="@drawable/effect_button"
-                    android:gravity="center"
-                    android:includeFontPadding="false"
-                    android:text="@string/text_button_send"
-                    android:textColor="@android:color/white"
-                    android:textSize="@dimen/_10sdp"
-                    android:textStyle="bold" />
+                    android:foreground="?android:attr/selectableItemBackground"
+                    android:src="@drawable/ic_apply_job" />
             </LinearLayout>
 
         </RelativeLayout>
@@ -178,7 +172,7 @@
             android:layout_height="wrap_content"
             android:padding="@dimen/_10sdp"
             android:text="@string/text_forget_password_input_notify_2"
-            android:textColor="@color/textColorPrimary"
+            android:textColor="@color/textGrey"
             android:textSize="@dimen/_12sdp"
             android:textStyle="bold" />
 

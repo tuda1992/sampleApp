@@ -1,6 +1,7 @@
 package findlocation.bateam.com.login;
 
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.view.View;
 import android.widget.Button;
 
@@ -18,7 +19,7 @@ import findlocation.bateam.com.constant.Constants;
 public class FragmentSignUpComplete extends BaseFragment {
 
     @BindView(R.id.btn_next)
-    Button mBtnNext;
+    FloatingActionButton mBtnNext;
 
     @OnClick(R.id.btn_next)
     public void onClickNext() {

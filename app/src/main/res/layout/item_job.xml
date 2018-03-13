@@ -28,6 +28,7 @@
                 android:layout_height="@dimen/_35sdp"
                 android:layout_centerVertical="true"
                 android:layout_marginBottom="@dimen/_5sdp"
+                android:tint="@color/textGrey"
                 android:layout_marginLeft="@dimen/_5sdp"
                 android:layout_marginTop="@dimen/_5sdp"
                 android:src="@drawable/ic_job" />
@@ -51,7 +52,7 @@
                     android:gravity="center_vertical"
                     android:includeFontPadding="false"
                     android:maxLines="2"
-                    android:textColor="@color/textColorPrimary"
+                    android:textColor="@color/textGrey"
                     android:textSize="@dimen/_11sdp"
                     android:textStyle="bold" />
 
@@ -66,7 +67,7 @@
                     android:includeFontPadding="false"
                     android:maxLines="1"
                     android:textAllCaps="true"
-                    android:textColor="@color/textColorPrimary"
+                    android:textColor="@color/textGrey"
                     android:textSize="@dimen/_9sdp" />
 
                 <LinearLayout
@@ -85,6 +86,7 @@
                         <ImageView
                             android:id="@+id/iv_location"
                             android:layout_width="@dimen/_18sdp"
+                            android:tint="@color/textGrey"
                             android:layout_height="@dimen/_18sdp"
                             android:src="@drawable/ic_marker" />
 
@@ -98,7 +100,7 @@
                             android:includeFontPadding="false"
                             android:maxLines="1"
                             android:padding="@dimen/_2sdp"
-                            android:textColor="@color/textColorPrimary"
+                            android:textColor="@color/textGrey"
                             android:textSize="@dimen/_10sdp" />
 
                     </RelativeLayout>
@@ -113,7 +115,7 @@
                             android:id="@+id/iv_salary"
                             android:layout_width="@dimen/_18sdp"
                             android:layout_height="@dimen/_18sdp"
-                            android:src="@drawable/ic_money" />
+                            android:src="@drawable/ic_money_grey" />
 
                         <TextView
                             android:id="@+id/tv_salary"
@@ -126,7 +128,7 @@
                             android:includeFontPadding="false"
                             android:padding="@dimen/_2sdp"
                             android:singleLine="true"
-                            android:textColor="@color/textColorPrimary"
+                            android:textColor="@color/textGrey"
                             android:textSize="@dimen/_9sdp" />
                     </RelativeLayout>
 

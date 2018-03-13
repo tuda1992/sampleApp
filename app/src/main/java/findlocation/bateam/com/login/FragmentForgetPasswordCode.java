@@ -1,6 +1,7 @@
 package findlocation.bateam.com.login;
 
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
@@ -27,7 +28,7 @@ public class FragmentForgetPasswordCode extends BaseFragment {
     @BindView(R.id.edt_code)
     EditText mEdtCode;
     @BindView(R.id.btn_send_code)
-    Button mBtnSendCode;
+    FloatingActionButton mBtnSendCode;
     @BindString(R.string.text_forget_password_code_notify)
     String mStrNotify;
     @BindString(R.string.error_dialog_code_null)
