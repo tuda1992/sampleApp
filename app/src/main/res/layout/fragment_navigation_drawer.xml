@@ -13,7 +13,7 @@
         android:background="#D8D8D8">
 
         <findlocation.bateam.com.widget.ImageLoading
-            android:id="@+id/iv_avatar"
+            android:id="@+id/il_avatar"
             android:layout_width="@dimen/_65sdp"
             android:layout_height="@dimen/_65sdp"
             android:layout_above="@+id/tv_user_name"

@@ -21,7 +21,6 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.OnClick;
 import findlocation.bateam.com.R;
-import findlocation.bateam.com.api.FastNetworking;
 import findlocation.bateam.com.base.BaseFragment;
 import findlocation.bateam.com.constant.Constants;
 import findlocation.bateam.com.model.UserInfo;
@@ -38,10 +37,10 @@ public class FragmentDrawer extends BaseFragment {
     RecyclerView recyclerView;
     @BindView(R.id.tv_user_name)
     TextView mTvUserName;
-    @BindView(R.id.iv_avatar)
+    @BindView(R.id.il_avatar)
     ImageLoading mILAvatar;
 
-    @OnClick(R.id.iv_avatar)
+    @OnClick(R.id.il_avatar)
     public void onClickUserInfo() {
         startActivityAnim(UserInfoActivity.class, null);
     }

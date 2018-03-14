@@ -259,6 +259,14 @@ public class FragmentFindLocation extends BaseFragment implements OnMapReadyCall
                     moveCamera(null, mLastLocation.getLatitude(), mLastLocation.getLongitude());
 
                 }
+
+                if (housingInfo.data == null && mCurrentPage == 1) {
+                    mCvData.setVisibility(View.GONE);
+                    mTvData.setText("");
+                    return;
+                }
+
+
                 mCvData.setVisibility(View.VISIBLE);
 
                 if (housingInfo.data != null && housingInfo.data.size() > 0) {
@@ -667,6 +675,19 @@ public class FragmentFindLocation extends BaseFragment implements OnMapReadyCall
         mIsHavePlace = true;
         mTvSearchPlace.setText(place.getAddress());
         moveCamera(null, place.getLatLng().latitude, place.getLatLng().longitude);
+
+        if (mLastLocation == null) {
+            return;
+        }
+
+        mCurrentPage = 1;
+
+        try {
+            callApiGetHouseInfo(true, false);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
     }
 
     private void moveCamera(PlaceModel item, double latitude, double longtitute) {
@@ -709,9 +730,14 @@ public class FragmentFindLocation extends BaseFragment implements OnMapReadyCall
         String price = "";
         if (item != null) {
             title = item.street;
+
             NumberFormat formatter = new DecimalFormat("#,###");
-            String formatPrice = formatter.format(Double.parseDouble(TextUtils.isEmpty(item.price) ? "0" : item.price)) + " VNĐ";
-            price = "Giá thuê : " + formatPrice;
+            try {
+                String formatPrice = formatter.format(Double.parseDouble(TextUtils.isEmpty(item.price) ? "0" : item.price)) + " VNĐ";
+                price = "Giá thuê : " + formatPrice;
+            } catch (Exception e) {
+                price = "Giá thuê : " + item.price;
+            }
         } else {
             title = "Vị trí của tôi";
         }

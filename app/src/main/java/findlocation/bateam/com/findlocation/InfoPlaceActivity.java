@@ -8,22 +8,31 @@ import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
+import android.support.v4.view.PagerAdapter;
 import android.support.v7.widget.Toolbar;
 import android.text.Html;
-import android.text.InputFilter;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.MenuItem;
-import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.tmall.ultraviewpager.UltraViewPager;
+import com.tmall.ultraviewpager.transformer.UltraDepthScaleTransformer;
+
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 
 import butterknife.BindString;
 import butterknife.BindView;
 import butterknife.OnClick;
 import findlocation.bateam.com.R;
+import findlocation.bateam.com.adapter.UltraPagerAdapter;
 import findlocation.bateam.com.base.BaseActivity;
 import findlocation.bateam.com.constant.Constants;
 import findlocation.bateam.com.model.PlaceModel;
@@ -39,6 +48,7 @@ public class InfoPlaceActivity extends BaseActivity {
     private String mMobile;
     private String mPhone;
     private String mNumberPhone;
+    private String[] mStrSeparated;
 
     @BindView(R.id.toolbar)
     Toolbar mToolbar;
@@ -66,6 +76,8 @@ public class InfoPlaceActivity extends BaseActivity {
     ImageView mIvLogo;
     @BindView(R.id.tv_title_logo)
     TextView mTvTitleLogo;
+    @BindView(R.id.ultra_viewpager)
+    UltraViewPager mUtViewPager;
 
     @BindString(R.string.text_info_title)
     String mStrTitle;
@@ -89,6 +101,9 @@ public class InfoPlaceActivity extends BaseActivity {
     String mStrContent;
     @BindString(R.string.title_detail_location)
     String mStrTitleLocation;
+
+
+    private UltraViewPager.Orientation mGravityIndicator;
 
     @OnClick(R.id.ll_mobile)
     public void onClickCallMobile() {
@@ -150,6 +165,7 @@ public class InfoPlaceActivity extends BaseActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         getSupportActionBar().setTitle(mStrTitleLocation);
+
     }
 
     @Override
@@ -165,12 +181,57 @@ public class InfoPlaceActivity extends BaseActivity {
         }
 
         if (mItem != null) {
+
+            Log.d(TAG, "URL ITEM = " + mItem.imageLink);
+
+            if (!TextUtils.isEmpty(mItem.imageLink) || !mItem.imageLink.equalsIgnoreCase("NULL")) {
+                mStrSeparated = mItem.imageLink.replace("~","").split(";");
+
+                List<String> listUrl = new ArrayList<>();
+                for (int i = 0; i < mStrSeparated.length; i++) {
+                    listUrl.add(mStrSeparated[i]);
+                }
+
+                mUtViewPager.setScrollMode(UltraViewPager.ScrollMode.HORIZONTAL);
+                //initialize UltraPagerAdapter，and add child view to UltraViewPager
+                UltraPagerAdapter adapter = new UltraPagerAdapter(this, false, listUrl, new UltraPagerAdapter.ItemClickCallBackListener() {
+                    @Override
+                    public void onItemClick(String url) {
+                        Log.d(TAG, "onItemClick " + url);
+                    }
+                });
+                mUtViewPager.setAdapter(adapter);
+                mUtViewPager.setMultiScreen(0.6f);
+                mUtViewPager.setItemRatio(1.0f);
+
+                mUtViewPager.setAutoMeasureHeight(true);
+                mUtViewPager.setPageTransformer(false, new UltraDepthScaleTransformer());
+                mGravityIndicator = UltraViewPager.Orientation.HORIZONTAL;
+
+                if (mUtViewPager.getIndicator() == null) {
+                    mUtViewPager.initIndicator();
+                    mUtViewPager.getIndicator().setOrientation(mGravityIndicator);
+                }
+
+            }
+
+
             mMobile = TextUtils.isEmpty(mItem.mobile) ? "" : mItem.mobile;
             mPhone = TextUtils.isEmpty(mItem.phone) || mItem.phone.contains("None") ? "" : mItem.phone;
 
             mTvTitle.setText(mItem.title);
 
-            String htmlDate = TextUtils.isEmpty(mItem.createdDate) ? "<b>" + mStrCreatedDate + "</b>" : "<b>" + mStrCreatedDate + "</b>" + " " + mItem.createdDate;
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss");
+            SimpleDateFormat output = new SimpleDateFormat("dd-MM-yyyy");
+            Date d = null;
+            try {
+                d = sdf.parse(mItem.createdDate);
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+            String formattedTime = output.format(d);
+
+            String htmlDate = TextUtils.isEmpty(mItem.createdDate) ? "<b>" + mStrCreatedDate + "</b>" : "<b>" + mStrCreatedDate + "</b>" + " " + formattedTime;
             mTvCreatedDate.setText(Html.fromHtml(htmlDate));
 
             String htmlCity = TextUtils.isEmpty(mItem.province) ? "<b>" + mStrCity + "</b>" : "<b>" + mStrCity + "</b>" + " " + mItem.province;

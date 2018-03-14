@@ -77,6 +77,8 @@ public class PlaceModel implements Parcelable {
     public String longResult;
     @SerializedName("Lattitude")
     public String latResult;
+    @SerializedName("ImageLink")
+    public String imageLink;
 
 
     @Override
@@ -102,6 +104,7 @@ public class PlaceModel implements Parcelable {
         parcel.writeString(latResult);
         parcel.writeString(longResult);
         parcel.writeString(distance);
+        parcel.writeString(imageLink);
     }
 
     // this is used to regenerate your object. All Parcelables must have a CREATOR that implements these two methods
@@ -133,6 +136,7 @@ public class PlaceModel implements Parcelable {
         distance = in.readString();
         longResult = in.readString();
         latResult = in.readString();
+        imageLink = in.readString();
     }
 
     public PlaceModel() {

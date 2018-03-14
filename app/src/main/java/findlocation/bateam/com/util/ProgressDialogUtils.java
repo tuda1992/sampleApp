@@ -2,6 +2,7 @@ package findlocation.bateam.com.util;
 
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.graphics.drawable.ColorDrawable;
 
 import findlocation.bateam.com.R;
 
@@ -23,6 +24,7 @@ public class ProgressDialogUtils {
     public void showDialog() {
         mProgressDialog.show();
         mProgressDialog.setContentView(R.layout.layout_my_progress);
+        mProgressDialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
     }
 
     public void hideDialog(){

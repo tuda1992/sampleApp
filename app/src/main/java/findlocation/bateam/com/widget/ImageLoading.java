@@ -18,7 +18,6 @@ import com.bumptech.glide.request.target.Target;
 import butterknife.BindView;
 import findlocation.bateam.com.R;
 import findlocation.bateam.com.base.BaseCustomLayout;
-import findlocation.bateam.com.constant.Constants;
 
 /**
  * Created by doanhtu on 3/13/18.

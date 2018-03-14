@@ -17,10 +17,35 @@
             layout="@layout/toolbar" />
     </LinearLayout>
 
-    <ScrollView
+
+    <LinearLayout
+        android:id="@+id/ll_title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/container_toolbar"
+        android:layout_marginTop="@dimen/_5sdp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/tv_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/_10sdp"
+            android:layout_marginRight="@dimen/_10sdp"
+            android:maxLines="2"
+            android:text="@string/text_info_title"
+            android:textAllCaps="true"
+            android:textColor="@color/textGrey"
+            android:textSize="@dimen/_15sdp"
+            android:textStyle="bold" />
+
+
+    </LinearLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/ll_title"
         android:layout_marginBottom="@dimen/_10sdp"
         android:layout_marginTop="@dimen/_10sdp"
         android:overScrollMode="never"
@@ -31,27 +56,11 @@
             android:layout_height="match_parent"
             android:orientation="vertical">
 
-
-            <LinearLayout
+            <com.tmall.ultraviewpager.UltraViewPager
+                android:id="@+id/ultra_viewpager"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:id="@+id/tv_title"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="@dimen/_10sdp"
-                    android:layout_marginRight="@dimen/_10sdp"
-                    android:maxLines="2"
-                    android:text="@string/text_info_title"
-                    android:textAllCaps="true"
-                    android:textColor="@color/textGrey"
-                    android:textSize="@dimen/_15sdp"
-                    android:textStyle="bold" />
-
-
-            </LinearLayout>
+                android:layout_height="@dimen/_100sdp"
+                android:layout_centerInParent="true" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -197,8 +206,8 @@
                 <ImageView
                     android:layout_width="@dimen/_23sdp"
                     android:layout_height="@dimen/_23sdp"
-                    android:tint="@color/textGrey"
-                    android:src="@drawable/ic_master" />
+                    android:src="@drawable/ic_master"
+                    android:tint="@color/textGrey" />
 
                 <TextView
                     android:id="@+id/tv_contract_name"
@@ -223,9 +232,9 @@
 
                 <ImageView
                     android:layout_width="@dimen/_22sdp"
-                    android:tint="@color/textGrey"
                     android:layout_height="@dimen/_22sdp"
-                    android:src="@drawable/ic_phone" />
+                    android:src="@drawable/ic_phone"
+                    android:tint="@color/textGrey" />
 
                 <TextView
                     android:id="@+id/tv_phone"
@@ -251,8 +260,8 @@
                 <ImageView
                     android:layout_width="@dimen/_22sdp"
                     android:layout_height="@dimen/_22sdp"
-                    android:tint="@color/textGrey"
-                    android:src="@drawable/ic_smart_phone" />
+                    android:src="@drawable/ic_smart_phone"
+                    android:tint="@color/textGrey" />
 
                 <TextView
                     android:id="@+id/tv_mobile"
