@@ -59,49 +59,12 @@ public class UltraPagerAdapter extends PagerAdapter {
 
     @Override
     public Object instantiateItem(ViewGroup container, final int position) {
-//        LinearLayout linearLayout = (LinearLayout) LayoutInflater.from(mContext).inflate(R.layout.item_view_pager, null);
-//        ImageView ivData = (ImageView) linearLayout.findViewById(R.id.iv_data_location);
-//
-//
-//        Glide.with(mContext).load(Constants.BASE_IMAGE + mListUrl.get(position)).into(ivData);
-//
-//        linearLayout.setId(R.id.item_id);
-//
-//        linearLayout.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                if (mListener != null) {
-//                    mListener.onItemClick("" + mListUrl.get(position));
-//                }
-//            }
-//        });
-//
-//        container.addView(linearLayout);
-//
-//        return linearLayout;
-
         View view = LayoutInflater.from(mContext).inflate(R.layout.item_view_pager, container, false);
         ImageView ivData = (ImageView) view.findViewById(R.id.iv_data_location);
 
-//        switch (position) {
-//            case 0:
-//                linearLayout.setBackgroundColor(Color.parseColor("#2196F3"));
-//                break;
-//            case 1:
-//                linearLayout.setBackgroundColor(Color.parseColor("#673AB7"));
-//                break;
-//            case 2:
-//                linearLayout.setBackgroundColor(Color.parseColor("#009688"));
-//                break;
-//            case 3:
-//                linearLayout.setBackgroundColor(Color.parseColor("#607D8B"));
-//                break;
-//            case 4:
-//                linearLayout.setBackgroundColor(Color.parseColor("#F44336"));
-//                break;
-//        }
+        Glide.with(mContext).load(Constants.BASE_IMAGE + mListUrl.get(position).replace(" ", "")).apply(new RequestOptions().override(400, 400)).into(ivData);
 
-        Glide.with(mContext).load(Constants.BASE_IMAGE + mListUrl.get(position)).apply(new RequestOptions().override(400, 400)).into(ivData);
+
         view.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -114,7 +77,6 @@ public class UltraPagerAdapter extends PagerAdapter {
         return view;
 
     }
-
 
     @Override
     public void destroyItem(ViewGroup container, int position, Object object) {

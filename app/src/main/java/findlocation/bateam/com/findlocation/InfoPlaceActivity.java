@@ -14,6 +14,7 @@ import android.text.Html;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -185,8 +186,9 @@ public class InfoPlaceActivity extends BaseActivity {
             Log.d(TAG, "URL ITEM = " + mItem.imageLink);
 
             if (!TextUtils.isEmpty(mItem.imageLink) || !mItem.imageLink.equalsIgnoreCase("NULL")) {
-                mStrSeparated = mItem.imageLink.replace("~","").split(";");
+                mStrSeparated = mItem.imageLink.replace("~", "").split(";");
 
+                mUtViewPager.setVisibility(View.VISIBLE);
                 List<String> listUrl = new ArrayList<>();
                 for (int i = 0; i < mStrSeparated.length; i++) {
                     listUrl.add(mStrSeparated[i]);
@@ -198,6 +200,10 @@ public class InfoPlaceActivity extends BaseActivity {
                     @Override
                     public void onItemClick(String url) {
                         Log.d(TAG, "onItemClick " + url);
+
+                        FragmentDialogImage fragmentDialogImage = FragmentDialogImage.newInstance(url);
+                        fragmentDialogImage.show(getSupportFragmentManager(), "fragmentDialogImage");
+
                     }
                 });
                 mUtViewPager.setAdapter(adapter);
@@ -213,6 +219,8 @@ public class InfoPlaceActivity extends BaseActivity {
                     mUtViewPager.getIndicator().setOrientation(mGravityIndicator);
                 }
 
+            } else {
+                mUtViewPager.setVisibility(View.GONE);
             }
 
 

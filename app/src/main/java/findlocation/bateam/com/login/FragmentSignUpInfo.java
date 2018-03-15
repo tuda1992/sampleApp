@@ -146,6 +146,12 @@ public class FragmentSignUpInfo extends BaseFragment {
     String mStrTelephoneError;
     @BindString(R.string.error_dialog_school_error)
     String mStrSchoolError;
+    @BindString(R.string.error_dialog_city_error)
+    String mStrCityError;
+    @BindString(R.string.error_dialog_district_error)
+    String mStrDistrictError;
+    @BindString(R.string.error_dialog_town_error)
+    String mStrTownError;
 
     private String mStrUniversityName;
     private Gson mGson;
@@ -179,9 +185,20 @@ public class FragmentSignUpInfo extends BaseFragment {
 
         boolean isSaveFb = mCbFb.isChecked();
         String sex = mArrSex.get(mSpnSex.getSelectedItemPosition());
-        String town = mArrAddressTown.get(mSpnAddressTown.getSelectedItemPosition()).name;
-        String district = mArrAddressDistrict.get(mSpnAddressDistrict.getSelectedItemPosition()).name;
-        String city = mArrAddressCity.get(mSpnAddressCity.getSelectedItemPosition()).name;
+
+        String town = "";
+        if (mArrAddressTown.size() > 0) {
+            town = mArrAddressTown.get(mSpnAddressTown.getSelectedItemPosition()).name;
+        }
+        String district = "";
+        if (mArrAddressDistrict.size() > 0) {
+            district = mArrAddressDistrict.get(mSpnAddressDistrict.getSelectedItemPosition()).name;
+        }
+        String city = "";
+        if (mArrAddressCity.size() > 0) {
+            city = mArrAddressCity.get(mSpnAddressCity.getSelectedItemPosition()).name;
+        }
+
         String address = mEdtAddress.getText().toString();
         String familyName = mEdtFamilyName.getText().toString();
         String middleName = mEdtMiddleName.getText().toString();
@@ -211,6 +228,21 @@ public class FragmentSignUpInfo extends BaseFragment {
 
         if (TextUtils.isEmpty(dob)) {
             DialogUtil.showDialogError(getActivity(), mStrDobNull, null);
+            return;
+        }
+
+        if (TextUtils.isEmpty(city)) {
+            DialogUtil.showDialogError(getActivity(), mStrCityError, null);
+            return;
+        }
+
+        if (TextUtils.isEmpty(district)) {
+            DialogUtil.showDialogError(getActivity(), mStrDistrictError, null);
+            return;
+        }
+
+        if (TextUtils.isEmpty(town)) {
+            DialogUtil.showDialogError(getActivity(), mStrTownError, null);
             return;
         }
 
@@ -263,6 +295,8 @@ public class FragmentSignUpInfo extends BaseFragment {
             DialogUtil.showDialogError(getActivity(), mStrSchoolError, null);
             return;
         }
+
+
 
 
         mUserRegister.email = email;
@@ -585,7 +619,7 @@ public class FragmentSignUpInfo extends BaseFragment {
                 }.getType();
                 List<Cities> list = (List<Cities>) mGson.fromJson(jsonArray.toString(), listType);
                 mArrAddressCity.addAll(list);
-//                mArrAddressCity.add(0, mCities);
+                mArrAddressCity.add(0, mCities);
                 mAdapterAddressCity = new CustomSpinnerAdapter(getActivity(), mArrAddressCity, false);
                 mSpnAddressCity.setAdapter(mAdapterAddressCity);
             }
@@ -608,7 +642,7 @@ public class FragmentSignUpInfo extends BaseFragment {
                 List<Cities> list = (List<Cities>) mGson.fromJson(jsonArray.toString(), listType);
                 mArrAddressDistrict.clear();
                 mArrAddressDistrict.addAll(list);
-//                mArrAddressDistrict.add(0, mCities);
+                mArrAddressDistrict.add(0, mCities);
                 mAdapterAddressDistrict = new CustomSpinnerAdapter(getActivity(), mArrAddressDistrict, false);
                 mSpnAddressDistrict.setAdapter(mAdapterAddressDistrict);
             }
@@ -631,7 +665,7 @@ public class FragmentSignUpInfo extends BaseFragment {
                 List<Cities> list = (List<Cities>) mGson.fromJson(jsonArray.toString(), listType);
                 mArrAddressTown.clear();
                 mArrAddressTown.addAll(list);
-//                mArrAddressTown.add(0, mCities);
+                mArrAddressTown.add(0, mCities);
                 mAdapterAddressTown = new CustomSpinnerAdapter(getActivity(), mArrAddressTown, false);
                 mSpnAddressTown.setAdapter(mAdapterAddressTown);
             }
