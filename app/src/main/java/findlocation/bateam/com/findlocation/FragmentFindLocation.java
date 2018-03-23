@@ -662,6 +662,7 @@ public class FragmentFindLocation extends BaseFragment implements OnMapReadyCall
     public boolean onMarkerClick(Marker marker) {
         Log.d(TAG, "marker = " + marker.getId());
         marker.showInfoWindow();
+        marker.setIcon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_MAGENTA));
 
         return false;
     }

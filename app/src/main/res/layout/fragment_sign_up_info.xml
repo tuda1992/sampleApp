@@ -44,29 +44,36 @@
                 android:layout_marginRight="@dimen/_10sdp"
                 android:orientation="horizontal">
 
-                <TextView
+                <!--<TextView-->
+                <!--android:layout_width="0dp"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_weight="1"-->
+                <!--android:padding="@dimen/_2sdp"-->
+                <!--android:text="@string/text_signup_family_name"-->
+                <!--android:textColor="@color/textGrey"-->
+                <!--android:textSize="@dimen/_12sdp"-->
+                <!--android:textStyle="bold" />-->
+
+                <android.support.design.widget.TextInputLayout
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:padding="@dimen/_2sdp"
-                    android:text="@string/text_signup_family_name"
-                    android:textColor="@color/textGrey"
-                    android:textSize="@dimen/_12sdp"
-                    android:textStyle="bold" />
+                    android:layout_weight="1.4">
 
-                <EditText
-                    android:id="@+id/edt_family_name"
-                    android:layout_width="0dp"
-                    android:layout_height="@dimen/_30sdp"
-                    android:layout_weight="1.4"
-                    android:background="@drawable/border_edittext"
-                    android:gravity="right"
-                    android:inputType="textCapWords|textEmailAddress"
-                    android:maxLength="50"
-                    android:padding="@dimen/_5sdp"
-                    android:singleLine="true"
-                    android:textColor="@color/textGrey"
-                    android:textSize="@dimen/_12sdp" />
+                    <EditText
+                        android:id="@+id/edt_family_name"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="left"
+                        android:hint="@string/text_signup_family_name"
+                        android:background="@drawable/border_bottom_black"
+                        android:inputType="textCapWords|textEmailAddress"
+                        android:maxLength="50"
+                        android:padding="@dimen/_5sdp"
+                        android:singleLine="true"
+                        android:textColor="@color/textGrey"
+                        android:textColorHint="@color/textColorPrimary"
+                        android:textSize="@dimen/_12sdp" />
+                </android.support.design.widget.TextInputLayout>
 
             </LinearLayout>
 
@@ -75,32 +82,38 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/_10sdp"
                 android:layout_marginRight="@dimen/_10sdp"
-                android:layout_marginTop="@dimen/_20sdp"
+                android:layout_marginTop="@dimen/_15sdp"
                 android:orientation="horizontal">
 
-                <TextView
+                <!--<TextView-->
+                <!--android:layout_width="0dp"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_weight="1"-->
+                <!--android:padding="@dimen/_2sdp"-->
+                <!--android:text="@string/text_signup_middle_name"-->
+                <!--android:textColor="@color/textGrey"-->
+                <!--android:textSize="@dimen/_12sdp"-->
+                <!--android:textStyle="bold" />-->
+                <android.support.design.widget.TextInputLayout
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:padding="@dimen/_2sdp"
-                    android:text="@string/text_signup_middle_name"
-                    android:textColor="@color/textGrey"
-                    android:textSize="@dimen/_12sdp"
-                    android:textStyle="bold" />
+                    android:layout_weight="1.4">
 
-                <EditText
-                    android:id="@+id/edt_middle_name"
-                    android:layout_width="0dp"
-                    android:layout_height="@dimen/_30sdp"
-                    android:layout_weight="1.4"
-                    android:background="@drawable/border_edittext"
-                    android:gravity="right"
-                    android:inputType="textCapWords|textEmailAddress"
-                    android:maxLength="50"
-                    android:padding="@dimen/_5sdp"
-                    android:singleLine="true"
-                    android:textColor="@color/textGrey"
-                    android:textSize="@dimen/_12sdp" />
+                    <EditText
+                        android:id="@+id/edt_middle_name"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="left"
+                        android:hint="@string/text_signup_middle_name"
+                        android:background="@drawable/border_bottom_black"
+                        android:inputType="textCapWords|textEmailAddress"
+                        android:maxLength="50"
+                        android:padding="@dimen/_5sdp"
+                        android:singleLine="true"
+                        android:textColor="@color/textGrey"
+                        android:textColorHint="@color/textColorPrimary"
+                        android:textSize="@dimen/_12sdp" />
+                </android.support.design.widget.TextInputLayout>
 
             </LinearLayout>
 
@@ -109,32 +122,38 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/_10sdp"
                 android:layout_marginRight="@dimen/_10sdp"
-                android:layout_marginTop="@dimen/_20sdp"
+                android:layout_marginTop="@dimen/_15sdp"
                 android:orientation="horizontal">
 
-                <TextView
+                <!--<TextView-->
+                <!--android:layout_width="0dp"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_weight="1"-->
+                <!--android:padding="@dimen/_2sdp"-->
+                <!--android:text="@string/text_signup_first_name"-->
+                <!--android:textColor="@color/textGrey"-->
+                <!--android:textSize="@dimen/_12sdp"-->
+                <!--android:textStyle="bold" />-->
+                <android.support.design.widget.TextInputLayout
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:padding="@dimen/_2sdp"
-                    android:text="@string/text_signup_first_name"
-                    android:textColor="@color/textGrey"
-                    android:textSize="@dimen/_12sdp"
-                    android:textStyle="bold" />
+                    android:layout_weight="1.4">
 
-                <EditText
-                    android:id="@+id/edt_first_name"
-                    android:layout_width="0dp"
-                    android:layout_height="@dimen/_30sdp"
-                    android:layout_weight="1.4"
-                    android:background="@drawable/border_edittext"
-                    android:gravity="right"
-                    android:inputType="textCapWords|textEmailAddress"
-                    android:maxLength="50"
-                    android:padding="@dimen/_5sdp"
-                    android:singleLine="true"
-                    android:textColor="@color/textGrey"
-                    android:textSize="@dimen/_12sdp" />
+                    <EditText
+                        android:id="@+id/edt_first_name"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="left"
+                        android:hint="@string/text_signup_first_name"
+                        android:background="@drawable/border_bottom_black"
+                        android:inputType="textCapWords|textEmailAddress"
+                        android:maxLength="50"
+                        android:padding="@dimen/_5sdp"
+                        android:singleLine="true"
+                        android:textColor="@color/textGrey"
+                        android:textColorHint="@color/textColorPrimary"
+                        android:textSize="@dimen/_12sdp" />
+                </android.support.design.widget.TextInputLayout>
 
             </LinearLayout>
 
@@ -143,27 +162,27 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/_10sdp"
                 android:layout_marginRight="@dimen/_10sdp"
-                android:layout_marginTop="@dimen/_20sdp"
+                android:layout_marginTop="@dimen/_15sdp"
                 android:orientation="horizontal">
 
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:padding="@dimen/_2sdp"
-                    android:text="@string/text_signup_dob"
-                    android:textColor="@color/textGrey"
-                    android:textSize="@dimen/_12sdp"
-                    android:textStyle="bold" />
+                <!--<TextView-->
+                <!--android:layout_width="0dp"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_weight="1"-->
+                <!--android:padding="@dimen/_2sdp"-->
+                <!--android:text="@string/text_signup_dob"-->
+                <!--android:textColor="@color/textGrey"-->
+                <!--android:textSize="@dimen/_12sdp"-->
+                <!--android:textStyle="bold" />-->
 
                 <TextView
                     android:id="@+id/tv_dob"
-                    android:layout_width="0dp"
+                    android:layout_width="match_parent"
                     android:layout_height="@dimen/_30sdp"
-                    android:layout_weight="1.4"
-                    android:background="@drawable/border_edittext"
-                    android:gravity="right"
+                    android:gravity="left"
+                    android:hint="Ngày sinh"
                     android:padding="@dimen/_5sdp"
+                    android:background="@drawable/border_bottom_black"
                     android:singleLine="true"
                     android:textColor="@color/textGrey"
                     android:textSize="@dimen/_12sdp" />
@@ -175,21 +194,21 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/_10sdp"
                 android:layout_marginRight="@dimen/_10sdp"
-                android:layout_marginTop="@dimen/_20sdp"
+                android:layout_marginTop="@dimen/_15sdp"
                 android:orientation="horizontal">
 
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:padding="@dimen/_2sdp"
-                    android:text="@string/text_signup_sex"
-                    android:textColor="@color/textGrey"
-                    android:textSize="@dimen/_12sdp"
-                    android:textStyle="bold" />
+                <!--<TextView-->
+                    <!--android:layout_width="0dp"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:layout_weight="1"-->
+                    <!--android:padding="@dimen/_2sdp"-->
+                    <!--android:text="@string/text_signup_sex"-->
+                    <!--android:textColor="@color/textGrey"-->
+                    <!--android:textSize="@dimen/_12sdp"-->
+                    <!--android:textStyle="bold" />-->
 
                 <RelativeLayout
-                    android:layout_width="0dp"
+                    android:layout_width="match_parent"
                     android:layout_height="@dimen/_30sdp"
                     android:layout_weight="1.4"
                     android:padding="@dimen/_1sdp">
@@ -198,7 +217,7 @@
                         android:id="@+id/spn_sex"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:background="@drawable/border_edittext"
+                        android:background="@drawable/border_bottom_black"
                         android:gravity="right"
                         android:singleLine="true"
                         android:textColor="@color/textGrey"
@@ -212,36 +231,36 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/_10sdp"
                 android:layout_marginRight="@dimen/_10sdp"
-                android:layout_marginTop="@dimen/_20sdp"
+                android:layout_marginTop="@dimen/_15sdp"
                 android:orientation="horizontal">
 
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:padding="@dimen/_2sdp"
-                    android:text="@string/text_signup_school"
-                    android:textColor="@color/textGrey"
-                    android:textSize="@dimen/_12sdp"
-                    android:textStyle="bold" />
+                <!--<TextView-->
+                <!--android:layout_width="0dp"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_weight="1"-->
+                <!--android:padding="@dimen/_2sdp"-->
+                <!--android:text="@string/text_signup_school"-->
+                <!--android:textColor="@color/textGrey"-->
+                <!--android:textSize="@dimen/_12sdp"-->
+                <!--android:textStyle="bold" />-->
 
-                <RelativeLayout
-                    android:layout_width="0dp"
-                    android:layout_height="@dimen/_30sdp"
-                    android:layout_weight="1.4"
-                    android:padding="@dimen/_1sdp">
+                <android.support.design.widget.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
 
                     <AutoCompleteTextView
                         android:id="@+id/edt_school"
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:background="@drawable/border_edittext"
-                        android:gravity="right|center"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/border_bottom_black"
+                        android:gravity="left"
+                        android:hint="Trường"
                         android:padding="@dimen/_5sdp"
                         android:singleLine="true"
                         android:textColor="@color/textGrey"
+                        android:textColorHint="@color/textColorPrimary"
                         android:textSize="@dimen/_12sdp" />
-                </RelativeLayout>
+                </android.support.design.widget.TextInputLayout>
 
             </LinearLayout>
 
@@ -250,32 +269,39 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/_10sdp"
                 android:layout_marginRight="@dimen/_10sdp"
-                android:layout_marginTop="@dimen/_20sdp"
+                android:layout_marginTop="@dimen/_15sdp"
                 android:orientation="horizontal">
 
-                <TextView
+                <!--<TextView-->
+                <!--android:layout_width="0dp"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_weight="1"-->
+                <!--android:padding="@dimen/_2sdp"-->
+                <!--android:text="@string/text_signup_class"-->
+                <!--android:textColor="@color/textGrey"-->
+                <!--android:textSize="@dimen/_12sdp"-->
+                <!--android:textStyle="bold" />-->
+
+                <android.support.design.widget.TextInputLayout
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:padding="@dimen/_2sdp"
-                    android:text="@string/text_signup_class"
-                    android:textColor="@color/textGrey"
-                    android:textSize="@dimen/_12sdp"
-                    android:textStyle="bold" />
+                    android:layout_weight="1.4">
 
-                <EditText
-                    android:id="@+id/edt_class"
-                    android:layout_width="0dp"
-                    android:layout_height="@dimen/_30sdp"
-                    android:layout_weight="1.4"
-                    android:background="@drawable/border_edittext"
-                    android:gravity="right"
-                    android:inputType="textEmailAddress"
-                    android:maxLength="50"
-                    android:padding="@dimen/_5sdp"
-                    android:singleLine="true"
-                    android:textColor="@color/textGrey"
-                    android:textSize="@dimen/_12sdp" />
+                    <EditText
+                        android:id="@+id/edt_class"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/border_bottom_black"
+                        android:gravity="left"
+                        android:hint="@string/text_signup_class"
+                        android:inputType="textEmailAddress"
+                        android:maxLength="50"
+                        android:padding="@dimen/_5sdp"
+                        android:singleLine="true"
+                        android:textColor="@color/textGrey"
+                        android:textColorHint="@color/textColorPrimary"
+                        android:textSize="@dimen/_12sdp" />
+                </android.support.design.widget.TextInputLayout>
 
             </LinearLayout>
 
@@ -284,32 +310,38 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/_10sdp"
                 android:layout_marginRight="@dimen/_10sdp"
-                android:layout_marginTop="@dimen/_20sdp"
+                android:layout_marginTop="@dimen/_15sdp"
                 android:orientation="horizontal">
 
-                <TextView
+                <!--<TextView-->
+                <!--android:layout_width="0dp"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_weight="1"-->
+                <!--android:padding="@dimen/_2sdp"-->
+                <!--android:text="@string/text_signup_grade"-->
+                <!--android:textColor="@color/textGrey"-->
+                <!--android:textSize="@dimen/_12sdp"-->
+                <!--android:textStyle="bold" />-->
+                <android.support.design.widget.TextInputLayout
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:padding="@dimen/_2sdp"
-                    android:text="@string/text_signup_grade"
-                    android:textColor="@color/textGrey"
-                    android:textSize="@dimen/_12sdp"
-                    android:textStyle="bold" />
+                    android:layout_weight="1.4">
 
-                <EditText
-                    android:id="@+id/edt_grade"
-                    android:layout_width="0dp"
-                    android:layout_height="@dimen/_30sdp"
-                    android:layout_weight="1.4"
-                    android:background="@drawable/border_edittext"
-                    android:gravity="right"
-                    android:inputType="textEmailAddress"
-                    android:maxLength="50"
-                    android:padding="@dimen/_5sdp"
-                    android:singleLine="true"
-                    android:textColor="@color/textGrey"
-                    android:textSize="@dimen/_12sdp" />
+                    <EditText
+                        android:id="@+id/edt_grade"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/border_bottom_black"
+                        android:gravity="left"
+                        android:hint="@string/text_signup_grade"
+                        android:inputType="textEmailAddress"
+                        android:maxLength="50"
+                        android:padding="@dimen/_5sdp"
+                        android:singleLine="true"
+                        android:textColor="@color/textGrey"
+                        android:textColorHint="@color/textColorPrimary"
+                        android:textSize="@dimen/_12sdp" />
+                </android.support.design.widget.TextInputLayout>
 
             </LinearLayout>
 
@@ -319,21 +351,21 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/_10sdp"
                 android:layout_marginRight="@dimen/_10sdp"
-                android:layout_marginTop="@dimen/_20sdp"
+                android:layout_marginTop="@dimen/_15sdp"
                 android:orientation="horizontal">
 
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:padding="@dimen/_2sdp"
-                    android:text="@string/text_signup_address_country"
-                    android:textColor="@color/textGrey"
-                    android:textSize="@dimen/_12sdp"
-                    android:textStyle="bold" />
+                <!--<TextView-->
+                    <!--android:layout_width="0dp"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:layout_weight="1"-->
+                    <!--android:padding="@dimen/_2sdp"-->
+                    <!--android:text="@string/text_signup_address_country"-->
+                    <!--android:textColor="@color/textGrey"-->
+                    <!--android:textSize="@dimen/_12sdp"-->
+                    <!--android:textStyle="bold" />-->
 
                 <RelativeLayout
-                    android:layout_width="0dp"
+                    android:layout_width="match_parent"
                     android:layout_height="@dimen/_30sdp"
                     android:layout_weight="1.4"
                     android:padding="@dimen/_1sdp">
@@ -342,7 +374,7 @@
                         android:id="@+id/spn_address_country"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:background="@drawable/border_edittext"
+                        android:background="@drawable/border_bottom_black"
                         android:gravity="right"
                         android:singleLine="true"
                         android:textColor="@color/textGrey"
@@ -356,30 +388,29 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/_10sdp"
                 android:layout_marginRight="@dimen/_10sdp"
-                android:layout_marginTop="@dimen/_20sdp"
+                android:layout_marginTop="@dimen/_15sdp"
                 android:orientation="horizontal">
 
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:padding="@dimen/_2sdp"
-                    android:text="@string/text_signup_address_city"
-                    android:textColor="@color/textGrey"
-                    android:textSize="@dimen/_12sdp"
-                    android:textStyle="bold" />
+                <!--<TextView-->
+                    <!--android:layout_width="0dp"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:layout_weight="1"-->
+                    <!--android:padding="@dimen/_2sdp"-->
+                    <!--android:text="@string/text_signup_address_city"-->
+                    <!--android:textColor="@color/textGrey"-->
+                    <!--android:textSize="@dimen/_12sdp"-->
+                    <!--android:textStyle="bold" />-->
 
                 <RelativeLayout
-                    android:layout_width="0dp"
+                    android:layout_width="match_parent"
                     android:layout_height="@dimen/_30sdp"
-                    android:layout_weight="1.4"
                     android:padding="@dimen/_1sdp">
 
                     <Spinner
                         android:id="@+id/spn_address_city"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:background="@drawable/border_edittext"
+                        android:background="@drawable/border_bottom_black"
                         android:gravity="right"
                         android:singleLine="true"
                         android:textColor="@color/textGrey"
@@ -393,21 +424,21 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/_10sdp"
                 android:layout_marginRight="@dimen/_10sdp"
-                android:layout_marginTop="@dimen/_20sdp"
+                android:layout_marginTop="@dimen/_15sdp"
                 android:orientation="horizontal">
 
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:padding="@dimen/_2sdp"
-                    android:text="@string/text_signup_address_district"
-                    android:textColor="@color/textGrey"
-                    android:textSize="@dimen/_12sdp"
-                    android:textStyle="bold" />
+                <!--<TextView-->
+                    <!--android:layout_width="0dp"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:layout_weight="1"-->
+                    <!--android:padding="@dimen/_2sdp"-->
+                    <!--android:text="@string/text_signup_address_district"-->
+                    <!--android:textColor="@color/textGrey"-->
+                    <!--android:textSize="@dimen/_12sdp"-->
+                    <!--android:textStyle="bold" />-->
 
                 <RelativeLayout
-                    android:layout_width="0dp"
+                    android:layout_width="match_parent"
                     android:layout_height="@dimen/_30sdp"
                     android:layout_weight="1.4"
                     android:padding="@dimen/_1sdp">
@@ -416,7 +447,7 @@
                         android:id="@+id/spn_address_district"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:background="@drawable/border_edittext"
+                        android:background="@drawable/border_bottom_black"
                         android:gravity="right"
                         android:singleLine="true"
                         android:textColor="@color/textGrey"
@@ -430,21 +461,21 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/_10sdp"
                 android:layout_marginRight="@dimen/_10sdp"
-                android:layout_marginTop="@dimen/_20sdp"
+                android:layout_marginTop="@dimen/_15sdp"
                 android:orientation="horizontal">
 
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:padding="@dimen/_2sdp"
-                    android:text="@string/text_signup_address_town"
-                    android:textColor="@color/textGrey"
-                    android:textSize="@dimen/_12sdp"
-                    android:textStyle="bold" />
+                <!--<TextView-->
+                    <!--android:layout_width="0dp"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:layout_weight="1"-->
+                    <!--android:padding="@dimen/_2sdp"-->
+                    <!--android:text="@string/text_signup_address_town"-->
+                    <!--android:textColor="@color/textGrey"-->
+                    <!--android:textSize="@dimen/_12sdp"-->
+                    <!--android:textStyle="bold" />-->
 
                 <RelativeLayout
-                    android:layout_width="0dp"
+                    android:layout_width="match_parent"
                     android:layout_height="@dimen/_30sdp"
                     android:layout_weight="1.4"
                     android:padding="@dimen/_1sdp">
@@ -453,7 +484,7 @@
                         android:id="@+id/spn_address_town"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:background="@drawable/border_edittext"
+                        android:background="@drawable/border_bottom_black"
                         android:gravity="right"
                         android:singleLine="true"
                         android:textColor="@color/textGrey"
@@ -467,32 +498,41 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/_10sdp"
                 android:layout_marginRight="@dimen/_10sdp"
-                android:layout_marginTop="@dimen/_20sdp"
+                android:layout_marginTop="@dimen/_15sdp"
                 android:orientation="horizontal">
 
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:padding="@dimen/_2sdp"
-                    android:text="@string/text_signup_address"
-                    android:textColor="@color/textGrey"
-                    android:textSize="@dimen/_12sdp"
-                    android:textStyle="bold" />
+                <!--<TextView-->
+                <!--android:layout_width="0dp"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_weight="1"-->
+                <!--android:padding="@dimen/_2sdp"-->
+                <!--android:text="@string/text_signup_address"-->
+                <!--android:textColor="@color/textGrey"-->
+                <!--android:textSize="@dimen/_12sdp"-->
+                <!--android:textStyle="bold" />-->
 
-                <EditText
-                    android:id="@+id/edt_address"
-                    android:layout_width="0dp"
-                    android:layout_height="@dimen/_30sdp"
-                    android:layout_weight="1.4"
-                    android:background="@drawable/border_edittext"
-                    android:gravity="right"
-                    android:inputType="textEmailAddress"
-                    android:maxLength="50"
-                    android:padding="@dimen/_5sdp"
-                    android:singleLine="true"
-                    android:textColor="@color/textGrey"
-                    android:textSize="@dimen/_12sdp" />
+                <android.support.design.widget.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <EditText
+                        android:id="@+id/edt_address"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentTop="true"
+                        android:layout_centerHorizontal="true"
+                        android:layout_marginTop="30dp"
+                        android:background="@drawable/border_bottom_black"
+                        android:gravity="left"
+                        android:hint="@string/text_signup_address"
+                        android:inputType="textEmailAddress"
+                        android:maxLength="50"
+                        android:padding="@dimen/_5sdp"
+                        android:singleLine="true"
+                        android:textColor="@color/textGrey"
+                        android:textColorHint="@color/textColorPrimary"
+                        android:textSize="@dimen/_12sdp" />
+                </android.support.design.widget.TextInputLayout>
 
             </LinearLayout>
 
@@ -501,33 +541,77 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/_10sdp"
                 android:layout_marginRight="@dimen/_10sdp"
-                android:layout_marginTop="@dimen/_20sdp"
+                android:layout_marginTop="@dimen/_15sdp"
                 android:orientation="horizontal">
 
-                <TextView
+                <!--<TextView-->
+                <!--android:layout_width="0dp"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_weight="1"-->
+                <!--android:padding="@dimen/_2sdp"-->
+                <!--android:text="@string/text_signup_email"-->
+                <!--android:textColor="@color/textGrey"-->
+                <!--android:textSize="@dimen/_12sdp"-->
+                <!--android:textStyle="bold" />-->
+                <android.support.design.widget.TextInputLayout
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:padding="@dimen/_2sdp"
-                    android:text="@string/text_signup_email"
-                    android:textColor="@color/textGrey"
-                    android:textSize="@dimen/_12sdp"
-                    android:textStyle="bold" />
+                    android:layout_weight="1.4">
 
-                <EditText
-                    android:id="@+id/edt_email"
+                    <EditText
+                        android:id="@+id/edt_email"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/border_bottom_black"
+                        android:gravity="left"
+                        android:hint="@string/text_signup_email"
+                        android:inputType="textEmailAddress"
+                        android:maxLength="50"
+                        android:padding="@dimen/_5sdp"
+                        android:singleLine="true"
+                        android:textColor="@color/textGrey"
+                        android:textColorHint="@color/textColorPrimary"
+                        android:textSize="@dimen/_12sdp" />
+                </android.support.design.widget.TextInputLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/_10sdp"
+                android:layout_marginRight="@dimen/_10sdp"
+                android:layout_marginTop="@dimen/_15sdp"
+                android:orientation="horizontal">
+
+                <!--<TextView-->
+                <!--android:layout_width="0dp"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_weight="1"-->
+                <!--android:padding="@dimen/_2sdp"-->
+                <!--android:text="@string/text_signup_password"-->
+                <!--android:textColor="@color/textGrey"-->
+                <!--android:textSize="@dimen/_12sdp"-->
+                <!--android:textStyle="bold" />-->
+                <android.support.design.widget.TextInputLayout
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1.4"
-                    android:background="@drawable/border_edittext"
-                    android:gravity="right"
-                    android:hint="example@gmail.com"
-                    android:inputType="textEmailAddress"
-                    android:maxLength="50"
-                    android:padding="@dimen/_5sdp"
-                    android:singleLine="true"
-                    android:textColor="@color/textGrey"
-                    android:textSize="@dimen/_12sdp" />
+                    android:layout_weight="1.4">
+
+                    <EditText
+                        android:id="@+id/edt_password"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/border_bottom_black"
+                        android:gravity="left"
+                        android:hint="@string/text_signup_password"
+                        android:inputType="textPassword"
+                        android:maxLength="50"
+                        android:padding="@dimen/_5sdp"
+                        android:singleLine="true"
+                        android:textColor="@color/textGrey"
+                        android:textColorHint="@color/textColorPrimary"
+                        android:textSize="@dimen/_12sdp" />
+                </android.support.design.widget.TextInputLayout>
 
             </LinearLayout>
 
@@ -536,102 +620,81 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/_10sdp"
                 android:layout_marginRight="@dimen/_10sdp"
-                android:layout_marginTop="@dimen/_20sdp"
+                android:layout_marginTop="@dimen/_15sdp"
                 android:orientation="horizontal">
 
-                <TextView
+                <!--<TextView-->
+                <!--android:layout_width="0dp"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_weight="1"-->
+                <!--android:padding="@dimen/_2sdp"-->
+                <!--android:text="@string/text_signup_re_password"-->
+                <!--android:textColor="@color/textGrey"-->
+                <!--android:textSize="@dimen/_12sdp"-->
+                <!--android:textStyle="bold" />-->
+                <android.support.design.widget.TextInputLayout
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:padding="@dimen/_2sdp"
-                    android:text="@string/text_signup_password"
-                    android:textColor="@color/textGrey"
-                    android:textSize="@dimen/_12sdp"
-                    android:textStyle="bold" />
+                    android:layout_weight="1.4">
 
-                <EditText
-                    android:id="@+id/edt_password"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1.4"
-                    android:background="@drawable/border_edittext"
-                    android:gravity="right"
-                    android:hint="8 ký tự gồm chữ và số"
-                    android:inputType="textPassword"
-                    android:maxLength="50"
-                    android:padding="@dimen/_5sdp"
-                    android:singleLine="true"
-                    android:textColor="@color/textGrey"
-                    android:textSize="@dimen/_12sdp" />
+                    <EditText
+                        android:id="@+id/edt_re_password"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/border_bottom_black"
+                        android:gravity="left"
+                        android:hint="@string/text_signup_re_password"
+                        android:inputType="textPassword"
+                        android:maxLength="50"
+                        android:padding="@dimen/_5sdp"
+                        android:singleLine="true"
+                        android:textColor="@color/textGrey"
+                        android:textColorHint="@color/textColorPrimary"
+                        android:textSize="@dimen/_12sdp" />
+                </android.support.design.widget.TextInputLayout>
 
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/_10sdp"
-                android:layout_marginRight="@dimen/_10sdp"
-                android:layout_marginTop="@dimen/_20sdp"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
+                android:layout_marginTop="665dp"
                 android:orientation="horizontal">
 
-                <TextView
+                <!--<TextView-->
+                <!--android:layout_width="0dp"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_weight="1"-->
+                <!--android:padding="@dimen/_3sdp"-->
+                <!--android:text="@string/text_signup_telephone"-->
+                <!--android:textColor="@color/textGrey"-->
+                <!--android:textSize="@dimen/_12sdp"-->
+                <!--android:textStyle="bold" />-->
+
+                <android.support.design.widget.TextInputLayout
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:padding="@dimen/_2sdp"
-                    android:text="@string/text_signup_re_password"
-                    android:textColor="@color/textGrey"
-                    android:textSize="@dimen/_12sdp"
-                    android:textStyle="bold" />
+                    android:layout_weight="1.4">
 
-                <EditText
-                    android:id="@+id/edt_re_password"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1.4"
-                    android:background="@drawable/border_edittext"
-                    android:gravity="right"
-                    android:hint="8 ký tự gồm chữ và số"
-                    android:inputType="textPassword"
-                    android:maxLength="50"
-                    android:padding="@dimen/_5sdp"
-                    android:singleLine="true"
-                    android:textColor="@color/textGrey"
-                    android:textSize="@dimen/_12sdp" />
 
-            </LinearLayout>
+                    <EditText
+                        android:id="@+id/edt_telephone"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/border_bottom_black"
+                        android:gravity="left"
+                        android:hint="@string/text_signup_telephone"
+                        android:inputType="number"
+                        android:maxLength="12"
+                        android:padding="@dimen/_5sdp"
+                        android:singleLine="true"
+                        android:textColor="@color/textGrey"
+                        android:textColorHint="@color/textColorPrimary"
+                        android:textSize="@dimen/_12sdp" />
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/_10sdp"
-                android:layout_marginRight="@dimen/_10sdp"
-                android:layout_marginTop="@dimen/_20sdp"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:padding="@dimen/_3sdp"
-                    android:text="@string/text_signup_telephone"
-                    android:textColor="@color/textGrey"
-                    android:textSize="@dimen/_12sdp"
-                    android:textStyle="bold" />
-
-                <EditText
-                    android:id="@+id/edt_telephone"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1.4"
-                    android:background="@drawable/border_edittext"
-                    android:gravity="right"
-                    android:inputType="number"
-                    android:maxLength="12"
-                    android:padding="@dimen/_5sdp"
-                    android:singleLine="true"
-                    android:textColor="@color/textGrey"
-                    android:textSize="@dimen/_12sdp" />
+                </android.support.design.widget.TextInputLayout>
 
             </LinearLayout>
 

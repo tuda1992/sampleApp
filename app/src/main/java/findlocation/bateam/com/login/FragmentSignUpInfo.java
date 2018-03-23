@@ -153,6 +153,13 @@ public class FragmentSignUpInfo extends BaseFragment {
     @BindString(R.string.error_dialog_town_error)
     String mStrTownError;
 
+    @BindString(R.string.text_signup_address_city)
+    String mStrCity;
+    @BindString(R.string.text_signup_address_district)
+    String mStrDistrict;
+    @BindString(R.string.text_signup_address_town)
+    String mStrTown;
+
     private String mStrUniversityName;
     private Gson mGson;
     private DatePickerDialog.OnDateSetListener mListenerPickter;
@@ -173,7 +180,7 @@ public class FragmentSignUpInfo extends BaseFragment {
     private ArrayList<UniversityModel> mArrSchool = new ArrayList<>();
     private Map<String, File> mMapFile = new HashMap<>();
     private UserRegister mUserRegister = new UserRegister();
-    private Cities mCities = new Cities();
+    private Cities mCities;
 
     @OnClick(R.id.btn_send)
     public void onClickSend() {
@@ -231,17 +238,17 @@ public class FragmentSignUpInfo extends BaseFragment {
             return;
         }
 
-        if (TextUtils.isEmpty(city)) {
+        if (TextUtils.isEmpty(city) || city.equalsIgnoreCase(mStrCity)) {
             DialogUtil.showDialogError(getActivity(), mStrCityError, null);
             return;
         }
 
-        if (TextUtils.isEmpty(district)) {
+        if (TextUtils.isEmpty(district) || district.equalsIgnoreCase(mStrDistrict)) {
             DialogUtil.showDialogError(getActivity(), mStrDistrictError, null);
             return;
         }
 
-        if (TextUtils.isEmpty(town)) {
+        if (TextUtils.isEmpty(town) || town.equalsIgnoreCase(mStrTown)) {
             DialogUtil.showDialogError(getActivity(), mStrTownError, null);
             return;
         }
@@ -295,8 +302,6 @@ public class FragmentSignUpInfo extends BaseFragment {
             DialogUtil.showDialogError(getActivity(), mStrSchoolError, null);
             return;
         }
-
-
 
 
         mUserRegister.email = email;
@@ -422,11 +427,6 @@ public class FragmentSignUpInfo extends BaseFragment {
             }
         };
 
-        mCities.cityId = "-1";
-        mCities.id = "-1";
-        mCities.name = "";
-
-
         mSpnAddressCity.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
@@ -434,6 +434,17 @@ public class FragmentSignUpInfo extends BaseFragment {
                 if (mArrAddressCity.size() > 0) {
                     if (!mArrAddressCity.get(position).id.equalsIgnoreCase("-1"))
                         getDistricts(mArrAddressCity.get(position).id);
+                    else {
+                        mCities = new Cities();
+                        mCities.id = "-1";
+                        mCities.cityId = "-1";
+                        mCities.name = mStrDistrict;
+                        mArrAddressDistrict.clear();
+                        mArrAddressDistrict.add(0, mCities);
+                        mAdapterAddressDistrict = new CustomSpinnerAdapter(getActivity(), mArrAddressDistrict, true);
+                        mSpnAddressDistrict.setAdapter(mAdapterAddressDistrict);
+                    }
+
                 }
             }
 
@@ -452,6 +463,16 @@ public class FragmentSignUpInfo extends BaseFragment {
                 if (mArrAddressDistrict.size() > 0) {
                     if (!mArrAddressDistrict.get(i).id.equalsIgnoreCase("-1"))
                         getWards(mArrAddressDistrict.get(i).id);
+                    else {
+                        mCities = new Cities();
+                        mCities.id = "-1";
+                        mCities.cityId = "-1";
+                        mCities.name = mStrTown;
+                        mArrAddressTown.clear();
+                        mArrAddressTown.add(0, mCities);
+                        mAdapterAddressTown = new CustomSpinnerAdapter(getActivity(), mArrAddressTown, true);
+                        mSpnAddressTown.setAdapter(mAdapterAddressTown);
+                    }
                 }
             }
 
@@ -552,7 +573,7 @@ public class FragmentSignUpInfo extends BaseFragment {
         // Sex
         mArrSex.add(mStrMen);
         mArrSex.add(mStrWomen);
-        mAdapter = new SexSpinnerAdapter(getActivity(), mArrSex, false);
+        mAdapter = new SexSpinnerAdapter(getActivity(), mArrSex, true);
         mSpnSex.setAdapter(mAdapter);
 
         getCities();
@@ -602,7 +623,7 @@ public class FragmentSignUpInfo extends BaseFragment {
                 }
             }
 
-            mAdapterAddressCountry = new NationSpinnerAdapter(getActivity(), mArrAddressCountry, false);
+            mAdapterAddressCountry = new NationSpinnerAdapter(getActivity(), mArrAddressCountry, true);
             mSpnAddressCountry.setAdapter(mAdapterAddressCountry);
 
         } catch (IOException e) {
@@ -619,8 +640,12 @@ public class FragmentSignUpInfo extends BaseFragment {
                 }.getType();
                 List<Cities> list = (List<Cities>) mGson.fromJson(jsonArray.toString(), listType);
                 mArrAddressCity.addAll(list);
+                mCities = new Cities();
+                mCities.id = "-1";
+                mCities.cityId = "-1";
+                mCities.name = mStrCity;
                 mArrAddressCity.add(0, mCities);
-                mAdapterAddressCity = new CustomSpinnerAdapter(getActivity(), mArrAddressCity, false);
+                mAdapterAddressCity = new CustomSpinnerAdapter(getActivity(), mArrAddressCity, true);
                 mSpnAddressCity.setAdapter(mAdapterAddressCity);
             }
 
@@ -642,8 +667,14 @@ public class FragmentSignUpInfo extends BaseFragment {
                 List<Cities> list = (List<Cities>) mGson.fromJson(jsonArray.toString(), listType);
                 mArrAddressDistrict.clear();
                 mArrAddressDistrict.addAll(list);
+
+                mCities = new Cities();
+                mCities.id = "-1";
+                mCities.cityId = "-1";
+                mCities.name = mStrDistrict;
+
                 mArrAddressDistrict.add(0, mCities);
-                mAdapterAddressDistrict = new CustomSpinnerAdapter(getActivity(), mArrAddressDistrict, false);
+                mAdapterAddressDistrict = new CustomSpinnerAdapter(getActivity(), mArrAddressDistrict, true);
                 mSpnAddressDistrict.setAdapter(mAdapterAddressDistrict);
             }
 
@@ -665,8 +696,14 @@ public class FragmentSignUpInfo extends BaseFragment {
                 List<Cities> list = (List<Cities>) mGson.fromJson(jsonArray.toString(), listType);
                 mArrAddressTown.clear();
                 mArrAddressTown.addAll(list);
+
+                mCities = new Cities();
+                mCities.id = "-1";
+                mCities.cityId = "-1";
+                mCities.name = mStrTown;
+
                 mArrAddressTown.add(0, mCities);
-                mAdapterAddressTown = new CustomSpinnerAdapter(getActivity(), mArrAddressTown, false);
+                mAdapterAddressTown = new CustomSpinnerAdapter(getActivity(), mArrAddressTown, true);
                 mSpnAddressTown.setAdapter(mAdapterAddressTown);
             }
 

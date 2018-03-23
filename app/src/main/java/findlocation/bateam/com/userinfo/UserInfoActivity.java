@@ -455,7 +455,7 @@ public class UserInfoActivity extends BaseActivity {
         // Sex
         mArrSex.add(mStrMen);
         mArrSex.add(mStrWomen);
-        mAdapter = new SexSpinnerAdapter(this, mArrSex, false);
+        mAdapter = new SexSpinnerAdapter(this, mArrSex, true);
         mSpnSex.setAdapter(mAdapter);
 
         getCities();
@@ -505,7 +505,7 @@ public class UserInfoActivity extends BaseActivity {
                 }
             }
 
-            mAdapterAddressCountry = new NationSpinnerAdapter(this, mArrAddressCountry, false);
+            mAdapterAddressCountry = new NationSpinnerAdapter(this, mArrAddressCountry, true);
             mSpnAddressCountry.setAdapter(mAdapterAddressCountry);
 
         } catch (IOException e) {
@@ -551,7 +551,7 @@ public class UserInfoActivity extends BaseActivity {
                 }.getType();
                 List<Cities> list = (List<Cities>) mGson.fromJson(jsonArray.toString(), listType);
                 mArrAddressCity.addAll(list);
-                mAdapterAddressCity = new CustomSpinnerAdapter(UserInfoActivity.this, mArrAddressCity, false);
+                mAdapterAddressCity = new CustomSpinnerAdapter(UserInfoActivity.this, mArrAddressCity, true);
                 mSpnAddressCity.setAdapter(mAdapterAddressCity);
 
                 if (mUserInfo != null) {
@@ -582,7 +582,7 @@ public class UserInfoActivity extends BaseActivity {
                 List<Cities> list = (List<Cities>) mGson.fromJson(jsonArray.toString(), listType);
                 mArrAddressDistrict.clear();
                 mArrAddressDistrict.addAll(list);
-                mAdapterAddressDistrict = new CustomSpinnerAdapter(UserInfoActivity.this, mArrAddressDistrict, false);
+                mAdapterAddressDistrict = new CustomSpinnerAdapter(UserInfoActivity.this, mArrAddressDistrict, true);
                 mSpnAddressDistrict.setAdapter(mAdapterAddressDistrict);
 
                 if (mUserInfo != null) {
@@ -614,7 +614,7 @@ public class UserInfoActivity extends BaseActivity {
                 List<Cities> list = (List<Cities>) mGson.fromJson(jsonArray.toString(), listType);
                 mArrAddressTown.clear();
                 mArrAddressTown.addAll(list);
-                mAdapterAddressTown = new CustomSpinnerAdapter(UserInfoActivity.this, mArrAddressTown, false);
+                mAdapterAddressTown = new CustomSpinnerAdapter(UserInfoActivity.this, mArrAddressTown, true);
                 mSpnAddressTown.setAdapter(mAdapterAddressTown);
 
                 if (mUserInfo != null) {

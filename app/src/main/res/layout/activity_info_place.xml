@@ -243,6 +243,7 @@
                     android:layout_gravity="center_vertical"
                     android:layout_marginLeft="@dimen/_5sdp"
                     android:text="@string/text_info_phone"
+                    android:autoLink="web"
                     android:textColor="@color/textGrey"
                     android:textSize="@dimen/_14sdp" />
 
@@ -269,6 +270,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
                     android:layout_marginLeft="@dimen/_5sdp"
+                    android:autoLink="web"
                     android:text="@string/text_info_mobile"
                     android:textColor="@color/textGrey"
                     android:textSize="@dimen/_14sdp" />

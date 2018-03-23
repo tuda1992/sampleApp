@@ -42,28 +42,35 @@
             android:layout_marginTop="@dimen/_40sdp"
             android:orientation="horizontal">
 
-            <TextView
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="@string/text_forget_password_old_pass"
-                android:textColor="@color/textGrey"
-                android:textSize="@dimen/_12sdp"
-                android:textStyle="bold" />
+            <!--<TextView-->
+            <!--android:layout_width="0dp"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_weight="1"-->
+            <!--android:text="@string/text_forget_password_old_pass"-->
+            <!--android:textColor="@color/textGrey"-->
+            <!--android:textSize="@dimen/_12sdp"-->
+            <!--android:textStyle="bold" />-->
 
-            <EditText
-                android:id="@+id/edt_old_pass"
-                android:layout_width="0dp"
-                android:layout_height="@dimen/_30sdp"
-                android:layout_weight="1.4"
-                android:background="@drawable/border_edittext"
-                android:gravity="right"
-                android:inputType="textPassword"
-                android:maxLength="50"
-                android:padding="@dimen/_5sdp"
-                android:singleLine="true"
-                android:textColor="@color/textGrey"
-                android:textSize="@dimen/_12sdp" />
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <EditText
+                    android:id="@+id/edt_old_pass"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_30sdp"
+                    android:background="@drawable/border_bottom_black"
+                    android:gravity="left"
+                    android:hint="@string/text_forget_password_old_pass"
+                    android:inputType="textPassword"
+                    android:maxLength="50"
+                    android:padding="@dimen/_5sdp"
+                    android:singleLine="true"
+                    android:textColor="@color/textGrey"
+                    android:textColorHint="@color/textColorPrimary"
+                    android:textSize="@dimen/_12sdp" />
+
+            </android.support.design.widget.TextInputLayout>
 
         </LinearLayout>
 
@@ -76,29 +83,35 @@
             android:layout_marginTop="@dimen/_20sdp"
             android:orientation="horizontal">
 
-            <TextView
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="@string/text_forget_password_new_pass"
-                android:textColor="@color/textGrey"
-                android:textSize="@dimen/_12sdp"
-                android:textStyle="bold" />
+            <!--<TextView-->
+            <!--android:layout_width="0dp"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_weight="1"-->
+            <!--android:text="@string/text_forget_password_new_pass"-->
+            <!--android:textColor="@color/textGrey"-->
+            <!--android:textSize="@dimen/_12sdp"-->
+            <!--android:textStyle="bold" />-->
 
-            <EditText
-                android:id="@+id/edt_new_pass"
-                android:layout_width="0dp"
-                android:layout_height="@dimen/_30sdp"
-                android:layout_weight="1.4"
-                android:background="@drawable/border_edittext"
-                android:gravity="right"
-                android:hint="VD: 123456hh"
-                android:inputType="textPassword"
-                android:maxLength="50"
-                android:padding="@dimen/_5sdp"
-                android:singleLine="true"
-                android:textColor="@color/textGrey"
-                android:textSize="@dimen/_12sdp" />
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <EditText
+                    android:id="@+id/edt_new_pass"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_30sdp"
+                    android:background="@drawable/border_bottom_black"
+                    android:gravity="left"
+                    android:hint="@string/text_forget_password_new_pass"
+                    android:inputType="textPassword"
+                    android:maxLength="50"
+                    android:padding="@dimen/_5sdp"
+                    android:singleLine="true"
+                    android:textColor="@color/textGrey"
+                    android:textColorHint="@color/textColorPrimary"
+                    android:textSize="@dimen/_12sdp" />
+
+            </android.support.design.widget.TextInputLayout>
 
         </LinearLayout>
 
@@ -110,29 +123,36 @@
             android:layout_marginTop="@dimen/_20sdp"
             android:orientation="horizontal">
 
-            <TextView
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="@string/text_forget_password_new_pass_reinput"
-                android:textColor="@color/textGrey"
-                android:textSize="@dimen/_12sdp"
-                android:textStyle="bold" />
+            <!--<TextView-->
+            <!--android:layout_width="0dp"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_weight="1"-->
+            <!--android:text="@string/text_forget_password_new_pass_reinput"-->
+            <!--android:textColor="@color/textGrey"-->
+            <!--android:textSize="@dimen/_12sdp"-->
+            <!--android:textStyle="bold" />-->
 
-            <EditText
-                android:id="@+id/edt_new_pass_reinput"
-                android:layout_width="0dp"
-                android:layout_height="@dimen/_30sdp"
-                android:layout_weight="1.4"
-                android:background="@drawable/border_edittext"
-                android:gravity="right"
-                android:hint="VD: 123456hh"
-                android:inputType="textPassword"
-                android:maxLength="50"
-                android:padding="@dimen/_5sdp"
-                android:singleLine="true"
-                android:textColor="@color/textGrey"
-                android:textSize="@dimen/_12sdp" />
+
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <EditText
+                    android:id="@+id/edt_new_pass_reinput"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_30sdp"
+                    android:background="@drawable/border_bottom_black"
+                    android:gravity="left"
+                    android:hint="@string/text_forget_password_new_pass"
+                    android:inputType="textPassword"
+                    android:maxLength="50"
+                    android:padding="@dimen/_5sdp"
+                    android:singleLine="true"
+                    android:textColor="@color/textGrey"
+                    android:textColorHint="@color/textColorPrimary"
+                    android:textSize="@dimen/_12sdp" />
+
+            </android.support.design.widget.TextInputLayout>
 
         </LinearLayout>
 

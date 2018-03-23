@@ -14,7 +14,7 @@ public class PlaceModel implements Parcelable {
 
     @SerializedName("Id")
     @Expose
-    public Integer id;
+    public String id;
     @SerializedName("FullAddress")
     @Expose
     public String fullAddress;

@@ -50,6 +50,7 @@ public class ImagePicker {
 //        pickIntent.setType("image/*");
         takePhotoIntent.putExtra("return-data", true);
         takePhotoIntent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(getTempFile(context)));
+
 //        intentList = addIntentsToList(context, intentList, pickIntent);
         intentList = addIntentsToList(context, intentList, takePhotoIntent);
 
@@ -61,6 +62,32 @@ public class ImagePicker {
 
         return chooserIntent;
     }
+
+    public static Intent getPickImageIntentFront(Context context) {
+        Intent chooserIntent = null;
+        List<Intent> intentList = new ArrayList<>();
+//        Intent pickIntent = new Intent(Intent.ACTION_PICK,
+//                android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+        Intent takePhotoIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+//        pickIntent.setType("image/*");
+        takePhotoIntent.putExtra("return-data", true);
+        takePhotoIntent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(getTempFile(context)));
+        takePhotoIntent.putExtra("android.intent.extras.CAMERA_FACING", 1);
+        takePhotoIntent.putExtra("android.intent.extras.LENS_FACING_FRONT", 1);
+        takePhotoIntent.putExtra("android.intent.extras.USE_FRONT_CAMERA", true);
+//        intentList = addIntentsToList(context, intentList, pickIntent);
+        intentList = addIntentsToList(context, intentList, takePhotoIntent);
+
+        if (intentList.size() > 0) {
+            chooserIntent = Intent.createChooser(intentList.remove(intentList.size() - 1),
+                    "Lựa chọn một trong các camera sau");
+            chooserIntent.putExtra(Intent.EXTRA_INITIAL_INTENTS, intentList.toArray(new Parcelable[]{}));
+        }
+
+        return chooserIntent;
+    }
+
+
 
     private static List<Intent> addIntentsToList(Context context, List<Intent> list, Intent intent) {
         List<ResolveInfo> resInfo = context.getPackageManager().queryIntentActivities(intent, 0);

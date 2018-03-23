@@ -185,7 +185,7 @@ public class InfoPlaceActivity extends BaseActivity {
 
             Log.d(TAG, "URL ITEM = " + mItem.imageLink);
 
-            if (!TextUtils.isEmpty(mItem.imageLink) || !mItem.imageLink.equalsIgnoreCase("NULL")) {
+            if (!TextUtils.isEmpty(mItem.imageLink) && !mItem.imageLink.equalsIgnoreCase("NULL")) {
                 mStrSeparated = mItem.imageLink.replace("~", "").split(";");
 
                 mUtViewPager.setVisibility(View.VISIBLE);
@@ -265,10 +265,10 @@ public class InfoPlaceActivity extends BaseActivity {
             String htmlContract = TextUtils.isEmpty(mItem.contractName) ? "<b>" + mStrContractName + "</b>" : "<b>" + mStrContractName + "</b>" + " " + mItem.contractName;
             mTvContractName.setText(Html.fromHtml(htmlContract));
 
-            String htmlPhone = TextUtils.isEmpty(mItem.phone) || mItem.phone.contains("None") ? "<b>" + mStrPhone + "</b>" : "<b>" + mStrPhone + "</b>" + " <u>" + mItem.phone.replace(".", "") + "</u>";
+            String htmlPhone = TextUtils.isEmpty(mItem.phone) || mItem.phone.contains("None") || mItem.phone.contains("NULL") ? "<b>" + mStrPhone + "</b>" : "<b>" + mStrPhone + "</b>" + " <u><font color='blue'>" + mItem.phone.replace(".", "") + "</font></u>";
             mTvPhone.setText(Html.fromHtml(htmlPhone));
 
-            String htmlMobile = TextUtils.isEmpty(mItem.mobile) ? "<b>" + mStrMobile + "</b>" : "<b>" + mStrMobile + "</b>" + " <u>" + mItem.mobile.replace(".", "") + "</u>";
+            String htmlMobile = TextUtils.isEmpty(mItem.mobile) || mItem.mobile.contains("NULL") || mItem.mobile.contains("None") ? "<b>" + mStrMobile + "</b>" : "<b>" + mStrMobile + "</b>" + " <u><font color='blue'>" + mItem.mobile.replace(".", "") + "</font></u>";
             mTvMobile.setText(Html.fromHtml(htmlMobile));
 
             String htmlContent = TextUtils.isEmpty(mItem.content) ? "<b>" + mStrContent + "</b>" : "<b>" + mStrContent + "</b>" + "<br>" + mItem.content + "</br";
