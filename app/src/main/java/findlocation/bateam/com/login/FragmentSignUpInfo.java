@@ -552,7 +552,7 @@ public class FragmentSignUpInfo extends BaseFragment {
                             mUserRegister.facebookUserName = name;
                             mUserRegister.facebookId = id;
 
-                            Toast.makeText(getActivity(), "Email : " + email + " id : " + id + " name : " + name + " profilePicture : " + profilePicUrl, Toast.LENGTH_LONG).show();
+//                            Toast.makeText(getActivity(), "Email : " + email + " id : " + id + " name : " + name + " profilePicture : " + profilePicUrl, Toast.LENGTH_LONG).show();
 
                             callApiRegister();
 

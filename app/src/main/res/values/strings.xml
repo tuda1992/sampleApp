@@ -119,6 +119,7 @@
 
     // Info Place
     <string name="text_info_address_detail">Địa chỉ: </string>
+    <string name="text_info_area">Diện tích: </string>
     <string name="text_info_price">Giá thuê: </string>
     <string name="text_info_contract_name">Chủ nhà trọ: </string>
     <string name="text_info_phone">Số điện thoại bàn: </string>

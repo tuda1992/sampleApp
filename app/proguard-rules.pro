@@ -135,5 +135,9 @@
   public *;
 }
 
-# for DexGuard only
--keepresourcexmlelements manifest/application/meta-data@value=GlideModule
+-dontwarn com.bumptech.glide.load.resource.bitmap.VideoDecoder
+
+-ignorewarnings
+-keep class * {
+    public private *;
+}

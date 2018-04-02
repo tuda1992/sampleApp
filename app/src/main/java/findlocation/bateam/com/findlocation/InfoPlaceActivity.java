@@ -16,6 +16,7 @@ import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.tmall.ultraviewpager.UltraViewPager;
@@ -77,8 +78,16 @@ public class InfoPlaceActivity extends BaseActivity {
     ImageView mIvLogo;
     @BindView(R.id.tv_title_logo)
     TextView mTvTitleLogo;
+    @BindView(R.id.tv_area)
+    TextView mTvArea;
     @BindView(R.id.ultra_viewpager)
     UltraViewPager mUtViewPager;
+    @BindView(R.id.ll_contract_name)
+    LinearLayout mLlContractName;
+    @BindView(R.id.ll_phone)
+    LinearLayout mLlPhone;
+    @BindView(R.id.ll_mobile)
+    LinearLayout mLlMobile;
 
     @BindString(R.string.text_info_title)
     String mStrTitle;
@@ -102,6 +111,8 @@ public class InfoPlaceActivity extends BaseActivity {
     String mStrContent;
     @BindString(R.string.title_detail_location)
     String mStrTitleLocation;
+    @BindString(R.string.text_info_area)
+    String mStrArea;
 
 
     private UltraViewPager.Orientation mGravityIndicator;
@@ -259,17 +270,34 @@ public class InfoPlaceActivity extends BaseActivity {
                 formatPrice = mItem.price;
             }
 
+            mTvArea.setText(Html.fromHtml("<b>" + mStrArea + "</b>" + " " + mItem.size + "m2"));
+
             String htmlPrice = TextUtils.isEmpty(mItem.price) ? "<b>" + mStrPrice + "</b>" : "<b>" + mStrPrice + "</b>" + " " + formatPrice;
             mTvPrice.setText(Html.fromHtml(htmlPrice));
 
-            String htmlContract = TextUtils.isEmpty(mItem.contractName) ? "<b>" + mStrContractName + "</b>" : "<b>" + mStrContractName + "</b>" + " " + mItem.contractName;
-            mTvContractName.setText(Html.fromHtml(htmlContract));
+            if (!TextUtils.isEmpty(mItem.contractName) && !mItem.contractName.equalsIgnoreCase("NULL") && !mItem.contractName.equalsIgnoreCase("None")) {
+                mLlContractName.setVisibility(View.VISIBLE);
+                String htmlContract = "<b>" + mStrContractName + "</b>" + " " + mItem.contractName;
+                mTvContractName.setText(Html.fromHtml(htmlContract));
+            } else {
+                mLlContractName.setVisibility(View.GONE);
+            }
 
-            String htmlPhone = TextUtils.isEmpty(mItem.phone) || mItem.phone.contains("None") || mItem.phone.contains("NULL") ? "<b>" + mStrPhone + "</b>" : "<b>" + mStrPhone + "</b>" + " <u><font color='blue'>" + mItem.phone.replace(".", "") + "</font></u>";
-            mTvPhone.setText(Html.fromHtml(htmlPhone));
+            if (!TextUtils.isEmpty(mItem.phone) && !mItem.phone.equalsIgnoreCase("NULL") && !mItem.phone.equalsIgnoreCase("None")) {
+                mLlPhone.setVisibility(View.VISIBLE);
+                String htmlPhone = "<b>" + mStrPhone + "</b>" + " <u><font color='blue'>" + mItem.phone.replace(".", "") + "</font></u>";
+                mTvPhone.setText(Html.fromHtml(htmlPhone));
+            } else {
+                mLlPhone.setVisibility(View.GONE);
+            }
 
-            String htmlMobile = TextUtils.isEmpty(mItem.mobile) || mItem.mobile.contains("NULL") || mItem.mobile.contains("None") ? "<b>" + mStrMobile + "</b>" : "<b>" + mStrMobile + "</b>" + " <u><font color='blue'>" + mItem.mobile.replace(".", "") + "</font></u>";
-            mTvMobile.setText(Html.fromHtml(htmlMobile));
+            if (!TextUtils.isEmpty(mItem.mobile) && !mItem.mobile.equalsIgnoreCase("NULL") && !mItem.mobile.equalsIgnoreCase("None")) {
+                mLlMobile.setVisibility(View.VISIBLE);
+                String htmlMobile = "<b>" + mStrMobile + "</b>" + " <u><font color='blue'>" + mItem.mobile.replace(".", "") + "</font></u>";
+                mTvMobile.setText(Html.fromHtml(htmlMobile));
+            } else {
+                mLlMobile.setVisibility(View.GONE);
+            }
 
             String htmlContent = TextUtils.isEmpty(mItem.content) ? "<b>" + mStrContent + "</b>" : "<b>" + mStrContent + "</b>" + "<br>" + mItem.content + "</br";
             mTvContent.setText(Html.fromHtml(htmlContent));

@@ -105,6 +105,7 @@ public class PlaceModel implements Parcelable {
         parcel.writeString(longResult);
         parcel.writeString(distance);
         parcel.writeString(imageLink);
+        parcel.writeInt(size);
     }
 
     // this is used to regenerate your object. All Parcelables must have a CREATOR that implements these two methods
@@ -137,6 +138,7 @@ public class PlaceModel implements Parcelable {
         longResult = in.readString();
         latResult = in.readString();
         imageLink = in.readString();
+        size = in.readInt();
     }
 
     public PlaceModel() {
