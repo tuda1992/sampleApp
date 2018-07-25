@@ -17,10 +17,28 @@ import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.facebook.AccessToken;
+import com.facebook.CallbackManager;
+import com.facebook.FacebookCallback;
+import com.facebook.FacebookException;
+import com.facebook.GraphRequest;
+import com.facebook.GraphResponse;
+import com.facebook.login.LoginManager;
+import com.facebook.login.LoginResult;
+import com.facebook.login.widget.LoginButton;
+import com.google.android.gms.auth.api.Auth;
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
+import com.google.android.gms.auth.api.signin.GoogleSignInResult;
+import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.SignInButton;
+import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.gson.Gson;
 
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.util.Arrays;
 
 import butterknife.BindString;
 import butterknife.BindView;
@@ -31,8 +49,10 @@ import findlocation.bateam.com.api.FastNetworking;
 import findlocation.bateam.com.base.BaseFragment;
 import findlocation.bateam.com.constant.Constants;
 import findlocation.bateam.com.listener.JsonObjectCallBackListener;
+import findlocation.bateam.com.listener.StringCallBackListener;
 import findlocation.bateam.com.model.UserInfo;
 import findlocation.bateam.com.model.UserLogin;
+import findlocation.bateam.com.model.UserRegister;
 import findlocation.bateam.com.util.DialogUtil;
 import findlocation.bateam.com.util.NetworkUtil;
 import findlocation.bateam.com.util.PatternUtil;
@@ -42,7 +62,7 @@ import findlocation.bateam.com.util.PrefUtil;
  * Created by acv on 12/4/17.
  */
 
-public class FragmentSignIn extends BaseFragment {
+public class FragmentSignIn extends BaseFragment implements GoogleApiClient.OnConnectionFailedListener{
 
     @BindView(R.id.tv_forgot_pass)
     TextView mTvForgetPass;
@@ -74,6 +94,21 @@ public class FragmentSignIn extends BaseFragment {
 
     private Gson mGson;
     private int mIntOut;
+    private CallbackManager mCallBackManager;
+    private UserRegister mUserRegister = new UserRegister();
+    private GoogleApiClient mGoogleApiClient;
+    private static final int RC_SIGN_IN = 007;
+
+    @OnClick(R.id.tv_login_fb)
+    public void onClickLoginFB(){
+        loginFacebook();
+    }
+
+    @OnClick(R.id.tv_login_gmail)
+    public void onClickLoginGmail(){
+        Intent signInIntent = Auth.GoogleSignInApi.getSignInIntent(mGoogleApiClient);
+        startActivityForResult(signInIntent, RC_SIGN_IN);
+    }
 
     @OnClick(R.id.btn_signin)
     public void onClickSignIn() {
@@ -205,6 +240,26 @@ public class FragmentSignIn extends BaseFragment {
 
     @Override
     protected void initDatas(Bundle savedInstanceState) {
+        // Call back Facebook
+        mCallBackManager = CallbackManager.Factory.create();
+
+
+        // [START configure_signin]
+        // Configure sign-in to request the user's ID, email address, and basic
+        // profile. ID and basic profile are included in DEFAULT_SIGN_IN.
+        GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+                .requestEmail()
+                .build();
+        // [END configure_signin]
+
+        // [START build_client]
+        // Build a GoogleSignInClient with the options specified by gso.
+        mGoogleApiClient = new GoogleApiClient.Builder(getActivity())
+                .enableAutoManage(getActivity(), this)
+                .addApi(Auth.GOOGLE_SIGN_IN_API, gso)
+                .build();
+        // [END build_client]
+
         mGson = new Gson();
 
         if (PrefUtil.getSharedPreferenceUserLogin(getActivity()) != null) {
@@ -213,6 +268,131 @@ public class FragmentSignIn extends BaseFragment {
             mEdtUserPass.setText(userLogin.password);
         }
 
+    }
+
+
+    private void loginFacebook() {
+        // FB logout before login
+//        LoginManager.getInstance().logOut();
+
+        // FB login
+        LoginManager.getInstance().registerCallback(mCallBackManager,
+                new FacebookCallback<LoginResult>() {
+                    @Override
+                    public void onSuccess(LoginResult loginResult) {
+                        // Handle callback
+                        updateProfile(loginResult);
+                    }
+
+                    @Override
+                    public void onCancel() {
+                        Log.d(TAG, "onCancel");
+                    }
+
+                    @Override
+                    public void onError(FacebookException exception) {
+                        Log.d(TAG, "onError " + exception.toString());
+                    }
+                });
+        LoginManager.getInstance().logInWithReadPermissions(
+                this,
+                Arrays.asList("public_profile", "email")
+        );
+    }
+
+    private void updateProfile(LoginResult loginResult) {
+        AccessToken accesstoken =  loginResult.getAccessToken();
+        // Facbook Email address
+        GraphRequest request = GraphRequest.newMeRequest(accesstoken,
+                new GraphRequest.GraphJSONObjectCallback() {
+                    @Override
+                    public void onCompleted(
+                            JSONObject object,
+                            GraphResponse response) {
+                        try {
+                            final JSONObject jsonObject = new JSONObject();
+                            String id = "";
+                            String name = "";
+                            String email = "";
+                            String profilePicUrl = "";
+//                            if (accesstoken != null) {
+//                                id = accesstoken.getUserId();
+//                                Log.d(TAG, "id = " + id);
+//                            }
+
+                            if (object.has("id")) {
+                                id = object.getString("id");
+                                Log.d(TAG, "id = " + id);
+                            }
+
+                            if (object.has("name")) {
+                                name = object.getString("name");
+                                Log.d(TAG, "name = " + name);
+                            }
+                            if (object.has("email")) {
+                                email = object.getString("email");
+                                Log.d(TAG, "email = " + email);
+                            }
+
+                            if (object.has("picture")) {
+                                profilePicUrl = object.getJSONObject("picture").getJSONObject("data").getString("url");
+                                Log.d(TAG, "profilePicUrl = " + profilePicUrl);
+                            }
+
+                            mUserRegister.email = email;
+                            mUserRegister.facebookAvatar = profilePicUrl;
+                            mUserRegister.familyName = name;
+                            mUserRegister.facebookId = id;
+
+                            Toast.makeText(getActivity(), "Email : " + email + " id : " + id + " name : " + name + " profilePicture : " + profilePicUrl, Toast.LENGTH_LONG).show();
+
+                            callApiRegister(email);
+
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                    }
+                });
+        Bundle parameters = new Bundle();
+        parameters.putString("fields", "id,name,email,gender,birthday,picture.type(large)");
+        request.setParameters(parameters);
+        request.executeAsync();
+    }
+
+
+
+    private void callApiRegister(final String email) {
+//        mMapFile.put(Constants.AVATAR, LoginActivity.mFileAvatar);
+//        mMapFile.put(Constants.STUDENT_CARD, LoginActivity.mFileLicense);
+
+        FastNetworking fastNetworking = new FastNetworking(getActivity(), new StringCallBackListener() {
+            @Override
+            public void onResponse(String string) {
+                Log.d(TAG, "onResponse : " + string);
+                if (string.contains("Đăng ký tài khoản thành công")) {
+                    DialogUtil.showDialogSuccess(getActivity(), string, new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+//                            LoginActivity.mFileAvatar = null;
+//                            LoginActivity.mFileLicense = null;
+                            FragmentSignUpApprove fragmentSignUpApprove = new FragmentSignUpApprove();
+                            Bundle bundle = new Bundle();
+                            bundle.putString(Constants.BUNDLE_EMAIL, email);
+                            fragmentSignUpApprove.setArguments(bundle);
+                            replaceFragment(fragmentSignUpApprove, Constants.FRAGMENT_SIGN_UP_APPROVE);
+                        }
+                    });
+                } else {
+                    DialogUtil.showDialogError(getActivity(), string, null);
+                }
+            }
+
+            @Override
+            public void onError(String messageError) {
+                Log.d(TAG, "onError : " + messageError);
+            }
+        });
+        fastNetworking.callApiRegister(null, mUserRegister);
     }
 
     @Override
@@ -237,4 +417,43 @@ public class FragmentSignIn extends BaseFragment {
 
     }
 
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        mCallBackManager.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == RC_SIGN_IN) {
+            GoogleSignInResult result = Auth.GoogleSignInApi.getSignInResultFromIntent(data);
+            handleSignInResult(result);
+        }
+    }
+
+    private void handleSignInResult(GoogleSignInResult result) {
+        Log.d(TAG, "handleSignInResult:" + result.isSuccess());
+        if (result.isSuccess()) {
+            // Signed in successfully, show authenticated UI.
+            GoogleSignInAccount acct = result.getSignInAccount();
+
+
+            String personName = acct.getDisplayName();
+            String personPhotoUrl = "";
+            if (acct.getPhotoUrl() != null)
+                personPhotoUrl= acct.getPhotoUrl().toString();
+            String email = acct.getEmail();
+
+            Log.d(TAG, "Name: " + personName + ", email: " + email
+                    + ", Image: " + personPhotoUrl);
+
+            mUserRegister.email = email;
+            mUserRegister.facebookAvatar = personPhotoUrl;
+            mUserRegister.familyName = personName;
+            mUserRegister.facebookId = acct.getId();
+
+        }
+    }
+
+
+    @Override
+    public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
+
+    }
 }

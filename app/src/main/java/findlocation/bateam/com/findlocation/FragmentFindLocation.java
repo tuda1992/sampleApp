@@ -125,6 +125,7 @@ public class FragmentFindLocation extends BaseFragment implements OnMapReadyCall
     private Gson mGson = new Gson();
     private int mCurrentPage = 1;
     private int mIntOut;
+    private boolean mIsSecond = true;
 
     // Bind View
 
@@ -209,23 +210,31 @@ public class FragmentFindLocation extends BaseFragment implements OnMapReadyCall
         if (mLastLocation == null) {
             return;
         }
+        if (mIsSecond) {
+            mCurrentPage = 1;
+            mIsSecond = false;
+        } else {
+            mCurrentPage = 2;
+            mIsSecond = true;
+        }
 
-        mCurrentPage = 1;
 
         try {
-            callApiGetHouseInfo(true, false);
+            callApiGetHouseInfo(true, false, true);
         } catch (JSONException e) {
             e.printStackTrace();
         }
+
+
     }
 
-    private void callApiGetHouseInfo(final boolean isShowLoading, final boolean isCreated) throws JSONException {
+    private void callApiGetHouseInfo(final boolean isShowLoading, final boolean isCreated, final boolean isClickButtonFind) throws JSONException {
         PlaceModel item = new PlaceModel();
         item.lattitude = String.valueOf(mLastLocation.getLatitude());
         item.longitude = String.valueOf(mLastLocation.getLongitude());
         item.distance = "5";
         item.pageIndex = mCurrentPage;
-        item.pageSize = 10;
+        item.pageSize = 20;
 
         String json = mGson.toJson(item);
         JSONObject jsonObject = new JSONObject(json);
@@ -238,7 +247,7 @@ public class FragmentFindLocation extends BaseFragment implements OnMapReadyCall
 
                 HousingInfo housingInfo = mGson.fromJson(jsonObject.toString(), HousingInfo.class);
 
-                if (mCurrentPage == 1) {
+                if (mCurrentPage == 1 || !isClickButtonFind) {
                     mAllListPlaceModel.clear();
                 }
 
@@ -684,7 +693,7 @@ public class FragmentFindLocation extends BaseFragment implements OnMapReadyCall
         mCurrentPage = 1;
 
         try {
-            callApiGetHouseInfo(true, false);
+            callApiGetHouseInfo(true, false, false);
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -856,7 +865,7 @@ public class FragmentFindLocation extends BaseFragment implements OnMapReadyCall
     @Override
     public void onLoadMore() {
         try {
-            callApiGetHouseInfo(true, true);
+            callApiGetHouseInfo(true, true, false);
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -866,7 +875,7 @@ public class FragmentFindLocation extends BaseFragment implements OnMapReadyCall
     public void onPullToRefresh() {
         try {
             mCurrentPage = 1;
-            callApiGetHouseInfo(false, false);
+            callApiGetHouseInfo(false, false, false);
         } catch (JSONException e) {
             e.printStackTrace();
         }

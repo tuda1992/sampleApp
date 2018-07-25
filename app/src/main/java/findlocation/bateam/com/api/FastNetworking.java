@@ -389,7 +389,7 @@ public class FastNetworking {
         HashMap<String, String> headers = initCustomContentType();
         AndroidNetworking.upload(BASE_URL + URL_REGISTER)
                 .addHeaders(headers)
-                .addMultipartFile(mapFile)
+//                .addMultipartFile(mapFile)
                 .addMultipartParameter(userRegister)
                 .build()
                 .getAsString(new StringRequestListener() {

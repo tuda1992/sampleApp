@@ -207,4 +207,39 @@
 
     </LinearLayout>
 
+    <TextView
+        android:id="@+id/tv_login_fb"
+        android:layout_width="@dimen/_200sdp"
+        android:layout_height="@dimen/_35sdp"
+        android:layout_gravity="center_horizontal"
+        android:orientation="horizontal"
+        android:text="Đăng nhập Facebook"
+        android:textAllCaps="true"
+        android:gravity="center"
+        android:drawablePadding="@dimen/_3sdp"
+        android:textColor="@android:color/white"
+        android:textSize="@dimen/_10sdp"
+        android:textStyle="bold"
+        android:drawableStart="@drawable/ic_fb"
+        android:background="#3f51b5"
+        android:layout_marginTop="@dimen/_10sdp" />
+
+
+    <TextView
+        android:id="@+id/tv_login_gmail"
+        android:layout_width="@dimen/_200sdp"
+        android:layout_height="@dimen/_35sdp"
+        android:layout_gravity="center_horizontal"
+        android:orientation="horizontal"
+        android:text="Đăng nhập Google"
+        android:textAllCaps="true"
+        android:gravity="center"
+        android:background="#f4511e"
+        android:drawablePadding="@dimen/_3sdp"
+        android:textColor="@android:color/white"
+        android:textSize="@dimen/_10sdp"
+        android:textStyle="bold"
+        android:drawableStart="@drawable/ic_gmail"
+        android:layout_marginTop="@dimen/_10sdp" />
+
 </LinearLayout>

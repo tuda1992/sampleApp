@@ -1,5 +1,6 @@
 package findlocation.bateam.com.login;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
@@ -13,16 +14,32 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
+import com.facebook.AccessToken;
+import com.facebook.CallbackManager;
+import com.facebook.FacebookCallback;
+import com.facebook.FacebookException;
+import com.facebook.GraphRequest;
+import com.facebook.GraphResponse;
+import com.facebook.login.LoginManager;
+import com.facebook.login.LoginResult;
+
+import org.json.JSONObject;
+
 import java.io.File;
+import java.util.Arrays;
 import java.util.List;
 
 import butterknife.BindString;
 import butterknife.BindView;
 import findlocation.bateam.com.MainActivity;
 import findlocation.bateam.com.R;
+import findlocation.bateam.com.api.FastNetworking;
 import findlocation.bateam.com.base.BaseActivity;
 import findlocation.bateam.com.base.BaseFragment;
 import findlocation.bateam.com.constant.Constants;
+import findlocation.bateam.com.listener.StringCallBackListener;
+import findlocation.bateam.com.model.UserRegister;
+import findlocation.bateam.com.util.DialogUtil;
 import findlocation.bateam.com.util.ImagePicker;
 import findlocation.bateam.com.util.PermissionUtils;
 import findlocation.bateam.com.util.PrefUtil;
@@ -69,14 +86,15 @@ public class LoginActivity extends BaseActivity {
 
     }
 
+
     @Override
     protected void getData() {
 
     }
 
     public void goFragmentSignUp() {
-        FragmentSignUp fragmentSignUp = new FragmentSignUp();
-        replaceFragment(fragmentSignUp, Constants.FRAGMENT_SIGN_UP);
+        FragmentSignUpInfo fragmentSignUp = new FragmentSignUpInfo();
+        replaceFragment(fragmentSignUp, Constants.FRAGMENT_SIGN_UP_INFO);
         getSupportActionBar().setTitle(mTitleSignUp);
     }
 
@@ -133,6 +151,8 @@ public class LoginActivity extends BaseActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
+
+
         Fragment f = getSupportFragmentManager().findFragmentById(R.id.container_body);
         f.onActivityResult(requestCode, resultCode, data);
     }
