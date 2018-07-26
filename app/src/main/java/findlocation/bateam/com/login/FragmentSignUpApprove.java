@@ -126,4 +126,8 @@ public class FragmentSignUpApprove extends BaseFragment {
     protected void getData() {
 
     }
+
+    public void updateActiveCode(String code) {
+        mEdtCode.setText(code);
+    }
 }

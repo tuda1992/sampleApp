@@ -122,10 +122,11 @@ public class FragmentFindLocation extends BaseFragment implements OnMapReadyCall
     private ClusterManager<MyClusterItem> mClusterManager;
     private boolean mIsHavePlace;
     private List<PlaceModel> mAllListPlaceModel = new ArrayList<>();
+    private List<PlaceModel> mAllListPlaceModelNew = new ArrayList<>();
     private Gson mGson = new Gson();
     private int mCurrentPage = 1;
     private int mIntOut;
-    private boolean mIsSecond = true;
+    private float mFloatColor = 330.0F;
 
     // Bind View
 
@@ -168,7 +169,22 @@ public class FragmentFindLocation extends BaseFragment implements OnMapReadyCall
 
     @OnClick(R.id.iv_back)
     public void onClickBackLocation() {
+        if (mLastLocation == null) {
+            return;
+        }
         moveCamera(null, mLastLocation.getLatitude(), mLastLocation.getLongitude());
+    }
+
+    @OnClick(R.id.iv_refresh)
+    public void onClickRefresh() {
+        if (mLastLocation != null && mCvData.getVisibility() == View.VISIBLE) {
+            try {
+                mCurrentPage = 1;
+                callApiGetHouseInfo(false, false, false);
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        }
     }
 
     private void showOrHideView() {
@@ -210,17 +226,9 @@ public class FragmentFindLocation extends BaseFragment implements OnMapReadyCall
         if (mLastLocation == null) {
             return;
         }
-        if (mIsSecond) {
-            mCurrentPage = 1;
-            mIsSecond = false;
-        } else {
-            mCurrentPage = 2;
-            mIsSecond = true;
-        }
-
 
         try {
-            callApiGetHouseInfo(true, false, true);
+            callApiGetHouseInfo(false, false, true);
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -247,8 +255,15 @@ public class FragmentFindLocation extends BaseFragment implements OnMapReadyCall
 
                 HousingInfo housingInfo = mGson.fromJson(jsonObject.toString(), HousingInfo.class);
 
-                if (mCurrentPage == 1 || !isClickButtonFind) {
+                if (isClickButtonFind) {
                     mAllListPlaceModel.clear();
+                }
+
+                if (mCurrentPage == 1) {
+                    mAllListPlaceModelNew.clear();
+                    mAllListPlaceModel.clear();
+                } else if (mAllListPlaceModelNew.size() == 40) {
+                    mAllListPlaceModelNew.subList(0, 20).clear();
                 }
 
                 if (!isShowLoading) {
@@ -263,7 +278,7 @@ public class FragmentFindLocation extends BaseFragment implements OnMapReadyCall
                     markerOpt.position(currentPosition)
                             .title("Vị trí của tôi")
                             .snippet("")
-                            .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_ROSE));
+                            .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED));
                     mGoogleMap.addMarker(markerOpt);
                     moveCamera(null, mLastLocation.getLatitude(), mLastLocation.getLongitude());
 
@@ -280,14 +295,24 @@ public class FragmentFindLocation extends BaseFragment implements OnMapReadyCall
 
                 if (housingInfo.data != null && housingInfo.data.size() > 0) {
                     if (mCurrentPage <= housingInfo.pagination.pageCount) {
+                        if (mCurrentPage == housingInfo.pagination.pageCount) {
+                            mCurrentPage = 0;
+                        }
                         mCurrentPage++;
                         mAllListPlaceModel.addAll(housingInfo.data);
-                        mTvData.setText(mAllListPlaceModel.get(0).street);
-                        mLayoutPlace.setDataForLayoutPlace(mAllListPlaceModel, isCreated);
+                        mAllListPlaceModelNew.addAll(housingInfo.data);
+                        mTvData.setText(mAllListPlaceModelNew.get(0).street);
+                        mLayoutPlace.setDataForLayoutPlace(mAllListPlaceModelNew, isCreated);
                     }
                 }
 
-                if (mCurrentPage <= 2 && mAllListPlaceModel.size() > 0) {
+                if (mAllListPlaceModel.size() > 0) {
+                    if (mFloatColor == 30f) {
+                        mFloatColor = 330.0f;
+                    } else {
+                        mFloatColor = mFloatColor - 30.0f;
+                    }
+
                     //Marker
                     for (int i = 0; i < mAllListPlaceModel.size(); i++) {
                         if (TextUtils.isEmpty(mAllListPlaceModel.get(i).latResult) || TextUtils.isEmpty(mAllListPlaceModel.get(i).longResult)) {
@@ -313,7 +338,7 @@ public class FragmentFindLocation extends BaseFragment implements OnMapReadyCall
                             markerOpt.position(position)
                                     .title(title)
                                     .snippet(price)
-                                    .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_VIOLET));
+                                    .icon(BitmapDescriptorFactory.defaultMarker(mFloatColor));
 
                             //Set Custom InfoWindow Adapter
                             CustomInfoWindowAdapter adapter = new CustomInfoWindowAdapter(getActivity());
@@ -703,6 +728,9 @@ public class FragmentFindLocation extends BaseFragment implements OnMapReadyCall
     private void moveCamera(PlaceModel item, double latitude, double longtitute) {
         String title = "";
         String price = "";
+        //Marker
+        LatLng position = new LatLng(latitude, longtitute);
+        MarkerOptions markerOpt = new MarkerOptions();
         if (item != null) {
             title = item.street;
             NumberFormat formatter = new DecimalFormat("#,###");
@@ -713,16 +741,19 @@ public class FragmentFindLocation extends BaseFragment implements OnMapReadyCall
                 price = "Giá thuê : " + item.price;
             }
 
+            markerOpt.position(position)
+                    .title(title)
+                    .snippet(price)
+                    .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_ROSE));
         } else {
             title = "Vị trí của tôi";
+
+            markerOpt.position(position)
+                    .title(title)
+                    .snippet(price)
+                    .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED));
         }
-        //Marker
-        LatLng position = new LatLng(latitude, longtitute);
-        MarkerOptions markerOpt = new MarkerOptions();
-        markerOpt.position(position)
-                .title(title)
-                .snippet(price)
-                .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_ROSE));
+
 
         //Set Custom InfoWindow Adapter
         CustomInfoWindowAdapter adapter = new CustomInfoWindowAdapter(getActivity());
@@ -738,6 +769,9 @@ public class FragmentFindLocation extends BaseFragment implements OnMapReadyCall
     private void moveCameraCenter(PlaceModel item, double latitude, double longtitute) {
         String title = "";
         String price = "";
+        LatLng position = new LatLng(latitude, longtitute);
+        MarkerOptions markerOpt = new MarkerOptions();
+
         if (item != null) {
             title = item.street;
 
@@ -748,24 +782,25 @@ public class FragmentFindLocation extends BaseFragment implements OnMapReadyCall
             } catch (Exception e) {
                 price = "Giá thuê : " + item.price;
             }
+
+            markerOpt.position(position)
+                    .title(title)
+                    .snippet(price)
+                    .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_VIOLET));
+
         } else {
             title = "Vị trí của tôi";
+            markerOpt.position(position)
+                    .title(title)
+                    .snippet(price)
+                    .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED));
         }
-        //Marker
-        LatLng position = new LatLng(latitude, longtitute);
-        MarkerOptions markerOpt = new MarkerOptions();
-        markerOpt.position(position)
-                .title(title)
-                .snippet(price)
-                .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_VIOLET));
+
 
         //Set Custom InfoWindow Adapter
         CustomInfoWindowAdapter adapter = new CustomInfoWindowAdapter(getActivity());
         mGoogleMap.setInfoWindowAdapter(adapter);
         mGoogleMap.addMarker(markerOpt);
-
-        // For zooming automatically to the location of the marker
-
     }
 
     @Override
@@ -833,7 +868,7 @@ public class FragmentFindLocation extends BaseFragment implements OnMapReadyCall
         markerOpt.position(currentPosition)
                 .title("Vị trí của tôi")
                 .snippet("")
-                .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_ROSE));
+                .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED));
 
         //Set Custom InfoWindow Adapter
         CustomInfoWindowAdapter adapter = new CustomInfoWindowAdapter(getActivity());

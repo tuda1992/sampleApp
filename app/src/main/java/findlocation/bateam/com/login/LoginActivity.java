@@ -1,5 +1,6 @@
 package findlocation.bateam.com.login;
 
+import android.Manifest;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -37,6 +38,7 @@ import findlocation.bateam.com.api.FastNetworking;
 import findlocation.bateam.com.base.BaseActivity;
 import findlocation.bateam.com.base.BaseFragment;
 import findlocation.bateam.com.constant.Constants;
+import findlocation.bateam.com.listener.IPermissionCallBack;
 import findlocation.bateam.com.listener.StringCallBackListener;
 import findlocation.bateam.com.model.UserRegister;
 import findlocation.bateam.com.util.DialogUtil;
@@ -62,6 +64,15 @@ public class LoginActivity extends BaseActivity {
     public static File mFileLicense = null;
     public static File mFileAvatar = null;
 
+
+    public static LoginActivity instance;
+
+
+    public static LoginActivity Instance() {
+        return instance;
+    }
+
+
     @Override
     protected int getLayoutView() {
         return R.layout.activity_login;
@@ -83,6 +94,16 @@ public class LoginActivity extends BaseActivity {
 
     @Override
     protected void initDatas(Bundle saveInstanceStatte) {
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            PermissionUtils.checkPermission(this, new String[]{Manifest.permission.READ_SMS}, Constants.REQUEST_READ_SMS, new IPermissionCallBack() {
+                @Override
+                public void onPermissionReady() {
+
+                }
+            });
+        }
+
 
     }
 
@@ -145,6 +166,8 @@ public class LoginActivity extends BaseActivity {
                     startActivityForResult(chooseImageIntent, Constants.PICK_IMAGE_ID);
                 }
                 break;
+            case Constants.REQUEST_READ_SMS:
+                break;
         }
     }
 
@@ -162,4 +185,12 @@ public class LoginActivity extends BaseActivity {
         super.onBackPressed();
         finish();
     }
+
+    public void updateList(final String smsMsg) {
+        Fragment f = getSupportFragmentManager().findFragmentById(R.id.container_body);
+        if (f != null && f instanceof FragmentSignUpApprove) {
+            ((FragmentSignUpApprove) f).updateActiveCode(smsMsg);
+        }
+    }
+
 }

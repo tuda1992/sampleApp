@@ -9,6 +9,7 @@ public class Constants {
     public static final String BASE_IMAGE = "http://sividns.southeastasia.cloudapp.azure.com";
 
     public static final int REQUEST_CAMERA = 2909;
+    public static final int REQUEST_READ_SMS = 3000;
     public static final int PICK_IMAGE_ID = 234;
     public static final int REQUEST_ACCESS_AND_COARSE_LOCATION = 999;
 

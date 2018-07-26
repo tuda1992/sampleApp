@@ -82,7 +82,21 @@
         android:layout_height="@dimen/_50sdp"
         android:layout_alignParentBottom="true">
 
+
+        <TextView
+            android:id="@+id/tv_count_down"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_toLeftOf="@+id/ll_send"
+            android:padding="@dimen/_4sdp"
+            android:textColor="@color/textColorPrimary"
+            android:textSize="@dimen/_11sdp"
+            android:textStyle="bold"
+            android:text="@string/string_count_down"/>
+
         <LinearLayout
+            android:id="@+id/ll_send"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"

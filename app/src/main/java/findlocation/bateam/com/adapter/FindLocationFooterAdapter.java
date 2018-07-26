@@ -69,9 +69,9 @@ public class FindLocationFooterAdapter extends RecyclerView.Adapter<RecyclerView
     //    need to override this method
     @Override
     public int getItemViewType(int position) {
-        if (isPositionFooter(position)) {
-            return TYPE_FOOTER;
-        }
+//        if (isPositionFooter(position)) {
+//            return TYPE_FOOTER;
+//        }
         return TYPE_ITEM;
     }
 
@@ -82,7 +82,7 @@ public class FindLocationFooterAdapter extends RecyclerView.Adapter<RecyclerView
 
     @Override
     public int getItemCount() {
-        return mListData.size() + 1;
+        return mListData.size();
     }
 
 

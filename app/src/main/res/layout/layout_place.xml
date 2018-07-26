@@ -4,8 +4,33 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <android.support.v4.widget.SwipeRefreshLayout
-        android:id="@+id/swipe_refresh"
+    <!--<android.support.v4.widget.SwipeRefreshLayout-->
+    <!--android:id="@+id/swipe_refresh"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="match_parent"-->
+    <!--android:layout_above="@+id/iv_down"-->
+    <!--android:layout_marginBottom="@dimen/_10sdp"-->
+    <!--android:layout_marginLeft="@dimen/_20sdp"-->
+    <!--android:layout_marginRight="@dimen/_20sdp"-->
+    <!--android:layout_marginTop="@dimen/_30sdp"-->
+    <!--android:background="@android:color/white">-->
+
+    <!--<android.support.v7.widget.RecyclerView-->
+    <!--android:id="@+id/rv_data"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="match_parent"-->
+    <!--android:overScrollMode="never"-->
+    <!--android:paddingBottom="@dimen/_5sdp"-->
+    <!--android:paddingLeft="@dimen/_2sdp"-->
+    <!--android:paddingRight="@dimen/_2sdp"-->
+    <!--android:paddingTop="@dimen/_5sdp"-->
+    <!--android:scrollbars="none" />-->
+
+    <!--</android.support.v4.widget.SwipeRefreshLayout>-->
+
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/rv_data"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_above="@+id/iv_down"
@@ -13,20 +38,14 @@
         android:layout_marginLeft="@dimen/_20sdp"
         android:layout_marginRight="@dimen/_20sdp"
         android:layout_marginTop="@dimen/_30sdp"
-        android:background="@android:color/white">
+        android:background="@android:color/white"
+        android:overScrollMode="never"
+        android:paddingBottom="@dimen/_5sdp"
+        android:paddingLeft="@dimen/_2sdp"
+        android:paddingRight="@dimen/_2sdp"
+        android:paddingTop="@dimen/_5sdp"
+        android:scrollbars="none" />
 
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/rv_data"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:overScrollMode="never"
-            android:paddingBottom="@dimen/_5sdp"
-            android:paddingLeft="@dimen/_2sdp"
-            android:paddingRight="@dimen/_2sdp"
-            android:paddingTop="@dimen/_5sdp"
-            android:scrollbars="none" />
-
-    </android.support.v4.widget.SwipeRefreshLayout>
 
     <ImageView
         android:id="@+id/iv_down"

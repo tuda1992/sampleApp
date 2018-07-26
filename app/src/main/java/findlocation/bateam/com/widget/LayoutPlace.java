@@ -31,8 +31,8 @@ public class LayoutPlace extends BaseCustomLayout {
 
     @BindView(R.id.rv_data)
     RecyclerView mRvData;
-    @BindView(R.id.swipe_refresh)
-    SwipeRefreshLayout mSwipe;
+//    @BindView(R.id.swipe_refresh)
+//    SwipeRefreshLayout mSwipe;
 
     @OnClick(R.id.iv_down)
     public void onClickHideLayout() {
@@ -121,30 +121,30 @@ public class LayoutPlace extends BaseCustomLayout {
     @Override
     protected void initListener() {
 
-        mLazyLoadListener = new EndlessRecyclerViewScrollListener(mLinearLayoutManager) {
-            @Override
-            public void onLoadMore(int page) {
-                if (mListener != null) {
-                    mListener.onLoadMore();
-                }
-            }
-        };
+//        mLazyLoadListener = new EndlessRecyclerViewScrollListener(mLinearLayoutManager) {
+//            @Override
+//            public void onLoadMore(int page) {
+//                if (mListener != null) {
+//                    mListener.onLoadMore();
+//                }
+//            }
+//        };
 
 //        mRvData.addOnScrollListener(mLazyLoadListener);
 
-        mSwipe.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
-            @Override
-            public void onRefresh() {
-                mLazyLoadListener.resetState();
-                if (mListener != null) {
-                    mListener.onPullToRefresh();
-                }
-            }
-        });
+//        mSwipe.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+//            @Override
+//            public void onRefresh() {
+//                mLazyLoadListener.resetState();
+//                if (mListener != null) {
+//                    mListener.onPullToRefresh();
+//                }
+//            }
+//        });
     }
 
     public void setRefreshing() {
-        mSwipe.setRefreshing(false);
+//        mSwipe.setRefreshing(false);
     }
 
     public void setNotifyAdapter() {

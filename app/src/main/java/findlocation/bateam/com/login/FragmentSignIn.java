@@ -369,6 +369,14 @@ public class FragmentSignIn extends BaseFragment implements GoogleApiClient.OnCo
             @Override
             public void onResponse(String string) {
                 Log.d(TAG, "onResponse : " + string);
+
+                switch (string){
+                    case "Đăng ký tài khoản thành công":
+                        break;
+                    case "Đăng nhập thành công":
+                        break;
+                }
+
                 if (string.contains("Đăng ký tài khoản thành công")) {
                     DialogUtil.showDialogSuccess(getActivity(), string, new DialogInterface.OnClickListener() {
                         @Override
@@ -447,6 +455,8 @@ public class FragmentSignIn extends BaseFragment implements GoogleApiClient.OnCo
             mUserRegister.facebookAvatar = personPhotoUrl;
             mUserRegister.familyName = personName;
             mUserRegister.facebookId = acct.getId();
+
+            callApiRegister(email);
 
         }
     }
