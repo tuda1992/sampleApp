@@ -21,9 +21,12 @@ import java.util.List;
 public class DrawRoute extends AsyncTask<String, Void, String> {
 
     private GoogleMap mMap;
+    private int width,height;
 
-    public DrawRoute(GoogleMap mMap) {
+    public DrawRoute(GoogleMap mMap,int w,int h) {
         this.mMap = mMap;
+        this.width = w;
+        this.height = h;
     }
 
     @Override
@@ -41,7 +44,7 @@ public class DrawRoute extends AsyncTask<String, Void, String> {
     @Override
     protected void onPostExecute(String result) {
         super.onPostExecute(result);
-        RouteDrawerTask routeDrawerTask = new RouteDrawerTask(mMap);
+        RouteDrawerTask routeDrawerTask = new RouteDrawerTask(mMap,width,height);
         routeDrawerTask.execute(result);
     }
 

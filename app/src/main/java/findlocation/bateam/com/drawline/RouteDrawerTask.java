@@ -4,10 +4,12 @@ import android.os.AsyncTask;
 import android.support.v4.content.ContextCompat;
 import android.util.Log;
 
+import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.LatLngBounds;
 import com.google.android.gms.maps.model.Polyline;
 import com.google.android.gms.maps.model.PolylineOptions;
 
@@ -28,9 +30,13 @@ public class RouteDrawerTask extends AsyncTask<String, Integer, List<List<HashMa
     private PolylineOptions lineOptions;
     private GoogleMap mMap;
     private int routeColor;
+    private CameraUpdate cu;
+    private int width,height;
 
-    public RouteDrawerTask(GoogleMap mMap) {
+    public RouteDrawerTask(GoogleMap mMap,int w,int h) {
         this.mMap = mMap;
+        this.width = w;
+        this.height = h;
     }
 
     @Override
@@ -63,6 +69,7 @@ public class RouteDrawerTask extends AsyncTask<String, Integer, List<List<HashMa
     }
 
     private void drawPolyLine(List<List<HashMap<String, String>>> result) {
+        LatLngBounds.Builder builder = new LatLngBounds.Builder();
         ArrayList<LatLng> points = null;
         lineOptions = null;
         Log.d("drawPolyLine", "result = " + result);
@@ -83,7 +90,14 @@ public class RouteDrawerTask extends AsyncTask<String, Integer, List<List<HashMa
                 LatLng position = new LatLng(lat, lng);
 
                 points.add(position);
+                builder.include(position);
             }
+
+            LatLngBounds bounds = builder.build();
+
+            int padding = (int) (width * 0.10); // offset from edges of the map 10% of screen
+
+            cu = CameraUpdateFactory.newLatLngBounds(bounds, width, height, padding);
 
             // Adding all the points in the route to LineOptions
             lineOptions.addAll(points);
@@ -99,8 +113,9 @@ public class RouteDrawerTask extends AsyncTask<String, Integer, List<List<HashMa
         if (lineOptions != null && mMap != null) {
             mMap.addPolyline(lineOptions);
             if (points != null) {
-                CameraPosition cameraPosition = new CameraPosition.Builder().target(points.get((int) points.size() / 2)).zoom(12.5f).build();
-                mMap.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition), 1000, null);
+//                CameraPosition cameraPosition = new CameraPosition.Builder().target(points.get((int) points.size() / 2)).zoom(12.5f).build();
+//                mMap.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition), 1000, null);
+                mMap.animateCamera(cu);
             }
 
         } else {

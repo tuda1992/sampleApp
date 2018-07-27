@@ -882,8 +882,11 @@ public class FragmentFindLocation extends BaseFragment implements OnMapReadyCall
         LatLng origin = new LatLng(mLastLocation.getLatitude(), mLastLocation.getLongitude());
         LatLng destination = new LatLng(Double.parseDouble(item.latResult), Double.parseDouble(item.longResult));
 
+        int width = getResources().getDisplayMetrics().widthPixels;
+        int height = getResources().getDisplayMetrics().heightPixels;
+
         DrawRouteMaps.getInstance(getActivity())
-                .draw(origin, destination, mGoogleMap);
+                .draw(origin, destination, mGoogleMap, width, height);
 
 
         moveCameraCenter(item, Double.parseDouble(item.latResult), Double.parseDouble(item.longResult));
