@@ -27,7 +27,7 @@
                 android:layout_marginBottom="@dimen/_5sdp"
                 android:layout_marginLeft="@dimen/_5sdp"
                 android:layout_marginTop="5dp"
-                android:tint="@color/textGrey"
+                android:tint="@color/textColorPrimary"
                 android:src="@drawable/ic_house" />
 
             <TextView
@@ -42,8 +42,9 @@
                 android:layout_toRightOf="@+id/iv_data"
                 android:gravity="center_vertical"
                 android:maxLines="2"
-                android:padding="@dimen/_5sdp"
-                android:textColor="@color/textGrey"
+                android:padding="@dimen/_3sdp"
+                android:includeFontPadding="false"
+                android:textColor="@color/textColorPrimary"
                 android:textSize="@dimen/_11sdp" />
 
             <ImageView
@@ -56,7 +57,7 @@
                 android:layout_marginRight="@dimen/_5sdp"
                 android:layout_marginTop="5dp"
                 android:clickable="true"
-                android:tint="@color/textGrey"
+                android:tint="@color/textColorPrimary"
                 android:foreground="?android:attr/selectableItemBackground"
                 android:src="@drawable/ic_info" />
 

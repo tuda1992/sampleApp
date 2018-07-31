@@ -236,21 +236,21 @@ public class UserInfoActivity extends BaseActivity {
             return;
         }
 
-        String sex = mArrSex.get(mSpnSex.getSelectedItemPosition());
-        String town = mArrAddressTown.get(mSpnAddressTown.getSelectedItemPosition()).name;
-        String district = mArrAddressDistrict.get(mSpnAddressDistrict.getSelectedItemPosition()).name;
-        String city = mArrAddressCity.get(mSpnAddressCity.getSelectedItemPosition()).name;
-        String address = mEdtAddress.getText().toString();
+//        String sex = mArrSex.get(mSpnSex.getSelectedItemPosition());
+//        String town = mArrAddressTown.get(mSpnAddressTown.getSelectedItemPosition()).name;
+//        String district = mArrAddressDistrict.get(mSpnAddressDistrict.getSelectedItemPosition()).name;
+//        String city = mArrAddressCity.get(mSpnAddressCity.getSelectedItemPosition()).name;
+//        String address = mEdtAddress.getText().toString();
         String familyName = mEdtFamilyName.getText().toString();
-        String middleName = mEdtMiddleName.getText().toString();
-        String firstName = mEdtFirstName.getText().toString();
+//        String middleName = mEdtMiddleName.getText().toString();
+//        String firstName = mEdtFirstName.getText().toString();
         String schoolName = mEdtSchool.getText().toString();
-        String className = mEdtClass.getText().toString();
-        String grade = mEdtGrade.getText().toString();
+//        String className = mEdtClass.getText().toString();
+//        String grade = mEdtGrade.getText().toString();
         String email = mEdtEmail.getText().toString();
         String telephone = mEdtTelephone.getText().toString();
         String dob = mTvDob.getText().toString();
-        String country = mArrAddressCountry.get(mSpnAddressCountry.getSelectedItemPosition()).nation;
+//        String country = mArrAddressCountry.get(mSpnAddressCountry.getSelectedItemPosition()).nation;
 
         // Validate
 
@@ -297,23 +297,23 @@ public class UserInfoActivity extends BaseActivity {
 
         mUserInfo.email = email;
         mUserInfo.name = familyName;
-        mUserInfo.name = firstName;
-        mUserInfo.middleName = middleName;
+//        mUserInfo.name = firstName;
+//        mUserInfo.middleName = middleName;
         mUserInfo.phoneNumber = telephone;
-        mUserInfo.cityId = mArrAddressCity.get(mSpnAddressCity.getSelectedItemPosition()).id;
-        mUserInfo.districtId = mArrAddressDistrict.get(mSpnAddressDistrict.getSelectedItemPosition()).id;
-        mUserInfo.wardId = mArrAddressTown.get(mSpnAddressTown.getSelectedItemPosition()).id;
-        mUserInfo.nationality = country;
+//        mUserInfo.cityId = mArrAddressCity.get(mSpnAddressCity.getSelectedItemPosition()).id;
+//        mUserInfo.districtId = mArrAddressDistrict.get(mSpnAddressDistrict.getSelectedItemPosition()).id;
+//        mUserInfo.wardId = mArrAddressTown.get(mSpnAddressTown.getSelectedItemPosition()).id;
+//        mUserInfo.nationality = country;
         mUserInfo.schoolName = schoolName;
-        mUserInfo.schoolYear = grade;
-        mUserInfo.specializedSubject = className;
-        if (sex.equalsIgnoreCase("Nam")) {
-            mUserInfo.sex = "0";
-        } else {
-            mUserInfo.sex = "1";
-        }
+//        mUserInfo.schoolYear = grade;
+//        mUserInfo.specializedSubject = className;
+//        if (sex.equalsIgnoreCase("Nam")) {
+//            mUserInfo.sex = "0";
+//        } else {
+//            mUserInfo.sex = "1";
+//        }
         mUserInfo.dob = dob;
-        mUserInfo.address = address;
+//        mUserInfo.address = address;
 
         callApiUpdate();
     }
@@ -529,7 +529,13 @@ public class UserInfoActivity extends BaseActivity {
             mStrUniversityName = mUserInfo.schoolName;
             mEdtEmail.setText(mUserInfo.email);
             mEdtTelephone.setText(mUserInfo.phoneNumber);
-            mILAvatarUser.loadUrl(Constants.BASE_IMAGE + mUserInfo.avatar);
+
+            if (!TextUtils.isEmpty(mUserInfo.avatar)){
+                mILAvatarUser.loadUrl(Constants.BASE_IMAGE + mUserInfo.avatar);
+            }else {
+                mILAvatarUser.loadUrl(mUserInfo.facebookAvatar);
+            }
+
 //            mEdtAddress.setText(mUserInfo.address);
 //            mEdtClass.setText(mUserInfo.specializedSubject);
 //            mTvDob.setText(mUserInfo.dob);

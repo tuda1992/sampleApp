@@ -95,7 +95,7 @@ public class RouteDrawerTask extends AsyncTask<String, Integer, List<List<HashMa
 
             LatLngBounds bounds = builder.build();
 
-            int padding = (int) (width * 0.10); // offset from edges of the map 10% of screen
+            int padding = (int) (width * 0.3); // offset from edges of the map 10% of screen
 
             cu = CameraUpdateFactory.newLatLngBounds(bounds, width, height, padding);
 

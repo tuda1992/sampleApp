@@ -9,7 +9,7 @@
         android:layout_height="@dimen/_28sdp"
         android:layout_centerVertical="true"
         android:layout_marginLeft="@dimen/_10sdp"
-        android:tint="@android:color/black" />
+        android:tint="@color/textColorPrimary" />
 
     <TextView
         android:id="@+id/tv_title"
@@ -20,7 +20,7 @@
         android:layout_marginRight="@dimen/_10sdp"
         android:layout_toRightOf="@+id/iv_icon"
         android:gravity="center_vertical"
-        android:textColor="@android:color/black"
+        android:textColor="@color/textColorPrimary"
         android:textSize="@dimen/_16sdp"
         android:textStyle="bold" />
 

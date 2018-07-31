@@ -7,6 +7,7 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.text.TextUtils;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
 import android.view.View;
@@ -126,8 +127,13 @@ public class FragmentDrawer extends BaseFragment {
 
     public void setUp(int fragmentId, DrawerLayout drawerLayout, final Toolbar toolbar, boolean isMaster, UserInfo userInfo) {
         if (userInfo != null) {
-            mTvUserName.setText(userInfo.familyName + " " + userInfo.middleName + " " + userInfo.name);
-            mILAvatar.loadUrl(Constants.BASE_IMAGE + userInfo.avatar);
+            mTvUserName.setText(userInfo.name);
+            if (!TextUtils.isEmpty(userInfo.avatar)){
+                mILAvatar.loadUrl(Constants.BASE_IMAGE + userInfo.avatar);
+            }else {
+                mILAvatar.loadUrl(userInfo.facebookAvatar);
+            }
+
         }
 
         if (isMaster) {

@@ -42,7 +42,7 @@
                 android:layout_toRightOf="@+id/iv_marker"
                 android:gravity="center_vertical"
                 android:maxLines="2"
-                android:padding="@dimen/_3sdp"
+                android:padding="@dimen/_2sdp"
                 android:textColor="@color/textGrey"
                 android:textSize="@dimen/_11sdp" />
 
@@ -102,6 +102,7 @@
                 android:layout_width="@dimen/_25sdp"
                 android:layout_height="@dimen/_25sdp"
                 android:layout_centerVertical="true"
+                android:tint="@color/textColorPrimary"
                 android:src="@drawable/ic_house" />
 
             <TextView
@@ -113,8 +114,8 @@
                 android:gravity="center_vertical"
                 android:includeFontPadding="false"
                 android:maxLines="2"
-                android:padding="@dimen/_5sdp"
-                android:textColor="@color/textGrey"
+                android:padding="@dimen/_3sdp"
+                android:textColor="@color/textColorPrimary"
                 android:textSize="@dimen/_11sdp" />
 
         </RelativeLayout>

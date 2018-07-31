@@ -100,7 +100,6 @@ public class FragmentSignIn extends BaseFragment implements GoogleApiClient.OnCo
     private UserRegister mUserRegister = new UserRegister();
     private GoogleApiClient mGoogleApiClient;
     private static final int RC_SIGN_IN = 007;
-    private Bundle bundle;
 
     @OnClick(R.id.tv_login_fb)
     public void onClickLoginFB() {
@@ -146,7 +145,7 @@ public class FragmentSignIn extends BaseFragment implements GoogleApiClient.OnCo
 
         int selectedId = mRg.getCheckedRadioButtonId();
         boolean isChecked = mCbSavePassword.isChecked();
-        bundle = new Bundle();
+        Bundle bundle = new Bundle();
         if (selectedId == R.id.rd_user) {
             Log.d(TAG, "Login By User isChecked = " + isChecked);
             bundle.putBoolean(Constants.BUNDLE_IS_MASTER, false);
@@ -354,7 +353,6 @@ public class FragmentSignIn extends BaseFragment implements GoogleApiClient.OnCo
                             mUserRegister.facebookId = id;
 
 
-
                             try {
                                 callApiExternalLogin();
                             } catch (JSONException e) {
@@ -436,33 +434,47 @@ public class FragmentSignIn extends BaseFragment implements GoogleApiClient.OnCo
             @Override
             public void onResponse(JSONObject jsonObject) {
                 UserInfo userLoginSuccess = mGson.fromJson(jsonObject.toString(), UserInfo.class);
-                if (TextUtils.isEmpty(userLoginSuccess.securityToken)) {
-                    switch (userLoginSuccess.responseCode){
-                        case "ACCOUNT_NOT_ACTIVE":
-                            DialogUtil.showDialogErrorNotActive(getActivity(), userLoginSuccess.message, new DialogInterface.OnClickListener() {
-                                @Override
-                                public void onClick(DialogInterface dialogInterface, int i) {
-                                    FragmentSignUpApprove fragmentSignUpApprove = new FragmentSignUpApprove();
-                                    Bundle bundle = new Bundle();
-                                    bundle.putString(Constants.BUNDLE_EMAIL, mUserRegister.email);
-                                    bundle.putBoolean(Constants.BUNDLE_NOT_ACTIVE, true);
-                                    fragmentSignUpApprove.setArguments(bundle);
-                                    replaceFragment(fragmentSignUpApprove, Constants.FRAGMENT_SIGN_UP_APPROVE);
-                                }
-                            });
-                            break;
-                        case "ACCOUNT_NOT_EXIST":
-                            callApiRegister(mUserRegister.email,mUserRegister.facebookAvatar,mUserRegister.name,mUserRegister.id);
-                            break;
-                        case "SUCCESS":
-                            PrefUtil.setSharedPreferenceUserInfo(getActivity(), jsonObject.toString());
-                            startActivityAnim(MainActivity.class, bundle);
-                            finishActivityAnim();
-                            break;
-                            default:
-                                DialogUtil.showDialogError(getActivity(), userLoginSuccess.message, null);
-                                break;
-                    }
+                switch (userLoginSuccess.responseCode) {
+                    case "ACCOUNT_NOT_ACTIVE":
+                        DialogUtil.showDialogErrorNotActive(getActivity(), userLoginSuccess.message, new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+                                FragmentSignUpApprove fragmentSignUpApprove = new FragmentSignUpApprove();
+                                Bundle bundle = new Bundle();
+                                bundle.putString(Constants.BUNDLE_EMAIL, mUserRegister.email);
+                                bundle.putBoolean(Constants.BUNDLE_NOT_ACTIVE, true);
+                                fragmentSignUpApprove.setArguments(bundle);
+                                replaceFragment(fragmentSignUpApprove, Constants.FRAGMENT_SIGN_UP_APPROVE);
+                            }
+                        });
+                        break;
+                    case "ACCOUNT_NOT_EXIST":
+                        callApiRegister(mUserRegister.email, mUserRegister.facebookAvatar, mUserRegister.name, mUserRegister.id);
+                        break;
+                    case "SUCCESS":
+
+                        int selectedId = mRg.getCheckedRadioButtonId();
+                        boolean isChecked = mCbSavePassword.isChecked();
+                        Bundle bundle = new Bundle();
+                        if (selectedId == R.id.rd_user) {
+                            Log.d(TAG, "Login By User isChecked = " + isChecked);
+                            bundle.putBoolean(Constants.BUNDLE_IS_MASTER, false);
+                        } else {
+                            Log.d(TAG, "Login By Master isChecked = " + isChecked);
+                            bundle.putBoolean(Constants.BUNDLE_IS_MASTER, true);
+                        }
+
+                        if (isChecked) {
+                            PrefUtil.setSharedPreferenceSaveData(getActivity());
+                        }
+
+                        PrefUtil.setSharedPreferenceUserInfo(getActivity(), jsonObject.toString());
+                        startActivityAnim(MainActivity.class, bundle);
+                        finishActivityAnim();
+                        break;
+                    default:
+                        DialogUtil.showDialogError(getActivity(), userLoginSuccess.message, null);
+                        break;
                 }
             }
 

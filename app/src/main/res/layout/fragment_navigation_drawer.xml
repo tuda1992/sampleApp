@@ -29,7 +29,7 @@
             android:layout_marginBottom="@dimen/_10sdp"
             android:text="userName"
             android:textAllCaps="true"
-            android:textColor="@android:color/black"
+            android:textColor="@color/textColorPrimary"
             android:textSize="@dimen/_14sdp"
             android:textStyle="bold" />
 

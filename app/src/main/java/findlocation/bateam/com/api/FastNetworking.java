@@ -36,7 +36,7 @@ import findlocation.bateam.com.util.ProgressDialogUtils;
 
 public class FastNetworking {
 
-//    public static final String BASE_URL = "http://sividns.southeastasia.cloudapp.azure.com/api";
+    //    public static final String BASE_URL = "http://sividns.southeastasia.cloudapp.azure.com/api";
     public static final String BASE_URL = "http://sividns.southeastasia.cloudapp.azure.com/SiviTest/api";
 
     public static final String URL_LOGIN = "/Users/Login";
@@ -49,11 +49,11 @@ public class FastNetworking {
     public static final String URL_JOB = "/JobInfos/Filter";
     public static final String URL_WARD = "/Wards/ListByDistrictId";
     public static final String URL_FILTER = "/JobInfos/ListJobInfoFilters";
-    public static final String URL_FORGOT_PW= "/Users/ResetPassword";
-    public static final String URL_UPDATE_PW= "/Users/UpdatePassword";
-    public static final String URL_EXTERNAL_REGISTER= "/Users/ExternalRegister";
-    public static final String URL_EXTERNAL_LOGIN= "/Users/ExternalLogin";
-    public static final String URL_RESEND= "/Users/SendActivationCode";
+    public static final String URL_FORGOT_PW = "/Users/ResetPassword";
+    public static final String URL_UPDATE_PW = "/Users/UpdatePassword";
+    public static final String URL_EXTERNAL_REGISTER = "/Users/ExternalRegister";
+    public static final String URL_EXTERNAL_LOGIN = "/Users/ExternalLogin";
+    public static final String URL_RESEND = "/Users/SendActivationCode";
 
     private Context mContext;
     private JsonObjectCallBackListener mListenerObject;
@@ -155,7 +155,7 @@ public class FastNetworking {
                 });
     }
 
-    public void callApiResend(JSONObject jsonObject) {
+    public void callApiResend(String email) {
         if (!NetworkUtil.isHaveInternet(mContext)) {
             DialogUtil.showDialogErrorInternet(mContext, null);
             return;
@@ -163,9 +163,9 @@ public class FastNetworking {
         mProgress.showDialog();
 
         HashMap<String, String> headers = initCustomHeader("");
-        AndroidNetworking.post(BASE_URL + URL_RESEND)
+        AndroidNetworking.get(BASE_URL + URL_RESEND)
                 .addHeaders(headers)
-                .addJSONObjectBody(jsonObject)
+                .addQueryParameter("email", email)
                 .build()
                 .getAsJSONObject(new JSONObjectRequestListener() {
                     @Override
@@ -190,9 +190,8 @@ public class FastNetworking {
             DialogUtil.showDialogErrorInternet(mContext, null);
             return;
         }
-        if (isShowLoading) {
-            mProgress.showDialog();
-        }
+        mProgress.showDialog();
+
         HashMap<String, String> headers = initCustomContentType();
         AndroidNetworking.post(BASE_URL + URL_HOUSE)
                 .addHeaders(headers)
@@ -265,7 +264,7 @@ public class FastNetworking {
         AndroidNetworking.post(BASE_URL + URL_FORGOT_PW)
                 .addHeaders(headers)
                 .addStringBody("application/json")
-                .addQueryParameter("email",email)
+                .addQueryParameter("email", email)
                 .build()
                 .getAsString(new StringRequestListener() {
 

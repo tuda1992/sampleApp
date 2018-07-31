@@ -61,25 +61,22 @@ public class FragmentSignUpApprove extends BaseFragment {
     @BindString(R.string.string_resend)
     String mStrResend;
 
-    @OnClick(R.id.tv_count_down)
-    public void onClickResend() {
-        Log.d(TAG, "Resend");
-        mTvCountDown.setText(String.format(mStrCountDown, mIntCountDown));
-        mTvCountDown.setPaintFlags(0);
-        mCountDownTimer.start();
-
-        try {
-            callApiResend();
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-
-    }
-
     private int mIntCountDown = 30;
     private String mEmail;
     private boolean mIsActive;
     private Gson mGson = new Gson();
+
+    @OnClick(R.id.tv_count_down)
+    public void onClickResend() {
+        Log.d(TAG, "Resend");
+        mIntCountDown = 30;
+        mTvCountDown.setText(String.format(mStrCountDown, "" + mIntCountDown));
+        mTvCountDown.setPaintFlags(0);
+        mCountDownTimer.start();
+        callApiResend();
+    }
+
+
     private CountDownTimer mCountDownTimer = new CountDownTimer(31000, 1000) {
         @Override
         public void onTick(long l) {
@@ -187,27 +184,25 @@ public class FragmentSignUpApprove extends BaseFragment {
         }
 
         if (mIsActive) {
-            try {
-                callApiResend();
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
+            callApiResend();
         }
 
     }
 
-    private void callApiResend() throws JSONException {
+    private void callApiResend() {
         EmailResend emailResend = new EmailResend();
         emailResend.email = mEmail;
-
-        final String json = mGson.toJson(emailResend);
-        JSONObject jsonObject = new JSONObject(json);
 
         FastNetworking fastNetworking = new FastNetworking(getActivity(), new JsonObjectCallBackListener() {
             @Override
             public void onResponse(JSONObject jsonObject) {
                 Response response = mGson.fromJson(jsonObject.toString(), Response.class);
                 Log.d(TAG, response + "");
+                if(response.code == "SUCCESS"){
+
+                }else {
+                    DialogUtil.showDialogErrorLowInternet(getActivity(), "Đường truyền của bạn đang gặp vấn đề !!!", null);
+                }
 
             }
 
@@ -217,7 +212,7 @@ public class FragmentSignUpApprove extends BaseFragment {
             }
         });
 
-        fastNetworking.callApiResend(jsonObject);
+        fastNetworking.callApiResend(emailResend.email);
     }
 
     @Override
