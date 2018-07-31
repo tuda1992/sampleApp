@@ -69,7 +69,7 @@ public class UserInfo {
     @SerializedName("StudentCard")
     @Expose
     public String studentCard;
-    @SerializedName("Message")
+    @SerializedName("ResponseMessage")
     @Expose
     public String message;
     @SerializedName("SecurityToken")
@@ -81,5 +81,7 @@ public class UserInfo {
     public String address;
     @SerializedName("DateOfBirth")
     public String dob;
+    @SerializedName("ResponseCode")
+    public String responseCode;
 
 }

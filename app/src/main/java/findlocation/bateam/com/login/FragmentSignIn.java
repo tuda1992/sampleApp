@@ -50,6 +50,8 @@ import findlocation.bateam.com.base.BaseFragment;
 import findlocation.bateam.com.constant.Constants;
 import findlocation.bateam.com.listener.JsonObjectCallBackListener;
 import findlocation.bateam.com.listener.StringCallBackListener;
+import findlocation.bateam.com.model.ExternalLogin;
+import findlocation.bateam.com.model.Response;
 import findlocation.bateam.com.model.UserInfo;
 import findlocation.bateam.com.model.UserLogin;
 import findlocation.bateam.com.model.UserRegister;
@@ -62,7 +64,7 @@ import findlocation.bateam.com.util.PrefUtil;
  * Created by acv on 12/4/17.
  */
 
-public class FragmentSignIn extends BaseFragment implements GoogleApiClient.OnConnectionFailedListener{
+public class FragmentSignIn extends BaseFragment implements GoogleApiClient.OnConnectionFailedListener {
 
     @BindView(R.id.tv_forgot_pass)
     TextView mTvForgetPass;
@@ -98,14 +100,15 @@ public class FragmentSignIn extends BaseFragment implements GoogleApiClient.OnCo
     private UserRegister mUserRegister = new UserRegister();
     private GoogleApiClient mGoogleApiClient;
     private static final int RC_SIGN_IN = 007;
+    private Bundle bundle;
 
     @OnClick(R.id.tv_login_fb)
-    public void onClickLoginFB(){
+    public void onClickLoginFB() {
         loginFacebook();
     }
 
     @OnClick(R.id.tv_login_gmail)
-    public void onClickLoginGmail(){
+    public void onClickLoginGmail() {
         Intent signInIntent = Auth.GoogleSignInApi.getSignInIntent(mGoogleApiClient);
         startActivityForResult(signInIntent, RC_SIGN_IN);
     }
@@ -143,7 +146,7 @@ public class FragmentSignIn extends BaseFragment implements GoogleApiClient.OnCo
 
         int selectedId = mRg.getCheckedRadioButtonId();
         boolean isChecked = mCbSavePassword.isChecked();
-        Bundle bundle = new Bundle();
+        bundle = new Bundle();
         if (selectedId == R.id.rd_user) {
             Log.d(TAG, "Login By User isChecked = " + isChecked);
             bundle.putBoolean(Constants.BUNDLE_IS_MASTER, false);
@@ -178,7 +181,7 @@ public class FragmentSignIn extends BaseFragment implements GoogleApiClient.OnCo
             public void onResponse(JSONObject jsonObject) {
                 UserInfo userLoginSuccess = mGson.fromJson(jsonObject.toString(), UserInfo.class);
                 if (TextUtils.isEmpty(userLoginSuccess.securityToken)) {
-                    if (userLoginSuccess.message.contains("Tài khoản chưa được kích hoạt")) {
+                    if (userLoginSuccess.responseCode.contains("ACCOUNT_NOT_ACTIVE")) {
                         DialogUtil.showDialogErrorNotActive(getActivity(), userLoginSuccess.message, new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialogInterface, int i) {
@@ -270,6 +273,12 @@ public class FragmentSignIn extends BaseFragment implements GoogleApiClient.OnCo
 
     }
 
+    @Override
+    public void onPause() {
+        super.onPause();
+        mGoogleApiClient.stopAutoManage(getActivity());
+        mGoogleApiClient.disconnect();
+    }
 
     private void loginFacebook() {
         // FB logout before login
@@ -301,7 +310,7 @@ public class FragmentSignIn extends BaseFragment implements GoogleApiClient.OnCo
     }
 
     private void updateProfile(LoginResult loginResult) {
-        AccessToken accesstoken =  loginResult.getAccessToken();
+        AccessToken accesstoken = loginResult.getAccessToken();
         // Facbook Email address
         GraphRequest request = GraphRequest.newMeRequest(accesstoken,
                 new GraphRequest.GraphJSONObjectCallback() {
@@ -341,12 +350,18 @@ public class FragmentSignIn extends BaseFragment implements GoogleApiClient.OnCo
 
                             mUserRegister.email = email;
                             mUserRegister.facebookAvatar = profilePicUrl;
-                            mUserRegister.familyName = name;
+                            mUserRegister.name = name;
                             mUserRegister.facebookId = id;
 
-                            Toast.makeText(getActivity(), "Email : " + email + " id : " + id + " name : " + name + " profilePicture : " + profilePicUrl, Toast.LENGTH_LONG).show();
 
-                            callApiRegister(email);
+
+                            try {
+                                callApiExternalLogin();
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            }
+
+//                            callApiRegister(email, profilePicUrl, name, id);
 
                         } catch (Exception e) {
                             e.printStackTrace();
@@ -359,48 +374,105 @@ public class FragmentSignIn extends BaseFragment implements GoogleApiClient.OnCo
         request.executeAsync();
     }
 
+    private void callApiRegister(final String email, final String avatarUrl, final String name, final String id) {
 
-
-    private void callApiRegister(final String email) {
-//        mMapFile.put(Constants.AVATAR, LoginActivity.mFileAvatar);
-//        mMapFile.put(Constants.STUDENT_CARD, LoginActivity.mFileLicense);
-
-        FastNetworking fastNetworking = new FastNetworking(getActivity(), new StringCallBackListener() {
+        FastNetworking fastNetworking = new FastNetworking(getActivity(), new JsonObjectCallBackListener() {
             @Override
-            public void onResponse(String string) {
-                Log.d(TAG, "onResponse : " + string);
+            public void onResponse(JSONObject jsonObject) {
+                Response response = mGson.fromJson(jsonObject.toString(), Response.class);
 
-                switch (string){
-                    case "Đăng ký tài khoản thành công":
+                switch (response.code) {
+                    case "PHONE_NUMBER_EMPTY":
+                    case "EMAIL_EMPTY":
+                        FragmentSignUpFbGmailInfo fragmentSignUpFbGmailInfo = new FragmentSignUpFbGmailInfo();
+                        Bundle bundle = new Bundle();
+                        bundle.putString(Constants.BUNDLE_EMAIL, email);
+                        bundle.putString(Constants.BUNDLE_AVATAR, avatarUrl);
+                        bundle.putString(Constants.BUNDLE_ID, id);
+                        bundle.putString(Constants.BUNDLE_NAME, name);
+                        fragmentSignUpFbGmailInfo.setArguments(bundle);
+                        replaceFragment(fragmentSignUpFbGmailInfo, Constants.FRAGMENT_SIGN_UP_FB_GMAIL_INFO);
                         break;
-                    case "Đăng nhập thành công":
-                        break;
-                }
+                    case "ACCOUNT_EXISTED":
 
-                if (string.contains("Đăng ký tài khoản thành công")) {
-                    DialogUtil.showDialogSuccess(getActivity(), string, new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialogInterface, int i) {
-//                            LoginActivity.mFileAvatar = null;
-//                            LoginActivity.mFileLicense = null;
-                            FragmentSignUpApprove fragmentSignUpApprove = new FragmentSignUpApprove();
-                            Bundle bundle = new Bundle();
-                            bundle.putString(Constants.BUNDLE_EMAIL, email);
-                            fragmentSignUpApprove.setArguments(bundle);
-                            replaceFragment(fragmentSignUpApprove, Constants.FRAGMENT_SIGN_UP_APPROVE);
-                        }
-                    });
-                } else {
-                    DialogUtil.showDialogError(getActivity(), string, null);
+                        break;
+                    default:
+                        DialogUtil.showDialogError(getActivity(), response.message, null);
+                        break;
                 }
             }
 
             @Override
             public void onError(String messageError) {
-                Log.d(TAG, "onError : " + messageError);
+
             }
         });
-        fastNetworking.callApiRegister(null, mUserRegister);
+
+        fastNetworking.callApiRegisterFbGmail(mUserRegister);
+    }
+
+    private void callApiExternalLogin() throws JSONException {
+
+        if (TextUtils.isEmpty(mUserRegister.email)) {
+            FragmentSignUpFbGmailInfo fragmentSignUpFbGmailInfo = new FragmentSignUpFbGmailInfo();
+            Bundle bundle = new Bundle();
+            bundle.putString(Constants.BUNDLE_EMAIL, "");
+            bundle.putString(Constants.BUNDLE_AVATAR, mUserRegister.facebookAvatar);
+            bundle.putString(Constants.BUNDLE_ID, mUserRegister.facebookId);
+            bundle.putString(Constants.BUNDLE_NAME, mUserRegister.name);
+            fragmentSignUpFbGmailInfo.setArguments(bundle);
+            replaceFragment(fragmentSignUpFbGmailInfo, Constants.FRAGMENT_SIGN_UP_FB_GMAIL_INFO);
+            return;
+        }
+
+
+        ExternalLogin externalLogin = new ExternalLogin();
+        externalLogin.email = mUserRegister.email;
+
+        final String json = mGson.toJson(externalLogin);
+        JSONObject jsonObject = new JSONObject(json);
+
+        FastNetworking fastNetworking = new FastNetworking(getActivity(), new JsonObjectCallBackListener() {
+            @Override
+            public void onResponse(JSONObject jsonObject) {
+                UserInfo userLoginSuccess = mGson.fromJson(jsonObject.toString(), UserInfo.class);
+                if (TextUtils.isEmpty(userLoginSuccess.securityToken)) {
+                    switch (userLoginSuccess.responseCode){
+                        case "ACCOUNT_NOT_ACTIVE":
+                            DialogUtil.showDialogErrorNotActive(getActivity(), userLoginSuccess.message, new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialogInterface, int i) {
+                                    FragmentSignUpApprove fragmentSignUpApprove = new FragmentSignUpApprove();
+                                    Bundle bundle = new Bundle();
+                                    bundle.putString(Constants.BUNDLE_EMAIL, mUserRegister.email);
+                                    bundle.putBoolean(Constants.BUNDLE_NOT_ACTIVE, true);
+                                    fragmentSignUpApprove.setArguments(bundle);
+                                    replaceFragment(fragmentSignUpApprove, Constants.FRAGMENT_SIGN_UP_APPROVE);
+                                }
+                            });
+                            break;
+                        case "ACCOUNT_NOT_EXIST":
+                            callApiRegister(mUserRegister.email,mUserRegister.facebookAvatar,mUserRegister.name,mUserRegister.id);
+                            break;
+                        case "SUCCESS":
+                            PrefUtil.setSharedPreferenceUserInfo(getActivity(), jsonObject.toString());
+                            startActivityAnim(MainActivity.class, bundle);
+                            finishActivityAnim();
+                            break;
+                            default:
+                                DialogUtil.showDialogError(getActivity(), userLoginSuccess.message, null);
+                                break;
+                    }
+                }
+            }
+
+            @Override
+            public void onError(String messageError) {
+
+            }
+        });
+
+        fastNetworking.callApiLoginFbGmail(jsonObject);
     }
 
     @Override
@@ -445,7 +517,7 @@ public class FragmentSignIn extends BaseFragment implements GoogleApiClient.OnCo
             String personName = acct.getDisplayName();
             String personPhotoUrl = "";
             if (acct.getPhotoUrl() != null)
-                personPhotoUrl= acct.getPhotoUrl().toString();
+                personPhotoUrl = acct.getPhotoUrl().toString();
             String email = acct.getEmail();
 
             Log.d(TAG, "Name: " + personName + ", email: " + email
@@ -453,10 +525,17 @@ public class FragmentSignIn extends BaseFragment implements GoogleApiClient.OnCo
 
             mUserRegister.email = email;
             mUserRegister.facebookAvatar = personPhotoUrl;
-            mUserRegister.familyName = personName;
+            mUserRegister.name = personName;
             mUserRegister.facebookId = acct.getId();
 
-            callApiRegister(email);
+
+            try {
+                callApiExternalLogin();
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+
+//            callApiRegister(email, personPhotoUrl, personName, acct.getId());
 
         }
     }

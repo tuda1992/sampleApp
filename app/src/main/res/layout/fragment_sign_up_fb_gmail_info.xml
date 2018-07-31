@@ -30,7 +30,7 @@
                 android:layout_height="wrap_content"
                 android:background="@null"
                 android:padding="@dimen/_10sdp"
-                android:text="123"
+                android:inputType="textEmailAddress"
                 android:textColor="@android:color/black"
                 android:textSize="@dimen/_13sdp" />
 
@@ -54,18 +54,50 @@
                 android:textStyle="bold" />
 
 
-            <TextView
-                android:id="@+id/tv_email"
+            <EditText
+                android:id="@+id/edt_email"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@null"
+                android:inputType="textEmailAddress"
                 android:padding="@dimen/_10sdp"
-                android:text="123"
                 android:textColor="@android:color/black"
                 android:textSize="@dimen/_13sdp" />
 
 
         </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/_10sdp"
+                android:text="Số điện thoại của bạn là:"
+                android:textColor="@android:color/black"
+                android:textSize="@dimen/_15sdp"
+                android:textStyle="bold" />
+
+
+            <EditText
+                android:id="@+id/edt_telephone"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@null"
+                android:inputType="number"
+                android:maxLength="12"
+                android:padding="@dimen/_10sdp"
+                android:textColor="@android:color/black"
+                android:textSize="@dimen/_13sdp" />
+
+
+        </LinearLayout>
+
+
     </LinearLayout>
 
     <RelativeLayout

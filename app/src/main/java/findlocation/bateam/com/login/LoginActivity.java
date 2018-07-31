@@ -1,8 +1,11 @@
 package findlocation.bateam.com.login;
 
 import android.Manifest;
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.os.Build;
@@ -34,6 +37,7 @@ import butterknife.BindString;
 import butterknife.BindView;
 import findlocation.bateam.com.MainActivity;
 import findlocation.bateam.com.R;
+import findlocation.bateam.com.SmsReceiver;
 import findlocation.bateam.com.api.FastNetworking;
 import findlocation.bateam.com.base.BaseActivity;
 import findlocation.bateam.com.base.BaseFragment;
@@ -65,13 +69,6 @@ public class LoginActivity extends BaseActivity {
     public static File mFileAvatar = null;
 
 
-    public static LoginActivity instance;
-
-
-    public static LoginActivity Instance() {
-        return instance;
-    }
-
 
     @Override
     protected int getLayoutView() {
@@ -91,6 +88,34 @@ public class LoginActivity extends BaseActivity {
     protected void initListeners() {
 
     }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        registerReceiver(broadcastReceiver, new IntentFilter("broadCastName"));
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        unregisterReceiver(broadcastReceiver);
+    }
+
+    // Add this inside your class
+    SmsReceiver broadcastReceiver =  new SmsReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+
+            Bundle b = intent.getExtras();
+
+            String message = b.getString("message");
+
+            Log.d(TAG, "" + message);
+
+            updateList(message);
+        }
+    };
+
 
     @Override
     protected void initDatas(Bundle saveInstanceStatte) {
@@ -122,6 +147,14 @@ public class LoginActivity extends BaseActivity {
     public void goFragmentSignIn() {
         getSupportActionBar().setTitle(mTitleSignIn);
         finishFragment();
+    }
+
+    public void setToolBarSignIn(){
+        getSupportActionBar().setTitle(mTitleSignIn);
+    }
+
+    public void setToolBarSignUp(){
+        getSupportActionBar().setTitle(mTitleSignUp);
     }
 
     public void goFragmentForgetPassword() {

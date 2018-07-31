@@ -173,7 +173,7 @@
     <string name="error_dialog_telephone_null">Bạn chưa điền thông tin số điện thoại di động</string>
     <string name="error_dialog_telephone_error">Bạn điền sai số điện thoại</string>
     <string name="error_dialog_school_error">Tên trường học chưa đúng</string>
-    <string name="error_dialog_family_name_null">Bạn chưa điền thông tin họ</string>
+    <string name="error_dialog_family_name_null">Bạn chưa điền thông tin họ tên</string>
     <string name="error_dialog_first_name_null">Bạn chưa điền thông tin tên</string>
     <string name="error_dialog_dob_null">Bạn chưa điền thông tin ngày sinh</string>
     <string name="error_dialog_code_null">Bạn chưa điền thông tin code</string>
@@ -183,9 +183,8 @@
     <string name="error_dialog_town_error">Bạn chưa chọn phường/xã</string>
 
 
-
-    <string name="string_count_down">Gửi lại số điện thoại xác nhận sau : %d</string>
-    <string name="string_resend">Gửi số điện thoại </string>
+    <string name="string_count_down">Gửi lại số điện thoại xác nhận sau 00:%s</string>
+    <string name="string_resend">Gửi lại số điện thoại</string>
 
 
     <string name="about_sivi">SiVi là ứng dụng được tạo ra nhằm đưa ra giải pháp tìm nhà, việc làm, nơi vui chơi giải trí một cách nhanh gọn, dễ dàng và hiệu quả tới các bạn sinh viên. SiVi được tạo ra bởi Dataholic team,  những con người có đam mê về dữ liệu và muốn ứng dụng dữ liệu vào trong cuộc sống hàng ngày nhằm đem lại sự tiện lợi trong cuộc sống cho mọi người. Chúng tôi tự gọi mình là những "dataholic", có sự đam mê về việc quản lý và khai phá dữ liệu.Dataholic team là tập hợp những thành viên có nhiều kinh nghiệm xử lý dữ liệu, với 4 thành viên chủ chốt với tổng kinh nghiệm trên 20 năm trong lĩnh vực tài chính, ngân hàng. Với kinh nghiệm của nhóm, chúng tôi tự tin mình có thể mang lại được nhiều giá trị hơn cho các cá nhân, tổ chức thông qua hoạt động thu thập, xử lý, quản lý và khai thác dữ liệu.\n•	Đức Nguyễn, Thạc sỹ Tài chính và Quản lý, trường đại học Exeter, Anh Quốc, 10 năm kinh nghiệm chuyên về dữ liệu trong ngân hàng, là chuyên gia:\no	Xây dựng định hướng, chiến lược dữ liệu cho các ngân hàng, tổ chức tài chính\no	Thiết kế, triển khai mô hình dữ liệu và ETL cho hệ thống DWH\no	Xây dựng Quản trị dữ liệu\no	Triển khai mô hình Trung tâm Phân tích kinh doanh\n\n•	Đức Phạm, Thạc sỹ Tài chính, trường đại học Bradford, Anh Quốc, 7 năm kinh nghiệm trong các ngành Ngân hàng, bảo hiểm và là chuyên gia:\no	Thiết kế, triển khai mô hình dữ liệu và ETL cho hệ thống DWH\no	Thiết kế, xây dựng hệ thống báo cáo thông minh BI\no	Xây dựng mô hình phân tích dữ liệu\no	Áp dụng Neural network giải quyết các bài toán phức tạp của nghiệp vụ\n\n•	Kiên Vũ, Cử nhân kinh tế trường ĐH Kinh tế, Đại học QG Hà Nội, 3 năm kinh nghiệm trong ngành chứng khoán, Ngân hàng, có kinh nghiệm triển khai:\no	Xây dựng báo cáo thông minh BI\no	Áp dụng text mining Big data\no	Áp dụng image recognition và image mining nhằm cải tiến quy trình\n\n•	Long Nguyễn, Cử nhân Quản trị Hệ thống Thông tin, Học viên Ngân Hàng, 3 năm kinh nghiệm trong ngành CNTT, Ngân hàng, có kinh nghiệm triển khai:\no	Thiết kế, triển khai cơ sở dữ liệu có cấu trúc và phi cấu trúc\no	Xây dựng báo cáo thông minh BI\no	Ứng dụng các hệ thống xử lý dữ liệu lớn vào các bài toán cụ thể của nghiệp vụ</string>

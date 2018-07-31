@@ -36,7 +36,8 @@ import findlocation.bateam.com.util.ProgressDialogUtils;
 
 public class FastNetworking {
 
-    public static final String BASE_URL = "http://sividns.southeastasia.cloudapp.azure.com/api";
+//    public static final String BASE_URL = "http://sividns.southeastasia.cloudapp.azure.com/api";
+    public static final String BASE_URL = "http://sividns.southeastasia.cloudapp.azure.com/SiviTest/api";
 
     public static final String URL_LOGIN = "/Users/Login";
     public static final String URL_ACTIVE_USER = "/Users/ActiveUser";
@@ -50,6 +51,9 @@ public class FastNetworking {
     public static final String URL_FILTER = "/JobInfos/ListJobInfoFilters";
     public static final String URL_FORGOT_PW= "/Users/ResetPassword";
     public static final String URL_UPDATE_PW= "/Users/UpdatePassword";
+    public static final String URL_EXTERNAL_REGISTER= "/Users/ExternalRegister";
+    public static final String URL_EXTERNAL_LOGIN= "/Users/ExternalLogin";
+    public static final String URL_RESEND= "/Users/SendActivationCode";
 
     private Context mContext;
     private JsonObjectCallBackListener mListenerObject;
@@ -92,6 +96,74 @@ public class FastNetworking {
         }
         HashMap<String, String> headers = initCustomHeader("");
         AndroidNetworking.post(BASE_URL + URL_LOGIN)
+                .addHeaders(headers)
+                .addJSONObjectBody(jsonObject)
+                .build()
+                .getAsJSONObject(new JSONObjectRequestListener() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        mProgress.hideDialog();
+                        if (mListenerObject != null)
+                            mListenerObject.onResponse(response);
+                    }
+
+                    @Override
+                    public void onError(ANError error) {
+                        mProgress.hideDialog();
+                        DialogUtil.showDialogErrorLowInternet(mContext, "Đường truyền của bạn đang gặp vấn đề !!!", null);
+                        if (mListenerObject != null)
+                            mListenerArray.onError("Đường truyền của bạn đang gặp vấn đề !!!");
+                    }
+                });
+    }
+
+    public void callApiLoginFbGmail(JSONObject jsonObject) {
+
+        if (!NetworkUtil.isHaveInternet(mContext)) {
+            DialogUtil.showDialogErrorInternet(mContext, null);
+            return;
+        }
+        mProgress.showDialog();
+
+        try {
+            jsonObject.put("VersionApp", mContext.getPackageManager().getPackageInfo(mContext.getPackageName(), 0).versionName);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        } catch (PackageManager.NameNotFoundException e) {
+            e.printStackTrace();
+        }
+        HashMap<String, String> headers = initCustomHeader("");
+        AndroidNetworking.post(BASE_URL + URL_EXTERNAL_LOGIN)
+                .addHeaders(headers)
+                .addJSONObjectBody(jsonObject)
+                .build()
+                .getAsJSONObject(new JSONObjectRequestListener() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        mProgress.hideDialog();
+                        if (mListenerObject != null)
+                            mListenerObject.onResponse(response);
+                    }
+
+                    @Override
+                    public void onError(ANError error) {
+                        mProgress.hideDialog();
+                        DialogUtil.showDialogErrorLowInternet(mContext, "Đường truyền của bạn đang gặp vấn đề !!!", null);
+                        if (mListenerObject != null)
+                            mListenerArray.onError("Đường truyền của bạn đang gặp vấn đề !!!");
+                    }
+                });
+    }
+
+    public void callApiResend(JSONObject jsonObject) {
+        if (!NetworkUtil.isHaveInternet(mContext)) {
+            DialogUtil.showDialogErrorInternet(mContext, null);
+            return;
+        }
+        mProgress.showDialog();
+
+        HashMap<String, String> headers = initCustomHeader("");
+        AndroidNetworking.post(BASE_URL + URL_RESEND)
                 .addHeaders(headers)
                 .addJSONObjectBody(jsonObject)
                 .build()
@@ -392,24 +464,73 @@ public class FastNetworking {
 //                .addMultipartFile(mapFile)
                 .addMultipartParameter(userRegister)
                 .build()
-                .getAsString(new StringRequestListener() {
-
+                .getAsJSONObject(new JSONObjectRequestListener() {
                     @Override
-                    public void onResponse(String s) {
+                    public void onResponse(JSONObject jsonObject) {
                         mProgress.hideDialog();
-                        if (mListenerString != null)
-                            mListenerString.onResponse(s);
+                        if (mListenerObject != null)
+                            mListenerObject.onResponse(jsonObject);
                     }
 
                     @Override
                     public void onError(ANError anError) {
                         mProgress.hideDialog();
                         DialogUtil.showDialogErrorLowInternet(mContext, "Đường truyền của bạn đang gặp vấn đề !!!", null);
-                        if (mListenerString != null)
-                            mListenerString.onError("Đường truyền của bạn đang gặp vấn đề !!!");
+                        if (mListenerObject != null)
+                            mListenerObject.onError("Đường truyền của bạn đang gặp vấn đề !!!");
+                    }
+                });
+
+//                .getAsString(new StringRequestListener() {
+//
+//                    @Override
+//                    public void onResponse(String s) {
+//                        mProgress.hideDialog();
+//                        if (mListenerString != null)
+//                            mListenerString.onResponse(s);
+//                    }
+//
+//                    @Override
+//                    public void onError(ANError anError) {
+//                        mProgress.hideDialog();
+//                        DialogUtil.showDialogErrorLowInternet(mContext, "Đường truyền của bạn đang gặp vấn đề !!!", null);
+//                        if (mListenerString != null)
+//                            mListenerString.onError("Đường truyền của bạn đang gặp vấn đề !!!");
+//                    }
+//                });
+    }
+
+    public void callApiRegisterFbGmail(UserRegister userRegister) {
+
+        if (!NetworkUtil.isHaveInternet(mContext)) {
+            DialogUtil.showDialogErrorInternet(mContext, null);
+            return;
+        }
+        mProgress.showDialog();
+
+        HashMap<String, String> headers = initCustomContentType();
+        AndroidNetworking.upload(BASE_URL + URL_EXTERNAL_REGISTER)
+                .addHeaders(headers)
+                .addMultipartParameter(userRegister)
+                .build()
+                .getAsJSONObject(new JSONObjectRequestListener() {
+                    @Override
+                    public void onResponse(JSONObject jsonObject) {
+                        mProgress.hideDialog();
+                        if (mListenerObject != null)
+                            mListenerObject.onResponse(jsonObject);
+                    }
+
+                    @Override
+                    public void onError(ANError anError) {
+                        mProgress.hideDialog();
+                        DialogUtil.showDialogErrorLowInternet(mContext, "Đường truyền của bạn đang gặp vấn đề !!!", null);
+                        if (mListenerObject != null)
+                            mListenerObject.onError("Đường truyền của bạn đang gặp vấn đề !!!");
                     }
                 });
     }
+
 
     public void callApiUpdate(Map<String, File> mapFile, UserInfo userInfo) {
         if (!NetworkUtil.isHaveInternet(mContext)) {

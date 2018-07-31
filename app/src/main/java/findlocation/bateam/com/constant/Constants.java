@@ -39,6 +39,7 @@ public class Constants {
     public static final String FRAGMENT_FORGET_PASSWORD_CODE = "FRAGMENT_FORGET_PASSWORD_CODE";
     public static final String FRAGMENT_FORGET_PASSWORD_INPUT = "FRAGMENT_FORGET_PASSWORD_INPUT";
     public static final String FRAGMENT_FORGET_PASSWORD_COMPLETE = "FRAGMENT_FORGET_PASSWORD_COMPLETE";
+    public static final String FRAGMENT_SIGN_UP_FB_GMAIL_INFO= "FRAGMENT_SIGN_UP_FB_GMAIL_INFO";
 
 
     // Querry Google Map
@@ -58,6 +59,10 @@ public class Constants {
     public static final String BUNDLE_IS_MASTER = "BUNDLE_IS_MASTER";
     public static final String BUNDLE_JOB_ITEM = "BUNDLE_JOB_ITEM";
     public static final String BUNDLE_EMAIL = "BUNDLE_EMAIL";
+    public static final String BUNDLE_AVATAR = "BUNDLE_AVATAR";
+    public static final String BUNDLE_ID = "BUNDLE_ID";
+    public static final String BUNDLE_NAME = "BUNDLE_NAME";
+    public static final String BUNDLE_NOT_ACTIVE = "BUNDLE_NOT_ACTIVE";
 
 
 }

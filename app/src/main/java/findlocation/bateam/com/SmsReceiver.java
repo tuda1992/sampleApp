@@ -19,17 +19,17 @@ public class SmsReceiver extends BroadcastReceiver {
         Bundle bundle = intent.getExtras();
 
 
-        if(intent.getAction().equalsIgnoreCase("android.provider.Telephony.SMS_RECEIVED")) {
+        if (intent.getAction().equalsIgnoreCase("android.provider.Telephony.SMS_RECEIVED")) {
             if (bundle != null) {
                 Object[] sms = (Object[]) bundle.get(SMS_BUNDLE);
                 String smsMsg = "";
 
                 SmsMessage smsMessage;
                 for (int i = 0; i < sms.length; i++) {
-                    if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.M){
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
                         String format = bundle.getString("format");
-                        smsMessage = SmsMessage.createFromPdu((byte[]) sms[i],format);
-                    }else{
+                        smsMessage = SmsMessage.createFromPdu((byte[]) sms[i], format);
+                    } else {
                         smsMessage = SmsMessage.createFromPdu((byte[]) sms[i]);
                     }
 
@@ -37,12 +37,13 @@ public class SmsReceiver extends BroadcastReceiver {
                     String msgBody = smsMessage.getMessageBody().toString();
                     String msgAddress = smsMessage.getOriginatingAddress();
 
-                    smsMsg += "SMS from : " + msgAddress + "\n";
-                    smsMsg += msgBody + "\n";
+                    smsMsg = msgBody.replace("Ma kich hoat tai khoan Sivi", "").trim();
                 }
 
-                LoginActivity inst = LoginActivity.Instance();
-                inst.updateList(smsMsg);
+                Intent i = new Intent("broadCastName");
+                // Data you need to pass to activity
+                i.putExtra("message", smsMsg);
+                context.sendBroadcast(i);
             }
         }
     }

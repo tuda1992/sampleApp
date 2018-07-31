@@ -29,6 +29,7 @@ public class DialogUtil {
                 .setMessage(message)
                 .setPositiveButton(context.getResources().getText(R.string.text_button_ok), okListener)
                 .setNegativeButton(context.getResources().getText(R.string.text_button_no), cancelListener)
+                .setCancelable(false)
                 .create()
                 .show();
     }
@@ -39,6 +40,7 @@ public class DialogUtil {
                 .setTitle(context.getResources().getText(R.string.title_dialog_error))
                 .setMessage(message)
                 .setPositiveButton(context.getResources().getText(R.string.text_button_ok), okListener)
+                .setCancelable(false)
                 .create()
                 .show();
     }
@@ -49,6 +51,7 @@ public class DialogUtil {
                 .setTitle(context.getResources().getText(R.string.title_dialog_error_job))
                 .setMessage(message)
                 .setPositiveButton(context.getResources().getText(R.string.text_button_ok), okListener)
+                .setCancelable(false)
                 .create()
                 .show();
     }
@@ -59,6 +62,7 @@ public class DialogUtil {
                 .setTitle(context.getResources().getText(R.string.title_dialog_reset_pw_fail))
                 .setMessage(message)
                 .setPositiveButton(context.getResources().getText(R.string.text_button_ok), okListener)
+                .setCancelable(false)
                 .create()
                 .show();
     }
@@ -69,6 +73,7 @@ public class DialogUtil {
                 .setTitle(context.getResources().getText(R.string.title_dialog_update_fail))
                 .setMessage(message)
                 .setPositiveButton(context.getResources().getText(R.string.text_button_ok), okListener)
+                .setCancelable(false)
                 .create()
                 .show();
     }
@@ -79,6 +84,7 @@ public class DialogUtil {
                 .setTitle(context.getResources().getText(R.string.title_dialog_error_not_active))
                 .setMessage(message)
                 .setPositiveButton(context.getResources().getText(R.string.text_button_ok), okListener)
+                .setCancelable(false)
                 .create()
                 .show();
     }
@@ -89,6 +95,7 @@ public class DialogUtil {
                 .setTitle(context.getResources().getText(R.string.title_dialog_error_active))
                 .setMessage(message)
                 .setPositiveButton(context.getResources().getText(R.string.text_button_ok), okListener)
+                .setCancelable(false)
                 .create()
                 .show();
     }
@@ -99,6 +106,7 @@ public class DialogUtil {
                 .setTitle(context.getResources().getText(R.string.title_dialog_success))
                 .setMessage(message)
                 .setPositiveButton(context.getResources().getText(R.string.text_button_ok), okListener)
+                .setCancelable(false)
                 .create()
                 .show();
     }
@@ -109,6 +117,7 @@ public class DialogUtil {
                 .setTitle(context.getResources().getText(R.string.title_dialog_reset_pw_success))
                 .setMessage(message)
                 .setPositiveButton(context.getResources().getText(R.string.text_button_ok), okListener)
+                .setCancelable(false)
                 .create()
                 .show();
     }
@@ -119,6 +128,7 @@ public class DialogUtil {
                 .setTitle(context.getResources().getText(R.string.title_dialog_update_success))
                 .setMessage(message)
                 .setPositiveButton(context.getResources().getText(R.string.text_button_ok), okListener)
+                .setCancelable(false)
                 .create()
                 .show();
     }
@@ -129,6 +139,7 @@ public class DialogUtil {
                 .setTitle(context.getResources().getText(R.string.title_dialog_error_internet))
                 .setMessage(message)
                 .setPositiveButton(context.getResources().getText(R.string.text_button_ok), okListener)
+                .setCancelable(false)
                 .create()
                 .show();
     }
@@ -139,6 +150,7 @@ public class DialogUtil {
                 .setTitle(context.getResources().getText(R.string.title_dialog_error_internet))
                 .setMessage(context.getResources().getText(R.string.error_dialog_internet))
                 .setPositiveButton(context.getResources().getText(R.string.text_button_ok), okListener)
+                .setCancelable(false)
                 .create()
                 .show();
     }

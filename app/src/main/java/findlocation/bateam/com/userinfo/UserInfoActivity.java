@@ -260,10 +260,10 @@ public class UserInfoActivity extends BaseActivity {
         }
 
 
-        if (TextUtils.isEmpty(firstName)) {
-            DialogUtil.showDialogError(this, mStrFirstNameNull, null);
-            return;
-        }
+//        if (TextUtils.isEmpty(firstName)) {
+//            DialogUtil.showDialogError(this, mStrFirstNameNull, null);
+//            return;
+//        }
 
         if (TextUtils.isEmpty(dob)) {
             DialogUtil.showDialogError(this, mStrDobNull, null);
@@ -296,7 +296,7 @@ public class UserInfoActivity extends BaseActivity {
         }
 
         mUserInfo.email = email;
-        mUserInfo.familyName = familyName;
+        mUserInfo.name = familyName;
         mUserInfo.name = firstName;
         mUserInfo.middleName = middleName;
         mUserInfo.phoneNumber = telephone;
@@ -414,37 +414,37 @@ public class UserInfoActivity extends BaseActivity {
             }
         };
 
-        mSpnAddressCity.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
-                Log.d(TAG, "mSpnAddressCity onItemSelected");
-                if (mArrAddressCity.size() > 0) {
-                    getDistricts(mArrAddressCity.get(position).id);
-                }
-            }
+//        mSpnAddressCity.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+//            @Override
+//            public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
+//                Log.d(TAG, "mSpnAddressCity onItemSelected");
+//                if (mArrAddressCity.size() > 0) {
+//                    getDistricts(mArrAddressCity.get(position).id);
+//                }
+//            }
+//
+//            @Override
+//            public void onNothingSelected(AdapterView<?> parentView) {
+//                Log.d(TAG, "mSpnAddressCity onNothingSelected");
+//            }
+//
+//        });
 
-            @Override
-            public void onNothingSelected(AdapterView<?> parentView) {
-                Log.d(TAG, "mSpnAddressCity onNothingSelected");
-            }
 
-        });
-
-
-        mSpnAddressDistrict.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                Log.d(TAG, "mSpnAddressDistrict onItemSelected");
-                if (mArrAddressDistrict.size() > 0) {
-                    getWards(mArrAddressDistrict.get(i).id);
-                }
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> adapterView) {
-                Log.d(TAG, "mSpnAddressDistrict onNothingSelected");
-            }
-        });
+//        mSpnAddressDistrict.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+//            @Override
+//            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+//                Log.d(TAG, "mSpnAddressDistrict onItemSelected");
+//                if (mArrAddressDistrict.size() > 0) {
+//                    getWards(mArrAddressDistrict.get(i).id);
+//                }
+//            }
+//
+//            @Override
+//            public void onNothingSelected(AdapterView<?> adapterView) {
+//                Log.d(TAG, "mSpnAddressDistrict onNothingSelected");
+//            }
+//        });
 
 
     }
@@ -452,14 +452,14 @@ public class UserInfoActivity extends BaseActivity {
     @Override
     protected void getData() {
 
-        // Sex
-        mArrSex.add(mStrMen);
-        mArrSex.add(mStrWomen);
-        mAdapter = new SexSpinnerAdapter(this, mArrSex, true);
-        mSpnSex.setAdapter(mAdapter);
-
-        getCities();
-
+//        // Sex
+//        mArrSex.add(mStrMen);
+//        mArrSex.add(mStrWomen);
+//        mAdapter = new SexSpinnerAdapter(this, mArrSex, true);
+//        mSpnSex.setAdapter(mAdapter);
+//
+//        getCities();
+//
         // School
         String jsonReaderUniversities;
         try {
@@ -487,57 +487,57 @@ public class UserInfoActivity extends BaseActivity {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
-        // Country
-        String jsonReader;
-        try {
-            jsonReader = JSONResourceReader.readFileJSONNationsFromRaw(this);
-            Gson gson = new Gson();
-            Type listType = new TypeToken<List<NationModel>>() {
-            }.getType();
-            List<NationModel> nationList = (List<NationModel>) gson.fromJson(jsonReader, listType);
-            mArrAddressCountry.clear();
-            for (NationModel item : nationList) {
-                if (item.id.equalsIgnoreCase("191")) {
-                    mArrAddressCountry.add(0, item);
-                } else {
-                    mArrAddressCountry.add(item);
-                }
-            }
-
-            mAdapterAddressCountry = new NationSpinnerAdapter(this, mArrAddressCountry, true);
-            mSpnAddressCountry.setAdapter(mAdapterAddressCountry);
-
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
+//
+//        // Country
+//        String jsonReader;
+//        try {
+//            jsonReader = JSONResourceReader.readFileJSONNationsFromRaw(this);
+//            Gson gson = new Gson();
+//            Type listType = new TypeToken<List<NationModel>>() {
+//            }.getType();
+//            List<NationModel> nationList = (List<NationModel>) gson.fromJson(jsonReader, listType);
+//            mArrAddressCountry.clear();
+//            for (NationModel item : nationList) {
+//                if (item.id.equalsIgnoreCase("191")) {
+//                    mArrAddressCountry.add(0, item);
+//                } else {
+//                    mArrAddressCountry.add(item);
+//                }
+//            }
+//
+//            mAdapterAddressCountry = new NationSpinnerAdapter(this, mArrAddressCountry, true);
+//            mSpnAddressCountry.setAdapter(mAdapterAddressCountry);
+//
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
+//
         if (mUserInfo != null) {
-            mEdtFamilyName.setText(mUserInfo.familyName);
-            mEdtMiddleName.setText(mUserInfo.middleName);
-            mEdtFirstName.setText(mUserInfo.name);
-            mEdtGrade.setText(mUserInfo.schoolYear);
+            mEdtFamilyName.setText(mUserInfo.name);
+//            mEdtMiddleName.setText(mUserInfo.middleName);
+//            mEdtFirstName.setText(mUserInfo.name);
+//            mEdtGrade.setText(mUserInfo.schoolYear);
 
-            for (int i = 0; i < mArrAddressCountry.size(); i++) {
-                if (mUserInfo.nationality.equalsIgnoreCase(mArrAddressCountry.get(i).nation)) {
-                    mSpnAddressCountry.setSelection(i);
-                    break;
-                }
-            }
+//            for (int i = 0; i < mArrAddressCountry.size(); i++) {
+//                if (mUserInfo.nationality.equalsIgnoreCase(mArrAddressCountry.get(i).nation)) {
+//                    mSpnAddressCountry.setSelection(i);
+//                    break;
+//                }
+//            }
 
             mEdtSchool.setText(mUserInfo.schoolName);
             mStrUniversityName = mUserInfo.schoolName;
             mEdtEmail.setText(mUserInfo.email);
             mEdtTelephone.setText(mUserInfo.phoneNumber);
             mILAvatarUser.loadUrl(Constants.BASE_IMAGE + mUserInfo.avatar);
-            mEdtAddress.setText(mUserInfo.address);
-            mEdtClass.setText(mUserInfo.specializedSubject);
-            mTvDob.setText(mUserInfo.dob);
-            if (mUserInfo.sex.equalsIgnoreCase("0")) {
-                mSpnSex.setSelection(0);
-            } else {
-                mSpnSex.setSelection(1);
-            }
+//            mEdtAddress.setText(mUserInfo.address);
+//            mEdtClass.setText(mUserInfo.specializedSubject);
+//            mTvDob.setText(mUserInfo.dob);
+//            if (mUserInfo.sex.equalsIgnoreCase("0")) {
+//                mSpnSex.setSelection(0);
+//            } else {
+//                mSpnSex.setSelection(1);
+//            }
         }
 
 

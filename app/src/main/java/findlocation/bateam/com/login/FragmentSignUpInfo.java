@@ -57,9 +57,11 @@ import findlocation.bateam.com.api.FastNetworking;
 import findlocation.bateam.com.base.BaseFragment;
 import findlocation.bateam.com.constant.Constants;
 import findlocation.bateam.com.listener.JsonArrayCallBackListener;
+import findlocation.bateam.com.listener.JsonObjectCallBackListener;
 import findlocation.bateam.com.listener.StringCallBackListener;
 import findlocation.bateam.com.model.Cities;
 import findlocation.bateam.com.model.NationModel;
+import findlocation.bateam.com.model.Response;
 import findlocation.bateam.com.model.UniversityModel;
 import findlocation.bateam.com.model.UserRegister;
 import findlocation.bateam.com.util.DialogUtil;
@@ -304,7 +306,7 @@ public class FragmentSignUpInfo extends BaseFragment {
 
 
         mUserRegister.email = email;
-        mUserRegister.familyName = familyName;
+        mUserRegister.name = familyName;
 //        mUserRegister.name = firstName;
 //        mUserRegister.middleName = middleName;
         mUserRegister.password = password;
@@ -339,12 +341,12 @@ public class FragmentSignUpInfo extends BaseFragment {
 //        mMapFile.put(Constants.AVATAR, LoginActivity.mFileAvatar);
 //        mMapFile.put(Constants.STUDENT_CARD, LoginActivity.mFileLicense);
 
-        FastNetworking fastNetworking = new FastNetworking(getActivity(), new StringCallBackListener() {
+        FastNetworking fastNetworking = new FastNetworking(getActivity(), new JsonObjectCallBackListener() {
             @Override
-            public void onResponse(String string) {
-                Log.d(TAG, "onResponse : " + string);
-                if (string.contains("Đăng ký tài khoản thành công")) {
-                    DialogUtil.showDialogSuccess(getActivity(), string, new DialogInterface.OnClickListener() {
+            public void onResponse(JSONObject jsonObject) {
+                Response response = mGson.fromJson(jsonObject.toString(),Response.class);
+                if (response.message.contains("Đăng ký tài khoản thành công")){
+                    DialogUtil.showDialogSuccess(getActivity(), response.message, new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialogInterface, int i) {
 //                            LoginActivity.mFileAvatar = null;
@@ -356,16 +358,17 @@ public class FragmentSignUpInfo extends BaseFragment {
                             replaceFragment(fragmentSignUpApprove, Constants.FRAGMENT_SIGN_UP_APPROVE);
                         }
                     });
-                } else {
-                    DialogUtil.showDialogError(getActivity(), string, null);
+                }else {
+                    DialogUtil.showDialogError(getActivity(), response.message, null);
                 }
             }
 
             @Override
             public void onError(String messageError) {
-                Log.d(TAG, "onError : " + messageError);
+
             }
         });
+
         fastNetworking.callApiRegister(null, mUserRegister);
     }
 
@@ -385,6 +388,7 @@ public class FragmentSignUpInfo extends BaseFragment {
 
     @Override
     protected void onBackPressFragment() {
+        ((LoginActivity)getActivity()).setToolBarSignIn();
         finishFragment();
     }
 
@@ -492,33 +496,33 @@ public class FragmentSignUpInfo extends BaseFragment {
 //
 //        getCities();
 //
-//        // School
-//        String jsonReaderUniversities;
-//        try {
-//            jsonReaderUniversities = JSONResourceReader.readFileJSONUniversityFromRaw(getActivity());
-//            Gson gson = new Gson();
-//            Type listType = new TypeToken<List<UniversityModel>>() {
-//            }.getType();
-//            List<UniversityModel> universityList = (List<UniversityModel>) gson.fromJson(jsonReaderUniversities, listType);
-//            mArrSchool.clear();
-//            mArrSchool.addAll(universityList);
-//            mAdapterSchool = new AutoCompleteUniversityAdapter(getActivity(), mArrSchool);
-//            mEdtSchool.setAdapter(mAdapterSchool);
-//            mEdtSchool.setThreshold(1);
-//
-//            mEdtSchool.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-//                @Override
-//                public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-//                    String universityName = mAdapterSchool.mFilterUniver.get(i).universityName;
-//                    mEdtSchool.setText(universityName);
-//                    mStrUniversityName = universityName;
-//                    mEdtSchool.setSelection(universityName.length());
-//                }
-//            });
-//
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
+        // School
+        String jsonReaderUniversities;
+        try {
+            jsonReaderUniversities = JSONResourceReader.readFileJSONUniversityFromRaw(getActivity());
+            Gson gson = new Gson();
+            Type listType = new TypeToken<List<UniversityModel>>() {
+            }.getType();
+            List<UniversityModel> universityList = (List<UniversityModel>) gson.fromJson(jsonReaderUniversities, listType);
+            mArrSchool.clear();
+            mArrSchool.addAll(universityList);
+            mAdapterSchool = new AutoCompleteUniversityAdapter(getActivity(), mArrSchool);
+            mEdtSchool.setAdapter(mAdapterSchool);
+            mEdtSchool.setThreshold(1);
+
+            mEdtSchool.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                @Override
+                public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                    String universityName = mAdapterSchool.mFilterUniver.get(i).universityName;
+                    mEdtSchool.setText(universityName);
+                    mStrUniversityName = universityName;
+                    mEdtSchool.setSelection(universityName.length());
+                }
+            });
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 //
 //        // Country
 //        String jsonReader;
