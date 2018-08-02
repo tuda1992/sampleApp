@@ -126,7 +126,7 @@ public class FragmentFindLocation extends BaseFragment implements OnMapReadyCall
     private Gson mGson = new Gson();
     private int mCurrentPage = 1;
     private int mIntOut;
-    private float mFloatColor = 330.0F;
+    private float mFloatColor = 300.0F;
 
     // Bind View
 
@@ -307,11 +307,11 @@ public class FragmentFindLocation extends BaseFragment implements OnMapReadyCall
                 }
 
                 if (mAllListPlaceModel.size() > 0) {
-                    if (mFloatColor == 30f) {
-                        mFloatColor = 330.0f;
-                    } else {
-                        mFloatColor = mFloatColor - 30.0f;
-                    }
+//                    if (mFloatColor == 30f) {
+//                        mFloatColor = 330.0f;
+//                    } else {
+//                        mFloatColor = mFloatColor - 30.0f;
+//                    }
 
                     //Marker
                     for (int i = 0; i < mAllListPlaceModel.size(); i++) {

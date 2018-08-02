@@ -1,5 +1,7 @@
 package findlocation.bateam.com.login;
 
+import android.app.Activity;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Paint;
@@ -9,6 +11,7 @@ import android.support.annotation.NonNull;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
@@ -48,6 +51,7 @@ import findlocation.bateam.com.R;
 import findlocation.bateam.com.api.FastNetworking;
 import findlocation.bateam.com.base.BaseFragment;
 import findlocation.bateam.com.constant.Constants;
+import findlocation.bateam.com.listener.DialogOnClick;
 import findlocation.bateam.com.listener.JsonObjectCallBackListener;
 import findlocation.bateam.com.listener.StringCallBackListener;
 import findlocation.bateam.com.model.ExternalLogin;
@@ -84,6 +88,8 @@ public class FragmentSignIn extends BaseFragment implements GoogleApiClient.OnCo
     Button mBtnSignUp;
     @BindView(R.id.cb_save_password)
     CheckBox mCbSavePassword;
+    @BindView(R.id.tv_sign_up)
+    TextView mTvSignUp;
 
     @BindString(R.string.error_dialog_email_null)
     String mStrUserNameNull;
@@ -100,6 +106,12 @@ public class FragmentSignIn extends BaseFragment implements GoogleApiClient.OnCo
     private UserRegister mUserRegister = new UserRegister();
     private GoogleApiClient mGoogleApiClient;
     private static final int RC_SIGN_IN = 007;
+
+
+    @OnClick(R.id.tv_forgot_pass)
+    public void onClickForgotPassword() {
+        ((LoginActivity) getActivity()).goFragmentForgetPassword();
+    }
 
     @OnClick(R.id.tv_login_fb)
     public void onClickLoginFB() {
@@ -220,9 +232,38 @@ public class FragmentSignIn extends BaseFragment implements GoogleApiClient.OnCo
         ((LoginActivity) getActivity()).goFragmentSignUp();
     }
 
-    @OnClick(R.id.tv_forgot_pass)
-    public void onClickForgotPassword() {
-        ((LoginActivity) getActivity()).goFragmentForgetPassword();
+    @OnClick(R.id.tv_sign_up)
+    public void onClickSignUpNew() {
+        ((LoginActivity) getActivity()).goFragmentSignUp();
+    }
+
+    @OnClick(R.id.tv_login_email)
+    public void onClickGoToLoginEmail() {
+        DialogUtil.showDialogLogin(getActivity(),new DialogOnClick() {
+            @Override
+            public void onClickLogin(String un, String pw) {
+                int selectedId = mRg.getCheckedRadioButtonId();
+                Bundle bundle = new Bundle();
+                if (selectedId == R.id.rd_user) {
+                    bundle.putBoolean(Constants.BUNDLE_IS_MASTER, false);
+                } else {
+                    bundle.putBoolean(Constants.BUNDLE_IS_MASTER, true);
+                }
+
+                PrefUtil.setSharedPreferenceSaveData(getActivity());
+
+                try {
+                    callApiLogin(un, pw, bundle);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+
+            @Override
+            public void onClickForgotPass() {
+                ((LoginActivity) getActivity()).goFragmentForgetPassword();
+            }
+        });
     }
 
     @Override
@@ -238,6 +279,7 @@ public class FragmentSignIn extends BaseFragment implements GoogleApiClient.OnCo
     @Override
     protected void initViews(View view) {
         mTvForgetPass.setPaintFlags(mTvForgetPass.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
+        mTvSignUp.setPaintFlags(mTvForgetPass.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
     }
 
     @Override
@@ -464,9 +506,9 @@ public class FragmentSignIn extends BaseFragment implements GoogleApiClient.OnCo
                             bundle.putBoolean(Constants.BUNDLE_IS_MASTER, true);
                         }
 
-                        if (isChecked) {
-                            PrefUtil.setSharedPreferenceSaveData(getActivity());
-                        }
+
+                        PrefUtil.setSharedPreferenceSaveData(getActivity());
+
 
                         PrefUtil.setSharedPreferenceUserInfo(getActivity(), jsonObject.toString());
                         startActivityAnim(MainActivity.class, bundle);
