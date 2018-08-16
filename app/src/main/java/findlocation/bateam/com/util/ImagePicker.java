@@ -11,8 +11,11 @@ import android.graphics.BitmapFactory;
 import android.graphics.Matrix;
 import android.media.ExifInterface;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Parcelable;
 import android.provider.MediaStore;
+import android.support.v4.BuildConfig;
+import android.support.v4.content.FileProvider;
 import android.util.Log;
 
 import java.io.ByteArrayOutputStream;
@@ -49,8 +52,12 @@ public class ImagePicker {
         Intent takePhotoIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
 //        pickIntent.setType("image/*");
         takePhotoIntent.putExtra("return-data", true);
-        takePhotoIntent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(getTempFile(context)));
-
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+            takePhotoIntent.setFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+            takePhotoIntent.putExtra(MediaStore.EXTRA_OUTPUT, FileProvider.getUriForFile(context, "findlocation.bateam.com.fileProvider",getTempFile(context)));
+        } else {
+            takePhotoIntent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(getTempFile(context)));
+        }
 //        intentList = addIntentsToList(context, intentList, pickIntent);
         intentList = addIntentsToList(context, intentList, takePhotoIntent);
 
@@ -71,7 +78,14 @@ public class ImagePicker {
         Intent takePhotoIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
 //        pickIntent.setType("image/*");
         takePhotoIntent.putExtra("return-data", true);
-        takePhotoIntent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(getTempFile(context)));
+//        takePhotoIntent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(getTempFile(context)));
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+            takePhotoIntent.setFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+            takePhotoIntent.putExtra(MediaStore.EXTRA_OUTPUT, FileProvider.getUriForFile(context, "findlocation.bateam.com.fileProvider",getTempFile(context)));
+        } else {
+            takePhotoIntent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(getTempFile(context)));
+        }
         takePhotoIntent.putExtra("android.intent.extras.CAMERA_FACING", 1);
         takePhotoIntent.putExtra("android.intent.extras.LENS_FACING_FRONT", 1);
         takePhotoIntent.putExtra("android.intent.extras.USE_FRONT_CAMERA", true);
@@ -113,7 +127,11 @@ public class ImagePicker {
                     imageReturnedIntent.getData() == null ||
                     imageReturnedIntent.getData().toString().contains(imageFile.toString()));
             if (isCamera) {     /** CAMERA **/
-                selectedImage = Uri.fromFile(imageFile);
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+                    selectedImage = FileProvider.getUriForFile(context,"findlocation.bateam.com.fileProvider",imageFile);
+                } else {
+                    selectedImage = Uri.fromFile(imageFile);
+                }
             } else {            /** ALBUM **/
                 selectedImage = imageReturnedIntent.getData();
             }
@@ -138,7 +156,11 @@ public class ImagePicker {
                     imageReturnedIntent.getData() == null ||
                     imageReturnedIntent.getData().toString().contains(imageFile.toString()));
             if (isCamera) {     /** CAMERA **/
-                selectedImage = Uri.fromFile(imageFile);
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+                    selectedImage = FileProvider.getUriForFile(context, "findlocation.bateam.com.fileProvider",imageFile);
+                } else {
+                    selectedImage = Uri.fromFile(imageFile);
+                }
             } else {            /** ALBUM **/
                 selectedImage = imageReturnedIntent.getData();
             }
