@@ -36,8 +36,8 @@ import findlocation.bateam.com.util.ProgressDialogUtils;
 
 public class FastNetworking {
 
-    //    public static final String BASE_URL = "http://sividns.southeastasia.cloudapp.azure.com/api";
-    public static final String BASE_URL = "http://sividns.southeastasia.cloudapp.azure.com/SiviTest/api";
+        public static final String BASE_URL = "http://sividns.southeastasia.cloudapp.azure.com/api";
+//    public static final String BASE_URL = "http://sividns.southeastasia.cloudapp.azure.com/SiviTest/api";
 
     public static final String URL_LOGIN = "/Users/Login";
     public static final String URL_ACTIVE_USER = "/Users/ActiveUser";

@@ -53,6 +53,19 @@ public class DialogUtil {
                 .show();
     }
 
+
+    public static void showDialogErrorNotProcess(Context context, String message, DialogInterface.OnClickListener okListener) {
+        if (context == null) return;
+        new AlertDialog.Builder(context)
+                .setTitle("Chức năng chủ nhà trọ đang được phát triển")
+                .setMessage("Bạn hãy chọn chức năng người dùng để đăng nhập vào ứng dụng nhé")
+                .setPositiveButton(context.getResources().getText(R.string.text_button_ok), okListener)
+                .setCancelable(false)
+                .create()
+                .show();
+    }
+
+
     public static void showDialogErrorJob(Context context, String message, DialogInterface.OnClickListener okListener) {
         if (context == null) return;
         new AlertDialog.Builder(context)

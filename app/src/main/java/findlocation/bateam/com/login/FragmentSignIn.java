@@ -8,6 +8,7 @@ import android.graphics.Paint;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.NonNull;
+import android.support.design.widget.FloatingActionButton;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
@@ -90,6 +91,8 @@ public class FragmentSignIn extends BaseFragment implements GoogleApiClient.OnCo
     CheckBox mCbSavePassword;
     @BindView(R.id.tv_sign_up)
     TextView mTvSignUp;
+    @BindView(R.id.fab_logo)
+    FloatingActionButton mFabLogo;
 
     @BindString(R.string.error_dialog_email_null)
     String mStrUserNameNull;
@@ -113,12 +116,12 @@ public class FragmentSignIn extends BaseFragment implements GoogleApiClient.OnCo
         ((LoginActivity) getActivity()).goFragmentForgetPassword();
     }
 
-    @OnClick(R.id.tv_login_fb)
+    @OnClick(R.id.rl_login_fb)
     public void onClickLoginFB() {
         loginFacebook();
     }
 
-    @OnClick(R.id.tv_login_gmail)
+    @OnClick(R.id.rl_login_gmail)
     public void onClickLoginGmail() {
         Intent signInIntent = Auth.GoogleSignInApi.getSignInIntent(mGoogleApiClient);
         startActivityForResult(signInIntent, RC_SIGN_IN);
@@ -237,9 +240,9 @@ public class FragmentSignIn extends BaseFragment implements GoogleApiClient.OnCo
         ((LoginActivity) getActivity()).goFragmentSignUp();
     }
 
-    @OnClick(R.id.tv_login_email)
+    @OnClick(R.id.rl_login_email)
     public void onClickGoToLoginEmail() {
-        DialogUtil.showDialogLogin(getActivity(),new DialogOnClick() {
+        DialogUtil.showDialogLogin(getActivity(), new DialogOnClick() {
             @Override
             public void onClickLogin(String un, String pw) {
                 int selectedId = mRg.getCheckedRadioButtonId();
@@ -247,7 +250,12 @@ public class FragmentSignIn extends BaseFragment implements GoogleApiClient.OnCo
                 if (selectedId == R.id.rd_user) {
                     bundle.putBoolean(Constants.BUNDLE_IS_MASTER, false);
                 } else {
+
                     bundle.putBoolean(Constants.BUNDLE_IS_MASTER, true);
+
+                    DialogUtil.showDialogErrorNotProcess(getActivity(), "", null);
+
+                    return;
                 }
 
                 PrefUtil.setSharedPreferenceSaveData(getActivity());
@@ -280,6 +288,7 @@ public class FragmentSignIn extends BaseFragment implements GoogleApiClient.OnCo
     protected void initViews(View view) {
         mTvForgetPass.setPaintFlags(mTvForgetPass.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
         mTvSignUp.setPaintFlags(mTvForgetPass.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
+//        mFabLogo.setEnabled(false);
     }
 
     @Override
@@ -494,7 +503,6 @@ public class FragmentSignIn extends BaseFragment implements GoogleApiClient.OnCo
                         callApiRegister(mUserRegister.email, mUserRegister.facebookAvatar, mUserRegister.name, mUserRegister.id);
                         break;
                     case "SUCCESS":
-
                         int selectedId = mRg.getCheckedRadioButtonId();
                         boolean isChecked = mCbSavePassword.isChecked();
                         Bundle bundle = new Bundle();
@@ -504,12 +512,13 @@ public class FragmentSignIn extends BaseFragment implements GoogleApiClient.OnCo
                         } else {
                             Log.d(TAG, "Login By Master isChecked = " + isChecked);
                             bundle.putBoolean(Constants.BUNDLE_IS_MASTER, true);
+
+                            DialogUtil.showDialogErrorNotProcess(getActivity(), "", null);
+
+                            return;
+
                         }
-
-
                         PrefUtil.setSharedPreferenceSaveData(getActivity());
-
-
                         PrefUtil.setSharedPreferenceUserInfo(getActivity(), jsonObject.toString());
                         startActivityAnim(MainActivity.class, bundle);
                         finishActivityAnim();

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@android:color/white"
@@ -196,66 +197,120 @@
     </LinearLayout>
 
 
-    <ImageView
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/fab_logo"
         android:layout_width="@dimen/_150sdp"
         android:layout_height="@dimen/_150sdp"
         android:layout_gravity="center_horizontal"
         android:layout_marginBottom="@dimen/_10sdp"
         android:layout_marginTop="@dimen/_20sdp"
-        android:src="@drawable/ic_logo" />
+        android:src="@drawable/ic_logo"
+        android:longClickable="false"
+        android:clickable="false"
+        android:visibility="gone"
+        app:backgroundTint="#04b43c"
+        app:borderWidth="0dp"
+        app:elevation="@dimen/_5sdp" />
 
 
-    <TextView
-        android:id="@+id/tv_login_fb"
-        android:layout_width="@dimen/_200sdp"
-        android:layout_height="@dimen/_35sdp"
+    <!--<android.support.v7.widget.CardView-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_centerHorizontal="true"-->
+        <!--android:layout_gravity="center_horizontal"-->
+        <!--android:layout_marginBottom="@dimen/_10sdp"-->
+        <!--android:layout_marginTop="@dimen/_20sdp"-->
+        <!--app:cardElevation="6dp">-->
+
+        <ImageView
+            android:layout_width="@dimen/_150sdp"
+            android:layout_height="@dimen/_150sdp"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginBottom="@dimen/_10sdp"
+            android:layout_marginTop="@dimen/_20sdp"
+            android:src="@drawable/ic_logo_shadow" />
+    <!--</android.support.v7.widget.CardView>-->
+
+
+    <android.support.v7.widget.CardView
+        android:id="@+id/rl_login_fb"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="@dimen/_10sdp"
-        android:background="#3f51b5"
-        android:drawablePadding="@dimen/_3sdp"
-        android:drawableStart="@drawable/ic_fb"
-        android:gravity="center"
-        android:orientation="horizontal"
-        android:text="Đăng nhập Facebook"
-        android:textAllCaps="true"
-        android:textColor="@android:color/white"
-        android:textSize="@dimen/_10sdp"
-        android:textStyle="bold" />
+        android:clickable="true"
+        android:foreground="?android:attr/selectableItemBackground"
+        app:cardElevation="@dimen/_5sdp">
+
+        <TextView
+            android:id="@+id/tv_login_fb"
+            android:layout_width="@dimen/_200sdp"
+            android:layout_height="@dimen/_35sdp"
+            android:background="#3f51b5"
+            android:drawablePadding="@dimen/_3sdp"
+            android:drawableStart="@drawable/ic_fb"
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:text="Đăng nhập Facebook"
+            android:textAllCaps="true"
+            android:textColor="@android:color/white"
+            android:textSize="@dimen/_10sdp"
+            android:textStyle="bold" />
+    </android.support.v7.widget.CardView>
 
 
-    <TextView
-        android:id="@+id/tv_login_gmail"
-        android:layout_width="@dimen/_200sdp"
-        android:layout_height="@dimen/_35sdp"
+    <android.support.v7.widget.CardView
+        android:id="@+id/rl_login_gmail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
-        android:layout_marginTop="@dimen/_10sdp"
-        android:background="#f4511e"
-        android:drawablePadding="@dimen/_3sdp"
-        android:drawableStart="@drawable/ic_gmail"
-        android:gravity="center"
-        android:orientation="horizontal"
-        android:text="Đăng nhập Google"
-        android:textAllCaps="true"
-        android:textColor="@android:color/white"
-        android:textSize="@dimen/_10sdp"
-        android:textStyle="bold" />
+        android:layout_marginTop="@dimen/_8sdp"
+        android:clickable="true"
+        android:foreground="?android:attr/selectableItemBackground"
+        app:cardElevation="@dimen/_5sdp">
 
-    <TextView
-        android:id="@+id/tv_login_email"
-        android:layout_width="@dimen/_200sdp"
-        android:layout_height="@dimen/_35sdp"
+        <TextView
+            android:id="@+id/tv_login_gmail"
+            android:layout_width="@dimen/_200sdp"
+            android:layout_height="@dimen/_35sdp"
+            android:background="#f4511e"
+            android:drawablePadding="@dimen/_3sdp"
+            android:drawableStart="@drawable/ic_gmail"
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:text="Đăng nhập Google"
+            android:textAllCaps="true"
+            android:textColor="@android:color/white"
+            android:textSize="@dimen/_10sdp"
+            android:textStyle="bold" />
+    </android.support.v7.widget.CardView>
+
+
+    <android.support.v7.widget.CardView
+        android:id="@+id/rl_login_email"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
-        android:layout_marginTop="@dimen/_10sdp"
-        android:background="@color/colorPrimary"
-        android:drawablePadding="@dimen/_3sdp"
-        android:drawableStart="@drawable/ic_mail"
-        android:gravity="center"
-        android:orientation="horizontal"
-        android:text="Đăng nhập mail"
-        android:textAllCaps="true"
-        android:textColor="@android:color/white"
-        android:textSize="@dimen/_10sdp"
-        android:textStyle="bold" />
+        android:layout_marginTop="@dimen/_8sdp"
+        android:clickable="true"
+        android:foreground="?android:attr/selectableItemBackground"
+        app:cardElevation="@dimen/_5sdp">
+
+        <TextView
+            android:id="@+id/tv_login_email"
+            android:layout_width="@dimen/_200sdp"
+            android:layout_height="@dimen/_35sdp"
+            android:background="@color/colorPrimary"
+            android:drawablePadding="@dimen/_3sdp"
+            android:drawableStart="@drawable/ic_mail"
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:text="Đăng nhập mail"
+            android:textAllCaps="true"
+            android:textColor="@android:color/white"
+            android:textSize="@dimen/_10sdp"
+            android:textStyle="bold" />
+    </android.support.v7.widget.CardView>
 
     <RadioGroup
         android:id="@+id/gr_radio"

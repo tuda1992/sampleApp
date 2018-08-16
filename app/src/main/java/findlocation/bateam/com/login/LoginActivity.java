@@ -69,7 +69,6 @@ public class LoginActivity extends BaseActivity {
     public static File mFileAvatar = null;
 
 
-
     @Override
     protected int getLayoutView() {
         return R.layout.activity_login;
@@ -102,7 +101,7 @@ public class LoginActivity extends BaseActivity {
     }
 
     // Add this inside your class
-    SmsReceiver broadcastReceiver =  new SmsReceiver() {
+    SmsReceiver broadcastReceiver = new SmsReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
 
@@ -121,7 +120,7 @@ public class LoginActivity extends BaseActivity {
     protected void initDatas(Bundle saveInstanceStatte) {
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            PermissionUtils.checkPermission(this, new String[]{Manifest.permission.READ_SMS}, Constants.REQUEST_READ_SMS, new IPermissionCallBack() {
+            PermissionUtils.checkPermission(this, new String[]{Manifest.permission.READ_SMS, Manifest.permission.RECEIVE_SMS}, Constants.REQUEST_READ_SMS, new IPermissionCallBack() {
                 @Override
                 public void onPermissionReady() {
 
@@ -149,11 +148,11 @@ public class LoginActivity extends BaseActivity {
         finishFragment();
     }
 
-    public void setToolBarSignIn(){
+    public void setToolBarSignIn() {
         getSupportActionBar().setTitle(mTitleSignIn);
     }
 
-    public void setToolBarSignUp(){
+    public void setToolBarSignUp() {
         getSupportActionBar().setTitle(mTitleSignUp);
     }
 

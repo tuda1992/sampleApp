@@ -46,6 +46,7 @@ import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapView;
 import com.google.android.gms.maps.MapsInitializer;
 import com.google.android.gms.maps.OnMapReadyCallback;
+import com.google.android.gms.maps.model.BitmapDescriptor;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
@@ -126,7 +127,7 @@ public class FragmentFindLocation extends BaseFragment implements OnMapReadyCall
     private Gson mGson = new Gson();
     private int mCurrentPage = 1;
     private int mIntOut;
-    private float mFloatColor = 300.0F;
+    private float mFloatColor = 120.0F;
 
     // Bind View
 
@@ -240,7 +241,7 @@ public class FragmentFindLocation extends BaseFragment implements OnMapReadyCall
         PlaceModel item = new PlaceModel();
         item.lattitude = String.valueOf(mLastLocation.getLatitude());
         item.longitude = String.valueOf(mLastLocation.getLongitude());
-        item.distance = "5";
+        item.distance = "2";
         item.pageIndex = mCurrentPage;
         item.pageSize = 20;
 
@@ -278,7 +279,7 @@ public class FragmentFindLocation extends BaseFragment implements OnMapReadyCall
                     markerOpt.position(currentPosition)
                             .title("Vị trí của tôi")
                             .snippet("")
-                            .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED));
+                            .icon(BitmapDescriptorFactory.fromResource(R.drawable.ic_marker_my_location));
                     mGoogleMap.addMarker(markerOpt);
                     moveCamera(null, mLastLocation.getLatitude(), mLastLocation.getLongitude());
 
@@ -338,7 +339,7 @@ public class FragmentFindLocation extends BaseFragment implements OnMapReadyCall
                             markerOpt.position(position)
                                     .title(title)
                                     .snippet(price)
-                                    .icon(BitmapDescriptorFactory.defaultMarker(mFloatColor));
+                                    .icon(BitmapDescriptorFactory.fromResource(R.drawable.ic_marker_location));
 
                             //Set Custom InfoWindow Adapter
                             CustomInfoWindowAdapter adapter = new CustomInfoWindowAdapter(getActivity());
@@ -360,6 +361,13 @@ public class FragmentFindLocation extends BaseFragment implements OnMapReadyCall
         });
         fastNetworking.callApiHouseInfo(jsonObject, MainActivity.mUserInfo.securityToken, isShowLoading);
 
+    }
+
+    // method definition
+    public BitmapDescriptor getMarkerIcon(String color) {
+        float[] hsv = new float[3];
+        Color.colorToHSV(Color.parseColor(color), hsv);
+        return BitmapDescriptorFactory.defaultMarker(hsv[0]);
     }
 
     @Override
@@ -696,7 +704,7 @@ public class FragmentFindLocation extends BaseFragment implements OnMapReadyCall
     public boolean onMarkerClick(Marker marker) {
         Log.d(TAG, "marker = " + marker.getId());
         marker.showInfoWindow();
-        marker.setIcon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_MAGENTA));
+        marker.setIcon(BitmapDescriptorFactory.fromResource(R.drawable.ic_marker_location_enable));
 
         return false;
     }
@@ -744,14 +752,14 @@ public class FragmentFindLocation extends BaseFragment implements OnMapReadyCall
             markerOpt.position(position)
                     .title(title)
                     .snippet(price)
-                    .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_ROSE));
+                    .icon(BitmapDescriptorFactory.fromResource(R.drawable.ic_marker_location_enable));
         } else {
             title = "Vị trí của tôi";
 
             markerOpt.position(position)
                     .title(title)
                     .snippet(price)
-                    .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED));
+                    .icon(BitmapDescriptorFactory.fromResource(R.drawable.ic_marker_my_location));
         }
 
 
@@ -786,14 +794,14 @@ public class FragmentFindLocation extends BaseFragment implements OnMapReadyCall
             markerOpt.position(position)
                     .title(title)
                     .snippet(price)
-                    .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_VIOLET));
+                    .icon(BitmapDescriptorFactory.fromResource(R.drawable.ic_marker_location));
 
         } else {
             title = "Vị trí của tôi";
             markerOpt.position(position)
                     .title(title)
                     .snippet(price)
-                    .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED));
+                    .icon(BitmapDescriptorFactory.fromResource(R.drawable.ic_marker_my_location));
         }
 
 
@@ -868,7 +876,7 @@ public class FragmentFindLocation extends BaseFragment implements OnMapReadyCall
         markerOpt.position(currentPosition)
                 .title("Vị trí của tôi")
                 .snippet("")
-                .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED));
+                .icon(BitmapDescriptorFactory.fromResource(R.drawable.ic_marker_my_location));
 
         //Set Custom InfoWindow Adapter
         CustomInfoWindowAdapter adapter = new CustomInfoWindowAdapter(getActivity());
@@ -925,6 +933,8 @@ public class FragmentFindLocation extends BaseFragment implements OnMapReadyCall
         for (int i = 0; i < mAllListPlaceModel.size(); i++) {
             if (marker.getTitle().equalsIgnoreCase(mAllListPlaceModel.get(i).street)) {
                 placeModel = mAllListPlaceModel.get(i);
+                mAllListPlaceModel.get(i).isSeen = true;
+                mLayoutPlace.setNotifyAdapter();
                 break;
             }
         }

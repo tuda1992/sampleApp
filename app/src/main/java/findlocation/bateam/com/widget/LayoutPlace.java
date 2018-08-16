@@ -78,6 +78,8 @@ public class LayoutPlace extends BaseCustomLayout {
             public void onItemInfo(int position, PlaceModel item) {
                 if (mListener != null) {
                     mListener.onItemInfoClick(position, item);
+                    mListData.get(position).isSeen = true;
+                    mAdapter.notifyDataSetChanged();
                 }
             }
 

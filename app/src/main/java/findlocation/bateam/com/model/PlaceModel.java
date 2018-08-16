@@ -79,6 +79,7 @@ public class PlaceModel implements Parcelable {
     public String latResult;
     @SerializedName("ImageLink")
     public String imageLink;
+    public boolean isSeen = false;
 
 
     @Override

@@ -72,6 +72,7 @@ public class FragmentSignUpApprove extends BaseFragment {
         mIntCountDown = 30;
         mTvCountDown.setText(String.format(mStrCountDown, "" + mIntCountDown));
         mTvCountDown.setPaintFlags(0);
+        mCountDownTimer.cancel();
         mCountDownTimer.start();
         callApiResend();
     }
@@ -80,7 +81,6 @@ public class FragmentSignUpApprove extends BaseFragment {
     private CountDownTimer mCountDownTimer = new CountDownTimer(31000, 1000) {
         @Override
         public void onTick(long l) {
-            Log.d(TAG, "FUCK ALL");
             mTvCountDown.setEnabled(false);
             mIntCountDown--;
             if (mIntCountDown < 10) {
@@ -198,7 +198,7 @@ public class FragmentSignUpApprove extends BaseFragment {
             public void onResponse(JSONObject jsonObject) {
                 Response response = mGson.fromJson(jsonObject.toString(), Response.class);
                 Log.d(TAG, response + "");
-                if(response.code == "SUCCESS"){
+                if(response.code.equalsIgnoreCase("SUCCESS")){
 
                 }else {
                     DialogUtil.showDialogErrorLowInternet(getActivity(), "Đường truyền của bạn đang gặp vấn đề !!!", null);

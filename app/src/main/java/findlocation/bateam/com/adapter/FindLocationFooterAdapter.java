@@ -109,6 +109,8 @@ public class FindLocationFooterAdapter extends RecyclerView.Adapter<RecyclerView
     class GenericViewHolder extends RecyclerView.ViewHolder {
         @BindView(R.id.iv_data)
         ImageView mIvLocation;
+        @BindView(R.id.iv_info)
+        ImageView mIvInfo;
         @BindView(R.id.tv_data)
         TextView mTvData;
 
@@ -133,6 +135,10 @@ public class FindLocationFooterAdapter extends RecyclerView.Adapter<RecyclerView
 
 
         public void setData(PlaceModel model) {
+            int color = model.isSeen ? mContext.getResources().getColor(R.color.colorPrimary) : mContext.getResources().getColor(R.color.textColorPrimary);
+            mIvLocation.setColorFilter(color);
+            mIvInfo.setColorFilter(color);
+            mTvData.setTextColor(color);
             mTvData.setText(model.street);
         }
 

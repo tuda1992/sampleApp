@@ -28,7 +28,7 @@ public class BAApplication extends Application {
         FacebookSdk.sdkInitialize(this);
         printHashKey(getApplicationContext());
 //        TypefaceUtil.overrideFont(getApplicationContext(), "SERIF", "fonts/segoeui.ttf");
-        TypefaceUtil.overrideFont(getApplicationContext(), "SERIF", "fonts/catamaran.ttf");
+        TypefaceUtil.overrideFont(getApplicationContext(), "SERIF", "fonts/quicksand.ttf");
     }
 
     public void printHashKey(Context pContext) {
