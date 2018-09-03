@@ -5,6 +5,7 @@ import android.graphics.Bitmap;
 import android.graphics.drawable.Drawable;
 import android.support.annotation.Nullable;
 import android.util.AttributeSet;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 
@@ -74,9 +75,14 @@ public class ImageLoading extends BaseCustomLayout {
         }).into(mIvAvatar);
     }
 
-    public void loadBitmap(Bitmap bm){
+    public void loadBitmap(final Bitmap bm){
         mPbAvatar.setVisibility(GONE);
-        mIvAvatar.setImageBitmap(bm);
+        mIvAvatar.post(new Runnable() {
+            @Override
+            public void run() {
+                mIvAvatar.setImageBitmap(bm);
+            }
+        });
     }
 
 }
